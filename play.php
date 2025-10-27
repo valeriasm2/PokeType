@@ -41,9 +41,50 @@ if (file_exists($file)) {
     <a href="index.php" id="back-btn">⬅️ Tornar</a>
 
     <script>
+        // ==========================
+        //   DATOS DE LA FRASE
+        // ==========================
         const frase = "<?php echo addslashes($frase); ?>";
+        const fraseEl = document.getElementById('frase');
+        let index = 0;
+
+        // ==========================
+        //   EFECTO VISUAL DE LA FRASE
+        // ==========================
+        function mostrarFrase() {
+            let html = '';
+            for (let i = 0; i < frase.length; i++) {
+                let char = frase[i];
+                if (i < index) {
+                    html += `<span class="correct">${char}</span>`;
+                } else if (i === index) {
+                    html += `<span class="highlight">${char}</span>`;
+                } else {
+                    html += char;
+                }
+            }
+            fraseEl.innerHTML = html;
+        }
+
+        // ==========================
+        //   COUNTDOWN
+        // ==========================
+        let countdown = 3;
+        const countdownEl = document.getElementById('countdown');
+        const gameArea = document.getElementById('game-area');
+
+        const interval = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown === 0) {
+                clearInterval(interval);
+                countdownEl.style.display = 'none';
+                gameArea.style.display = 'block';
+                mostrarFrase();
+            }
+        }, 1000);
     </script>
-    <script src="dev9.js"></script>
+
     <script src="dev10.js"></script>
 </body>
 </html>
