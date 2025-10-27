@@ -20,6 +20,7 @@ if (file_exists($file)) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -29,6 +30,7 @@ if (file_exists($file)) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <h1>Poketype</h1>
     <p>Benvingut, <strong><?php echo $name; ?></strong>!</p>
     <p>Dificultat seleccionada: <strong><?php echo ucfirst($difficulty); ?></strong></p>
@@ -41,17 +43,14 @@ if (file_exists($file)) {
     <a href="index.php" id="back-btn">⬅️ Tornar</a>
 
     <script>
-        // ==========================
-        //   DATOS DE LA FRASE
-        // ==========================
+        let countdown = 3;
+        const countdownEl = document.getElementById('countdown');
+        const gameArea = document.getElementById('game-area');
         const frase = "<?php echo addslashes($frase); ?>";
         const fraseEl = document.getElementById('frase');
         let index = 0;
 
-        // ==========================
-        //   EFECTO VISUAL DE LA FRASE
-        // ==========================
-        function mostrarFrase() {
+        const mostrarFrase = () => {
             let html = '';
             for (let i = 0; i < frase.length; i++) {
                 let char = frase[i];
@@ -64,14 +63,7 @@ if (file_exists($file)) {
                 }
             }
             fraseEl.innerHTML = html;
-        }
-
-        // ==========================
-        //   COUNTDOWN
-        // ==========================
-        let countdown = 3;
-        const countdownEl = document.getElementById('countdown');
-        const gameArea = document.getElementById('game-area');
+        };
 
         const interval = setInterval(() => {
             countdown--;
@@ -81,10 +73,29 @@ if (file_exists($file)) {
                 countdownEl.style.display = 'none';
                 gameArea.style.display = 'block';
                 mostrarFrase();
+                document.addEventListener('keydown', jugar);
             }
         }, 1000);
+
+        function jugar(e) {
+            if (index >= frase.length) return;
+            const tecla = e.key;
+
+            if (tecla === frase[index]) {
+                index++;
+            } else {
+                fraseEl.classList.add('incorrect');
+                setTimeout(() => fraseEl.classList.remove('incorrect'), 200);
+            }
+
+            mostrarFrase();
+
+            if (index === frase.length) {
+                fraseEl.innerHTML += "<br><br><strong>🎉 Has completat la frase! 🎉</strong>";
+                document.removeEventListener('keydown', jugar);
+            }
+        }
     </script>
 
-    <script src="dev10.js"></script>
 </body>
 </html>
