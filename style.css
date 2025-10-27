@@ -1,0 +1,208 @@
+/* === Fuente y fondo general con GIF === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Press Start 2P', cursive;
+    background: url('https://media1.tenor.com/m/0_-BvSG6IpgAAAAd/monad.gif') no-repeat center center fixed;
+    background-size: cover;      /* Para que cubra toda la pantalla */
+    display: flex;               /* Centrado horizontal y vertical */
+    justify-content: center;     
+    align-items: center;         
+    color: #a602ff;
+    overflow: hidden;
+}
+
+/* === Contenedor index.php === */
+#index-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor del juego === */
+#container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor Game Over === */
+.gameover-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor Ranking === */
+#ranking-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Encabezados === */
+h1 {
+    font-size: 50px;
+    color: #f33636;
+    margin: 0;
+    text-shadow: 5px 5px #aa00ff;
+}
+
+h2 {
+    font-size: 36px;
+    color: #f33636;
+    margin: 0 0 20px 0;
+    text-shadow: 3px 3px #aa00ff;
+}
+
+p {
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+/* === Formulario y botones === */
+form {
+    margin-top: 20px;
+}
+
+input, select, button {
+    padding: 12px;
+    margin: 6px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 2px solid #3b4cca;
+    font-family: 'Press Start 2P', cursive;
+}
+
+button {
+    background-color: #3b4cca;
+    color: #ffcb05;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #a846f8;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* === Mensajes de error === */
+.error-alert {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* === Zona de juego === */
+#game-area {
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+.correct { color: green; }
+.wrong { color: red; }
+
+.highlight {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#countdown {
+    font-size: 2em;
+    color: darkblue;
+    margin-top: 20px;
+}
+
+/* === Botón de volver === */
+#back-btn {
+    margin-top: 40px;
+    display: inline-block;
+    background-color: #e43df0;
+    color: #ffcb05;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#back-btn:hover {
+    background-color: #5e2aa1;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* === Tabla Ranking === */
+#ranking-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+#ranking-container th, #ranking-container td {
+    padding: 12px;
+    border: 2px solid #aa32ef;
+}
+
+#ranking-container th {
+    background-color: #da9bfe;
+    color: #3b4cca;
+}
+
+#ranking-container .highlight {
+    background-color: #aaff9c;
+    color: #3b4cca;
+    font-weight: bold;
+}
+
+#ranking-container a {
+    text-decoration: none;
+    color: #ffcb05;
+    font-weight: bold;
+    background-color: #3b4cca;
+    padding: 12px 25px;
+    border-radius: 12px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+#ranking-container a:hover {
+    background-color: #aa32ef;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
