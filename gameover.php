@@ -1,7 +1,7 @@
 <?php
 if (!isset($_POST['score']) || !isset($_POST['name'])) {
     header("HTTP/1.1 403 Forbidden");
-    include("error403.php");
+    include(__DIR__ . "/errors/error403.php");
     exit;
 }
 $score = intval($_POST['score']);
@@ -14,7 +14,7 @@ $name = htmlspecialchars($_POST['name']);
 <head>
     <meta charset="UTF-8">
     <title>Game Over</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
