@@ -1,0 +1,323 @@
+/* === Fuente y fondo general con GIF === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    
+    font-family: 'Press Start 2P', cursive;
+    background: url('https://media1.tenor.com/m/0_-BvSG6IpgAAAAd/monad.gif') no-repeat center center fixed;
+    background-size: cover;      /* Para que cubra toda la pantalla */
+    display: flex;               /* Centrado horizontal y vertical */
+    justify-content: center;     
+    align-items: center;         
+    color: #a602ff;
+    overflow: hidden;
+}
+
+/* === Contenedor index.php === */
+#index-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor del juego === */
+#container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor Game Over === */
+.gameover-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Contenedor Ranking === */
+#ranking-container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(231, 217, 247); 
+    border: 5px solid #a825d4;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #3b4cca;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* === Encabezados === */
+h1 {
+    font-size: 50px;
+    color: #f33636;
+    margin: 0;
+    text-shadow: 5px 5px #aa00ff;
+}
+
+h2 {
+    font-size: 36px;
+    color: #f33636;
+    margin: 0 0 20px 0;
+    text-shadow: 3px 3px #aa00ff;
+}
+
+p {
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+/* === Formulario y botones === */
+form {
+    margin-top: 20px;
+}
+
+input, select, button {
+    padding: 12px;
+    margin: 6px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 2px solid #3b4cca;
+    font-family: 'Press Start 2P', cursive;
+}
+
+button {
+    background-color: #3b4cca;
+    color: #ffcb05;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #a846f8;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* === Mensajes de error === */
+.error-alert {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* === Zona de juego === */
+#game-area {
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+.correct { color: green; }
+.wrong { color: red; }
+
+.highlight {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#countdown {
+    font-size: 2em;
+    color: darkblue;
+    margin-top: 20px;
+}
+
+/* === Botón de volver === */
+#back-btn {
+    margin-top: 40px;
+    display: inline-block;
+    background-color: #e43df0;
+    color: #ffcb05;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#back-btn:hover {
+    background-color: #5e2aa1;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* === Tabla Ranking === */
+#ranking-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+#ranking-container th, #ranking-container td {
+    padding: 12px;
+    border: 2px solid #aa32ef;
+}
+
+#ranking-container th {
+    background-color: #da9bfe;
+    color: #3b4cca;
+}
+
+#ranking-container .highlight {
+    background-color: #aaff9c;
+    color: #3b4cca;
+    font-weight: bold;
+}
+
+#ranking-container a {
+    text-decoration: none;
+    color: #ffcb05;
+    font-weight: bold;
+    background-color: #3b4cca;
+    padding: 12px 25px;
+    border-radius: 12px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+#ranking-container a:hover {
+    background-color: #aa32ef;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+
+
+/* Icono Easter Egg */
+#easter-egg {
+    position: fixed;       /* Ara està fixat a la pantalla, no dins del container */
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    z-index: 1001;         /* Per sobre del joc */
+}
+
+#easter-egg:hover {
+    opacity: 1;
+}
+
+
+
+ /* Fondo oscuro tipo laberinto */
+    body.laberinto-bg {
+      background-image: url('https://media.discordapp.net/attachments/893063025014231080/1432393802559262750/raaa.gif?ex=69018cef&is=69003b6f&hm=7ba9a8cbd9bb9caf579e7517599a77eeb473b80977b16d7840f59903ef65a5be&=&width=1376&height=774');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    body.laberinto-bg::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      filter: brightness(0.65) blur(4px);
+      z-index: 0;
+    }
+
+    .giratina-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #ffcb05;
+      text-shadow: 2px 2px #3b4cca;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #ffffff;
+      text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
+    }
+
+    #giratina {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #giratina:hover {
+      transform: scale(1.2);
+    }
+
+    
+    #resultado {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ffcb05;
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    /* Estado visible del contenedor de resultado */
+    #resultado.mostrar {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    #resultado img {
+      width: 150px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px #ffcb05);
+    }
+
+    #resultado p {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ffcb05;
+
+    }
+        

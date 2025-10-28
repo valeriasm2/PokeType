@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poketype</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <!-- Sonido para todos los botones -->
+    <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
+
     <div id="index-container">
         <?php
         function mostrarError($error) {
@@ -23,7 +25,6 @@
 
         if ($_POST) {
             $name = trim($_POST['name']);
-
             if (empty($name)) {
                 $error = "⚠️ El camp nom no pot estar buit";
             } else {
@@ -36,8 +37,7 @@
 
         <h1>Poketype</h1>
         <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
-        <img src="https://images.steamusercontent.com/ugc/156901856787352192/57490018F1B024CC09706D3106251C92A4E5B5F0/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Mew GIF" width="300">
-
+        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Mew GIF" width="300">
 
         <form action="index.php" method="post">
             <label for="name">Nom:</label>
@@ -53,17 +53,44 @@
             </select><br><br>
 
             <button type="submit" id="play-button" disabled>Jugar</button>
-
-            <script>
-                document.getElementById('play-button').disabled = false;
-            </script>
-
-            <noscript>
-                <div class="error-alert">
-                    ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
-                </div>
-            </noscript>
         </form>
     </div>
+
+    <!-- Easter Egg oculto -->
+    <a href="oculto.php" id="easter-egg" title="Easter Egg" style="position: fixed; bottom: 5px; right: 5px; font-size: 20px; opacity: 0.3;">👀</a>
+
+    <!-- Scripts -->
+    <script src="music.js"></script>
+    <script>
+        // Habilitar botón
+        const playButton = document.getElementById('play-button');
+        playButton.disabled = false;
+
+        // Seleccionar todos los botones
+        const buttons = document.querySelectorAll('button');
+        const buttonSound = document.getElementById('button-sound');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Reproducir sonido del botón
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+
+                // Si es el botón de submit, retrasar el envío para que se escuche
+                if (btn.type === 'submit') {
+                    e.preventDefault();
+                    setTimeout(() => {
+                        btn.closest('form').submit();
+                    }, 800); // 400ms para que se escuche el sonido completo
+                }
+            });
+        });
+    </script>
+
+    <noscript>
+        <div class="error-alert">
+            ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
+        </div>
+    </noscript>
 </body>
 </html>
