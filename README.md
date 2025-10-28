@@ -1,6 +1,6 @@
 # PokeType - ¡Mejora tu mecanografía con Pokémon!
 
-![PokeType](https://via.placeholder.com/800x200/4a154b/ffffff?text=PokeType+-+Mecanografía+Pokémon)
+![Gengar GIF](media/gengarGTIF.gif)
 
 ## 🎮 ¿De qué trata PokeType?
 
@@ -96,9 +96,9 @@ Escribe correctamente y lo más rápido posible las palabras/frases que aparecen
 - Servidor web (Apache recomendado)
 - Navegador con soporte para JavaScript moderno
 
-## 👨‍💻 Autore
+## 👨‍💻 Autores
 
-Creado con ❤️ por [Valeria Santana][Marc Cachinero][Gerard Sanchez]
+Creado con ❤️ por Valeria Santana,Marc Cachinero,Gerard Sanchez
 ---
 
 **¡Conviértete en un maestro de la mecanografía y atrapa todos los Pokémon!** 🎮⌨️🐉
