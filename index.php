@@ -1,78 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poketype</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
-<style>
-    .error-alert {
-        color: red;
-        font-weight: bold;
-    }
-    
-</style>
-
 <body>
-    <?php
-    function mostrarError($error) {
-        if (!empty($error)) {
-            echo '<div class="error-alert">' . $error . '</div>';
-            echo "<script>document.getElementById('name').focus();</script>";
-        }
-    }
-    ?>
-    
-    <?php
-    $error = "";
-    $name = "";
-    $dificultad = "";
+    <!-- Sonido para todos los botones -->
+    <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
-    if ($_POST) {
-        $name = trim($_POST['name']);
-
-        if (empty($name)){
-            $error = "el camp nom no pot estar buit";
-            
-        }
-        else{
-            $dificultad = $_POST['difficulty'];  
-            header("Location: play.php?name=" . urlencode($name) . "&difficulty=" . urlencode($dificultad));
-            exit();
-        }
+    <div id="index-container">
+        <?php
+        function mostrarError($error) {
+            if (!empty($error)) {
+                echo '<div class="error-alert">' . $error . '</div>';
+                echo "<script>document.getElementById('name').focus();</script>";
+            }
         }
 
-    ?>
-    <h1>Poketype</h1>
-    <p>Benvingut a Poketype! Un joc per aprendre els tipus de especies Pokémon i les seves regions.</p>
-    <img src="media/mew.png" alt="Mew Image" width="300">
-    <form action="index.php" method="post">
+        $error = "";
+        $name = "";
+        $dificultad = "";
 
-        <label for="name">Nom:</label>
-        <!-- html specialchars es por seeguidad, para que no puedan meter codigo malicioso -->
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>"><br>
-        
-        <?php mostrarError($error); ?>
-        <br>
-        
-        <label for="difficultad">Dificultat:</label>
-        <select name="difficulty" id="difficultad">
+        if ($_POST) {
+            $name = trim($_POST['name']);
+            if (empty($name)) {
+                $error = "⚠️ El camp nom no pot estar buit";
+            } else {
+                $dificultad = $_POST['difficulty'];
+                header("Location: play.php?name=" . urlencode($name) . "&difficulty=" . urlencode($dificultad));
+                exit();
+            }
+        }
+        ?>
 
-        <option value="facil">Fàcil</option>
-        <option value="normal">Normal</option>
-        <option value="dificil">Difícil</option>
+        <h1>Poketype</h1>
+        <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
+        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Mew GIF" width="300">
 
-        </select><br><br>
-        <!-- El boton jugar esta desabilitado hasta que se detecta que JS esta activo -->
-        <button type="submit" id="play-button" disabled>Jugar</button>
-        
-        <script>
-            //habilitar el boto jugar si JS està actiu
-            document.getElementById('play-button').disabled = false;
-        </script>
+        <form action="index.php" method="post">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>"><br>
+            <?php mostrarError($error); ?>
+            <br>
 
-    </form>
+            <label for="dificultat">Dificultat:</label>
+            <select name="difficulty" id="dificultat">
+                <option value="facil">Fàcil</option>
+                <option value="normal">Normal</option>
+                <option value="dificil">Difícil</option>
+            </select><br><br>
 
+            <button type="submit" id="play-button" disabled>Jugar</button>
+        </form>
+    </div>
+
+    <!-- Easter Egg oculto -->
+    <a href="oculto.php" id="easter-egg" title="Easter Egg" style="position: fixed; bottom: 5px; right: 5px; font-size: 20px; opacity: 0.3;">👀</a>
+
+    <!-- Scripts -->
+    <script src="music.js"></script>
+    <script>
+        // Habilitar botón
+        const playButton = document.getElementById('play-button');
+        playButton.disabled = false;
+
+        // Seleccionar todos los botones
+        const buttons = document.querySelectorAll('button');
+        const buttonSound = document.getElementById('button-sound');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Reproducir sonido del botón
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+
+                // Si es el botón de submit, retrasar el envío para que se escuche
+                if (btn.type === 'submit') {
+                    e.preventDefault();
+                    setTimeout(() => {
+                        btn.closest('form').submit();
+                    }, 800); // 400ms para que se escuche el sonido completo
+                }
+            });
+        });
+    </script>
+
+    <noscript>
+        <div class="error-alert">
+            ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
+        </div>
+    </noscript>
 </body>
 </html>
