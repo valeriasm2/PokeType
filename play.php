@@ -14,17 +14,20 @@ if (file_exists($file)) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poketype - Joc</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- Música de fondo y sonidos de acierto/error -->
+<audio id="correct-sound" src="bien.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="mal.mp3" preload="auto"></audio>
+<script src="music.js"></script>
 <div id="container">
     <h1>Poketype</h1>
     <p>Benvingut, <strong><?php echo $name; ?></strong>!</p>
@@ -38,6 +41,10 @@ if (file_exists($file)) {
     <a href="index.php" id="back-btn">⬅️ Tornar</a>
 </div>
 
+<!-- Easter Egg -->
+<a href="oculto.php" id="easter-egg" title="Easter Egg">👀</a>
+
+<script src="music.js"></script>
 <script>
 let countdown = 3;
 const countdownEl = document.getElementById('countdown');
@@ -47,6 +54,9 @@ const fraseEl = document.getElementById('frase');
 let index = 0;
 let estado = [];
 
+const correctSound = document.getElementById('correct-sound');
+const wrongSound = document.getElementById('wrong-sound');
+
 function normalizar(char) {
     return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
@@ -55,7 +65,9 @@ const mostrarFrase = () => {
     let html = '';
     for (let i = 0; i < frase.length; i++) {
         if (i < index) {
-            html += estado[i] ? `<span class="correct">${frase[i]}</span>` : `<span class="wrong">${frase[i]}</span>`;
+            html += estado[i] 
+                ? `<span class="correct">${frase[i]}</span>` 
+                : `<span class="wrong">${frase[i]}</span>`;
         } else if (i === index) {
             html += `<span class="highlight">${frase[i]}</span>`;
         } else {
@@ -65,6 +77,7 @@ const mostrarFrase = () => {
     fraseEl.innerHTML = html;
 };
 
+// Cuenta atrás
 const interval = setInterval(() => {
     countdown--;
     countdownEl.textContent = countdown;
@@ -77,12 +90,23 @@ const interval = setInterval(() => {
     }
 }, 1000);
 
-
+// Función principal del juego
 function jugar(e) {
     if (index >= frase.length) return;
     if (e.key.length > 1) return;
 
-    estado[index] = (normalizar(e.key) === normalizar(frase[index]));
+    const acertado = normalizar(e.key) === normalizar(frase[index]);
+    estado[index] = acertado;
+    
+    // Reproducir sonido
+    if(acertado){
+        correctSound.currentTime = 0;
+        correctSound.play();
+    } else {
+        wrongSound.currentTime = 0;
+        wrongSound.play();
+    }
+
     index++;
     mostrarFrase();
 
