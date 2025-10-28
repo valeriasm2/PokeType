@@ -6,7 +6,7 @@ http_response_code(404);
 <head>
     <meta charset="UTF-8">
     <title>404 - Pàgina no trobada</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
