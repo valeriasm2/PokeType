@@ -57,7 +57,7 @@
     </div>
 
     <!-- Easter Egg oculto -->
-    <a href="oculto.php" id="easter-egg" title="Easter Egg" style="position: fixed; bottom: 5px; right: 5px; font-size: 20px; opacity: 0.3;">👀</a>
+   
 
     <!-- Scripts -->
     <script src="music.js"></script>
