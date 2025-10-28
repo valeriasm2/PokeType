@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>403 - Accés Prohibit</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="container" class="gameover-container">
