@@ -2,6 +2,10 @@
 $name = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Jugador";
 $difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty']) : "facil";
 
+// --- NUEVO: Captura del bonus del easter egg ---
+$bonus = isset($_GET['bonus']) ? intval($_GET['bonus']) : 0;
+// ---------------------------------------------------
+
 $file = "frases.txt";
 $frase = "No hi ha frases disponibles per aquest nivell.";
 
@@ -28,6 +32,7 @@ if (file_exists($file)) {
 <audio id="correct-sound" src="bien.mp3" preload="auto"></audio>
 <audio id="wrong-sound" src="mal.mp3" preload="auto"></audio>
 <script src="music.js"></script>
+
 <div id="container">
     <h1>Poketype</h1>
     <p>Benvingut, <strong><?php echo $name; ?></strong>!</p>
@@ -41,11 +46,15 @@ if (file_exists($file)) {
     <a href="index.php" id="back-btn">⬅️ Tornar</a>
 </div>
 
-<!-- Easter Egg -->
-<a href="oculto.php" id="easter-egg" title="Easter Egg">👀</a>
+<!-- Easter Egg: pasamos nombre y dificultad -->
+<a href="secret.php?name=<?php echo urlencode($name); ?>&difficulty=<?php echo urlencode($difficulty); ?>" id="easter-egg" title="Easter Egg">👀</a>
 
 <script src="music.js"></script>
 <script>
+// --- NUEVO: Pasamos el bonus a JS ---
+let bonus = <?php echo $bonus; ?>; // puntos extra del easter egg
+// ---------------------------------------------------
+
 let countdown = 3;
 const countdownEl = document.getElementById('countdown');
 const gameArea = document.getElementById('game-area');
@@ -115,7 +124,7 @@ function jugar(e) {
         document.removeEventListener('keydown', jugar);
 
         let aciertos = estado.filter(x => x).length;
-        let puntos = aciertos;
+        let puntos = aciertos + bonus; // --- NUEVO: sumamos el bonus ---
 
         const form = document.createElement('form');
         form.method = 'POST';
