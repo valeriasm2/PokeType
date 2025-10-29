@@ -24,7 +24,7 @@ if (file_exists($file)) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poketype - Joc</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css<?php echo time(); ?>">
 </head>
 <body>
 
