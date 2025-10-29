@@ -251,7 +251,7 @@ button:disabled {
 
  /* Fondo oscro */
     body.laberinto-bg {
-      background-image: url('https://media.discordapp.net/attachments/893063025014231080/1432393802559262750/raaa.gif?ex=69018cef&is=69003b6f&hm=7ba9a8cbd9bb9caf579e7517599a77eeb473b80977b16d7840f59903ef65a5be&=&width=1376&height=774');
+      background-image: url('media/giratina.gif');
       background-size: cover;
       background-repeat: no-repeat;
     }
