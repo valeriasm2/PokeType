@@ -53,11 +53,15 @@
             </select><br><br>
 
             <button type="submit" id="play-button" disabled>Jugar</button>
+
+            <!-- Mensaje JS deshabilitado debajo del botón -->
+            <noscript>
+                <div class="error-alert">
+                    ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
+                </div>
+            </noscript>
         </form>
     </div>
-
-    <!-- Easter Egg oculto -->
-   
 
     <!-- Scripts -->
     <script src="music.js"></script>
@@ -81,16 +85,10 @@
                     e.preventDefault();
                     setTimeout(() => {
                         btn.closest('form').submit();
-                    }, 800); // 400ms para que se escuche el sonido completo
+                    }, 800); // 800ms para que se escuche el sonido completo
                 }
             });
         });
     </script>
-
-    <noscript>
-        <div class="error-alert">
-            ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
-        </div>
-    </noscript>
 </body>
 </html>

@@ -23,6 +23,7 @@ $difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty'])
     </div>
   </div>
 
+  <script src="music2.js"></script>
   <script>
     const giratina = document.getElementById('giratina');
     const resultado = document.getElementById('resultado');
@@ -38,7 +39,7 @@ $difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty'])
       giratina.style.top = `${y}px`;
     }
 
-    const intervalo = setInterval(moverGiratina, 700);
+    const intervalo = setInterval(moverGiratina, 600);
 
     giratina.addEventListener('click', () => {
       atrapado = true;

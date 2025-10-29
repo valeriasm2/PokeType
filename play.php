@@ -67,7 +67,7 @@ const correctSound = document.getElementById('correct-sound');
 const wrongSound = document.getElementById('wrong-sound');
 
 function normalizar(char) {
-    return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 const mostrarFrase = () => {
@@ -107,7 +107,6 @@ function jugar(e) {
     const acertado = normalizar(e.key) === normalizar(frase[index]);
     estado[index] = acertado;
     
-    // Reproducir sonido
     if(acertado){
         correctSound.currentTime = 0;
         correctSound.play();
@@ -124,26 +123,28 @@ function jugar(e) {
         document.removeEventListener('keydown', jugar);
 
         let aciertos = estado.filter(x => x).length;
-        let puntos = aciertos + bonus; // --- NUEVO: sumamos el bonus ---
+        let puntos = aciertos + bonus;
 
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'gameover.php';
+        setTimeout(() => {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'gameover.php';
 
-        const inputScore = document.createElement('input');
-        inputScore.type = 'hidden';
-        inputScore.name = 'score';
-        inputScore.value = puntos;
-        form.appendChild(inputScore);
+            const inputScore = document.createElement('input');
+            inputScore.type = 'hidden';
+            inputScore.name = 'score';
+            inputScore.value = puntos;
+            form.appendChild(inputScore);
 
-        const inputName = document.createElement('input');
-        inputName.type = 'hidden';
-        inputName.name = 'name';
-        inputName.value = "<?php echo $name; ?>";
-        form.appendChild(inputName);
+            const inputName = document.createElement('input');
+            inputName.type = 'hidden';
+            inputName.name = 'name';
+            inputName.value = "<?php echo $name; ?>";
+            form.appendChild(inputName);
 
-        document.body.appendChild(form);
-        form.submit();
+            document.body.appendChild(form);
+            form.submit();
+        }, 2000); 
     }
 }
 </script>

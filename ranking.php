@@ -25,7 +25,7 @@
         <a href="index.php" class="btn-link">Tornar al joc</a>
     </div>
 
-    <script src="music.js"></script>
+    <script src="music3.js"></script>
     <script>
         let ranking = JSON.parse(localStorage.getItem("ranking") || "[]");
         const tbody = document.getElementById("ranking-body");
