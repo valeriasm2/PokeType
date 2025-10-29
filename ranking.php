@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Rànking de rècords</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+
 </head>
 
 <body>

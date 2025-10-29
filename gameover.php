@@ -14,7 +14,8 @@ $name = htmlspecialchars($_POST['name']);
 <head>
     <meta charset="UTF-8">
     <title>Game Over</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+
 </head>
 
 <body>
