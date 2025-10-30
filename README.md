@@ -52,11 +52,11 @@ cd poketype
 PokeType/
 ├── index.php          # Página principal
 ├── play.php           # Juego principal
-├── game.php           # Lógica del juego
 ├── gameover.php       # Pantalla de fin de juego
 ├── ranking.php        # Sistema de ranking
 ├── style.css          # Estilos principales
 ├── frases.txt         # Base de datos de palabras/frases
+├── music.js           # Musica del juego
 ├── errors/
 │   ├── error403.php   # Error de permisos
 │   └── error404.php   # Error de página no encontrada
