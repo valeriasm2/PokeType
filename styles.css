@@ -217,7 +217,7 @@ form {
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 1.5vh 0;
+    padding: 1vh 2vh;
     border-radius: 1vh;
 }
 
