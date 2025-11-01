@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bgMusic) {
         bgMusic = document.createElement('audio');
         bgMusic.id = 'bg-music';
-        bgMusic.src = 'ranking.mp3';
+        bgMusic.src = 'media/Giratina.mp3';
         bgMusic.loop = true;
         bgMusic.autoplay = true;
         document.body.appendChild(bgMusic);
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Sonido de clics más fuerte que la música =====
     const clickSound = document.createElement('audio');
     clickSound.id = 'click-sound';
-    clickSound.src = 'vuttonfin.mp3';
+    clickSound.src = 'media/vuttonfin.mp3';
     clickSound.preload = 'auto';
     clickSound.volume = 1.0; // más fuerte que la música de fondo
     document.body.appendChild(clickSound);

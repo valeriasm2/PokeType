@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poketype</title>
-    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-
-</head>
-<body>
-    <!-- Sonido para todos los botones -->
-    <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
-
-    <div id="index-container">
-        <?php
+<?php
         function mostrarError($error) {
             if (!empty($error)) {
                 echo '<div class="error-alert">' . $error . '</div>';
@@ -35,6 +21,24 @@
             }
         }
         ?>
+
+
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poketype</title>
+    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+
+</head>
+<body>
+    <!-- Sonido para todos los botones -->
+    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
+
+    <div id="index-container">
+        
 
         <h1>Poketype</h1>
         <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
@@ -65,7 +69,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="music.js"></script>
+    <script src="utils/music.js"></script>
     <script>
         // Habilitar botón
         const playButton = document.getElementById('play-button');

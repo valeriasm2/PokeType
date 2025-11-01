@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
+    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div id="ranking-container">
         <h1>Rànking de rècords</h1>
@@ -26,7 +26,7 @@
         <a href="index.php" class="btn-link">Tornar al joc</a>
     </div>
 
-    <script src="music3.js"></script>
+    <script src="utils/music3.js"></script>
     <script>
         let ranking = JSON.parse(localStorage.getItem("ranking") || "[]");
         const tbody = document.getElementById("ranking-body");

@@ -24,7 +24,7 @@ $difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty'])
     </div>
   </div>
 
-  <script src="music2.js"></script>
+  <script src="utils/music2.js"></script>
   <script>
     const giratina = document.getElementById('giratina');
     const resultado = document.getElementById('resultado');
