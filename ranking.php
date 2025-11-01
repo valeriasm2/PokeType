@@ -22,7 +22,7 @@ if(file_exists($rankingFile)) {
     </head>
     <body>
         <div id="ranking-container">
-            <h1>Rànquing de jugadors</h1>
+            <h1>Rànking de Jugadors</h1>
             <div class="table-scroll">
                 <table>
                     <thead>
