@@ -15,36 +15,38 @@ if(file_exists($rankingFile)) {
 ?>
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <title>Rànking de rècords</title>
-    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-</head>
-<body>
-    <div id="ranking-container">
-        <h1>Rànking de rècords</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Jugador</th>
-                    <th>Punts</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $highlighted = false; // resaltar solo la última partida
-                foreach($ranking as $i => $p):
-                    $highlight = (!$highlighted && $p['name'] === $lastPlayer && $p['score'] === $lastScore);
-                    if($highlight) $highlighted = true;
-                ?>
-                <tr class="<?= $i % 2 === 0 ? 'even' : 'odd' ?> <?= $highlight ? 'highlight' : '' ?>">
-                    <td><?= $p['name'] ?></td>
-                    <td><?= $p['score'] ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="index.php" class="btn-link">Tornar al joc</a>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rànking de rècords</title>
+        <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+    </head>
+    <body>
+        <div id="ranking-container">
+            <h1>Ranking</h1>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jugador</th>
+                            <th>Puntos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $highlighted = false;
+                            foreach($ranking as $i => $p):
+                                $highlight = (!$highlighted && $p['name'] === $lastPlayer && $p['score'] === $lastScore);
+                                if($highlight) $highlighted = true;
+                            ?>
+                            <tr class="<?= $i % 2 === 0 ? 'even' : 'odd' ?> <?= $highlight ? 'highlight' : '' ?>">
+                                <td><?= $p['name'] ?></td>
+                                <td><?= $p['score'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <a href="index.php" id="back-btn">Volver</a>
+        </div>
+    </body>
 </html>
