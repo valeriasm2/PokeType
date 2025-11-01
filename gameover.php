@@ -1,4 +1,9 @@
 <?php
+if (!isset($_POST['score']) || !isset($_POST['name'])) {
+    header("HTTP/1.1 403 Forbidden");
+    include(__DIR__ . "/errors/error403.php");
+    exit;
+}
 $score = $name = null;
 $lastPlayer = $lastScore = null;
 
