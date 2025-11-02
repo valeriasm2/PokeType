@@ -20,3 +20,4 @@ nomPrueba1:36
 Prueba1:37
 maria de los dolores:1
 maria de los dolores:1
+Pedro:103
