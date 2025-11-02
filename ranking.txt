@@ -27,3 +27,4 @@ uyjuki:121
 a:105
 wadaw:107
 ioww:117
+dwa:37
