@@ -53,5 +53,7 @@ if (isset($_POST['score']) && isset($_POST['name'])) {
                 <a href="index.php" class="btn-link"><button type="button" class="btn-link">Tornar</button></a>
             <?php endif; ?>
         </div>
+        <script src="utils/musicGameover.js"></script>
+
     </body>
 </html>

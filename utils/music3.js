@@ -29,16 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Sonido de clics más fuerte que la música =====
     const clickSound = document.createElement('audio');
     clickSound.id = 'click-sound';
-    clickSound.src = 'media/vuttonfin.mp3';
+    clickSound.src = 'media/boton.mp3';
     clickSound.preload = 'auto';
     clickSound.volume = 1.0; // más fuerte que la música de fondo
     document.body.appendChild(clickSound);
 
     // Asociar el sonido a todos los botones y enlaces importantes
     document.querySelectorAll('button, a#back-btn, a#easter-egg').forEach(elem => {
-        elem.addEventListener('click', () => {
+        elem.addEventListener('click', e => {
             clickSound.currentTime = 0;
             clickSound.play();
+
+            // Si es un enlace, retrasamos la navegación 1 segundo
+            if (elem.tagName.toLowerCase() === 'a' && elem.href) {
+                e.preventDefault(); // evita que cambie de página de inmediato
+                setTimeout(() => {
+                    window.location.href = elem.href;
+                }, 1000); // espera 1 segundo antes de navegar
+            }
         });
     });
 });

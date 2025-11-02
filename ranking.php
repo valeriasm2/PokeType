@@ -21,6 +21,7 @@ if(file_exists($rankingFile)) {
         <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
     </head>
     <body>
+        <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
         <div id="ranking-container">
             <h1>Rànking de Jugadors</h1>
             <div class="table-scroll">
@@ -46,7 +47,9 @@ if(file_exists($rankingFile)) {
                     </tbody>
                 </table>
             </div>
-            <a href="index.php" id="back-btn">Volver</a>
+            <a href="index.php" id="back-btn">Tornar</a>
         </div>
+        <script src="utils/music3.js"></script>
+
     </body>
 </html>
