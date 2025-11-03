@@ -557,3 +557,103 @@ body.laberinto-bg::before {
         font-size: 16px;
     }
 }
+
+
+
+
+
+
+/* === LISTAR FRASES EN ADMIN === */
+
+
+.llistarfrases-container {
+    width: 65vw;
+    max-width: 650px;
+    height: auto;
+    padding: 2vh 2vw;
+    text-align: center;
+    background-color: rgb(231, 217, 247);
+    border: 0.5vh solid #a825d4;
+    border-radius: 2vh;
+    box-shadow: 0 0 3vh #3b4cca;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.llistarfrases-container label {
+    font-size: 0.95vw;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.llistarfrases-container h2 {
+    margin-bottom: 2vh;
+}
+
+.frases-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    table-layout: fixed;
+    margin-top: 2vh;
+}
+.frases-table th {
+    background-color: #da9bfe;
+    color: #3b4cca;
+}
+
+.frases-table th,
+.frases-table td {
+    padding: 12px;
+    border: 2px solid #aa32ef;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.frases-table th:last-child,
+.frases-table td.accion-cell {
+    width: 110px; /* Columna estrecha para el botón */
+    text-align: center; /* Centrar el botón */
+    white-space: nowrap; /* Que el botón no se parta */
+}
+
+.frases-table tbody tr:nth-child(odd) {
+    background-color: rgb(231, 217, 247);
+}
+
+.frases-table tbody tr:nth-child(even) {
+    background-color: rgb(220, 200, 243);
+}
+
+.form-eliminar {
+    display: inline-block; /* evitar salto de línea */
+}
+
+.form-eliminar button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-eliminar button:hover {
+    background-color: #c9302c;
+}
+
+/* Para el mensaje de alerta (opcional) */
+.alert.success {
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
