@@ -508,6 +508,215 @@ h1 {
     pointer-events: none;
 }
 
+/* =========================================
+        ESTILOS DEL ÁREA ADMIN
+   ========================================= */
+   .admin-page-index {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    background: linear-gradient(180deg, #A7D3F0 0%, #E0F4FF 100%);
+    color: #1E3A5F;
+    margin: 0;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.admin-container-index {
+    background-color: #FFFFFF;
+    padding: 3rem 4rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 4rem;
+    text-align: center;
+    border: 2px solid #4A90E2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-container-index:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* Título */
+.admin-container-index h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #1E3A5F;
+    font-size: 22px;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Menú de acciones (botones/links) */
+.admin-container-index ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.admin-container-index li {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+.admin-container-index button,
+.admin-container-index a.button-link {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.admin-container-index button:hover,
+.admin-container-index a.button-link:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+/* Tabla de frases */
+.admin-container-index table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 2rem;
+    background-color: #EAF6FF;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.admin-container-index th,
+.admin-container-index td {
+    padding: 1rem;
+    border-bottom: 1px solid #4A90E2;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    color: #1E3A5F;
+    word-break: break-word;
+}
+
+.admin-container-index th {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+}
+
+.admin-container-index tr:nth-child(even) {
+    background-color: #D8ECFF;
+}
+
+.admin-container-index td:last-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Botón de borrar */
+.admin-container-index form button {
+    background-color: #E74C3C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.admin-container-index form button:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    transform: translateY(-2px);
+}
+
+/* Select y formulario de filtro */
+.admin-container-index select {
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    background-color: #EAF6FF;
+    color: #1E3A5F;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    margin-left: 0.5rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.admin-container-index select:focus {
+    border-color: #F7C948;
+    outline: none;
+}
+
+/* Labels */
+.admin-container-index label {
+    color: #4A90E2;
+    font-weight: bold;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
+/* Mensajes de estado */
+.admin-container-index .error {
+    color: #E74C3C;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.admin-container-index .success {
+    color: #27AE60;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.admin-container-index .admin-btn {
+    display: inline-block;
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.8rem;
+    margin: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.admin-container-index .admin-btn:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+
+
+
 
 /* ===== EFECTO ANIMACIÓN GAME OVER ===== */
 .gameover-container h1 {

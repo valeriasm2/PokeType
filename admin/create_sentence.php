@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nivell = $_POST['nivell'] ?? '';
     $frase = trim($_POST['frase'] ?? '');
 
-    // Validamos datos
     if ($nivell === '' || $frase === '') {
         $mensaje = "Error: dades incompletes per afegir la frase.";
         $error = true;
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $archivo = '../frases.txt';
 
         if (!file_exists($archivo)) {
-            // Si no existe el archivo, creamos estructura base
             $frases = [
                 'facil' => [],
                 'normal' => [],
@@ -39,15 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!$error) {
-            // Si el nivel no existe, creamos array vacío (por si acaso)
             if (!isset($frases[$nivell])) {
                 $frases[$nivell] = [];
             }
 
-            // Añadimos la frase
             $frases[$nivell][] = $frase;
 
-            // Guardamos el archivo
             $json_nuevo = json_encode($frases, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             if (file_put_contents($archivo, $json_nuevo) === false) {
                 $mensaje = "Error: no s'ha pogut guardar el fitxer.";
@@ -59,41 +54,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
     <meta charset="UTF-8">
     <title>Afegir Frase</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
-    <p>
-        Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
-        <a href="logout.php">Logout</a> | 
-        <a href="index.php">Tornar al panell</a>
-    </p>
+<body class="admin-page-index">
+    <div class="admin-container-index">
+        <p>
+            Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
+            <a href="logout.php">Logout</a> | 
+            <a href="index.php">Tornar al panell</a>
+        </p>
 
-    <h1>Afegir una nova frase</h1>
+        <h1>Afegir una nova frase</h1>
 
-    <?php if ($mensaje): ?>
-        <div style="color: <?php echo $error ? 'red' : 'green'; ?>">
-            <?php echo htmlspecialchars($mensaje); ?>
-        </div>
-    <?php endif; ?>
+        <?php if ($mensaje): ?>
+            <div style="color: <?php echo $error ? 'red' : 'green'; ?>">
+                <?php echo htmlspecialchars($mensaje); ?>
+            </div>
+        <?php endif; ?>
 
-    <form method="POST" action="">
-        <label for="frase">Frase:</label><br>
-        <textarea id="frase" name="frase" rows="4" cols="50" required><?php echo isset($_POST['frase']) ? htmlspecialchars($_POST['frase']) : ''; ?></textarea><br><br>
+        <form method="POST" action="">
+            <label for="frase">Frase:</label>
+            <textarea id="frase" name="frase" rows="4" cols="50" required><?php echo isset($_POST['frase']) ? htmlspecialchars($_POST['frase']) : ''; ?></textarea>
 
-        <label for="nivell">Nivell de dificultat:</label><br>
-        <select id="nivell" name="nivell" required>
-            <option value="" disabled <?php echo !isset($_POST['nivell']) ? 'selected' : ''; ?>>-- Selecciona un nivell --</option>
-            <option value="facil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'facil') ? 'selected' : ''; ?>>Fàcil</option>
-            <option value="normal" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'normal') ? 'selected' : ''; ?>>Normal</option>
-            <option value="dificil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'dificil') ? 'selected' : ''; ?>>Difícil</option>
-        </select><br><br>
+            <label for="nivell">Nivell de dificultat:</label>
+            <select id="nivell" name="nivell" required>
+                <option value="" disabled <?php echo !isset($_POST['nivell']) ? 'selected' : ''; ?>>-- Selecciona un nivell --</option>
+                <option value="facil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'facil') ? 'selected' : ''; ?>>Fàcil</option>
+                <option value="normal" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'normal') ? 'selected' : ''; ?>>Normal</option>
+                <option value="dificil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'dificil') ? 'selected' : ''; ?>>Difícil</option>
+            </select>
 
-        <button type="submit">Afegir frase</button>
-    </form>
+            <button type="submit">Afegir frase</button>
+        </form>
+    </div>
 </body>
 </html>
