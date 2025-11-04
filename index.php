@@ -1,3 +1,32 @@
+<?php
+session_start(); // ✅ Permet recordar el nom i mostrar recuadro de sessió
+
+function mostrarError($error) {
+    if (!empty($error)) {
+        echo '<div class="error-alert">' . $error . '</div>';
+        echo "<script>document.getElementById('name').focus();</script>";
+    }
+}
+
+$error = "";
+$name = "";
+$dificultat = "";
+
+// ✅ Si el formulari s'envia
+if ($_POST) {
+    $name = trim($_POST['name']);
+    if (empty($name)) {
+        $error = "⚠️ El camp nom no pot estar buit";
+    } else {
+        $_SESSION['name'] = $name; // ✅ Guardem el nom en sessió
+        $dificultat = $_POST['difficulty'];
+        header("Location: play.php?difficulty=" . urlencode($dificultat));
+        exit();
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -7,33 +36,20 @@
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
 </head>
 <body>
+
+    <!-- ✅ Recuadro superior derecho de sesión -->
+    <?php if (isset($_SESSION['name'])): ?>
+        <div id="user-box">
+            👤 <strong><?= htmlspecialchars($_SESSION['name']); ?></strong><br>
+            <a href="destroy_session.php">Tancar sessió</a>
+        </div>
+    <?php endif; ?>
+    <!-- ✅ Fin recuadro -->
+
     <!-- So per als botons -->
     <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
     <div id="index-container">
-        <?php
-        function mostrarError($error) {
-            if (!empty($error)) {
-                echo '<div class="error-alert">' . $error . '</div>';
-                echo "<script>document.getElementById('name').focus();</script>";
-            }
-        }
-
-        $error = "";
-        $name = "";
-        $dificultat = "";
-
-        if ($_POST) {
-            $name = trim($_POST['name']);
-            if (empty($name)) {
-                $error = "⚠️ El camp nom no pot estar buit";
-            } else {
-                $dificultat = $_POST['difficulty'];
-                header("Location: play.php?name=" . urlencode($name) . "&difficulty=" . urlencode($dificultat));
-                exit();
-            }
-        }
-        ?>
 
         <h1>Poketype</h1>
         <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
@@ -41,7 +57,8 @@
 
         <form action="index.php" method="post">
             <label for="name">Nom:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>"><br>
+            <input type="text" id="name" name="name"
+                   value="<?php echo htmlspecialchars($name); ?>"><br>
             <?php mostrarError($error); ?>
             <br>
 
@@ -88,25 +105,21 @@
             });
         });
 
-        // 🔥 Nova funció: prement una lletra fa el mateix que el botó corresponent
+        // Tecles: prem una lletra i simula el clic del botó corresponent
         document.addEventListener('keydown', (e) => {
-            if (e.repeat) return; // evita repetir si la tecla es manté premuda
+            if (e.repeat) return; 
 
-            // Evitar activar si s'està escrivint en un camp de text
             const active = document.activeElement;
             if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return;
 
-            // --- Assignar tecles segons el text del botó ---
             buttons.forEach(btn => {
                 const text = btn.textContent.trim().toLowerCase();
-                const key = e.key.toLowerCase();
-
-                // Si el text del botó conté la lletra premsada (ex: "Jugar" → tecla J)
-                if (text.startsWith(key)) {
+                if (text.startsWith(e.key.toLowerCase())) {
                     btn.click();
                 }
             });
         });
     </script>
+
 </body>
 </html>
