@@ -80,8 +80,8 @@ if ($mostrar_llistat) {
 
 <body>
     <p>
-        Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> |
-        <a href="logout.php">Logout</a>
+    Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> |<a href="logout.php">Tancar sessió</a></p>
+    <a href="logout.php">Logout</a>
     </p>
 
     <h1>Panell d’Administrador</h1>

@@ -34,3 +34,6 @@ PRUEBA:13
 hol:1
 koko:3
 cachi:38
+PRUEBA:13
+hol:1
+koko:3
