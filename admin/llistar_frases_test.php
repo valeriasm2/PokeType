@@ -2,11 +2,11 @@
 session_name("admin_session");
 session_start();
 
-// comentado por ahora para facilitar las pruebas
-// if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-//     header("Location: login.php");
-//     exit;
-// }
+
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 
 $archivo = '../frases.txt';
 $contenido = file_get_contents($archivo);
