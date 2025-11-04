@@ -2,6 +2,11 @@
 session_name("admin_session");
 session_start();
 
+if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+    header("Location: index.php");
+    exit;
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,6 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user === $stored_user && $pass === $stored_pass) {
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['admin_user'] = $user;
+
+        // Regenerar ID de sesión por seguridad
+        session_regenerate_id(true);
+
         header("Location: index.php");
         exit;
     } else {
@@ -32,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body class="admin-page">
         <div class="admin-container">
-        <img src="../media/piplu.gif" alt="Piplup" class="admin-gif" />
+            <img src="../media/piplu.gif" alt="Piplup" class="admin-gif" />
             <h1>Login Administrador</h1>
             <?php if ($error) echo "<p class='error'>$error</p>"; ?>
             <form method="post">
@@ -45,4 +54,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </body>
 </html>
-
