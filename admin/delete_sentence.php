@@ -6,10 +6,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-//     header("Location: login.php");
-//     exit;
-// }
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 
 $nivell = $_POST['nivell'] ?? null;
 $index = isset($_POST['index']) ? intval($_POST['index']) : null;
@@ -47,6 +47,6 @@ if (file_put_contents($archivo, json_encode($frases, JSON_PRETTY_PRINT | JSON_UN
     die("Error al guardar frases.");
 }
 
-header("Location: llistar_frases_test.php?nivell=$nivell&msg=frase_eliminada");
+header("Location: index.php?nivell=$nivell&msg=frase_eliminada");
 exit;
 ?>
