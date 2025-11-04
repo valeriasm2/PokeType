@@ -19,7 +19,8 @@ function redirigir_error($codigo, $nivell = 'facil') {
     exit;
 }
 
-if (!$nivell  $index === null) {
+if (!$nivell || $index === null) {
+>>>>>>> 6346943 (admin index mejorado)
     redirigir_error("error_datos");
 }
 
