@@ -19,7 +19,7 @@ $name = htmlspecialchars($_POST['name']);
 </head>
 
 <body>
-    <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
+    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div class="gameover-container">
         <h1>Game Over!</h1>
@@ -28,7 +28,7 @@ $name = htmlspecialchars($_POST['name']);
         <button id="no-btn">No</button>
     </div>
 
-    <script src="music.js"></script>
+    <script src="utils/music.js"></script>
     <script>
         const buttonSound = document.getElementById('button-sound');
 

@@ -30,9 +30,9 @@ if (file_exists($file)) {
 <body>
 
 <!-- Música de fondo y sonidos de acierto/error -->
-<audio id="correct-sound" src="bien.mp3" preload="auto"></audio>
-<audio id="wrong-sound" src="mal.mp3" preload="auto"></audio>
-<script src="music.js"></script>
+<audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="media/mal.mp3" preload="auto"></audio>
+<script src="utils/music.js"></script>
 
 <div id="container">
     <h1>Poketype</h1>
@@ -50,7 +50,7 @@ if (file_exists($file)) {
 <!-- Easter Egg: pasamos nombre y dificultad -->
 <a href="secret.php?name=<?php echo urlencode($name); ?>&difficulty=<?php echo urlencode($difficulty); ?>" id="easter-egg" title="Easter Egg">👀</a>
 
-<script src="music.js"></script>
+<script src="utils/music.js"></script>
 <script>
 // --- NUEVO: Pasamos el bonus a JS ---
 let bonus = <?php echo $bonus; ?>; // puntos extra del easter egg
