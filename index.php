@@ -92,7 +92,7 @@ if (isset($_SESSION['difficulty'])) {
     </div>
 
     <!-- Scripts -->
-    <script src="music.js"></script>
+    <script src="utils/music.js"></script>
     <script>
         // Activar el botó Jugar quan es carregui la pàgina
         const playButton = document.getElementById('play-button');
@@ -111,7 +111,7 @@ if (isset($_SESSION['difficulty'])) {
                     e.preventDefault();
                     setTimeout(() => {
                         btn.closest('form').submit();
-                    }, 500); // temps per escoltar el so
+                    }, 1000); // temps per escoltar el so
                 }
             });
         });

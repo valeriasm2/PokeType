@@ -12,6 +12,7 @@
     "dificil": [
         "Mewtwo és un Pokémon llegendari creat per experiments",
         "Rayquaza viu als cels i controla els conflictes entre Kyogre i Groudon",
-        "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió"
+        "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió",
+        "En termes de reproducció Vaporeon es compatible amb humans"
     ]
 }
