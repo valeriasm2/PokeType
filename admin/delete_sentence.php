@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!isset($_SESSION['admin_logged_in'])  $_SESSION['admin_logged_in'] !== true) {
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit;
 }
@@ -20,7 +20,6 @@ function redirigir_error($codigo, $nivell = 'facil') {
 }
 
 if (!$nivell || $index === null) {
->>>>>>> 6346943 (admin index mejorado)
     redirigir_error("error_datos");
 }
 
