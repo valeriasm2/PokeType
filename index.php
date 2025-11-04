@@ -25,7 +25,10 @@ if ($_POST) {
     }
 }
 
-
+// ✅ Si hi ha sessió, el formulari mostrarà el nom de la sessió
+if (isset($_SESSION['name'])) {
+    $name = $_SESSION['name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -107,7 +110,7 @@ if ($_POST) {
 
         // Tecles: prem una lletra i simula el clic del botó corresponent
         document.addEventListener('keydown', (e) => {
-            if (e.repeat) return; 
+            if (e.repeat) return; // evita repetits
 
             const active = document.activeElement;
             if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return;
