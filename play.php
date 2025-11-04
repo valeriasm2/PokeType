@@ -38,10 +38,9 @@ if (file_exists($file)) {
     👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
     <a href="destroy_session.php">Tancar sessió</a>
 </div>
-    <!-- Easter Egg -->
+
+<!-- Easter Egg -->
 <a href="secret.php" id="easter-egg" title="Easter Egg">👀</a>
-
-
 
 <!-- Sonidos -->
 <audio id="correct-sound" src="bien.mp3" preload="auto"></audio>

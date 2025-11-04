@@ -10,24 +10,31 @@ function mostrarError($error) {
 
 $error = "";
 $name = "";
-$dificultat = "";
+$difficulty = "";
 
 // ✅ Si el formulari s'envia
 if ($_POST) {
     $name = trim($_POST['name']);
+    $difficulty = $_POST['difficulty'] ?? '';
+
     if (empty($name)) {
         $error = "⚠️ El camp nom no pot estar buit";
     } else {
-        $_SESSION['name'] = $name; // ✅ Guardem el nom en sessió
-        $dificultat = $_POST['difficulty'];
-        header("Location: play.php?difficulty=" . urlencode($dificultat));
+        $_SESSION['name'] = $name;              // ✅ Guardem nom en sessió
+        $_SESSION['difficulty'] = $difficulty;  // ✅ Guardem dificultat en sessió
+
+        header("Location: play.php");
         exit();
     }
 }
 
-// ✅ Si hi ha sessió, el formulari mostrarà el nom de la sessió
+// ✅ Si hi ha sessió iniciada, recuperar dades per mostrar-les al formulari
 if (isset($_SESSION['name'])) {
     $name = $_SESSION['name'];
+}
+
+if (isset($_SESSION['difficulty'])) {
+    $difficulty = $_SESSION['difficulty'];
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +56,7 @@ if (isset($_SESSION['name'])) {
     <?php endif; ?>
     <!-- ✅ Fin recuadro -->
 
-    <!-- So per als botons -->
+    <!-- So botons -->
     <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
     <div id="index-container">
@@ -62,17 +69,18 @@ if (isset($_SESSION['name'])) {
             <label for="name">Nom:</label>
             <input type="text" id="name" name="name"
                    value="<?php echo htmlspecialchars($name); ?>"><br>
+
             <?php mostrarError($error); ?>
             <br>
 
             <label for="dificultat">Dificultat:</label>
             <select name="difficulty" id="dificultat">
-                <option value="facil">Fàcil</option>
-                <option value="normal">Normal</option>
-                <option value="dificil">Difícil</option>
+                <option value="facil"  <?= ($difficulty === "facil") ? "selected" : "" ?>>Fàcil</option>
+                <option value="normal" <?= ($difficulty === "normal") ? "selected" : "" ?>>Normal</option>
+                <option value="dificil" <?= ($difficulty === "dificil") ? "selected" : "" ?>>Difícil</option>
             </select><br><br>
 
-            <!-- Botó Jugar amb tecla especial -->
+            <!-- Botó Jugar -->
             <button type="submit" id="play-button" disabled>Jugar</button>
 
             <noscript>
@@ -86,7 +94,7 @@ if (isset($_SESSION['name'])) {
     <!-- Scripts -->
     <script src="music.js"></script>
     <script>
-        // Activar el botó Jugar
+        // Activar el botó Jugar quan es carregui la pàgina
         const playButton = document.getElementById('play-button');
         playButton.disabled = false;
 
@@ -103,14 +111,14 @@ if (isset($_SESSION['name'])) {
                     e.preventDefault();
                     setTimeout(() => {
                         btn.closest('form').submit();
-                    }, 800); // temps per escoltar el so
+                    }, 500); // temps per escoltar el so
                 }
             });
         });
 
         // Tecles: prem una lletra i simula el clic del botó corresponent
         document.addEventListener('keydown', (e) => {
-            if (e.repeat) return; // evita repetits
+            if (e.repeat) return;
 
             const active = document.activeElement;
             if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return;
