@@ -43,7 +43,7 @@ if(file_exists($rankingFile)) {
     <div id="ranking-container">
         <h1>Rànking de Jugadors</h1>
 
-        <div class="table-scroll">
+        <div>
             <table>
                 <thead>
                     <tr>

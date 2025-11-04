@@ -43,9 +43,9 @@ if (file_exists($file)) {
 <a href="secret.php" id="easter-egg" title="Easter Egg">👀</a>
 
 <!-- Sonidos -->
-<audio id="correct-sound" src="bien.mp3" preload="auto"></audio>
-<audio id="wrong-sound" src="mal.mp3" preload="auto"></audio>
-<audio id="button-sound" src="boton.mp3" preload="auto"></audio>
+<audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="media/mal.mp3" preload="auto"></audio>
+<audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
 <div id="container">
     <h1>Poketype</h1>
@@ -58,7 +58,7 @@ if (file_exists($file)) {
 
     <a href="index.php" id="back-btn">⬅ESCAPE</a>
 </div>
-
+<script src="utils/music.js"></script>
 <script>
 const correctSound = document.getElementById("correct-sound");
 const wrongSound = document.getElementById("wrong-sound");

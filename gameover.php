@@ -65,7 +65,7 @@ $_SESSION['name'] = $name; // asegura que la sesión guarde el nombre
         <!-- Botón No -->
         <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">No</button>
     </div>
-
+    <script src="utils/musicGameover.js"></script>
     <script>
         const buttonSound = document.getElementById("button-sound");
 

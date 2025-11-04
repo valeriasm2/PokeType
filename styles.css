@@ -1,26 +1,25 @@
 /* === Fuente y fondo general con GIF === */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-html {
+html, body {
     margin: 0;
-    height: 100%;
+    padding: 0;
+    height: auto;
 }
 
 body {
-    margin: 0;
-    height: 100%;
-
     font-family: 'Press Start 2P', cursive;
     background: url('https://media1.tenor.com/m/0_-BvSG6IpgAAAAd/monad.gif') no-repeat center center fixed;
     background-size: cover;
-    /* Para que cubra toda la pantalla */
+    color: #a602ff;
     display: flex;
-    /* Centrado horizontal y vertical */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #a602ff;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
 
 /* === Contenedor index.php === */
 #index-container {
@@ -33,10 +32,12 @@ body {
     max-width: 600px;
     width: 90%;
     position: relative;
+    margin: 60px 0;
 }
 
 /* === Contenedor del juego === */
 #container {
+    display: inline-block;
     text-align: center;
     padding: 50px;
     background-color: rgb(231, 217, 247);
@@ -45,7 +46,7 @@ body {
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    position: relative;
+    margin: 200px auto;
 }
 
 /* === Contenedor Game Over === */
@@ -58,7 +59,7 @@ body {
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    position: relative;
+    margin: 200px auto;
 }
 
 
@@ -74,7 +75,9 @@ body {
     max-width: 600px;
     width: 90%;
     position: relative;
+    margin: 100px auto;
 }
+
 
 /* === Encabezados === */
 h1 {
@@ -232,7 +235,7 @@ button:disabled {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Scroll de Ranking */
+/* Scroll de Ranking 
 #ranking-container .table-scroll {
     max-height: 300px;
     overflow-y: auto;
@@ -260,6 +263,7 @@ button:disabled {
     scrollbar-width: thin;
     scrollbar-color: #a846f8 #eae0f7;
 }
+*/
 
 /* Easter Egg */
 #easter-egg {
