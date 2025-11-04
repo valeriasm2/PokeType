@@ -16,8 +16,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         <title>Panell d'Administrador</title>
     </head>
     <body>
-        <p>Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
-        <a href="logout.php">Logout</a></p>
+    <p>Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | <a href="logout.php">Tancar sessió</a></p>
+    <a href="logout.php">Logout</a></p>
 
         <h1>Panell d’Administrador</h1>
         <ul>

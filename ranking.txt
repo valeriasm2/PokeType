@@ -28,3 +28,6 @@ a:105
 wadaw:107
 ioww:117
 dwa:37
+PRUEBA:13
+hol:1
+koko:3
