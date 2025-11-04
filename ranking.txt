@@ -28,3 +28,5 @@ a:105
 wadaw:107
 ioww:117
 dwa:37
+Pedro:8
+Gery:52
