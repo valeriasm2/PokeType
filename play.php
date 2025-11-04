@@ -25,14 +25,13 @@ if (file_exists($file)) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poketype - Joc</title>
 <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-
 </head>
 <body>
 
 <!-- Música de fondo y sonidos de acierto/error -->
-<audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
-<audio id="wrong-sound" src="media/mal.mp3" preload="auto"></audio>
-<script src="utils/music.js"></script>
+<audio id="correct-sound" src="bien.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="mal.mp3" preload="auto"></audio>
+<audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
 <div id="container">
     <h1>Poketype</h1>
@@ -50,11 +49,11 @@ if (file_exists($file)) {
 <!-- Easter Egg: pasamos nombre y dificultad -->
 <a href="secret.php?name=<?php echo urlencode($name); ?>&difficulty=<?php echo urlencode($difficulty); ?>" id="easter-egg" title="Easter Egg">👀</a>
 
-<script src="utils/music.js"></script>
+<script src="music.js"></script>
 <script>
-// --- NUEVO: Pasamos el bonus a JS ---
-let bonus = <?php echo $bonus; ?>; // puntos extra del easter egg
-// ---------------------------------------------------
+// --- BONUS ---
+let bonus = <?php echo $bonus; ?>; 
+// ----------------
 
 let countdown = 3;
 const countdownEl = document.getElementById('countdown');
@@ -66,6 +65,7 @@ let estado = [];
 
 const correctSound = document.getElementById('correct-sound');
 const wrongSound = document.getElementById('wrong-sound');
+const buttonSound = document.getElementById('button-sound');
 
 function normalizar(char) {
     return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -148,6 +148,27 @@ function jugar(e) {
         }, 2000); 
     }
 }
+
+// --- Tecla especial para el botón Tornar (Escape) ---
+document.addEventListener('keydown', (e) => {
+    if (e.repeat) return;
+
+    const active = document.activeElement;
+    if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return;
+
+    if (e.key === 'Escape') {
+        const backBtn = document.getElementById('back-btn');
+        if (backBtn) {
+            if (buttonSound) {
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+            }
+            setTimeout(() => {
+                backBtn.click();
+            }, 800);
+        }
+    }
+});
 </script>
 
 </body>
