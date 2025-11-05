@@ -80,7 +80,7 @@ if ($mostrar_llistat) {
 
             <?php if (isset($_GET['msg'])): ?>
                 <?php
-                $msgs = [
+                $msgs = [ //array de mensajes con formato clave => valor
                     'frase_eliminada' => "Frase eliminada correctament.",
                     'error_datos' => "Error: dades incompletes per eliminar la frase.",
                     'error_archivo_no_encontrado' => "Error: fitxer de frases no trobat.",
@@ -102,15 +102,21 @@ if ($mostrar_llistat) {
             const container = document.getElementById("llistarContainer");
 
             if (toggleBtn && container) {
-                // Si ya se está mostrando el listado, actualizar el texto del botón
+                // SI ya se está mostrando el listado, actualiza el texto del botón para mostrar que está activo!!!! jeje
                 const esMostrado = !container.classList.contains("hidden");
                 if (esMostrado) {
                     toggleBtn.textContent = "Ocultar frases";
                 }
 
                 toggleBtn.addEventListener("click", () => {
+                    // SI el contenedor está oculto y no hay listado cargado, redirigir para cargar las frases por defecto!!
+                    if (container.classList.contains("hidden") && !esMostrado) {
+                        window.location.href = "?action=llistar&nivell=facil";
+                        return;
+                    }
+                    
                     container.classList.toggle("hidden");
-                    // Cambiar el texto del botón según el estado
+                    // cambiar el texto del botón según el estado ya sea oculto o visible
                     if (container.classList.contains("hidden")) {
                         toggleBtn.textContent = "Llistar frases";
                     } else {
