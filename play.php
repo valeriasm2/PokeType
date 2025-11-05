@@ -1,10 +1,15 @@
 <?php
-$name = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Jugador";
-$difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty']) : "facil";
+session_start();
 
-// --- NUEVO: Captura del bonus del easter egg ---
+// Si no hay sesión, volver al index
+if (!isset($_SESSION['name'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$name = $_SESSION['name'];
+$difficulty = isset($_SESSION['difficulty']) ? $_SESSION['difficulty'] : "facil";
 $bonus = isset($_GET['bonus']) ? intval($_GET['bonus']) : 0;
-// ---------------------------------------------------
 
 $file = "frases.txt";
 $frase = "No hi ha frases disponibles per aquest nivell.";
@@ -25,90 +30,93 @@ if (file_exists($file)) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poketype - Joc</title>
 <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-
 </head>
 <body>
 
-<!-- Música de fondo y sonidos de acierto/error -->
+<!-- 🔹 Recuadro superior derecho (nombre + logout) -->
+<div id="user-box">
+    👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
+    <a href="destroy_session.php">Tancar sessió</a>
+</div>
+
+<!-- Easter Egg -->
+<a href="secret.php" id="easter-egg" title="Easter Egg">👀</a>
+
+<!-- Sonidos -->
 <audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
 <audio id="wrong-sound" src="media/mal.mp3" preload="auto"></audio>
-<script src="utils/music.js"></script>
+<audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
 <div id="container">
     <h1>Poketype</h1>
-    <p>Benvingut, <strong><?php echo $name; ?></strong>!</p>
-    <p>Dificultat seleccionada: <strong><?php echo ucfirst($difficulty); ?></strong></p>
+    <p>Dificultat seleccionada: <strong><?php echo ucfirst(htmlspecialchars($difficulty)); ?></strong></p>
 
     <div id="countdown">3</div>
     <div id="game-area" style="display:none;">
         <p id="frase"></p>
     </div>
 
-    <a href="index.php" id="back-btn">⬅️ Tornar</a>
+    <a href="index.php" id="back-btn">ESCAPE</a>
 </div>
-
-<!-- Easter Egg: pasamos nombre y dificultad -->
-<a href="secret.php?name=<?php echo urlencode($name); ?>&difficulty=<?php echo urlencode($difficulty); ?>" id="easter-egg" title="Easter Egg">👀</a>
-
 <script src="utils/music.js"></script>
 <script>
-// --- NUEVO: Pasamos el bonus a JS ---
-let bonus = <?php echo $bonus; ?>; // puntos extra del easter egg
-// ---------------------------------------------------
+const correctSound = document.getElementById("correct-sound");
+const wrongSound = document.getElementById("wrong-sound");
+const buttonSound = document.getElementById("button-sound");
 
-let countdown = 3;
-const countdownEl = document.getElementById('countdown');
-const gameArea = document.getElementById('game-area');
+let bonus = <?php echo $bonus; ?>;
 const frase = "<?php echo addslashes($frase); ?>";
-const fraseEl = document.getElementById('frase');
+const fraseEl = document.getElementById("frase");
 let index = 0;
 let estado = [];
-
-const correctSound = document.getElementById('correct-sound');
-const wrongSound = document.getElementById('wrong-sound');
+let countdown = 3;
 
 function normalizar(char) {
     return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-const mostrarFrase = () => {
-    let html = '';
+// Mostrar frase con colores
+function mostrarFrase() {
+    let html = "";
     for (let i = 0; i < frase.length; i++) {
         if (i < index) {
-            html += estado[i] 
-                ? `<span class="correct">${frase[i]}</span>` 
-                : `<span class="wrong">${frase[i]}</span>`;
+            html += estado[i]
+                ? `<span class='correct'>${frase[i]}</span>`
+                : `<span class='wrong'>${frase[i]}</span>`;
         } else if (i === index) {
-            html += `<span class="highlight">${frase[i]}</span>`;
+            html += `<span class='highlight'>${frase[i]}</span>`;
         } else {
             html += frase[i];
         }
     }
     fraseEl.innerHTML = html;
-};
+}
 
 // Cuenta atrás
+const countdownEl = document.getElementById("countdown");
+const gameArea = document.getElementById("game-area");
+
 const interval = setInterval(() => {
     countdown--;
     countdownEl.textContent = countdown;
     if (countdown === 0) {
         clearInterval(interval);
-        countdownEl.style.display = 'none';
-        gameArea.style.display = 'block';
+        countdownEl.style.display = "none";
+        gameArea.style.display = "block";
         mostrarFrase();
-        document.addEventListener('keydown', jugar);
+        document.addEventListener("keydown", jugar);
     }
 }, 1000);
 
-// Función principal del juego
+// Juego
 function jugar(e) {
     if (index >= frase.length) return;
     if (e.key.length > 1) return;
 
     const acertado = normalizar(e.key) === normalizar(frase[index]);
     estado[index] = acertado;
-    
-    if(acertado){
+
+    if (acertado) {
         correctSound.currentTime = 0;
         correctSound.play();
     } else {
@@ -121,33 +129,34 @@ function jugar(e) {
 
     if (index === frase.length) {
         fraseEl.innerHTML += "<br><br><strong>🎉 Has completat la frase! 🎉</strong>";
-        document.removeEventListener('keydown', jugar);
+        document.removeEventListener("keydown", jugar);
 
         let aciertos = estado.filter(x => x).length;
         let puntos = aciertos + bonus;
 
         setTimeout(() => {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'gameover.php';
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "gameover.php";
 
-            const inputScore = document.createElement('input');
-            inputScore.type = 'hidden';
-            inputScore.name = 'score';
-            inputScore.value = puntos;
-            form.appendChild(inputScore);
-
-            const inputName = document.createElement('input');
-            inputName.type = 'hidden';
-            inputName.name = 'name';
-            inputName.value = "<?php echo $name; ?>";
-            form.appendChild(inputName);
-
+            form.innerHTML = `
+                <input type="hidden" name="score" value="${puntos}">
+                <input type="hidden" name="name" value="<?php echo $name; ?>">
+            `;
             document.body.appendChild(form);
             form.submit();
-        }, 2000); 
+        }, 2000);
     }
 }
+
+// Volver con ESC + sonido
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        buttonSound.currentTime = 0;
+        buttonSound.play();
+        setTimeout(() => document.getElementById("back-btn").click(), 200);
+    }
+});
 </script>
 
 </body>

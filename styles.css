@@ -1,62 +1,66 @@
 /* === Fuente y fondo general con GIF === */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-html {
+html,
+body {
     margin: 0;
-    height: 100%;
+    padding: 0;
+    height: auto;
 }
 
 body {
-    margin: 0;
-    height: 100%;
-    
     font-family: 'Press Start 2P', cursive;
     background: url('https://media1.tenor.com/m/0_-BvSG6IpgAAAAd/monad.gif') no-repeat center center fixed;
-    background-size: cover;      /* Para que cubra toda la pantalla */
-    display: flex;               /* Centrado horizontal y vertical */
-    justify-content: center;     
-    align-items: center;         
+    background-size: cover;
     color: #a602ff;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
 
 /* === Contenedor index.php === */
 #index-container {
     text-align: center;
     padding: 50px;
-    background-color: rgb(231, 217, 247); 
+    background-color: rgb(231, 217, 247);
     border: 5px solid #a825d4;
     border-radius: 25px;
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
     position: relative;
+    margin: 60px 0;
 }
 
 /* === Contenedor del juego === */
 #container {
+    display: inline-block;
     text-align: center;
     padding: 50px;
-    background-color: rgb(231, 217, 247); 
+    background-color: rgb(231, 217, 247);
     border: 5px solid #a825d4;
     border-radius: 25px;
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    position: relative;
+    margin: 200px auto;
 }
 
 /* === Contenedor Game Over === */
 .gameover-container {
     text-align: center;
     padding: 50px;
-    background-color: rgb(231, 217, 247); 
+    background-color: rgb(231, 217, 247);
     border: 5px solid #a825d4;
     border-radius: 25px;
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    position: relative;
+    margin: 200px auto;
 }
 
 
@@ -65,14 +69,16 @@ body {
 #ranking-container {
     text-align: center;
     padding: 50px;
-    background-color: rgb(231, 217, 247); 
+    background-color: rgb(231, 217, 247);
     border: 5px solid #a825d4;
     border-radius: 25px;
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
     position: relative;
+    margin: 100px auto;
 }
+
 
 /* === Encabezados === */
 h1 {
@@ -99,7 +105,9 @@ form {
     margin-top: 20px;
 }
 
-input, select, button {
+input,
+select,
+button {
     padding: 12px;
     margin: 6px;
     font-size: 14px;
@@ -119,7 +127,7 @@ button {
 button:hover {
     background-color: #a846f8;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
@@ -141,8 +149,13 @@ button:disabled {
     margin-top: 30px;
 }
 
-.correct { color: green; }
-.wrong { color: red; }
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
 
 .highlight {
     text-decoration: underline;
@@ -155,7 +168,7 @@ button:disabled {
     margin-top: 20px;
 }
 
-/* === Botón de volver === */
+/* === BotÃ³n de volver === */
 #back-btn {
     margin-top: 40px;
     display: inline-block;
@@ -171,7 +184,7 @@ button:disabled {
 #back-btn:hover {
     background-color: #5e2aa1;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* === Tabla Ranking === */
@@ -182,7 +195,8 @@ button:disabled {
     font-size: 16px;
 }
 
-#ranking-container th, #ranking-container td {
+#ranking-container th,
+#ranking-container td {
     padding: 12px;
     border: 2px solid #aa32ef;
 }
@@ -193,11 +207,11 @@ button:disabled {
 }
 
 #ranking-container table tbody tr:nth-child(odd) {
-  background-color: rgb(231, 217, 247);
+    background-color: rgb(231, 217, 247);
 }
 
 #ranking-container table tbody tr:nth-child(even) {
-  background-color: rgb(220, 200, 243);
+    background-color: rgb(220, 200, 243);
 }
 
 
@@ -225,22 +239,50 @@ button:disabled {
 #ranking-container a:hover {
     background-color: #aa32ef;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Scroll de Ranking 
+#ranking-container .table-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1vh 2vh;
+    border-radius: 1vh;
+}
 
+#ranking-container .table-scroll::-webkit-scrollbar {
+    width: 0.8vw;
+}
 
+#ranking-container .table-scroll::-webkit-scrollbar-track {
+    background: #eae0f7;
+    border-radius: 1vh;
+}
+
+#ranking-container .table-scroll::-webkit-scrollbar-thumb {
+    background-color: #a846f8;
+    border-radius: 1vh;
+    border: 2px solid #eae0f7;
+}
+
+#ranking-container .table-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #a846f8 #eae0f7;
+}
+*/
 
 /* Easter Egg */
 #easter-egg {
-    position: fixed;       
+    position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
+    left: 10px;
     font-size: 24px;
     cursor: pointer;
     opacity: 0.3;
     transition: opacity 0.3s;
-    z-index: 1001;         
+    z-index: 1001;
 }
 
 #easter-egg:hover {
@@ -249,90 +291,699 @@ button:disabled {
 
 
 
- /* Fondo oscro */
-    body.laberinto-bg {
-      background-image: url('media/giratina.gif');
-      background-size: cover;
-      background-repeat: no-repeat;
+/* Fondo oscro */
+body.laberinto-bg {
+    background-image: url('media/giratina.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body.laberinto-bg::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: brightness(0.55) blur(5px);
+    z-index: 0;
+}
+
+.giratina-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffcb05;
+    text-shadow: 2px 2px #3b4cca;
+    z-index: 1;
+}
+
+h1 {
+    color: #ffffff;
+    text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
+}
+
+h1 {
+    color: #ffffff;
+    text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
+}
+
+#giratina {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#giratina:hover {
+    transform: scale(1.2);
+}
+
+
+
+#resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #ffcb05;
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Estado visible del contenedor de resultado */
+#resultado.mostrar {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#resultado img {
+    width: 150px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px #ffcb05);
+}
+
+#resultado p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffcb05;
+
+}
+
+/* Recuadro usuario (arriba derecha) */
+#user-box {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #666;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    z-index: 9999;
+}
+
+#user-box a {
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #c0392b;
+    text-decoration: none;
+}
+
+/* =========================================
+            ESTILOS DEL AREA ADMIN
+   ========================================= */
+.admin-page {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    background: linear-gradient(180deg, #A7D3F0 0%, #E0F4FF 100%);
+    color: #c2d5ee;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Contenedor principal del login/logout */
+.admin-container {
+    background-color: #FFFFFF;
+    padding: 5rem 4rem;
+    border-radius: 24px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    width: 420px;
+    text-align: center;
+    border: 2px solid #4A90E2;
+}
+
+/* Títulos */
+.admin-container h1 {
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: none !important;
+    color: #1E3A5F !important;
+    font-size: 22px;
+    word-break: break-word;
+    white-space: normal;
+    margin-top: 0;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+/* Etiquetas y entradas */
+.admin-page label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #5A8DD8;
+    font-size: 14px;
+}
+
+.admin-page input[type="text"],
+.admin-page input[type="password"] {
+    width: 95%;
+    padding: 1rem;
+    margin-top: 0.4rem;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    background-color: #EAF6FF;
+    font-size: 1.1rem;
+}
+
+/* Botón */
+.admin-page button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.admin-page button:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Mensaje de error */
+.admin-page .error {
+    color: #c0392b;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* Enlace de volver o salir */
+.admin-page a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #4A90E2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.admin-page a:hover {
+    color: #F7C948;
+}
+
+.admin-gif {
+    display: block;
+    width: 180px;
+    height: auto;
+    margin: 0 auto 1rem;
+    pointer-events: none;
+}
+
+/* =========================================
+
+        ESTILOS DEL PANEL D'ADMINISTRADOR
+   ========================================= */
+.admin-page-index {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    background: linear-gradient(180deg, #A7D3F0 0%, #E0F4FF 100%);
+    color: #1E3A5F;
+    margin: 0;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.admin-container-index {
+    background-color: #FFFFFF;
+    padding: 3rem 4rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 4rem;
+    text-align: center;
+    border: 2px solid #4A90E2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-container-index:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+
+}
+
+/* Título */
+.admin-container-index h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #1E3A5F;
+    font-size: 22px;
+    margin-bottom: 2.5rem;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+}
+
+/* Menú de acciones (botones/links) */
+.admin-container-index ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.admin-container-index li {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+.admin-container-index button,
+.admin-container-index a.button-link {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.admin-container-index button:hover,
+.admin-container-index a.button-link:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Tabla de frases */
+
+.admin-container-index table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 2rem;
+    background-color: #EAF6FF;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.admin-container-index th,
+.admin-container-index td {
+    padding: 1rem;
+    border-bottom: 1px solid #4A90E2;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+
+    font-size: 14px;
+    color: #1E3A5F;
+    word-break: break-word;
+}
+
+.admin-container-index th {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+}
+
+.admin-container-index tr:nth-child(even) {
+    background-color: #D8ECFF;
+}
+
+.admin-container-index td:last-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.admin-container-index table td:first-child,
+.admin-container-index table th:first-child {
+    max-width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.admin-container-index table td:last-child,
+.admin-container-index table th:last-child {
+    width: 100px;
+    text-align: center;
+    white-space: nowrap;
+}
+/* Mostrar/Ocultar contenedor de frases */
+.hidden {
+    display: none;
+}
+
+#llistarContainer {
+    transition: all 0.3s ease;
+}
+
+
+/* Botón de borrar */
+.admin-container-index form button {
+    background-color: #E74C3C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.admin-container-index form button:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    transform: translateY(-2px);
+}
+
+/* Select y formulario de filtro */
+.admin-container-index select {
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    background-color: #EAF6FF;
+    color: #1E3A5F;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    margin-left: 0.5rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.admin-container-index select:focus {
+    border-color: #F7C948;
+    outline: none;
+}
+
+/* Labels */
+.admin-container-index label {
+    color: #4A90E2;
+    font-weight: bold;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
+/* Mensajes de estado */
+.admin-container-index .error {
+    color: #E74C3C;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.admin-container-index .success {
+    color: #27AE60;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.admin-container-index .admin-btn {
+    display: inline-block;
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.8rem;
+    margin: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.admin-container-index .admin-btn:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin-container-index form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-container-index form label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.3rem;
+}
+
+.admin-container-index form textarea,
+.admin-container-index form select {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.admin-link-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 8px 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.admin-link-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.admin-link-btn.logout {
+    background-color: #f44336;
+}
+
+.admin-link-btn.logout:hover {
+    background-color: #d32f2f;
+}
+
+
+/* ===== EFECTO ANIMACIÓN GAME OVER ===== */
+.gameover-container h1 {
+    font-size: 60px;
+    color: #aa32ef;
+    animation: gameover-shake 0.6s infinite alternate ease-in-out;
+    text-shadow: 0px 0px 10px #fff, 0 0 25px #aa32ef, 0 0 45px #aa32ef;
+    padding: 50px 0;
+}
+
+/* ===== ESTILOS PARA LOS MENSAJES DE ERROR ADMIN ===== */
+.error {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.empty {
+    background-color: #ffeb3b !important;
+    color: #333 !important;
+}
+
+.user {
+    background-color: #f44336 !important;
+    color: #fff !important;
+}
+
+.pass {
+    background-color: #ff9800 !important;
+    color: #fff !important;
+}
+
+.server {
+    background-color: #9c27b0 !important;
+    color: #fff !important;
+}
+
+@keyframes gameover-shake {
+    0% {
+        transform: scale(1) rotate(-1deg);
     }
 
-    body.laberinto-bg::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      filter: brightness(0.55) blur(5px);
-      z-index: 0;
+    50% {
+        transform: scale(1.05) rotate(1deg);
     }
 
-    .giratina-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #ffcb05;
-      text-shadow: 2px 2px #3b4cca;
-      z-index: 1;
+    100% {
+        transform: scale(1) rotate(-1deg);
+    }
+}
+
+/* === Media query para 1388px de ancho y 768px de alto === */
+@media (max-width: 1388px) and (max-height: 768px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        padding: 30px;
+        max-width: 500px;
+        width: 85%;
+        margin: 80px auto;
     }
 
     h1 {
-      color: #ffffff;
-      text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
+        font-size: 40px;
     }
 
-    #giratina {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    h2 {
+        font-size: 28px;
     }
 
-    #giratina:hover {
-      transform: scale(1.2);
+    p {
+        font-size: 14px;
     }
 
-    
-    #resultado {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #ffcb05;
-      opacity: 0;
-      transform: scale(0.9);
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    input,
+    select,
+    button {
+        padding: 10px;
+        font-size: 12px;
     }
 
-    /* Estado visible del contenedor de resultado */
-    #resultado.mostrar {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
+    #back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 
-    #resultado img {
-      width: 150px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 0 10px #ffcb05);
+    #game-area {
+        font-size: 1.2em;
     }
 
     #resultado p {
-      font-size: 22px;
-      font-weight: bold;
-      color: #ffcb05;
-
+        font-size: 18px;
     }
-        
+
+    #user-box {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* === Media query para pantallas medianas === */
+@media (max-width: 1200px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        max-width: 450px;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+}
+
+/* === Media query para pantallas pequeñas === */
+@media (max-width: 992px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    #game-area {
+        font-size: 1em;
+    }
+}
+
+/* === Media query para móviles === */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        margin: 40px 0;
+        padding: 15px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    #back-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}

@@ -1,68 +1,101 @@
+<?php
+session_start();
+
+// Si no hay sesión, vuelve al inicio
+if (!isset($_SESSION['name'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$name = $_SESSION['name'];
+
+$rankingFile = __DIR__ . '/ranking.txt';
+$ranking = [];
+$lastPlayer = $_GET['last'] ?? '';
+$lastScore  = isset($_GET['score']) ? intval($_GET['score']) : null;
+
+if(file_exists($rankingFile)) {
+    $lines = file($rankingFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach($lines as $line) {
+        [$playerName, $score] = explode(":", $line);
+        $ranking[] = ['name' => htmlspecialchars($playerName), 'score' => intval($score)];
+    }
+    usort($ranking, fn($a, $b) => $b['score'] <=> $a['score']);
+}
+?>
 <!DOCTYPE html>
 <html lang="ca">
-
 <head>
     <meta charset="UTF-8">
     <title>Rànking de rècords</title>
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-
 </head>
-
 <body>
+
+    <!-- Recuadro session -->
+    <div id="user-box">
+        👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
+        <a href="destroy_session.php">Tancar sessió</a>
+    </div>
+
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div id="ranking-container">
-        <h1>Rànking de rècords</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Jugador</th>
-                    <th>Punts</th>
-                </tr>
-            </thead>
-            <tbody id="ranking-body">
-            </tbody>
-        </table>
-        <a href="index.php" class="btn-link">Tornar al joc</a>
+        <h1>Rànking de Jugadors</h1>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Punts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $highlighted = false;
+                        foreach($ranking as $i => $p):
+                            $highlight = (!$highlighted && $p['name'] === $lastPlayer && $p['score'] === $lastScore);
+                            if($highlight) $highlighted = true;
+                    ?>
+                        <tr class="<?= $i % 2 === 0 ? 'even' : 'odd' ?> <?= $highlight ? 'highlight' : '' ?>">
+                            <td><?= $p['name'] ?></td>
+                            <td><?= $p['score'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón Tornar -->
+        <a href="index.php" id="back-btn">ESCAPE</a>
     </div>
 
     <script src="utils/music3.js"></script>
-    <script>
-        let ranking = JSON.parse(localStorage.getItem("ranking") || "[]");
-        const tbody = document.getElementById("ranking-body");
-        const lastPlayerName = sessionStorage.getItem("lastPlayer"); // jugador reciente
 
-        ranking.forEach((p, i) => {
-            let tr = document.createElement("tr");
-            tr.className = i % 2 === 0 ? "even" : "odd";
-            if (p.name === lastPlayerName) {
-                tr.classList.add("highlight");
-            }
-            tr.innerHTML = `<td>${p.name}</td><td>${p.score}</td>`;
-            tbody.appendChild(tr);
+    <script>
+        const buttonSound = document.getElementById("button-sound");
+        const backBtn = document.getElementById("back-btn");
+
+        // Función sonido + volver
+        function playSoundAndBack() {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+            setTimeout(() => window.location.href = "index.php", 800);
+        }
+
+        backBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            playSoundAndBack();
         });
 
-        const buttonSound = document.getElementById('button-sound');
-        const allButtons = document.querySelectorAll('button, .btn-link');
-
-        allButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                buttonSound.currentTime = 0;
-                buttonSound.volume = 1;
-                buttonSound.play();
-                const href = btn.getAttribute('href');
-                if (href) {
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 800);
-                } else {
-                    const form = btn.closest('form');
-                    if (form) setTimeout(() => form.submit(), 800);
-                }
-            });
+        // ✅ ESC vuelve al inicio
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                playSoundAndBack();
+            }
         });
     </script>
-</body>
 
+</body>
 </html>
