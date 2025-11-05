@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Afegir Frase</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?<?php echo time(); ?>">
 </head>
 <body class="admin-page-index">
     <div class="admin-container-index">

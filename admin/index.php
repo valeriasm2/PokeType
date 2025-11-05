@@ -47,7 +47,7 @@ if ($mostrar_llistat) {
 <head>
     <meta charset="UTF-8">
     <title>Panell d'Administrador</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?<?php echo time(); ?>">
 </head>
 <body class="admin-page-index">
     <div class="admin-container-index">

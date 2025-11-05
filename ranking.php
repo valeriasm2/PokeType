@@ -38,6 +38,8 @@ if(file_exists($rankingFile)) {
         <a href="destroy_session.php">Tancar sessió</a>
     </div>
 
+    <!-- Audio para música de fondo y efectos -->
+    <audio id="bg-music" src="media/ranking.mp3" loop preload="auto"></audio>
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div id="ranking-container">
@@ -74,6 +76,21 @@ if(file_exists($rankingFile)) {
     <script src="utils/music3.js"></script>
 
     <script>
+        // Fix para Chrome: activar música con primer clic si autoplay falla
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const bgMusic = document.getElementById('bg-music');
+                if (bgMusic && bgMusic.paused) {
+                    // Si la música no está sonando, activarla con primer clic
+                    const activateMusic = () => {
+                        bgMusic.play().catch(() => {});
+                        document.removeEventListener('click', activateMusic);
+                    };
+                    document.addEventListener('click', activateMusic);
+                }
+            }, 500); // Esperar medio segundo para que music3.js termine
+        });
+
         const buttonSound = document.getElementById("button-sound");
         const backBtn = document.getElementById("back-btn");
 

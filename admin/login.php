@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login Administrador</title>
-        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../styles.css?<?php echo time(); ?>">
     </head>
     <body class="admin-page">
         <div class="admin-container">
