@@ -56,7 +56,7 @@ if (file_exists($file)) {
         <p id="frase"></p>
     </div>
 
-    <a href="index.php" id="back-btn">⬅ESCAPE</a>
+    <a href="index.php" id="back-btn">ESCAPE</a>
 </div>
 <script src="utils/music.js"></script>
 <script>

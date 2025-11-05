@@ -9,3 +9,6 @@ demo1:25
 Demo2:34
 sample1:27
 Sample2:32
+prueba:35
+nomPrueba1:0
+nomPrueba1:0
