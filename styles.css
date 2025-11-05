@@ -603,6 +603,7 @@ h1 {
 }
 
 /* Tabla de frases */
+
 .admin-container-index table {
     width: 100%;
     border-collapse: separate;
@@ -659,6 +660,15 @@ h1 {
     text-align: center;
     white-space: nowrap;
 }
+/* Mostrar/Ocultar contenedor de frases */
+.hidden {
+    display: none;
+}
+
+#llistarContainer {
+    transition: all 0.3s ease;
+}
+
 
 /* Botón de borrar */
 .admin-container-index form button {

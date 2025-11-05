@@ -48,31 +48,6 @@ if ($mostrar_llistat) {
     <meta charset="UTF-8">
     <title>Panell d'Administrador</title>
     <link rel="stylesheet" href="../styles.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.getElementById("toggleLlistar");
-            const container = document.getElementById("llistarContainer");
-
-            if (toggleBtn && container) {
-                toggleBtn.addEventListener("click", () => {
-                    if (container.innerHTML.trim() === "") {
-                        fetch("?action=llistar")
-                            .then(response => response.text())
-                            .then(html => {
-                                const temp = document.createElement("div");
-                                temp.innerHTML = html;
-                                const newContent = temp.querySelector("#llistarContainer");
-                                if (newContent) {
-                                    container.innerHTML = newContent.innerHTML;
-                                }
-                            });
-                    } else {
-                        container.innerHTML = "";
-                    }
-                });
-            }
-        });
-    </script>
 </head>
 <body class="admin-page-index">
     <div class="admin-container-index">
@@ -84,42 +59,67 @@ if ($mostrar_llistat) {
         <a href="create_sentence.php" class="admin-btn">Afegir frase</a>
         <a href="logout.php" class="admin-btn">Logout</a>
 
-    
+        <!-- operador ternario para mostrar/ocultar el llistat -->
+        <div id="llistarContainer" class="<?php echo $mostrar_llistat ? '' : 'hidden'; ?>">
 
-        <div id="llistarContainer">
-            <?php if ($mostrar_llistat): ?>
-                <form method="GET" action="">
-                    <input type="hidden" name="action" value="llistar">
-                    <label for="nivell">Mostra segons nivell de dificultat:</label>
-                    <select name="nivell" id="nivell" onchange="this.form.submit()">
-                        <option value="facil" <?php if ($nivell_seleccionat === 'facil') echo 'selected'; ?>>Fàcil</option>
-                        <option value="normal" <?php if ($nivell_seleccionat === 'normal') echo 'selected'; ?>>Normal</option>
-                        <option value="dificil" <?php if ($nivell_seleccionat === 'dificil') echo 'selected'; ?>>Difícil</option>
-                    </select>
-                </form>
+            <form method="GET" action="">
+                <input type="hidden" name="action" value="llistar">
+                <label for="nivell">Mostra segons nivell de dificultat:</label>
+               <select name="nivell" id="nivell" onchange="this.form.submit();">
+                    <option value="facil" <?php if (($nivell_seleccionat ?? '') === 'facil') echo 'selected'; ?>>Fàcil</option>
+                    <option value="normal" <?php if (($nivell_seleccionat ?? '') === 'normal') echo 'selected'; ?>>Normal</option>
+                    <option value="dificil" <?php if (($nivell_seleccionat ?? '') === 'dificil') echo 'selected'; ?>>Difícil</option>
+                </select>
+            </form>
 
-                <?php if (isset($error_msg)): ?>
-                    <div class="error"><?php echo htmlspecialchars($error_msg); ?></div>
-                <?php elseif (isset($listado_html)): ?>
-                    <?php echo $listado_html; ?>
-                <?php endif; ?>
-
-                <?php if (isset($_GET['msg'])): ?>
-                    <?php
-                    $msgs = [
-                        'frase_eliminada' => "Frase eliminada correctament.",
-                        'error_datos' => "Error: dades incompletes per eliminar la frase.",
-                        'error_archivo_no_encontrado' => "Error: fitxer de frases no trobat.",
-                        'error_permiso_escritura' => "Error: sense permís d'escriptura al fitxer.",
-                        'error_json' => "Error: fitxer de frases mal format.",
-                        'error_frase_no_encontrada' => "Error: frase no trobada.",
-                        'error_guardado' => "Error: no s'ha pogut guardar el fitxer."
-                    ];
-                    echo "<div>" . ($msgs[$_GET['msg']] ?? "Error desconegut.") . "</div>";
-                    ?>
-                <?php endif; ?>
+            <?php if (isset($error_msg)): ?>
+                <div class="error"><?php echo htmlspecialchars($error_msg); ?></div>
+            <?php elseif (isset($listado_html)): ?>
+                <?php echo $listado_html; ?>
             <?php endif; ?>
+
+            <?php if (isset($_GET['msg'])): ?>
+                <?php
+                $msgs = [
+                    'frase_eliminada' => "Frase eliminada correctament.",
+                    'error_datos' => "Error: dades incompletes per eliminar la frase.",
+                    'error_archivo_no_encontrado' => "Error: fitxer de frases no trobat.",
+                    'error_permiso_escritura' => "Error: sense permís d'escriptura al fitxer.",
+                    'error_json' => "Error: fitxer de frases mal format.",
+                    'error_frase_no_encontrada' => "Error: frase no trobada.",
+                    'error_guardado' => "Error: no s'ha pogut guardar el fitxer."
+                ];
+                echo "<div>" . ($msgs[$_GET['msg']] ?? "Error desconegut.") . "</div>";
+                ?>
+            <?php endif; ?>
+
         </div>
-    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("toggleLlistar");
+            const container = document.getElementById("llistarContainer");
+
+            if (toggleBtn && container) {
+                // Si ya se está mostrando el listado, actualizar el texto del botón
+                const esMostrado = !container.classList.contains("hidden");
+                if (esMostrado) {
+                    toggleBtn.textContent = "Ocultar frases";
+                }
+
+                toggleBtn.addEventListener("click", () => {
+                    container.classList.toggle("hidden");
+                    // Cambiar el texto del botón según el estado
+                    if (container.classList.contains("hidden")) {
+                        toggleBtn.textContent = "Llistar frases";
+                    } else {
+                        toggleBtn.textContent = "Ocultar frases";
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
