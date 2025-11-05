@@ -65,8 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="admin-container-index">
         <p>
             Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
-            <a href="logout.php">Logout</a> | 
-            <a href="index.php">Tornar al panell</a>
+
+            <a href="logout.php" class="admin-link-btn logout">Logout</a> | 
+            <a href="index.php" class="admin-link-btn">Tornar al panell</a>
         </p>
 
         <h1>Afegir una nova frase</h1>

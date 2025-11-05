@@ -1,7 +1,8 @@
 /* === Fuente y fondo general con GIF === */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: auto;
@@ -126,7 +127,7 @@ button {
 button:hover {
     background-color: #a846f8;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
@@ -148,8 +149,13 @@ button:disabled {
     margin-top: 30px;
 }
 
-.correct { color: green; }
-.wrong { color: red; }
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
 
 .highlight {
     text-decoration: underline;
@@ -178,7 +184,7 @@ button:disabled {
 #back-btn:hover {
     background-color: #5e2aa1;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* === Tabla Ranking === */
@@ -189,7 +195,8 @@ button:disabled {
     font-size: 16px;
 }
 
-#ranking-container th, #ranking-container td {
+#ranking-container th,
+#ranking-container td {
     padding: 12px;
     border: 2px solid #aa32ef;
 }
@@ -200,11 +207,11 @@ button:disabled {
 }
 
 #ranking-container table tbody tr:nth-child(odd) {
-  background-color: rgb(231, 217, 247);
+    background-color: rgb(231, 217, 247);
 }
 
 #ranking-container table tbody tr:nth-child(even) {
-  background-color: rgb(220, 200, 243);
+    background-color: rgb(220, 200, 243);
 }
 
 
@@ -232,7 +239,7 @@ button:disabled {
 #ranking-container a:hover {
     background-color: #aa32ef;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Scroll de Ranking 
@@ -267,7 +274,7 @@ button:disabled {
 
 /* Easter Egg */
 #easter-egg {
-    position: fixed;       
+    position: fixed;
     top: 10px;
     left: 10px;
     left: 10px;
@@ -275,7 +282,7 @@ button:disabled {
     cursor: pointer;
     opacity: 0.3;
     transition: opacity 0.3s;
-    z-index: 1001;         
+    z-index: 1001;
 }
 
 #easter-egg:hover {
@@ -291,84 +298,85 @@ body.laberinto-bg {
     background-repeat: no-repeat;
 }
 
-    body.laberinto-bg::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      filter: brightness(0.55) blur(5px);
-      z-index: 0;
-    }
+body.laberinto-bg::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: brightness(0.55) blur(5px);
+    z-index: 0;
+}
 
-    .giratina-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #ffcb05;
-      text-shadow: 2px 2px #3b4cca;
-      z-index: 1;
-    }
-
-    h1 {
-      color: #ffffff;
-      text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
-    }
+.giratina-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffcb05;
+    text-shadow: 2px 2px #3b4cca;
+    z-index: 1;
+}
 
 h1 {
     color: #ffffff;
     text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
 }
 
-    #giratina {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
+h1 {
+    color: #ffffff;
+    text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
+}
 
-    #giratina:hover {
-      transform: scale(1.2);
-    }
+#giratina {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
 
-    
+#giratina:hover {
+    transform: scale(1.2);
+}
 
-    #resultado {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #ffcb05;
-      opacity: 0;
-      transform: scale(0.9);
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
 
-    /* Estado visible del contenedor de resultado */
-    #resultado.mostrar {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
 
-    #resultado img {
-      width: 150px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 0 10px #ffcb05);
-    }
+#resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #ffcb05;
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Estado visible del contenedor de resultado */
+#resultado.mostrar {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#resultado img {
+    width: 150px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px #ffcb05);
+}
 
 #resultado p {
     font-size: 22px;
@@ -509,9 +517,10 @@ h1 {
 }
 
 /* =========================================
-        ESTILOS DEL ÁREA ADMIN
+
+        ESTILOS DEL PANEL D'ADMINISTRADOR
    ========================================= */
-   .admin-page-index {
+.admin-page-index {
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;
     background: linear-gradient(180deg, #A7D3F0 0%, #E0F4FF 100%);
@@ -531,7 +540,7 @@ h1 {
     padding: 3rem 4rem;
     border-radius: 24px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin-top: 4rem;
     text-align: center;
@@ -541,7 +550,9 @@ h1 {
 
 .admin-container-index:hover {
     transform: translateY(-1px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+
 }
 
 /* Título */
@@ -550,7 +561,9 @@ h1 {
     color: #1E3A5F;
     font-size: 22px;
     margin-bottom: 2.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
 }
 
 /* Menú de acciones (botones/links) */
@@ -584,7 +597,8 @@ h1 {
 .admin-container-index a.button-link:hover {
     background-color: #F7C948;
     color: #1E3A5F;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
@@ -598,7 +612,8 @@ h1 {
     border: 2px solid #4A90E2;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
 
@@ -608,7 +623,8 @@ h1 {
     border-bottom: 1px solid #4A90E2;
     text-align: left;
     font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
+
+    font-size: 14px;
     color: #1E3A5F;
     word-break: break-word;
 }
@@ -627,6 +643,21 @@ h1 {
 .admin-container-index td:last-child {
     text-align: center;
     vertical-align: middle;
+}
+
+
+.admin-container-index table td:first-child,
+.admin-container-index table th:first-child {
+    max-width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.admin-container-index table td:last-child,
+.admin-container-index table th:last-child {
+    width: 100px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 /* Botón de borrar */
@@ -710,12 +741,55 @@ h1 {
 .admin-container-index .admin-btn:hover {
     background-color: #F7C948;
     color: #1E3A5F;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.admin-container-index form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
 
+.admin-container-index form label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.3rem;
+}
 
+.admin-container-index form textarea,
+.admin-container-index form select {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
 
+.admin-link-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 8px 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.admin-link-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.admin-link-btn.logout {
+    background-color: #f44336;
+}
+
+.admin-link-btn.logout:hover {
+    background-color: #d32f2f;
+}
 
 
 /* ===== EFECTO ANIMACIÓN GAME OVER ===== */
@@ -724,16 +798,182 @@ h1 {
     color: #aa32ef;
     animation: gameover-shake 0.6s infinite alternate ease-in-out;
     text-shadow: 0px 0px 10px #fff, 0 0 25px #aa32ef, 0 0 45px #aa32ef;
+    padding: 50px 0;
+}
+
+/* ===== ESTILOS PARA LOS MENSAJES DE ERROR ADMIN ===== */
+.error {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.empty {
+    background-color: #ffeb3b !important;
+    color: #333 !important;
+}
+
+.user {
+    background-color: #f44336 !important;
+    color: #fff !important;
+}
+
+.pass {
+    background-color: #ff9800 !important;
+    color: #fff !important;
+}
+
+.server {
+    background-color: #9c27b0 !important;
+    color: #fff !important;
 }
 
 @keyframes gameover-shake {
     0% {
         transform: scale(1) rotate(-1deg);
     }
+
     50% {
         transform: scale(1.05) rotate(1deg);
     }
+
     100% {
         transform: scale(1) rotate(-1deg);
+    }
+}
+
+/* === Media query para 1388px de ancho y 768px de alto === */
+@media (max-width: 1388px) and (max-height: 768px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        padding: 30px;
+        max-width: 500px;
+        width: 85%;
+        margin: 80px auto;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input,
+    select,
+    button {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    #back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #game-area {
+        font-size: 1.2em;
+    }
+
+    #resultado p {
+        font-size: 18px;
+    }
+
+    #user-box {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* === Media query para pantallas medianas === */
+@media (max-width: 1200px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        max-width: 450px;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+}
+
+/* === Media query para pantallas pequeñas === */
+@media (max-width: 992px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    #game-area {
+        font-size: 1em;
+    }
+}
+
+/* === Media query para móviles === */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        margin: 40px 0;
+        padding: 15px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    #back-btn {
+        font-size: 12px;
+        padding: 8px 16px;
     }
 }

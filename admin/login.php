@@ -8,25 +8,37 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 }
 
 $error = '';
+$error_type = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $creds = file(__DIR__ . '/credentials.txt', FILE_IGNORE_NEW_LINES);
-    list($stored_user, $stored_pass) = explode(':', trim($creds[0]));
+    $user = trim($_POST['user'] ?? '');
+    $pass = trim($_POST['pass'] ?? '');
 
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
-
-    if ($user === $stored_user && $pass === $stored_pass) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user'] = $user;
-
-        // Regenerar ID de sesión por seguridad
-        session_regenerate_id(true);
-
-        header("Location: index.php");
-        exit;
+    if ($user === '' || $pass === '') {
+        $error = "Tots els camps són obligatoris.";
+        $error_type = "empty";
     } else {
-        $error = "Usuari o contrasenya incorrectes.";
+        $creds = file(__DIR__ . '/credentials.txt', FILE_IGNORE_NEW_LINES);
+        if ($creds) {
+            list($stored_user, $stored_pass) = explode(':', trim($creds[0]));
+
+            if ($user !== $stored_user) {
+                $error = "Usuari no trobat.";
+                $error_type = "user";
+            } elseif ($pass !== $stored_pass) {
+                $error = "Contrasenya incorrecta.";
+                $error_type = "pass";
+            } else {
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_user'] = $user;
+                session_regenerate_id(true);
+                header("Location: index.php");
+                exit;
+            }
+        } else {
+            $error = "No s'han pogut llegir les credencials del servidor.";
+            $error_type = "server";
+        }
     }
 }
 ?>
@@ -43,14 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="admin-container">
             <img src="../media/piplu.gif" alt="Piplup" class="admin-gif" />
             <h1>Login Administrador</h1>
-            <?php if ($error) echo "<p class='error'>$error</p>"; ?>
+            <?php 
+            if ($error) {
+                echo "<p class='error $error_type'>$error</p>";
+            }
+            ?>
             <form method="post">
                 <label>Usuari:</label>
-                <input type="text" name="user" required>
+                <input type="text" name="user" value="<?php echo htmlspecialchars($user ?? ''); ?>">
                 <label>Contrasenya:</label>
-                <input type="password" name="pass" required>
+                <input type="password" name="pass">
                 <button type="submit">Entrar</button>
             </form>
         </div>
     </body>
-</html>
+    </html>
