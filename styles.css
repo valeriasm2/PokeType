@@ -638,24 +638,18 @@ h1 {
     vertical-align: middle;
 }
 
-/* Limitar ancho de la primera columna (frase) */
 .admin-container-index table td:first-child,
 .admin-container-index table th:first-child {
     max-width: 300px;
-    /* Ajusta al ancho deseado */
     word-wrap: break-word;
-    /* Que el texto largo se divida */
     overflow-wrap: break-word;
 }
 
-/* Asegurar que la columna del botón se mantenga centrada y visible */
 .admin-container-index table td:last-child,
 .admin-container-index table th:last-child {
     width: 100px;
-    /* Ancho suficiente para el botón */
     text-align: center;
     white-space: nowrap;
-    /* Evita que el texto se rompa */
 }
 
 
@@ -789,9 +783,6 @@ h1 {
 .admin-link-btn.logout:hover {
     background-color: #d32f2f;
 }
-
-
-
 
 /* ===== EFECTO ANIMACIÓN GAME OVER ===== */
 .gameover-container h1 {
