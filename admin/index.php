@@ -105,76 +105,82 @@ if ($mostrar_llistat) {
 
 
         <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("toggleLlistar");
-    const container = document.getElementById("llistarContainer");
-    const logoutLink = document.querySelector('.admin-btn[href="logout.php"]');
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("toggleLlistar");
+        const container = document.getElementById("llistarContainer");
+        const logoutLink = document.querySelector('a[href="logout.php"]');
 
-    // 🔹 Función para actualizar el texto del botón listar/ocultar
-    const actualizarTexto = (mostrando) => {
-        if (mostrando) {
-            toggleBtn.innerHTML = '<span class="underline-letter">O</span>cultar frases';
-        } else {
-            toggleBtn.innerHTML = '<span class="underline-letter">L</span>listar frases';
-        }
-    };
-
-    // 🔹 Función para actualizar el subrayado del logout según el estado
-    const actualizarLogout = (mostrando) => {
-        if (mostrando) {
-            logoutLink.innerHTML = '<span class="underline-letter">L</span>ogout';
-        } else {
-            logoutLink.innerHTML = 'L<span class="underline-letter">o</span>gout';
-        }
-    };
-
-    if (toggleBtn && container && logoutLink) {
-        const esMostrado = !container.classList.contains("hidden");
-        actualizarTexto(esMostrado);
-        actualizarLogout(esMostrado);
-
-        toggleBtn.addEventListener("click", () => {
-            const estaOculto = container.classList.contains("hidden");
-
-            if (estaOculto && !esMostrado) {
-                window.location.href = "?action=llistar&nivell=facil";
-                return;
+        // ✅ Actualiza texto del botón y del logout según visibilidad
+        const actualizarTextos = (visible) => {
+            // Botón listar/ocultar
+            if (visible) {
+                toggleBtn.innerHTML = '<span class="underline-letter">O</span>cultar frases';
+            } else {
+                toggleBtn.innerHTML = '<span class="underline-letter">L</span>listar frases';
             }
 
+            // Enlace logout (subrayar O o L según estado)
+            if (logoutLink) {
+                if (visible) {
+                    logoutLink.innerHTML = '<span class="underline-letter">L</span>ogout';
+                } else {
+                    logoutLink.innerHTML = 'L<span class="underline-letter">o</span>gout';
+                }
+            }
+        };
+
+        // Estado inicial
+        const inicialmenteVisible = container && !container.classList.contains("hidden");
+        actualizarTextos(inicialmenteVisible);
+
+        // Acción del botón
+        toggleBtn.addEventListener("click", () => {
             container.classList.toggle("hidden");
             const visibleAhora = !container.classList.contains("hidden");
+            actualizarTextos(visibleAhora);
 
-            actualizarTexto(visibleAhora);
-            actualizarLogout(visibleAhora);
+            if (visibleAhora && !window.location.search.includes("action=llistar")) {
+                window.location.href = "?action=llistar&nivell=facil";
+            }
         });
-    }
 
-    // 🔹 Teclas de acceso rápido dinámicas
-    document.addEventListener("keydown", (e) => {
-        const key = e.key.toLowerCase();
-        const estaVisible = !container.classList.contains("hidden");
+        // 🎹 Atajos de teclado
+        document.addEventListener("keydown", (e) => {
+            const key = e.key.toLowerCase();
+            const estaVisible = container && !container.classList.contains("hidden");
 
-        switch (key) {
-            case "l":
-                if (estaVisible) {
-                    window.location.href = "logout.php";
-                } else {
-                    toggleBtn?.click();
-                }
-                break;
-            case "a":
-                window.location.href = "create_sentence.php";
-                break;
-            case "t":
-                window.location.href = "index.php";
-                break;
-            case "o":
-                if (estaVisible) toggleBtn?.click();
-                break;
-        }
+            switch (key) {
+                case "l":
+                    if (estaVisible) {
+                        // Si listado visible → L = Logout
+                        window.location.href = "logout.php";
+                    } else {
+                        // Si listado oculto → L = Listar frases
+                        toggleBtn?.click();
+                    }
+                    break;
+
+                case "o":
+                    if (estaVisible) {
+                        // Si visible → O = Ocultar frases
+                        toggleBtn?.click();
+                    } else {
+                        // Si oculto → O = Logout
+                        window.location.href = "logout.php";
+                    }
+                    break;
+
+                case "a":
+                    window.location.href = "create_sentence.php";
+                    break;
+
+                case "t":
+                    window.location.href = "index.php";
+                    break;
+            }
+        });
     });
-});
-</script>
+    </script>
 
 
 
