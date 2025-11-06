@@ -1,12 +1,10 @@
 <?php
 session_name("admin_session");
 session_start();
-
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit;
 }
-
 $mensaje = "";
 $error = false;
 
@@ -35,12 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = true;
             }
         }
-
         if (!$error) {
             if (!isset($frases[$nivell])) {
                 $frases[$nivell] = [];
             }
-
             $frases[$nivell][] = $frase;
 
             $json_nuevo = json_encode($frases, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -71,71 +67,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="index.php" class="admin-link-btn" id="panel-link">
                 <span class="underline-letter">T</span>ornar al panell
             </a>
-
             </p>
 
             <h1>Afegir una nova frase</h1>
-
-            <?php if ($mensaje): ?>
-                <div style="color: <?php echo $error ? 'red' : 'green'; ?>">
-                    <?php echo htmlspecialchars($mensaje); ?>
-                </div>
-            <?php endif; ?>
-
-            <form method="POST" action="">
-                <label for="frase">Frase:</label>
-                <textarea id="frase" name="frase" rows="4" cols="50"n style="<?php echo ($error && $frase === '') ? 'border: 2px solid red;' : ''; ?>">
-                    <?php echo isset($_POST['frase']) ? htmlspecialchars($_POST['frase']) : ''; ?></textarea>
-
+            <form action="create_sentence.php" method="POST" id="create-form">
                 <label for="nivell">Nivell de dificultat:</label>
-                <select id="nivell" name="nivell">
-                    <option value="" disabled <?php echo !isset($_POST['nivell']) ? 'selected' : ''; ?>>-- Selecciona un nivell --</option>
-                    <option value="facil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'facil') ? 'selected' : ''; ?>>Fàcil</option>
-                    <option value="normal" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'normal') ? 'selected' : ''; ?>>Normal</option>
-                    <option value="dificil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'dificil') ? 'selected' : ''; ?>>Difícil</option>
+                <select name="nivell" id="nivell" required>
+                    <option value="">Selecciona un nivell</option>
+                    <option value="facil">Fàcil</option>
+                    <option value="normal">Normal</option>
+                    <option value="dificil">Difícil</option>
                 </select>
+
+                <label for="frase">Frase:</label>
+                <textarea name="frase" id="frase" rows="4" required></textarea>
 
                 <button type="submit" id="add-btn">
                     <span class="underline-letter">A</span>fegir frase
                 </button>
+
+                <?php if ($mensaje): ?>
+                    <div class="admin-message <?php echo $error ? 'error' : 'success'; ?>">
+                        <?php echo $error ? '❌' : '✅'; ?> <?php echo htmlspecialchars($mensaje); ?>
+                    </div>
+                <?php endif; ?>
             </form>
         </div>
-
-        <script>
-            document.addEventListener("keydown", (e) => {
-                // ✅ Verificar si estamos escribiendo en un campo de texto
-                const elementoActivo = document.activeElement;
-                const esElementoEscritura = elementoActivo && (
-                    elementoActivo.tagName === 'INPUT' || 
-                    elementoActivo.tagName === 'TEXTAREA' || 
-                    elementoActivo.tagName === 'SELECT' ||
-                    elementoActivo.isContentEditable ||
-                    elementoActivo.type === 'text' ||
-                    elementoActivo.type === 'password' ||
-                    elementoActivo.type === 'email' ||
-                    elementoActivo.type === 'search' ||
-                    elementoActivo.contentEditable === 'true'
-                );
-                
-                // Si estamos escribiendo, no activar atajos
-                if (esElementoEscritura) {
-                    return; // Salir sin procesar atajos
-                }
-
-                const key = e.key.toLowerCase();
-
-                if (key === "l") {
-                    e.preventDefault();
-                    window.location.href = "logout.php";
-                } else if (key === "t") {
-                    e.preventDefault();
-                    window.location.href = "index.php";
-                } else if (key === "a") {
-                    e.preventDefault();
-                    const addBtn = document.getElementById("add-btn");
-                    if (addBtn) addBtn.click();
-                }
-            });
-        </script>
     </body>
+    <script>
+        //esto es pa que no joda los atajos cuando el usuario está escribiendo
+        
+        document.addEventListener("keydown", function(event){
+            if (document.activeElement.tagName === 'INPUT' || 
+                document.activeElement.tagName === 'TEXTAREA' ||
+                document.activeElement.tagName === 'SELECT' ||
+                document.activeElement.isContentEditable ) {
+                return; 
+            }
+            const teclita = event.key.toLowerCase();
+            if (teclita === "l") {
+                window.location.href = "logout.php";
+            }
+            if (teclita === "t") {
+                window.location.href = "index.php";
+            }
+            if (teclita === "a") {
+                document.getElementById("add-btn").click();
+            }
+        })
+
+    </script>
 </html>
