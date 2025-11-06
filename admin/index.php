@@ -55,9 +55,18 @@ if ($mostrar_llistat) {
 
         <h1>Panell d’Administrador</h1>
         
-        <button id="toggleLlistar" type="button">Llistar frases</button>
-        <a href="create_sentence.php" class="admin-btn">Afegir frase</a>
-        <a href="logout.php" class="admin-btn">Logout</a>
+        <button id="toggleLlistar" type="button">
+            <span class="underline-letter">L</span>listar frases
+        </button>
+
+        <a href="create_sentence.php" class="admin-btn">
+            <span class="underline-letter">A</span>fegir frase
+        </a>
+
+        <a href="logout.php" class="admin-btn">
+            L<span class="underline-letter">o</span>gout
+        </a>
+
 
         <!-- operador ternario para mostrar/ocultar el llistat -->
         <div id="llistarContainer" class="<?php echo $mostrar_llistat ? '' : 'hidden'; ?>">
@@ -92,40 +101,83 @@ if ($mostrar_llistat) {
                 echo "<div>" . ($msgs[$_GET['msg']] ?? "Error desconegut.") . "</div>";
                 ?>
             <?php endif; ?>
-
         </div>
 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.getElementById("toggleLlistar");
-            const container = document.getElementById("llistarContainer");
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("toggleLlistar");
+    const container = document.getElementById("llistarContainer");
+    const logoutLink = document.querySelector('.admin-btn[href="logout.php"]');
 
-            if (toggleBtn && container) {
-                // SI ya se está mostrando el listado, actualiza el texto del botón para mostrar que está activo!!!! jeje
-                const esMostrado = !container.classList.contains("hidden");
-                if (esMostrado) {
-                    toggleBtn.textContent = "Ocultar frases";
-                }
+    // 🔹 Función para actualizar el texto del botón listar/ocultar
+    const actualizarTexto = (mostrando) => {
+        if (mostrando) {
+            toggleBtn.innerHTML = '<span class="underline-letter">O</span>cultar frases';
+        } else {
+            toggleBtn.innerHTML = '<span class="underline-letter">L</span>listar frases';
+        }
+    };
 
-                toggleBtn.addEventListener("click", () => {
-                    // SI el contenedor está oculto y no hay listado cargado, redirigir para cargar las frases por defecto!!
-                    if (container.classList.contains("hidden") && !esMostrado) {
-                        window.location.href = "?action=llistar&nivell=facil";
-                        return;
-                    }
-                    
-                    container.classList.toggle("hidden");
-                    // cambiar el texto del botón según el estado ya sea oculto o visible
-                    if (container.classList.contains("hidden")) {
-                        toggleBtn.textContent = "Llistar frases";
-                    } else {
-                        toggleBtn.textContent = "Ocultar frases";
-                    }
-                });
+    // 🔹 Función para actualizar el subrayado del logout según el estado
+    const actualizarLogout = (mostrando) => {
+        if (mostrando) {
+            logoutLink.innerHTML = '<span class="underline-letter">L</span>ogout';
+        } else {
+            logoutLink.innerHTML = 'L<span class="underline-letter">o</span>gout';
+        }
+    };
+
+    if (toggleBtn && container && logoutLink) {
+        const esMostrado = !container.classList.contains("hidden");
+        actualizarTexto(esMostrado);
+        actualizarLogout(esMostrado);
+
+        toggleBtn.addEventListener("click", () => {
+            const estaOculto = container.classList.contains("hidden");
+
+            if (estaOculto && !esMostrado) {
+                window.location.href = "?action=llistar&nivell=facil";
+                return;
             }
+
+            container.classList.toggle("hidden");
+            const visibleAhora = !container.classList.contains("hidden");
+
+            actualizarTexto(visibleAhora);
+            actualizarLogout(visibleAhora);
         });
-    </script>
+    }
+
+    // 🔹 Teclas de acceso rápido dinámicas
+    document.addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        const estaVisible = !container.classList.contains("hidden");
+
+        switch (key) {
+            case "l":
+                if (estaVisible) {
+                    window.location.href = "logout.php";
+                } else {
+                    toggleBtn?.click();
+                }
+                break;
+            case "a":
+                window.location.href = "create_sentence.php";
+                break;
+            case "t":
+                window.location.href = "index.php";
+                break;
+            case "o":
+                if (estaVisible) toggleBtn?.click();
+                break;
+        }
+    });
+});
+</script>
+
+
+
 
 </body>
 </html>

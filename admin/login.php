@@ -65,8 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="user" value="<?php echo htmlspecialchars($user ?? ''); ?>">
                 <label>Contrasenya:</label>
                 <input type="password" name="pass">
-                <button type="submit">Entrar</button>
+                <button type="submit" id="enter-btn">
+                    <span class="underline-letter">E</span>ntrar
+                </button>
             </form>
         </div>
+
+        <script>
+            document.addEventListener("keydown", (e) => {
+                if (e.key.toLowerCase() === "e") {
+                document.getElementById("enter-btn").click();
+                }
+            });
+        </script>
+
     </body>
     </html>

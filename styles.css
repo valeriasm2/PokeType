@@ -763,7 +763,7 @@ body.laberinto-bg::before {
 
 /* Botón de borrar */
 .admin-container-index form button {
-    background-color: #E74C3C;
+    background-color: #e40707;
     color: #FFFFFF;
     border: none;
     border-radius: 6px;
@@ -780,6 +780,25 @@ body.laberinto-bg::before {
     color: #1E3A5F;
     transform: translateY(-2px);
 }
+
+/* Botón de afegir */
+#add-btn {
+    background-color: #069901;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 25px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#add-btn:hover {
+    background-color: #045801;
+    transform: translateY(-3px);
+}
+
 
 /* Select y formulario de filtro */
 .admin-container-index select {

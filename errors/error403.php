@@ -14,7 +14,17 @@ http_response_code(403);
             <h1 class="fontNameError">¡Accés Prohibit!</h1>
             <p>No pots visitar directament aquesta pàgina.</p>
             <p>Un Pokémon guardià bloqueja el pas per protegir el joc.</p>
-            <button onclick="location.href='/index.php'">Tornar a l'inici</button>
+            <button onclick="location.href='/index.php'">
+                <span class="underline-letter">T</span>ornar a l'inici
+            </button>
         </div>
+
+        <script>
+            document.addEventListener("keydown", (e) => {
+                if (e.key.toLowerCase() === "t") {
+                window.location.href = "/index.php";
+                }
+            });
+    </script>
     </body>
 </html>

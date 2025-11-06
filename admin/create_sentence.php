@@ -64,8 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body class="admin-page-index">
         <div class="admin-container-index">
             <p> Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
-                <a href="logout.php" class="admin-link-btn logout">Logout</a> | 
-                <a href="index.php" class="admin-link-btn">Tornar al panell</a>
+            <a href="logout.php" class="admin-link-btn logout" id="logout-link">
+                <span class="underline-letter">L</span>ogout
+            </a>
+            |
+            <a href="index.php" class="admin-link-btn" id="panel-link">
+                <span class="underline-letter">T</span>ornar al panell
+            </a>
+
             </p>
 
             <h1>Afegir una nova frase</h1>
@@ -89,8 +95,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="dificil" <?php echo (isset($_POST['nivell']) && $_POST['nivell'] === 'dificil') ? 'selected' : ''; ?>>Difícil</option>
                 </select>
 
-                <button type="submit">Afegir frase</button>
+                <button type="submit" id="add-btn">
+                    <span class="underline-letter">A</span>fegir frase
+                </button>
             </form>
         </div>
+
+        <script>
+            document.addEventListener("keydown", (e) => {
+                const key = e.key.toLowerCase();
+
+                if (key === "l") {
+                    window.location.href = "logout.php";
+                } else if (key === "t") {
+                    window.location.href = "index.php";
+                } else if (key === "a") {
+                    const addBtn = document.getElementById("add-btn");
+                    if (addBtn) addBtn.click();
+                }
+            });
+        </script>
     </body>
 </html>
