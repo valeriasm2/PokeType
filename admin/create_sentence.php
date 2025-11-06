@@ -103,13 +103,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <script>
             document.addEventListener("keydown", (e) => {
+                // ✅ Verificar si estamos escribiendo en un campo de texto
+                const elementoActivo = document.activeElement;
+                const esElementoEscritura = elementoActivo && (
+                    elementoActivo.tagName === 'INPUT' || 
+                    elementoActivo.tagName === 'TEXTAREA' || 
+                    elementoActivo.tagName === 'SELECT' ||
+                    elementoActivo.isContentEditable ||
+                    elementoActivo.type === 'text' ||
+                    elementoActivo.type === 'password' ||
+                    elementoActivo.type === 'email' ||
+                    elementoActivo.type === 'search' ||
+                    elementoActivo.contentEditable === 'true'
+                );
+                
+                // Si estamos escribiendo, no activar atajos
+                if (esElementoEscritura) {
+                    return; // Salir sin procesar atajos
+                }
+
                 const key = e.key.toLowerCase();
 
                 if (key === "l") {
+                    e.preventDefault();
                     window.location.href = "logout.php";
                 } else if (key === "t") {
+                    e.preventDefault();
                     window.location.href = "index.php";
                 } else if (key === "a") {
+                    e.preventDefault();
                     const addBtn = document.getElementById("add-btn");
                     if (addBtn) addBtn.click();
                 }
