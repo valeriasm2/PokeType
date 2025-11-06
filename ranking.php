@@ -70,7 +70,9 @@ if(file_exists($rankingFile)) {
         </div>
 
         <!-- Botón Tornar -->
-        <a href="index.php" id="back-btn">ESCAPE</a>
+        <a href="index.php" id="back-btn">
+            <span class="underline-letter">ESC</span>APE
+        </a>
     </div>
 
     <script src="utils/music3.js"></script>

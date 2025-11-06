@@ -2,8 +2,7 @@
     "facil": [
         "Pikachu és un Pokémon de tipus elèctric",
         "Bulbasaur és un Pokémon de tipus planta",
-        "Charmander pot llançar foc",
-        "LOOOCOWIIN WJDNWAJDwad adsajdj"
+        "Charmander pot llançar foc"
     ],
     "normal": [
         "Eevee pot evolucionar en moltes formes diferents",

@@ -27,73 +27,76 @@ if (isset($_POST['save']) && isset($_POST['score']) && isset($_POST['name'])) {
     exit;
 }
 
-// Si solo se recibe nombre + score (pantalla inicial Game Over)
 $score = intval($_POST['score']);
 $name = htmlspecialchars($_POST['name']);
-$_SESSION['name'] = $name; // asegura que la sesión guarde el nombre
+$_SESSION['name'] = $name;
 ?>
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <title>Game Over</title>
-    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Game Over</title>
+        <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+    </head>
+    <body>
 
-    <!-- ✅ RECUADRO SUPERIOR DERECHA -->
-    <div id="user-box">
-        👤 <strong><?php echo htmlspecialchars($_SESSION['name']); ?></strong><br>
-        <a href="destroy_session.php">Tancar sessió</a>
-    </div>
+        <!-- ✅ RECUADRO SUPERIOR DERECHA -->
+        <div id="user-box">
+            👤 <strong><?php echo htmlspecialchars($_SESSION['name']); ?></strong><br>
+            <a href="destroy_session.php">Tancar sessió</a>
+        </div>
 
-    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
+        <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
-    <div class="gameover-container">
-        <h1>Game Over!</h1>
+        <div class="gameover-container">
+            <h1>Game Over!</h1>
 
-        <p>Vols registrar el teu rècord de <?= $score ?> punts?</p>
+            <p>Vols registrar el teu rècord de <?= $score ?> punts?</p>
 
-        <!-- Botón Sí (guardar) -->
-        <form method="post" action="gameover.php" style="display:inline;">
-            <input type="hidden" name="name" value="<?= $name ?>">
-            <input type="hidden" name="score" value="<?= $score ?>">
-            <input type="hidden" name="save" value="1">
-            <button type="submit" class="btn-link" id="save-btn">Sí</button>
-        </form>
+            <!-- Botón Sí (guardar) -->
+            <form method="post" action="gameover.php" style="display:inline;">
+                <input type="hidden" name="name" value="<?= $name ?>">
+                <input type="hidden" name="score" value="<?= $score ?>">
+                <input type="hidden" name="save" value="1">
+                <button type="submit" class="btn-link" id="save-btn">
+                    <span class="underline-letter">S</span>í
+                </button>
+            </form>
 
-        <!-- Botón No -->
-        <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">No</button>
-    </div>
-    <script src="utils/musicGameover.js"></script>
-    <script>
-        const buttonSound = document.getElementById("button-sound");
+            <!-- Botón No -->
+            <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">
+                <span class="underline-letter">N</span>o
+            </button>
+        </div>
+        <script src="utils/musicGameover.js"></script>
+        <script>
+            const buttonSound = document.getElementById("button-sound");
 
-        // ▶️ Función sonido + acción
-        function playSound(callback) {
-            buttonSound.currentTime = 0;
-            buttonSound.play();
-            setTimeout(callback, 800);
-        }
+            // ▶️ Función sonido + acción
+            function playSound(callback) {
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+                setTimeout(callback, 800);
+            }
 
-        // ✅ Guardar récord
-        document.getElementById("save-btn").addEventListener("click", (e) => {
-            e.preventDefault();
-            playSound(() => e.target.closest("form").submit());
-        });
+            // ✅ Guardar récord
+            document.getElementById("save-btn").addEventListener("click", (e) => {
+                e.preventDefault();
+                playSound(() => e.target.closest("form").submit());
+            });
 
-        // ✅ Volver al inicio
-        function goToIndex() {
-            playSound(() => window.location.href = "index.php");
-        }
+            // ✅ Volver al inicio
+            function goToIndex() {
+                playSound(() => window.location.href = "index.php");
+            }
 
-        // ✅ Teclas S (Sí) y N (No)
-        document.addEventListener("keydown", (e) => {
-            const key = e.key.toLowerCase();
-            if (key === "s") document.getElementById("save-btn").click();
-            if (key === "n") goToIndex();
-        });
-    </script>
+            // ✅ Teclas S (Sí) y N (No)
+            document.addEventListener("keydown", (e) => {
+                const key = e.key.toLowerCase();
+                if (key === "s") document.getElementById("save-btn").click();
+                if (key === "n") goToIndex();
+            });
+        </script>
 
-</body>
+    </body>
 </html>

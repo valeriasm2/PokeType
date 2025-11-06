@@ -81,7 +81,10 @@ if (isset($_SESSION['difficulty'])) {
             </select><br><br>
 
             <!-- Botó Jugar -->
-            <button type="submit" id="play-button" disabled>Jugar</button>
+            <button type="submit" id="play-button" disabled>
+                <span class="underline-letter">J</span>ugar
+            </button>
+
 
             <noscript>
                 <div class="error-alert">
