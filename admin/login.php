@@ -73,8 +73,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <script>
             document.addEventListener("keydown", (e) => {
+                // ✅ Verificar si estamos escribiendo en un campo de texto
+                const elementoActivo = document.activeElement;
+                const esElementoEscritura = elementoActivo && (
+                    elementoActivo.tagName === 'INPUT' || 
+                    elementoActivo.tagName === 'TEXTAREA' || 
+                    elementoActivo.tagName === 'SELECT' ||
+                    elementoActivo.isContentEditable ||
+                    elementoActivo.type === 'text' ||
+                    elementoActivo.type === 'password' ||
+                    elementoActivo.type === 'email' ||
+                    elementoActivo.type === 'search' ||
+                    elementoActivo.contentEditable === 'true'
+                );
+                
+                // Si estamos escribiendo, no activar atajos
+                if (esElementoEscritura) {
+                    return; // Salir sin procesar atajos
+                }
+
                 if (e.key.toLowerCase() === "e") {
-                document.getElementById("enter-btn").click();
+                    e.preventDefault();
+                    document.getElementById("enter-btn").click();
                 }
             });
         </script>

@@ -3,7 +3,8 @@
         "Pikachu és un Pokémon de tipus elèctric",
         "Bulbasaur és un Pokémon de tipus planta",
         "Charmander pot llançar foc",
-        "prubeb"
+        "Hola que tale stais",
+        "frase prueba"
     ],
     "normal": [
         "Eevee pot evolucionar en moltes formes diferents",
