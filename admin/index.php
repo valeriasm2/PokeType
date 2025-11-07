@@ -9,6 +9,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 $mostrar_llistat = isset($_GET['action']) && $_GET['action'] === 'llistar';
 
+// Obtengo la frase nueva  que viene de create_sentece para resaltar
+$nuevaFrase = $_SESSION['ultima_frase'] ?? null;
+$nivellUltim = $_SESSION['ultim_nivell'] ?? null;
+
+
 if ($mostrar_llistat) {
     $archivo = '../frases.txt';
     $contenido = file_get_contents($archivo);
@@ -26,7 +31,11 @@ if ($mostrar_llistat) {
         $listado_html .= '<thead><tr><th>Frase</th><th>Esborra</th></tr></thead><tbody>';
 
         foreach ($frases[$nivell_seleccionat] as $index => $frase) {
-            $listado_html .= '<tr>';
+            //comparo si es la nueva frase y su nivel para resaltarla
+            $es_nueva = ($nuevaFrase !== null && $frase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
+
+            $listado_html .= '<tr' . ($es_nueva ? ' class="highlight"' : '') . '>';
+            
             $listado_html .= '<td>' . htmlspecialchars($frase) . '</td>';
             $listado_html .= '<td>
                 <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\'Segur que vols eliminar aquesta frase?\');">
@@ -85,6 +94,7 @@ if ($mostrar_llistat) {
                 <div class="error"><?php echo htmlspecialchars($error_msg); ?></div>
             <?php elseif (isset($listado_html)): ?>
                 <?php echo $listado_html; ?>
+                <?php unset($_SESSION['ultima_frase']); //limpio la variable para no resaltar más de 1 ?>
             <?php endif; ?>
 
             <?php if (isset($_GET['msg'])): ?>

@@ -45,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = true;
             } else {
                 $mensaje = "Frase afegida correctament.";
+                //me guardo la última frase y nivel para resaltarla al volver al listado!!!
+                $_SESSION['ultima_frase'] = $frase;
+                $_SESSION['ultim_nivell'] = $nivell;
+                
             }
         }
     }
@@ -64,7 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="underline-letter">L</span>ogout
             </a>
             |
-            <a href="index.php" class="admin-link-btn" id="panel-link">
+            <?php
+            // Enlace al panel con el nivel correcto si existe, te redirecciona al listado del último nivel agregado
+            $panel_url = 'index.php';
+            if (isset($_SESSION['ultim_nivell'])) {
+                $panel_url .= '?action=llistar&nivell=' . urlencode($_SESSION['ultim_nivell']);
+            }
+            ?>
+            <a href="<?= $panel_url ?>" class="admin-link-btn" id="panel-link">
                 <span class="underline-letter">T</span>ornar al panell
             </a>
             </p>

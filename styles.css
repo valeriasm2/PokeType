@@ -755,6 +755,12 @@ body.laberinto-bg::before {
 .hidden {
     display: none;
 }
+/* resaltar la fila nueva */
+.admin-container-index table tr.highlight {
+  background-color: #fff900 !important;
+  color: #3b4cca !important;
+  font-weight: bold;
+}
 
 #llistarContainer {
     transition: all 0.3s ease;
