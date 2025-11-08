@@ -9,6 +9,9 @@ $mensaje = "";
 $error = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //me cargo la frase resaltada anterior para no duplicar y generar una nueva sin confusión
+    unset($_SESSION['ultima_frase']);
+    unset($_SESSION['ultim_nivell']);
     $nivell = $_POST['nivell'] ?? '';
     $frase = trim($_POST['frase'] ?? '');
     
@@ -121,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             if (teclita === "t") {
                 window.location.href = "index.php";
+                document.getElementById("panel-link").click();
             }
             if (teclita === "a") {
                 document.getElementById("add-btn").click();

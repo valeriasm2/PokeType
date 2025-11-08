@@ -94,7 +94,7 @@ if ($mostrar_llistat) {
                 <div class="error"><?php echo htmlspecialchars($error_msg); ?></div>
             <?php elseif (isset($listado_html)): ?>
                 <?php echo $listado_html; ?>
-                <?php unset($_SESSION['ultima_frase']); //limpio la variable para no resaltar más de 1 ?>
+                
             <?php endif; ?>
 
             <?php if (isset($_GET['msg'])): ?>

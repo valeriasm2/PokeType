@@ -2,16 +2,13 @@
     "facil": [
         "Pikachu és un Pokémon de tipus elèctric",
         "Bulbasaur és un Pokémon de tipus planta",
-        "Charmander pot llançar foc",
-        "Hola que tale stais",
-        "wdljwajdawdwapodwa"
+        "Charmander pot llançar foc"
     ],
     "normal": [
         "Eevee pot evolucionar en moltes formes diferents",
         "Squirtle és un Pokémon de tipus aigua molt fidel",
         "Togepi porta sempre un ou a la closca",
-        "En termes de reproducció Vaporeon es compatible amb humans",
-        "wdkoawkdoakpopaaawd"
+        "En termes de reproducció Vaporeon es compatible amb humans"
     ],
     "dificil": [
         "Mewtwo és un Pokémon llegendari creat per experiments",
