@@ -30,13 +30,14 @@ if ($mostrar_llistat) {
         $listado_html = '<table>';
         $listado_html .= '<thead><tr><th>Frase</th><th>Esborra</th></tr></thead><tbody>';
 
-        foreach ($frases[$nivell_seleccionat] as $index => $frase) {
+        foreach ($frases[$nivell_seleccionat] as $index => $fraseObj) {
+            $textoFrase = $fraseObj['texto']; // Extraer el texto
             //comparo si es la nueva frase y su nivel para resaltarla
-            $es_nueva = ($nuevaFrase !== null && $frase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
+            $es_nueva = ($nuevaFrase !== null && $textoFrase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
 
             $listado_html .= '<tr' . ($es_nueva ? ' class="highlight"' : '') . '>';
             
-            $listado_html .= '<td>' . htmlspecialchars($frase) . '</td>';
+            $listado_html .= '<td>' . htmlspecialchars($textoFrase) . '</td>';
             $listado_html .= '<td>
                 <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\'Segur que vols eliminar aquesta frase?\');">
                     <input type="hidden" name="nivell" value="' . htmlspecialchars($nivell_seleccionat) . '">

@@ -13,13 +13,16 @@ $bonus = isset($_GET['bonus']) ? intval($_GET['bonus']) : 0;
 
 $file = "frases.txt";
 $frase = "No hi ha frases disponibles per aquest nivell.";
+$imagenFrase = null; // Inicializar
 
 if (file_exists($file)) {
     $json = file_get_contents($file);
     $frases = json_decode($json, true);
 
     if (isset($frases[$difficulty]) && count($frases[$difficulty]) > 0) {
-        $frase = $frases[$difficulty][array_rand($frases[$difficulty])];
+        $fraseObj = $frases[$difficulty][array_rand($frases[$difficulty])];
+        $frase = $fraseObj['texto']; // Extraer solo el texto, ahora el formato es un array de objetos
+        $imagenFrase = $fraseObj['imagen'];
     }
 }
 ?>
@@ -55,6 +58,14 @@ if (file_exists($file)) {
             <div id="game-area" style="display:none;">
                 <p id="frase"></p>
             </div>
+
+            <?php if ($imagenFrase): ?>
+                <div class="pokemon-image-container">
+                    <img src="images/<?php echo htmlspecialchars($imagenFrase); ?>" 
+                         class="pokemon-icon" 
+                         alt="Pokemon">
+                </div>
+            <?php endif; ?>
 
             <a href="index.php" id="back-btn">
                 <span class="underline-letter">ESC</span>APE

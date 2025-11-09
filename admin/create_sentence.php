@@ -40,7 +40,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($frases[$nivell])) {
                 $frases[$nivell] = [];
             }
-            $frases[$nivell][] = $frase;
+            //========MANEJO DE IMAGENES SUBIDAS=========
+            $nombreImagen = null; // Por defecto sin imagen
+    
+            if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+                
+                $nombreImagen = $_FILES['imagen']['name'];
+                $rutaDestino = '../images/' . $nombreImagen;
+                
+                if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+                    $mensaje = "Error: no s'ha pogut guardar la imatge.";
+                    $error = true;
+                    $nombreImagen = null;
+                }
+               
+            }
+            // Crear objeto frase con texto e imagen 
+            $nuevaFrase = [
+                'texto' => $frase,
+                'imagen' => $nombreImagen 
+            ];
+            
+            $frases[$nivell][] = $nuevaFrase;
 
             $json_nuevo = json_encode($frases, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             if (file_put_contents($archivo, $json_nuevo) === false) {
@@ -84,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
 
             <h1>Afegir una nova frase</h1>
-            <form action="create_sentence.php" method="POST" id="create-form">
+            <form action="create_sentence.php" method="POST" enctype="multipart/form-data" id="create-form">
                 <label for="nivell">Nivell de dificultat:</label>
                 <select name="nivell" id="nivell" required>
                     <option value="">Selecciona un nivell</option>
@@ -95,6 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="frase">Frase:</label>
                 <textarea name="frase" id="frase" rows="4" required></textarea>
+                
+                <label for="imagen">Imatge (opcional):</label>
+                <input type="file" name="imagen" id="imagen" accept="image/*">
+                
 
                 <button type="submit" id="add-btn">
                     <span class="underline-letter">A</span>fegir frase
@@ -109,6 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </body>
     <script>
+        
         //esto es pa que no joda los atajos cuando el usuario está escribiendo
         
         document.addEventListener("keydown", function(event){

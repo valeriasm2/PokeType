@@ -1,19 +1,52 @@
 {
     "facil": [
-        "Pikachu és un Pokémon de tipus elèctric",
-        "Bulbasaur és un Pokémon de tipus planta",
-        "Charmander pot llançar foc"
+        {
+            "texto": "Pikachu és un Pokémon de tipus elèctric",
+            "imagen": "pikachu.png"
+        },
+        {
+            "texto": "Bulbasaur és un Pokémon de tipus planta",
+            "imagen": null
+        },
+        {
+            "texto": "Charmander pot llançar foc",
+            "imagen": null
+        }
     ],
     "normal": [
-        "Eevee pot evolucionar en moltes formes diferents",
-        "Squirtle és un Pokémon de tipus aigua molt fidel",
-        "Togepi porta sempre un ou a la closca",
-        "En termes de reproducció Vaporeon es compatible amb humans"
+        {
+            "texto": "Eevee pot evolucionar en moltes formes diferents",
+            "imagen": null
+        },
+        {
+            "texto": "Squirtle és un Pokémon de tipus aigua molt fidel",
+            "imagen": null
+        },
+        {
+            "texto": "Togepi porta sempre un ou a la closca",
+            "imagen": null
+        },
+        {
+            "texto": "En termes de reproducció Vaporeon es compatible amb humans",
+            "imagen": null
+        }
     ],
     "dificil": [
-        "Mewtwo és un Pokémon llegendari creat per experiments",
-        "Rayquaza viu als cels i controla els conflictes entre Kyogre i Groudon",
-        "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió",
-        "M'agrada menjar Torkoals a la llauna, nyam!."
+        {
+            "texto": "Mewtwo és un Pokémon llegendari creat per experiments",
+            "imagen": null
+        },
+        {
+            "texto": "Rayquaza viu als cels i controla els conflictes entre Kyogre i Groudon",
+            "imagen": null
+        },
+        {
+            "texto": "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió",
+            "imagen": null
+        },
+        {
+            "texto": "La fúria gegant de l'aigua és el que defineix a en  Gyarados.",
+            "imagen": "gyarados.png"
+        }
     ]
 }
