@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Incluir sistema de logs
+require_once 'admin/logger.php';
+
 // Si no hay sesión, vuelve al index
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -23,6 +26,9 @@ if (isset($_POST['save']) && isset($_POST['score']) && isset($_POST['name'])) {
     $line = $name . ":" . $score . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);
 
+    // Log registro en ranking
+    logJuego("SAVE_RANKING", "gameover.php", "Usuario '$name' guardó puntuación: $score puntos");
+
     header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score);
     exit;
 }
@@ -30,6 +36,9 @@ if (isset($_POST['save']) && isset($_POST['score']) && isset($_POST['name'])) {
 $score = intval($_POST['score']);
 $name = htmlspecialchars($_POST['name']);
 $_SESSION['name'] = $name;
+
+// Log game over
+logJuego("GAME_OVER", "gameover.php", "Usuario '$name' terminó juego con $score puntos");
 ?>
 <!DOCTYPE html>
 <html lang="ca">

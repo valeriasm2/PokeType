@@ -1,5 +1,8 @@
 <?php
-session_start(); // ✅ Permet recordar el nom i mostrar recuadro de sessió
+session_start(); // permite gestionar la sessió del usuarioo
+
+// Incluir sistema de logs
+require_once 'admin/logger.php';
 
 function mostrarError($error) {
     if (!empty($error)) {
@@ -22,6 +25,9 @@ if ($_POST) {
     } else {
         $_SESSION['name'] = $name;              // ✅ Guardem nom en sessió
         $_SESSION['difficulty'] = $difficulty;  // ✅ Guardem dificultat en sessió
+
+        // Log inicio de juego
+        logJuego("GAME_START", "index.php", "Usuario '$name' inició juego en dificultad '$difficulty'");
 
         header("Location: play.php");
         exit();

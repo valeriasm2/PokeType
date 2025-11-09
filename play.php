@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Incluir sistema de logs
+require_once 'admin/logger.php';
+
 // Si no hay sesión, volver al index
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -23,6 +26,9 @@ if (file_exists($file)) {
         $fraseObj = $frases[$difficulty][array_rand($frases[$difficulty])];
         $frase = $fraseObj['texto']; // Extraer solo el texto, ahora el formato es un array de objetos
         $imagenFrase = $fraseObj['imagen'];
+        
+        // Log nueva frase cargada
+        logJuego("LOAD_PHRASE", "play.php", "Usuario '$name' cargó frase en dificultad '$difficulty': '$frase'");
     }
 }
 ?>
@@ -40,6 +46,8 @@ if (file_exists($file)) {
         <div id="user-box">
             👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
             <a href="destroy_session.php">Tancar sessió</a>
+            
+            
         </div>
 
         <!-- Easter Egg -->

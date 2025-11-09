@@ -1,6 +1,10 @@
 <?php
 session_name("admin_session");
 session_start();
+
+// Incluir sistema de logs
+require_once 'logger.php';
+
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit;
@@ -69,6 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = true;
             } else {
                 $mensaje = "Frase afegida correctament.";
+                // Log creación exitosa de frase
+                $imagenInfo = $nombreImagen ? " con imagen: $nombreImagen" : " sin imagen";
+                logAdmin("CREATE_SENTENCE", "create_sentence.php", "Nueva frase creada en nivel '$nivell': '$frase'$imagenInfo");
                 //me guardo la última frase y nivel para resaltarla al volver al listado!!!
                 $_SESSION['ultima_frase'] = $frase;
                 $_SESSION['ultim_nivell'] = $nivell;

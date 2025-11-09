@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Incluir sistema de logs
+require_once 'admin/logger.php';
+
 // Si no hay sesión, vuelve al inicio
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -8,6 +11,9 @@ if (!isset($_SESSION['name'])) {
 }
 
 $name = $_SESSION['name'];
+
+// Log acceso a ranking
+logJuego("VIEW_RANKING", "ranking.php", "Usuario '$name' accedió al ranking");
 
 $rankingFile = __DIR__ . '/ranking.txt';
 $ranking = [];

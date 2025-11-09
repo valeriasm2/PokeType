@@ -2,6 +2,9 @@
 session_name("admin_session");
 session_start();
 
+// Incluir sistema de logs
+require_once 'logger.php';
+
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: index.php");
     exit;
@@ -25,13 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user !== $stored_user) {
                 $error = "Usuari no trobat.";
                 $error_type = "user";
+                // Log intento de login con usuario incorrecto
+                escribirLog("LOGIN_FAILED", "login.php", "Intento login con usuario incorrecto: $user");
             } elseif ($pass !== $stored_pass) {
                 $error = "Contrasenya incorrecta.";
                 $error_type = "pass";
+                // Log intento de login con contraseña incorrecta
+                escribirLog("LOGIN_FAILED", "login.php", "Intento login con contraseña incorrecta para usuario: $user");
             } else {
                 $_SESSION['admin_logged_in'] = true;
                 $_SESSION['admin_user'] = $user;
                 session_regenerate_id(true);
+                // Log login exitoso
+                logAdmin("LOGIN_SUCCESS", "login.php", "Admin logueado correctamente");
                 header("Location: index.php");
                 exit;
             }

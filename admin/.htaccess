@@ -1,3 +1,7 @@
 <Files "credentials.txt">
     Require all denied
 </Files>
+
+<Files "logs.txt">
+    Require all denied
+</Files>

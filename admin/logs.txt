@@ -1,0 +1,12 @@
+[2025-11-09 17:38:15] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Alejandrito' cerró sesión del juego
+[2025-11-09 17:38:25] [::1] [index.php] GAME_START: Usuario 'Padreball' inició juego en dificultad 'facil'
+[2025-11-09 17:38:25] [::1] [play.php] LOAD_PHRASE: Usuario 'Padreball' cargó frase en dificultad 'facil': 'Bulbasaur és un Pokémon de tipus planta'
+[2025-11-09 17:38:45] [::1] [index.php] GAME_START: Usuario 'Padreball' inició juego en dificultad 'facil'
+[2025-11-09 17:38:45] [::1] [play.php] LOAD_PHRASE: Usuario 'Padreball' cargó frase en dificultad 'facil': 'Pikachu és un Pokémon de tipus elèctric'
+[2025-11-09 17:39:01] [::1] [gameover.php] GAME_OVER: Usuario 'Padreball' terminó juego con 36 puntos
+[2025-11-09 17:39:03] [::1] [gameover.php] SAVE_RANKING: Usuario 'Padreball' guardó puntuación: 36 puntos
+[2025-11-09 17:39:03] [::1] [ranking.php] VIEW_RANKING: Usuario 'Padreball' accedió al ranking
+[2025-11-09 17:39:10] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Padreball' cerró sesión del juego
+[2025-11-09 17:39:25] [::1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-09 17:39:38] [::1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil': 'wadwdwdwdadwadwadwadawdawdaw' (Usuario: admin)
+[2025-11-09 17:39:46] [::1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)

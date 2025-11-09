@@ -12,3 +12,5 @@ kukuuku:27
 Gery:27
 Gery:130
 testN800:56
+pedrito:137
+Padreball:36
