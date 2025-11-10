@@ -755,9 +755,10 @@ body.laberinto-bg::before {
 .hidden {
     display: none;
 }
+
 /* resaltar la fila nueva */
 .admin-container-index table tr.highlight {
-  background-color: #fff900 !important;
+  background-color: #f3f178 !important;
   color: #3b4cca !important;
   font-weight: bold;
 }
@@ -765,7 +766,6 @@ body.laberinto-bg::before {
 #llistarContainer {
     transition: all 0.3s ease;
 }
-
 
 /* Botón de borrar */
 .admin-container-index form button {
@@ -1005,6 +1005,63 @@ body.laberinto-bg::before {
     color: #fff !important;
 }
 
+/* mensajes de listar frases */
+/* Mensajes de éxito */
+#llistarContainer .success {
+    margin: 20px auto;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    font-weight: bold;
+    max-width: 400px;
+    text-align: center;
+    align-items: center;
+}
+
+/* Mensajes de error */
+#llistarContainer .error {
+    margin: 20px auto;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    font-weight: bold;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+
+/* ===============================================
+        PAGINATOR 25RESULTS
+================================================= */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    background: #f9f9f9;
+}
+
+.pagination a:hover {
+    background: #e0e0e0;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+}
 
 /* ============================================================
 📱 MEDIA QUERIES (Responsividad)
