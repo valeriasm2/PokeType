@@ -77,11 +77,24 @@ return [
 
     /* ------------ ADMIN/INDEX.PHP ------------ */
     'admin_index' => [
-        'title' => 'Panel de Administración',
-        'create' => 'Crear frase',
+        'title' => "Panel de Administrador",
+        'create' => 'Agregar frase',
         'edit' => 'Editar frase',
-        'delete' => 'Eliminar frase',
+        'delete' => 'Borrar frase',
         'logout' => 'Cerrar sesión',
+        'list_sentences' => 'Listar frases',
+        'hide_sentences' => 'Ocultar frases',
+        'difficulty' => 'Mostrar según nivel de dificultad:',
+        'paginator'      => 'Siguiente',
+    ],
+    'messages' => [
+        'frase_eliminada' => 'Frase eliminada correctamente.',
+        'error_datos' => 'Error: datos incompletos para eliminar la frase.',
+        'error_archivo_no_encontrado' => 'Error: archivo de frases no encontrado.',
+        'error_permiso_escritura' => 'Error: sin permiso de escritura en el archivo.',
+        'error_json' => 'Error: archivo de frases mal formado.',
+        'error_frase_no_encontrada' => 'Error: frase no encontrada.',
+        'error_guardado' => 'Error: no se pudo guardar el archivo.',
     ],
 
     /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */

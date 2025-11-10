@@ -7,113 +7,144 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit;
 }
 
+// Mostrar listado
 $mostrar_llistat = isset($_GET['action']) && $_GET['action'] === 'llistar';
 
-// Obtengo la frase nueva que viene de create_sentence para resaltar
+// Guardar idioma seleccionado
+if (isset($_POST['lang'])) {
+    $lang = $_POST['lang'];
+    $_SESSION['lang'] = $lang;
+} else {
+    $lang = $_SESSION['lang'] ?? 'ca';
+}
+
+// Cargar archivo de idioma
+switch ($lang) {
+    case 'es': $lang_file = '../lang/es.php'; break;
+    case 'en': $lang_file = '../lang/en.php'; break;
+    case 'ca':
+    default: $lang_file = '../lang/ca.php'; break;
+}
+$lang_data = include($lang_file);
+
+// Determinar archivo de frases según idioma
+switch ($lang) {
+    case 'es': $archivo = '../frases_es.txt'; break;
+    case 'en': $archivo = '../frases_en.txt'; break;
+    case 'ca':
+    default: $archivo = '../frases_ca.txt'; break;
+}
+
+// Frase nueva para resaltar
 $nuevaFrase = $_SESSION['ultima_frase'] ?? null;
 $nivellUltim = $_SESSION['ultim_nivell'] ?? null;
 
+// Listado de frases
 if ($mostrar_llistat) {
-    $archivo = '../frases.txt';
-    $contenido = file_get_contents($archivo);
-    $frases = json_decode($contenido, true);
-
-    if ($frases === null) {
-        $error_msg = "Error al llegir o decodificar el fitxer de frases.";
+    if (!file_exists($archivo)) {
+        $error_msg = $lang_data['messages']['error_archivo_no_encontrado'];
     } else {
-        $nivell_seleccionat = $_GET['nivell'] ?? 'facil';
-        if (!isset($frases[$nivell_seleccionat])) {
-            $nivell_seleccionat = 'facil';
-        }
+        $contenido = file_get_contents($archivo);
+        $frases = json_decode($contenido, true);
 
-        $listado_html = '<table>';
-        $listado_html .= '<thead><tr><th>Frase</th><th>Esborra</th></tr></thead><tbody>';
-
-        // --- Paginació ---
-        $por_pagina = 25;
-        $total_frases = count($frases[$nivell_seleccionat]);
-        $total_paginas = ceil($total_frases / $por_pagina);
-
-        $pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
-
-        // Calculem l’índex d’inici i final
-        $inicio = ($pagina_actual - 1) * $por_pagina;
-        $frases_paginadas = array_slice($frases[$nivell_seleccionat], $inicio, $por_pagina);
-
-        foreach ($frases_paginadas as $i => $fraseObj) {
-            $index = $inicio + $i;
-            $textoFrase = $fraseObj['texto'];
-
-            // Comparo si és la nova frase i el seu nivell per ressaltar-la
-            $es_nueva = ($nuevaFrase !== null && $textoFrase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
-
-            $listado_html .= '<tr' . ($es_nueva ? ' class="highlight"' : '') . '>';
-            $listado_html .= '<td>' . htmlspecialchars($textoFrase) . '</td>';
-            $listado_html .= '<td>
-                <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\'Segur que vols eliminar aquesta frase?\');">
-                    <input type="hidden" name="nivell" value="' . htmlspecialchars($nivell_seleccionat) . '">
-                    <input type="hidden" name="index" value="' . $index . '">
-                    <button type="submit" aria-label="Esborra">X</button>
-                </form>
-            </td>';
-            $listado_html .= '</tr>';
-        }
-
-        $listado_html .= '</tbody></table>';
-
-        // --- Navegació de pàgines ---
-        if ($total_paginas > 1) {
-            $listado_html .= '<div class="pagination">';
-
-            if ($pagina_actual > 1) {
-                $prev = $pagina_actual - 1;
-                $listado_html .= '<a href="?action=llistar&nivell=' . htmlspecialchars($nivell_seleccionat) . '&pagina=' . $prev . '">&laquo; Anterior</a>';
+        if ($frases === null) {
+            $error_msg = $lang_data['messages']['error_json'];
+        } else {
+            $nivell_seleccionat = $_GET['nivell'] ?? 'facil';
+            if (!isset($frases[$nivell_seleccionat])) {
+                $nivell_seleccionat = 'facil';
             }
 
-            $listado_html .= "<span>Pàgina $pagina_actual de $total_paginas</span>";
+            $listado_html = '<table>';
+            $listado_html .= '<thead><tr><th>'.$lang_data['admin_index']['list_sentences'].'</th><th>'.$lang_data['admin_index']['delete'].'</th></tr></thead><tbody>';
 
-            if ($pagina_actual < $total_paginas) {
-                $next = $pagina_actual + 1;
-                $listado_html .= '<a href="?action=llistar&nivell=' . htmlspecialchars($nivell_seleccionat) . '&pagina=' . $next . '">Següent &raquo;</a>';
+            // Paginación
+            $por_pagina = 25;
+            $total_frases = count($frases[$nivell_seleccionat]);
+            $total_paginas = ceil($total_frases / $por_pagina);
+
+            $pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
+            $inicio = ($pagina_actual - 1) * $por_pagina;
+            $frases_paginadas = array_slice($frases[$nivell_seleccionat], $inicio, $por_pagina);
+
+            foreach ($frases_paginadas as $i => $fraseObj) {
+                $index = $inicio + $i;
+                $textoFrase = $fraseObj['texto'];
+                $es_nueva = ($nuevaFrase !== null && $textoFrase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
+
+                $listado_html .= '<tr'.($es_nueva ? ' class="highlight"' : '').'>';
+                $listado_html .= '<td>'.htmlspecialchars($textoFrase).'</td>';
+                $listado_html .= '<td>
+                    <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\''.$lang_data['admin_index']['delete'].'?\');">
+                        <input type="hidden" name="nivell" value="'.htmlspecialchars($nivell_seleccionat).'">
+                        <input type="hidden" name="index" value="'.$index.'">
+                        <button type="submit" aria-label="'.$lang_data['admin_index']['delete'].'">X</button>
+                    </form>
+                </td>';
+                $listado_html .= '</tr>';
             }
 
-            $listado_html .= '</div>';
+            $listado_html .= '</tbody></table>';
+
+            // Paginación HTML
+            if ($total_paginas > 1) {
+                $listado_html .= '<div class="pagination">';
+                if ($pagina_actual > 1) {
+                    $prev = $pagina_actual - 1;
+                    $listado_html .= '<a href="?action=llistar&nivell='.htmlspecialchars($nivell_seleccionat).'&pagina='.$prev.'">&laquo; '.$lang_data['admin_index']['paginator'].'</a>';
+                }
+                $listado_html .= "<span>Pàgina $pagina_actual de $total_paginas</span>";
+                if ($pagina_actual < $total_paginas) {
+                    $next = $pagina_actual + 1;
+                    $listado_html .= '<a href="?action=llistar&nivell='.htmlspecialchars($nivell_seleccionat).'&pagina='.$next.'">'.$lang_data['admin_index']['paginator'].' &raquo;</a>';
+                }
+                $listado_html .= '</div>';
+            }
         }
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo $lang; ?>">
     <head>
         <meta charset="UTF-8">
-        <title>Panell d'Administrador</title>
+        <title><?php echo $lang_data['admin_index']['title']; ?></title>
         <link rel="stylesheet" href="../styles.css?<?php echo time(); ?>">
     </head>
-
     <body class="admin-page-index">
-
-
         <div class="admin-container-index">
-            <p>Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong></p>
+            <div class="admin-topbar">
+                <p class="admin-welcome">
+                    <?php echo $lang_data['admin_index']['title']; ?>, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong>
+                </p>
+                <form action="index.php" method="post" class="lang-selector-form">
+                    <label for="lang">🌐</label>
+                    <select name="lang" id="lang" onchange="this.form.submit()">
+                        <option value="ca" <?php if($lang==='ca') echo 'selected'; ?>>Català</option>
+                        <option value="es" <?php if($lang==='es') echo 'selected'; ?>>Español</option>
+                        <option value="en" <?php if($lang==='en') echo 'selected'; ?>>English</option>
+                    </select>
+                </form>
+            </div>
 
-            <h1>Panell d’Administrador</h1>
+            <h1><?php echo $lang_data['admin_index']['title']; ?></h1>
 
             <button id="toggleLlistar" type="button">
-                <span class="underline-letter">L</span>listar frases
+                <span class="underline-letter">L</span><?php echo $lang_data['admin_index']['list_sentences']; ?>
             </button>
 
             <a href="create_sentence.php" class="admin-btn">
-                <span class="underline-letter">A</span>fegir frase
+                <span class="underline-letter">A</span><?php echo $lang_data['admin_index']['create']; ?>
             </a>
 
             <a href="logout.php" class="admin-btn">
-                L<span class="underline-letter">o</span>gout
+                <?php echo $lang_data['admin_index']['logout']; ?>
             </a>
 
             <div id="llistarContainer" class="<?php echo $mostrar_llistat ? '' : 'hidden'; ?>">
                 <form method="GET" action="">
                     <input type="hidden" name="action" value="llistar">
-                    <label for="nivell">Mostra segons nivell de dificultat:</label>
+                    <label for="nivell"><?php echo $lang_data['admin_index']['difficulty']; ?></label>
                     <select name="nivell" id="nivell" onchange="this.form.submit();">
                         <option value="facil" <?php if (($nivell_seleccionat ?? '') === 'facil') echo 'selected'; ?>>Fàcil</option>
                         <option value="normal" <?php if (($nivell_seleccionat ?? '') === 'normal') echo 'selected'; ?>>Normal</option>
@@ -121,100 +152,44 @@ if ($mostrar_llistat) {
                     </select>
                 </form>
 
-                <!-- ✅ Mensajes ahora ARRIBA del listado -->
                 <?php if (isset($_GET['msg'])): ?>
                     <?php
-                    $msgs = [
-                        'frase_eliminada' => "Frase eliminada correctament.",
-                        'error_datos' => "Error: dades incompletes per eliminar la frase.",
-                        'error_archivo_no_encontrado' => "Error: fitxer de frases no trobat.",
-                        'error_permiso_escritura' => "Error: sense permís d'escriptura al fitxer.",
-                        'error_json' => "Error: fitxer de frases mal format.",
-                        'error_frase_no_encontrada' => "Error: frase no trobada.",
-                        'error_guardado' => "Error: no s'ha pogut guardar el fitxer."
-                    ];
-
-                    $msg_text = $msgs[$_GET['msg']] ?? "Error desconegut.";
-                    $msg_class = ($_GET['msg'] === 'frase_eliminada') ? 'success' : 'error';
-
+                    $msg_text = $lang_data['messages'][$_GET['msg']] ?? $lang_data['messages']['error_guardado'];
+                    $msg_class = ($_GET['msg']==='frase_eliminada') ? 'success' : 'error';
                     echo "<div class='$msg_class'>$msg_text</div>";
                     ?>
                 <?php endif; ?>
-                <!-- ✅ FIN zona mensajes -->
 
                 <?php if (isset($error_msg)): ?>
                     <div class="error"><?php echo htmlspecialchars($error_msg); ?></div>
                 <?php elseif (isset($listado_html)): ?>
-                    <!-- ✅ Ahora la tabla + paginador aparecen debajo del mensaje -->
                     <?php echo $listado_html; ?>
                 <?php endif; ?>
             </div>
-
-
-            <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    const toggleBtn = document.getElementById("toggleLlistar");
-                    const container = document.getElementById("llistarContainer");
-                    const logoutLink = document.querySelector('a[href="logout.php"]');
-
-                    const actualizarTextos = (visible) => {
-                        if (visible) {
-                            toggleBtn.innerHTML = '<span class="underline-letter">O</span>cultar frases';
-                        } else {
-                            toggleBtn.innerHTML = '<span class="underline-letter">L</span>listar frases';
-                        }
-                        if (logoutLink) {
-                            if (visible) {
-                                logoutLink.innerHTML = '<span class="underline-letter">L</span>ogout';
-                            } else {
-                                logoutLink.innerHTML = 'L<span class="underline-letter">o</span>gout';
-                            }
-                        }
-                    };
-
-                    const inicialmenteVisible = container && !container.classList.contains("hidden");
-                    actualizarTextos(inicialmenteVisible);
-
-                    toggleBtn.addEventListener("click", () => {
-                        container.classList.toggle("hidden");
-                        const visibleAhora = !container.classList.contains("hidden");
-                        actualizarTextos(visibleAhora);
-
-                        if (visibleAhora && !window.location.search.includes("action=llistar")) {
-                            window.location.href = "?action=llistar&nivell=facil";
-                        }
-                    });
-
-                    document.addEventListener("keydown", (e) => {
-                        const key = e.key.toLowerCase();
-                        const estaVisible = container && !container.classList.contains("hidden");
-
-                        switch (key) {
-                            case "l":
-                                if (estaVisible) {
-                                    window.location.href = "logout.php";
-                                } else {
-                                    toggleBtn?.click();
-                                }
-                                break;
-                            case "o":
-                                if (estaVisible) {
-                                    toggleBtn?.click();
-                                } else {
-                                    window.location.href = "logout.php";
-                                }
-                                break;
-                            case "a":
-                                window.location.href = "create_sentence.php";
-                                break;
-                            case "t":
-                                window.location.href = "index.php";
-                                break;
-                        }
-                    });
-                });
-            </script>
         </div>
-    </body>
 
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("toggleLlistar");
+            const container = document.getElementById("llistarContainer");
+            const logoutLink = document.querySelector('a[href="logout.php"]');
+
+            const actualizarTextos = (visible) => {
+                if (visible) toggleBtn.innerHTML = '<span class="underline-letter">O</span><?php echo $lang_data['admin_index']['hide_sentences']; ?>';
+                else toggleBtn.innerHTML = '<span class="underline-letter">L</span><?php echo $lang_data['admin_index']['list_sentences']; ?>';
+            };
+
+            const inicialmenteVisible = container && !container.classList.contains("hidden");
+            actualizarTextos(inicialmenteVisible);
+
+            toggleBtn.addEventListener("click", () => {
+                container.classList.toggle("hidden");
+                actualizarTextos(!container.classList.contains("hidden"));
+                if (!window.location.search.includes("action=llistar")) {
+                    window.location.href = "?action=llistar&nivell=facil";
+                }
+            });
+        });
+        </script>
+    </body>
 </html>

@@ -100,3 +100,4 @@
 [2025-11-10 21:37:36] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'dificil'
 [2025-11-10 21:37:46] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'dificil'
 [2025-11-10 21:37:58] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'dificil'
+[2025-11-10 21:50:25] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)

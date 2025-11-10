@@ -77,11 +77,24 @@ return [
 
     /* ------------ ADMIN/INDEX.PHP ------------ */
     'admin_index' => [
-        'title' => 'Administration Panel',
+        'title' => "Administration Panel",
         'create' => 'Create sentence',
         'edit' => 'Edit sentence',
         'delete' => 'Delete sentence',
         'logout' => 'Log out',
+        'list_sentences' => 'List sentences',
+        'hide_sentences' => 'Hide sentences',
+        'difficulty' => 'Show by difficulty level:',
+        'paginator'      => 'Next',
+    ],
+    'messages' => [
+        'frase_eliminada' => 'Sentence deleted successfully.',
+        'error_datos' => 'Error: incomplete data to delete the sentence.',
+        'error_archivo_no_encontrado' => 'Error: sentences file not found.',
+        'error_permiso_escritura' => 'Error: no write permission on file.',
+        'error_json' => 'Error: malformed sentences file.',
+        'error_frase_no_encontrada' => 'Error: sentence not found.',
+        'error_guardado' => 'Error: could not save the file.',
     ],
 
     /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */

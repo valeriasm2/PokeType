@@ -953,6 +953,65 @@ body.laberinto-bg::before {
 }
 
 /* ============================================================
+   🌐 Barra superior del panel
+============================================================ */
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+/* Zona izquierda: selector de idioma */
+.lang-selector-form {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.lang-selector-form label {
+    color: #4A90E2;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    margin: 0;
+}
+
+.lang-selector-form select {
+    padding: 0.3rem 0.5rem;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    background-color: #EAF6FF;
+    color: #1E3A5F;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.lang-selector-form select:hover,
+.lang-selector-form select:focus {
+    border-color: #F7C948;
+    background-color: #FFF9E6;
+    outline: none;
+}
+
+/* Texto de bienvenida centrado */
+.admin-welcome {
+    margin: 0 auto;
+    color: #1E3A5F;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+/* ============================================================
       🎮 POKEMON ICON EN JUEGO
 ============================================================ */
 .pokemon-image-container {

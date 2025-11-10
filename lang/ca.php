@@ -78,11 +78,25 @@ return [
 
     /* ------------ ADMIN/INDEX.PHP ------------ */
     'admin_index' => [
-        'title' => 'Panell d\'Administració',
-        'create' => 'Crear frase',
-        'edit' => 'Editar frase',
-        'delete' => 'Eliminar frase',
-        'logout' => 'Tancar sessió',
+        'title'          => "Panell d'Administrador",
+        'create'         => 'Afegir frase',
+        'edit'           => 'Editar frase',
+        'delete'         => 'Esborrar frase',
+        'logout'         => 'Logout',
+        'list_sentences' => 'Llistar frases',
+        'hide_sentences' => 'Ocultar frases',
+        'difficulty'     => 'Mostra segons nivell de dificultat:',
+        'paginator'      => 'Següent',
+    ],
+
+    'messages' => [
+        'frase_eliminada'              => 'Frase eliminada correctament.',
+        'error_datos'                  => 'Error: dades incompletes per eliminar la frase.',
+        'error_archivo_no_encontrado'  => 'Error: fitxer de frases no trobat.',
+        'error_permiso_escritura'      => "Error: sense permís d'escriptura al fitxer.",
+        'error_json'                   => "Error: fitxer de frases mal format.",
+        'error_frase_no_encontrada'    => "Error: frase no trobada.",
+        'error_guardado'               => "Error: no s'ha pogut guardar el fitxer.",
     ],
 
     /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */
