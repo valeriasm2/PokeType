@@ -69,7 +69,7 @@ body {
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    margin: 200px auto;
+    margin: 0;
 }
 
 /* ===== EFECTO ANIMACIÓN GAME OVER ===== */
@@ -374,13 +374,12 @@ button:disabled {
 ============================================================ */
 #easter-egg {
     position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 24px;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
     cursor: pointer;
-    opacity: 0.3;
-    transition: opacity 0.3s;
-    z-index: 1001;
+    z-index: 1000;
+    opacity: 0.2;
 }
 
 #easter-egg:hover {

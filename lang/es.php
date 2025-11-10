@@ -17,12 +17,19 @@ return [
 
     /* ------------ PLAY.PHP ------------ */
     'play' => [
-        'difficulty' => 'Dificultad',
+        'difficulty_label' => 'Dificultad seleccionada',
+        'difficulty_facil' => 'Fácil',
+        'difficulty_normal' => 'Normal',
+        'difficulty_dificil' => 'Difícil',
+        'timer' => '⏱',
+        'countdown_start' => 'Comenzando...',
+        'progress' => 'Frase %d de %d',
         'phraseCompleted' => '✅ ¡Frase completada!',
         'back' => 'Volver',
-        'countdown_start' => 'Comenzando...',
-        'escape' => 'ESCAPE'
+        'escape' => 'ESCAPE',
+        'easter_egg' => '👀'
     ],
+
 
     /* ------------ GAMEOVER.PHP ------------ */
     'gameover' => [
@@ -39,6 +46,14 @@ return [
         'save' => '¿Guardar puntuación?',
         'yes' => 'Sí',
         'no' => 'No',
+    ],
+    /* ------------ GIRATINA.PHP ------------ */
+    'giratina' => [
+        'title' => '¡Atrapa a Giratina!',
+        'instruction' => '¡Haz clic sobre Giratina antes de que escape!',
+        'caught' => '¡Has atrapado a Giratina! +100 puntos 🎉',
+        'redirecting' => 'Redirigiendo al juego...',
+        'bonus' => 'Bonus Giratina',
     ],
 
     /* ------------ RANKING.PHP ------------ */

@@ -17,11 +17,17 @@ return [
 
     /* ------------ PLAY.PHP ------------ */
     'play' => [
-        'difficulty' => 'Difficulty',
-        'phraseCompleted' => '✅ Phrase completed!',
-        'back' => 'Back',
+        'difficulty_label' => 'Selected difficulty',
+        'difficulty_facil' => 'Easy',
+        'difficulty_normal' => 'Normal',
+        'difficulty_dificil' => 'Hard',
+        'timer' => '⏱',
         'countdown_start' => 'Starting...',
-        'escape' => 'ESCAPE'
+        'progress' => 'Sentence %d of %d',
+        'phraseCompleted' => '✅ Sentence completed!',
+        'back' => 'Back',
+        'escape' => 'ESCAPE',
+        'easter_egg' => '👀'
     ],
 
     /* ------------ GAMEOVER.PHP ------------ */
@@ -49,6 +55,15 @@ return [
         'time' => 'Time',
         'date' => 'Date',
         'back' => 'ESCAPE',
+    ],
+
+    /* ------------ GIRATINA.PHP ------------ */
+    'giratina' => [
+        'title' => 'Catch Giratina!',
+        'instruction' => 'Click on Giratina before it escapes!',
+        'caught' => 'You caught Giratina! +100 points 🎉',
+        'redirecting' => 'Redirecting to the game...',
+        'bonus' => 'Giratina Bonus',
     ],
 
     /* ------------ ADMIN/LOGIN.PHP ------------ */

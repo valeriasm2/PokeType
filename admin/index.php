@@ -91,6 +91,8 @@ if ($mostrar_llistat) {
     </head>
 
     <body class="admin-page-index">
+
+
         <div class="admin-container-index">
             <p>Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong></p>
 
