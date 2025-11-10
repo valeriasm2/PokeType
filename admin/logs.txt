@@ -61,3 +61,6 @@
 [2025-11-10 15:50:30] [127.0.0.1] [index.php] GAME_START: Usuario 'ioui' inició juego en dificultad 'facil'
 [2025-11-10 15:52:00] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'ioui' accedió al ranking
 [2025-11-10 15:52:07] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'ioui' cerró sesión del juego
+[2025-11-10 18:11:12] [127.0.0.1] [index.php] GAME_START: Usuario 'lklklk' inició juego en dificultad 'normal'
+[2025-11-10 18:12:05] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'lklklk' accedió al ranking
+[2025-11-10 18:12:12] [127.0.0.1] [index.php] GAME_START: Usuario 'lklklk' inició juego en dificultad 'dificil'

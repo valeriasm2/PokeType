@@ -39,9 +39,6 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 // Bonus por dificultad
 $bonus = ($difficulty === "facil") ? 2 :
         (($difficulty === "normal") ? 3 : 5);
-
-// Bonus Giratina (si viene desde el Easter Egg)
-$bonusGiratina = isset($_GET['bonusGiratina']) ? intval($_GET['bonusGiratina']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -102,7 +99,6 @@ let puntosTotales = 0;
 let totalHits = 0;
 let totalTimeBonus = 0;
 let bonus = <?php echo $bonus; ?>;
-let bonusGiratina = <?php echo $bonusGiratina; ?>;
 
 const correctSound = document.getElementById("correct-sound");
 const wrongSound = document.getElementById("wrong-sound");
@@ -228,14 +224,12 @@ function jugar(e) {
                 form.method = "POST";
                 form.action = "gameover.php";
 
-                // ✅ Mandamos ambos bonuses separados
                 form.innerHTML = `
-                    <input type="hidden" name="score" value="${puntosTotales + bonus + bonusGiratina}">
+                    <input type="hidden" name="score" value="${puntosTotales + bonus}">
                     <input type="hidden" name="time" value="${document.getElementById("timer").textContent}">
                     <input type="hidden" name="hits" value="${totalHits}">
                     <input type="hidden" name="timeBonus" value="${totalTimeBonus}">
                     <input type="hidden" name="bonus" value="${bonus}">
-                    <input type="hidden" name="bonusGiratina" value="${bonusGiratina}">
                     <input type="hidden" name="name" value="<?php echo $name; ?>">
                 `;
                 document.body.appendChild(form);
