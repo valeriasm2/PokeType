@@ -1033,8 +1033,6 @@ body.laberinto-bg::before {
     text-align: center;
 }
 
-
-
 /* ===============================================
         PAGINATOR 25RESULTS
 ================================================= */
@@ -1062,6 +1060,56 @@ body.laberinto-bg::before {
     margin: 0 10px;
     font-weight: bold;
 }
+
+/* ===============================================
+        Selector de idioma
+================================================= */
+#lang-selector {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 2px solid #a825d4;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#lang-selector:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+#lang-selector label {
+    font-size: 14px;
+}
+
+#lang-selector select {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    padding: 4px 6px;
+    border-radius: 8px;
+    border: 2px solid #3b4cca;
+    background-color: #f7f0ff;
+    color: #3b4cca;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#lang-selector select:hover,
+#lang-selector select:focus {
+    border-color: #a846f8;
+    background-color: #e1d4f7;
+    outline: none;
+}
+
 
 /* ============================================================
 📱 MEDIA QUERIES (Responsividad)

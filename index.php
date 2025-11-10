@@ -1,32 +1,44 @@
 <?php
-session_start(); // permite gestionar la sessió del usuarioo
+session_start(); // Gestionar sesión
 
-// Incluir sistema de logs
-require_once 'admin/logger.php';
-
-function mostrarError($error) {
-    if (!empty($error)) {
-        echo '<div class="error-alert">' . $error . '</div>';
-        echo "<script>document.getElementById('name').focus();</script>";
-    }
+// ✅ Selección de idioma
+if (isset($_POST['lang'])) {
+    $_SESSION['lang'] = $_POST['lang'];
 }
+
+$lang = $_SESSION['lang'] ?? 'ca';
+$langFile = __DIR__ . "/lang/{$lang}.php";
+
+if (file_exists($langFile)) {
+    $langArray = require $langFile;
+
+    // ✅ Cargar textos del bloque INDEX
+    $texts = $langArray['index'];
+    $hotkeys = $langArray['hotkeys'];
+} else {
+    $texts = [];
+    $hotkeys = [];
+}
+
+// ✅ Incluir sistema de logs
+require_once 'admin/logger.php';
 
 $error = "";
 $name = "";
 $difficulty = "";
 
-// ✅ Si el formulari s'envia
-if ($_POST) {
+// ✅ Formulario enviado
+if ($_POST && isset($_POST['name'])) {
     $name = trim($_POST['name']);
     $difficulty = $_POST['difficulty'] ?? '';
 
     if (empty($name)) {
-        $error = "⚠️ El camp nom no pot estar buit";
+        $error = $texts['error_empty'] ?? "⚠️ El camp nom no pot estar buit";
     } else {
-        $_SESSION['name'] = $name;              // ✅ Guardem nom en sessió
-        $_SESSION['difficulty'] = $difficulty;  // ✅ Guardem dificultat en sessió
+        $_SESSION['name'] = $name;
+        $_SESSION['difficulty'] = $difficulty;
 
-        // Log inicio de juego
+        // Log inicio
         logJuego("GAME_START", "index.php", "Usuario '$name' inició juego en dificultad '$difficulty'");
 
         header("Location: play.php");
@@ -34,83 +46,99 @@ if ($_POST) {
     }
 }
 
-// ✅ Si hi ha sessió iniciada, recuperar dades per mostrar-les al formulari
-if (isset($_SESSION['name'])) {
-    $name = $_SESSION['name'];
-}
+// ✅ Recuperar sesión si existe
+if (isset($_SESSION['name'])) $name = $_SESSION['name'];
+if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
 
-if (isset($_SESSION['difficulty'])) {
-    $difficulty = $_SESSION['difficulty'];
-}
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?= $lang ?>">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poketype</title>
-    <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
+    <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
+
 <body>
 
-    <!-- ✅ Recuadro superior derecho de sesión -->
+    <!-- ✅ Recuadro usuario -->
     <?php if (isset($_SESSION['name'])): ?>
         <div id="user-box">
             👤 <strong><?= htmlspecialchars($_SESSION['name']); ?></strong><br>
-            <a href="destroy_session.php">Tancar sessió</a>
+            <a href="destroy_session.php"><?= $texts['logout'] ?? 'Cerrar sesión' ?></a>
         </div>
     <?php endif; ?>
-    <!-- ✅ Fin recuadro -->
 
-    <!-- So botons -->
+    <!-- ✅ Audio botones -->
     <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
+    <!-- ✅ Selector de idioma (arriba izquierda) -->
+    <form action="index.php" method="post" id="lang-selector">
+        <label for="lang">🌐</label>
+        <select name="lang" id="lang" onchange="this.form.submit()">
+            <option value="ca" <?= ($lang === 'ca') ? 'selected' : '' ?>>Català</option>
+            <option value="es" <?= ($lang === 'es') ? 'selected' : '' ?>>Español</option>
+            <option value="en" <?= ($lang === 'en') ? 'selected' : '' ?>>English</option>
+        </select>
+    </form>
+
     <div id="index-container">
+        <h1><?= $texts['welcome'] ?? 'Poketype' ?></h1>
+        <p><?= $texts['description'] ?? '' ?></p>
+        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Pokémon GIF" width="300">
 
-        <h1>Poketype</h1>
-        <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
-        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Mew GIF" width="300">
-
+        <!-- ✅ Formulario inicio del juego -->
         <form action="index.php" method="post">
-            <label for="name">Nom:</label>
-            <input type="text" id="name" name="name"
-                   value="<?php echo htmlspecialchars($name); ?>"><br>
+            <label for="name"><?= $texts['name_label'] ?? 'Nombre:' ?></label>
+            <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>"><br>
 
-            <?php mostrarError($error); ?>
+            <?php if ($error): ?>
+                <div class="error-alert"><?= $error ?></div>
+            <?php endif; ?>
+
             <br>
 
-            <label for="dificultat">Dificultat:</label>
+            <label for="dificultat"><?= $texts['difficulty'] ?? 'Dificultad:' ?></label>
             <select name="difficulty" id="dificultat">
-                <option value="facil"  <?= ($difficulty === "facil") ? "selected" : "" ?>>Fàcil</option>
-                <option value="normal" <?= ($difficulty === "normal") ? "selected" : "" ?>>Normal</option>
-                <option value="dificil" <?= ($difficulty === "dificil") ? "selected" : "" ?>>Difícil</option>
-            </select><br><br>
+                <option value="facil" <?= ($difficulty === "facil") ? "selected" : "" ?>>
+                    <?= $texts['difficulty_facil'] ?? 'Fácil' ?>
+                </option>
 
-            <!-- Botó Jugar -->
+                <option value="normal" <?= ($difficulty === "normal") ? "selected" : "" ?>>
+                    <?= $texts['difficulty_normal'] ?? 'Normal' ?>
+                </option>
+
+                <option value="dificil" <?= ($difficulty === "dificil") ? "selected" : "" ?>>
+                    <?= $texts['difficulty_dificil'] ?? 'Difícil' ?>
+                </option>
+            </select>
+
+            <br><br>
+
+            <?php $playText = $texts['play'] ?? 'Jugar'; ?>
             <button type="submit" id="play-button" disabled>
-                <span class="underline-letter">J</span>ugar
+                <span class="underline-letter"><?= substr($playText, 0, 1) ?></span><?= substr($playText, 1) ?>
             </button>
 
-
-            <noscript>
-                <div class="error-alert">
-                    ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
-                </div>
-            </noscript>
         </form>
+
+        <noscript>
+            <div class="error-alert">
+                <?= $texts['js_required'] ?? '⚠️ Este juego necesita JavaScript para funcionar.' ?>
+            </div>
+        </noscript>
     </div>
 
-    <!-- Scripts -->
     <script src="utils/music.js"></script>
     <script>
-        // Activar el botó Jugar quan es carregui la pàgina
         const playButton = document.getElementById('play-button');
         playButton.disabled = false;
 
         const buttons = document.querySelectorAll('button');
         const buttonSound = document.getElementById('button-sound');
 
-        // Reproducir so en fer clic
         buttons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 buttonSound.currentTime = 0;
@@ -118,28 +146,23 @@ if (isset($_SESSION['difficulty'])) {
 
                 if (btn.type === 'submit') {
                     e.preventDefault();
-                    setTimeout(() => {
-                        btn.closest('form').submit();
-                    }, 1000); // temps per escoltar el so
+                    setTimeout(() => btn.closest('form').submit(), 1000);
                 }
             });
         });
 
-        // Tecles: prem una lletra i simula el clic del botó corresponent
         document.addEventListener('keydown', (e) => {
             if (e.repeat) return;
-
             const active = document.activeElement;
-            if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
 
             buttons.forEach(btn => {
                 const text = btn.textContent.trim().toLowerCase();
-                if (text.startsWith(e.key.toLowerCase())) {
-                    btn.click();
-                }
+                if (text.startsWith(e.key.toLowerCase())) btn.click();
             });
         });
     </script>
 
 </body>
+
 </html>
