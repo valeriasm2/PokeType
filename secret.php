@@ -50,7 +50,7 @@ $difficulty = isset($_GET['difficulty']) ? htmlspecialchars($_GET['difficulty'])
 
       setTimeout(() => {
         // Redirigimos a play.php pasando bonus + nombre + dificultad
-        window.location.href = `play.php?bonus=100&name=${encodeURIComponent('<?php echo $name; ?>')}&difficulty=${encodeURIComponent('<?php echo $difficulty; ?>')}`;
+        window.location.href = `play.php?bonusGiratina=100&name=${encodeURIComponent('<?php echo $name; ?>')}&difficulty=${encodeURIComponent('<?php echo $difficulty; ?>')}`;
       }, 3000); // 3 segundos para que se vea el mensaje
     });
 

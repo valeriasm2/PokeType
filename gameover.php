@@ -25,12 +25,13 @@ if (
 }
 
 // ✅ Recibir valores desde play.php
-$name      = htmlspecialchars($_POST['name']);
-$score     = intval($_POST['score']);
-$time      = floatval($_POST['time']);
-$hits      = intval($_POST['hits']);
-$bonus     = intval($_POST['bonus']);
-$timeBonus = intval($_POST['timeBonus']);
+$name          = htmlspecialchars($_POST['name']);
+$score         = intval($_POST['score']);
+$time          = floatval($_POST['time']);
+$hits          = intval($_POST['hits']);
+$bonus         = intval($_POST['bonus']);
+$timeBonus     = intval($_POST['timeBonus']);
+$bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0;
 
 $_SESSION['name'] = $name;
 
@@ -71,7 +72,13 @@ if (isset($_POST['save'])) {
         <h3>Resultat de la partida:</h3>
         <p>✅ Encerts: <strong><?= $hits ?></strong></p>
         <p>🎯 Bonus per dificultat: <strong><?= $bonus ?></strong></p>
+
+        <?php if ($bonusGiratina > 0): ?>
+            <p>✨ Bonus Giratina: <strong>+<?= $bonusGiratina ?></strong> punts!</p>
+        <?php endif; ?>
+
         <p>⚡ Bonus per temps: <strong><?= $timeBonus ?></strong></p>
+        
         <p>⏱ Temps total: <strong><?= $time ?>s</strong></p>
 
         <hr>
@@ -86,6 +93,7 @@ if (isset($_POST['save'])) {
             <input type="hidden" name="hits" value="<?= $hits ?>">
             <input type="hidden" name="bonus" value="<?= $bonus ?>">
             <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
+            <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
             <input type="hidden" name="save" value="1">
 
             <button type="submit" class="btn-link" id="save-btn">

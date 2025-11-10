@@ -13,14 +13,17 @@ $difficulty = isset($_SESSION['difficulty']) ? $_SESSION['difficulty'] : "facil"
 $file = "frases.txt";
 $frasesSeleccionadas = [];
 
-// Cargar las frases desde JSON
+// Cargar frases desde JSON (array de objetos con texto + imagen)
 if (file_exists($file)) {
     $json = file_get_contents($file);
     $frasesData = json_decode($json, true);
 
     if (isset($frasesData[$difficulty])) {
         foreach ($frasesData[$difficulty] as $obj) {
-            $frasesSeleccionadas[] = $obj["texto"];  // ✅ Solo texto
+            $frasesSeleccionadas[] = [
+                "texto" => $obj["texto"],
+                "imagen" => $obj["imagen"] ?? null
+            ];
         }
     }
 }
@@ -36,6 +39,9 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 // Bonus por dificultad
 $bonus = ($difficulty === "facil") ? 2 :
         (($difficulty === "normal") ? 3 : 5);
+
+// Bonus Giratina (si viene desde el Easter Egg)
+$bonusGiratina = isset($_GET['bonusGiratina']) ? intval($_GET['bonusGiratina']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -43,7 +49,6 @@ $bonus = ($difficulty === "facil") ? 2 :
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poketype - Joc</title>
-
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
 </head>
 <body>
@@ -53,6 +58,7 @@ $bonus = ($difficulty === "facil") ? 2 :
         👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
         <a href="destroy_session.php">Tancar sessió</a>
     </div>
+    <a href="secret.php" id="easter-egg" title="Easter Egg">👀</a>
 
     <!-- ⏱ Temporizador total -->
     <div id="timer-box">⏱ <span id="timer">0.00</span>s</div>
@@ -74,8 +80,11 @@ $bonus = ($difficulty === "facil") ? 2 :
             <div id="progress-bar"></div>
         </div>
 
+        <!-- ✅ Zona de juego -->
         <div id="game-area" style="display:none;">
             <p id="frase"></p>
+            <!-- 🔹 Imagen del Pokémon (si existe) -->
+            <div id="image-box" class="pokemon-image-container"></div>
         </div>
 
         <a href="index.php" id="back-btn"><span class="underline-letter">ESC</span>APE</a>
@@ -84,7 +93,7 @@ $bonus = ($difficulty === "facil") ? 2 :
 <script src="utils/music.js"></script>
 <script>
 /* ------------------- CONFIG ------------------- */
-const frases = <?php echo json_encode($frasesSeleccionadas); ?>;
+const frasesData = <?php echo json_encode($frasesSeleccionadas); ?>;
 let fraseIndex = 0;
 let charIndex = 0;
 let estado = [];
@@ -93,12 +102,14 @@ let puntosTotales = 0;
 let totalHits = 0;
 let totalTimeBonus = 0;
 let bonus = <?php echo $bonus; ?>;
+let bonusGiratina = <?php echo $bonusGiratina; ?>;
 
 const correctSound = document.getElementById("correct-sound");
 const wrongSound = document.getElementById("wrong-sound");
 const buttonSound = document.getElementById("button-sound");
 
 const fraseEl = document.getElementById("frase");
+const imageBox = document.getElementById("image-box");
 const progressText = document.getElementById("progress-text");
 const progressBar = document.getElementById("progress-bar");
 const progressContainer = document.getElementById("progress-container");
@@ -126,9 +137,9 @@ function normalizar(char) {
     return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-/* Mostrar frase actual coloreada */
+/* Mostrar frase e imagen actual */
 function mostrarFrase() {
-    let frase = frases[fraseIndex];
+    let frase = frasesData[fraseIndex].texto;
     let html = "";
 
     for (let i = 0; i < frase.length; i++) {
@@ -143,6 +154,14 @@ function mostrarFrase() {
         }
     }
     fraseEl.innerHTML = html;
+
+    // Mostrar imagen si existe
+    const imagen = frasesData[fraseIndex].imagen;
+    if (imagen) {
+        imageBox.innerHTML = `<img src="images/${imagen}" class="pokemon-icon" alt="Pokemon">`;
+    } else {
+        imageBox.innerHTML = "";
+    }
 }
 
 /* ------------------ COUNTDOWN ------------------ */
@@ -155,8 +174,8 @@ function iniciarCuentaAtras() {
     countdownEl.style.display = "block";
 
     progressContainer.style.display = "block";
-    progressText.innerText = `Frase ${fraseIndex + 1} de ${frases.length}`;
-    progressBar.style.width = ((fraseIndex) / frases.length) * 100 + "%";
+    progressText.innerText = `Frase ${fraseIndex + 1} de ${frasesData.length}`;
+    progressBar.style.width = ((fraseIndex) / frasesData.length) * 100 + "%";
 
     let intervalo = setInterval(() => {
         countdownEl.innerText--;
@@ -165,8 +184,8 @@ function iniciarCuentaAtras() {
             countdownEl.style.display = "none";
             gameArea.style.display = "block";
 
-            if (startTimeGlobal === null) startGlobalTimer(); // ✅ tiempo total
-            startTimerFrase(); // ✅ tiempo frase
+            if (startTimeGlobal === null) startGlobalTimer();
+            startTimerFrase();
 
             mostrarFrase();
             document.addEventListener("keydown", jugar);
@@ -176,7 +195,7 @@ function iniciarCuentaAtras() {
 
 /* ------------------ JUEGO ------------------ */
 function jugar(e) {
-    let frase = frases[fraseIndex];
+    let frase = frasesData[fraseIndex].texto;
     if (charIndex >= frase.length || e.key.length > 1) return;
 
     const acertado = normalizar(e.key) === normalizar(frase[charIndex]);
@@ -189,34 +208,34 @@ function jugar(e) {
 
     if (charIndex === frase.length) {
         document.removeEventListener("keydown", jugar);
-
         fraseEl.innerHTML += "<br><br><strong>✅ Frase completada!</strong>";
 
         let aciertos = estado.filter(x => x).length;
         let tiempoFrase = stopTimerFrase();
 
-        let tiempoScore = Math.max(0, Math.floor(30 / tiempoFrase)); // ⏱ bonus reducido
+        let tiempoScore = Math.max(0, Math.floor(30 / tiempoFrase));
 
         totalHits += aciertos;
         totalTimeBonus += tiempoScore;
         puntosTotales += aciertos + tiempoScore;
 
         fraseIndex++;
+        progressBar.style.width = (fraseIndex / frasesData.length) * 100 + "%";
 
-        progressBar.style.width = (fraseIndex / frases.length) * 100 + "%";
-
-        if (fraseIndex === frases.length) {
+        if (fraseIndex === frasesData.length) {
             setTimeout(() => {
                 const form = document.createElement("form");
                 form.method = "POST";
                 form.action = "gameover.php";
 
+                // ✅ Mandamos ambos bonuses separados
                 form.innerHTML = `
-                    <input type="hidden" name="score" value="${puntosTotales + bonus}">
+                    <input type="hidden" name="score" value="${puntosTotales + bonus + bonusGiratina}">
                     <input type="hidden" name="time" value="${document.getElementById("timer").textContent}">
                     <input type="hidden" name="hits" value="${totalHits}">
                     <input type="hidden" name="timeBonus" value="${totalTimeBonus}">
                     <input type="hidden" name="bonus" value="${bonus}">
+                    <input type="hidden" name="bonusGiratina" value="${bonusGiratina}">
                     <input type="hidden" name="name" value="<?php echo $name; ?>">
                 `;
                 document.body.appendChild(form);
