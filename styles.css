@@ -1200,3 +1200,46 @@ body.laberinto-bg::before {
         padding: 8px 16px;
     }
 }
+
+
+
+#timer-box {
+    position: absolute;
+    top: 20px;
+    right: 250px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* === Barra de progressió del nombre de frases === */
+
+#progress-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #222;
+}
+
+#progress-container {
+    width: 80%;
+    height: 22px;
+    background: linear-gradient(to right, #cfcfcf, #e8e8e8);
+    border-radius: 14px;
+    margin: 8px auto 18px auto;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 4px rgba(0,0,0,0.25);
+    display: none;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 14px;
+    background: linear-gradient(to right, #61c152, #2e8b24);
+    transition: width 0.4s ease-in-out;
+}

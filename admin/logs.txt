@@ -16,3 +16,8 @@
 [2025-11-10 15:15:46] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase creada en nivel 'facil': 'predo predo' sin imagen (Usuario: admin)
 [2025-11-10 15:17:12] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil': 'predo predo' (Usuario: admin)
 [2025-11-10 15:30:21] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil': 'Cubone porta un crani com casc' (Usuario: admin)
+[2025-11-10 14:45:52] [127.0.0.1] [index.php] GAME_START: Usuario 'cachi' inició juego en dificultad 'facil'
+[2025-11-10 14:46:04] [127.0.0.1] [index.php] GAME_START: Usuario 'cachi' inició juego en dificultad 'facil'
+[2025-11-10 14:50:21] [127.0.0.1] [index.php] GAME_START: Usuario 'cachi' inició juego en dificultad 'facil'
+[2025-11-10 14:53:18] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'cachi' accedió al ranking
+[2025-11-10 14:53:46] [127.0.0.1] [index.php] GAME_START: Usuario 'cachi' inició juego en dificultad 'facil'

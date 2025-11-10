@@ -12,18 +12,20 @@ $difficulty = isset($_SESSION['difficulty']) ? $_SESSION['difficulty'] : "facil"
 
 $file = "frases.txt";
 $frasesSeleccionadas = [];
-$frase = "No hi ha frases disponibles per aquest nivell.";
 
+// Cargar las frases desde JSON
 if (file_exists($file)) {
     $json = file_get_contents($file);
     $frasesData = json_decode($json, true);
 
-    if (isset($frasesData[$difficulty]) && count($frasesData[$difficulty]) > 0) {
-        $frasesSeleccionadas = $frasesData[$difficulty];
+    if (isset($frasesData[$difficulty])) {
+        foreach ($frasesData[$difficulty] as $obj) {
+            $frasesSeleccionadas[] = $obj["texto"];  // ✅ Solo texto
+        }
     }
 }
 
-// Frases por dificultad
+// Cantidad de frases según dificultad
 $frasesPorNivel = ($difficulty === "facil") ? 3 :
                  (($difficulty === "normal") ? 4 : 5);
 
@@ -41,20 +43,21 @@ $bonus = ($difficulty === "facil") ? 2 :
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poketype - Joc</title>
+
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
 </head>
 <body>
 
-    <!-- ✅ Info usuari -->
+    <!-- ✅ Info usuario -->
     <div id="user-box">
         👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
         <a href="destroy_session.php">Tancar sessió</a>
     </div>
 
-    <!-- ⏱ Temporitzador total -->
+    <!-- ⏱ Temporizador total -->
     <div id="timer-box">⏱ <span id="timer">0.00</span>s</div>
 
-    <!-- Sons -->
+    <!-- Sonidos -->
     <audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
     <audio id="wrong-sound" src="media/mal.mp3" preload="auto"></audio>
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
@@ -64,6 +67,12 @@ $bonus = ($difficulty === "facil") ? 2 :
         <p>Dificultat seleccionada: <strong><?php echo ucfirst(htmlspecialchars($difficulty)); ?></strong></p>
 
         <div id="countdown">3</div>
+
+        <!-- ✅ Barra de progreso -->
+        <div id="progress-text"></div>
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
 
         <div id="game-area" style="display:none;">
             <p id="frase"></p>
@@ -79,6 +88,7 @@ const frases = <?php echo json_encode($frasesSeleccionadas); ?>;
 let fraseIndex = 0;
 let charIndex = 0;
 let estado = [];
+
 let puntosTotales = 0;
 let totalHits = 0;
 let totalTimeBonus = 0;
@@ -89,6 +99,9 @@ const wrongSound = document.getElementById("wrong-sound");
 const buttonSound = document.getElementById("button-sound");
 
 const fraseEl = document.getElementById("frase");
+const progressText = document.getElementById("progress-text");
+const progressBar = document.getElementById("progress-bar");
+const progressContainer = document.getElementById("progress-container");
 
 /* ------------------- TIMER GLOBAL ------------------- */
 let startTimeGlobal = null;
@@ -108,12 +121,12 @@ function stopTimerFrase() {
     return parseFloat(((Date.now() - startTimeFrase) / 1000).toFixed(2));
 }
 
-/* Normalizar caracteres con acento */
+/* Normalizar caracteres */
 function normalizar(char) {
     return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-/* Mostrar frase coloreada */
+/* Mostrar frase actual coloreada */
 function mostrarFrase() {
     let frase = frases[fraseIndex];
     let html = "";
@@ -141,6 +154,10 @@ function iniciarCuentaAtras() {
     countdownEl.innerText = 3;
     countdownEl.style.display = "block";
 
+    progressContainer.style.display = "block";
+    progressText.innerText = `Frase ${fraseIndex + 1} de ${frases.length}`;
+    progressBar.style.width = ((fraseIndex) / frases.length) * 100 + "%";
+
     let intervalo = setInterval(() => {
         countdownEl.innerText--;
         if (countdownEl.innerText == "0") {
@@ -148,8 +165,8 @@ function iniciarCuentaAtras() {
             countdownEl.style.display = "none";
             gameArea.style.display = "block";
 
-            if (startTimeGlobal === null) startGlobalTimer();  // ✅ START TIME TOTAL
-            startTimerFrase(); // ✅ START TIME FRASE
+            if (startTimeGlobal === null) startGlobalTimer(); // ✅ tiempo total
+            startTimerFrase(); // ✅ tiempo frase
 
             mostrarFrase();
             document.addEventListener("keydown", jugar);
@@ -172,17 +189,21 @@ function jugar(e) {
 
     if (charIndex === frase.length) {
         document.removeEventListener("keydown", jugar);
+
         fraseEl.innerHTML += "<br><br><strong>✅ Frase completada!</strong>";
 
         let aciertos = estado.filter(x => x).length;
         let tiempoFrase = stopTimerFrase();
-        let tiempoScore = Math.max(0, Math.floor(30 / tiempoFrase));
+
+        let tiempoScore = Math.max(0, Math.floor(30 / tiempoFrase)); // ⏱ bonus reducido
 
         totalHits += aciertos;
         totalTimeBonus += tiempoScore;
         puntosTotales += aciertos + tiempoScore;
 
         fraseIndex++;
+
+        progressBar.style.width = (fraseIndex / frases.length) * 100 + "%";
 
         if (fraseIndex === frases.length) {
             setTimeout(() => {
