@@ -67,3 +67,10 @@
 [2025-11-10 18:13:21] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
 [2025-11-10 18:13:35] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase creada en nivel 'normal': 'awkdlmkawmdamdadaaw' sin imagen (Usuario: admin)
 [2025-11-10 18:13:40] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'normal': 'awkdlmkawmdamdadaaw' (Usuario: admin)
+[2025-11-11 14:48:27] [127.0.0.1] [index.php] GAME_START: Usuario 'pkmp' inició juego en dificultad 'facil'
+[2025-11-11 14:48:59] [127.0.0.1] [index.php] GAME_START: Usuario 'pkmp' inició juego en dificultad 'dificil'
+[2025-11-11 14:49:07] [127.0.0.1] [index.php] GAME_START: Usuario 'pkmp' inició juego en dificultad 'normal'
+[2025-11-11 14:49:17] [127.0.0.1] [index.php] GAME_START: Usuario 'pkmp' inició juego en dificultad 'normal'
+[2025-11-11 14:49:49] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'pkmp' cerró sesión del juego
+[2025-11-11 15:00:14] [127.0.0.1] [index.php] GAME_START: Usuario 'koo' inició juego en dificultad 'facil'
+[2025-11-11 15:00:43] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'koo' accedió al ranking

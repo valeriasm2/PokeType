@@ -13,7 +13,6 @@
  * @param string $mensaje - Mensaje descriptivo de la acción
  */
 
-
 function escribirLog($accion, $archivo, $mensaje) {
     $fecha = date('Y-m-d H:i:s');
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
