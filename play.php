@@ -58,7 +58,8 @@ $bonus = ($difficulty === "facil") ? 2 :
         <link rel="stylesheet" href="styles.css?<?= time(); ?>">
     </head>
     <body>
-        <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
+    <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
+    <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
         <div id="user-box">
             👤 <strong><?= htmlspecialchars($name) ?></strong><br>

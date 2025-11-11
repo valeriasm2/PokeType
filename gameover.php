@@ -44,83 +44,87 @@ if (isset($_POST['save'])) {
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
-    <head>
-        <meta charset="UTF-8">
-        <title><?= $t['title'] ?? 'Game Over' ?></title>
-        <link rel="stylesheet" href="styles.css?<?= time(); ?>">
-    </head>
-    <body>
-        <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
-        <div id="user-box">
-            👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
-            <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sesión' ?></a>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title><?= $t['title'] ?? 'Game Over' ?></title>
+    <link rel="stylesheet" href="styles.css?<?= time(); ?>">
+</head>
 
-        <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
+<body>
+    <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
+    <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
-        <div class="gameover-container">
-            <h1><?= $t['title'] ?? 'Game Over!' ?></h1>
+    <div id="user-box">
+        👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
+        <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sesión' ?></a>
+    </div>
 
-            <h3><?= $t['results'] ?? 'Resultat de la partida:' ?></h3>
-            <p>✅ <?= $t['hits'] ?? 'Encerts' ?>: <strong><?= $hits ?></strong></p>
-            <p>🎯 <?= $t['difficultyBonus'] ?? 'Bonus per dificultat' ?>: <strong><?= $bonus ?></strong></p>
+    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
-            <?php if ($bonusGiratina > 0): ?>
-                <p>✨ <?= $t['bonusGiratina'] ?? 'Bonus Giratina' ?>: <strong>+<?= $bonusGiratina ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
-            <?php endif; ?>
+    <div class="gameover-container">
+        <h1><?= $t['title'] ?? 'Game Over!' ?></h1>
 
-            <p>⚡ <?= $t['timeBonus'] ?? 'Bonus per temps' ?>: <strong><?= $timeBonus ?></strong></p>
-            <p>⏱ <?= $t['totalTime'] ?? 'Temps total' ?>: <strong><?= $time ?>s</strong></p>
+        <h3><?= $t['results'] ?? 'Resultat de la partida:' ?></h3>
+        <p>✅ <?= $t['hits'] ?? 'Encerts' ?>: <strong><?= $hits ?></strong></p>
+        <p>🎯 <?= $t['difficultyBonus'] ?? 'Bonus per dificultat' ?>: <strong><?= $bonus ?></strong></p>
 
-            <hr>
+        <?php if ($bonusGiratina > 0): ?>
+            <p>✨ <?= $t['bonusGiratina'] ?? 'Bonus Giratina' ?>: <strong>+<?= $bonusGiratina ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
+        <?php endif; ?>
 
-            <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuació final' ?>: <?= $score ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
+        <p>⚡ <?= $t['timeBonus'] ?? 'Bonus per temps' ?>: <strong><?= $timeBonus ?></strong></p>
+        <p>⏱ <?= $t['totalTime'] ?? 'Temps total' ?>: <strong><?= $time ?>s</strong></p>
 
-            <form method="post" action="gameover.php" style="display:inline;">
-                <input type="hidden" name="name" value="<?= $name ?>">
-                <input type="hidden" name="score" value="<?= $score ?>">
-                <input type="hidden" name="time" value="<?= $time ?>">
-                <input type="hidden" name="hits" value="<?= $hits ?>">
-                <input type="hidden" name="bonus" value="<?= $bonus ?>">
-                <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
-                <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
-                <input type="hidden" name="save" value="1">
+        <hr>
 
-                <button type="submit" class="btn-link" id="save-btn">
-                    <span class="underline-letter"><?= substr($t['yes'] ?? 'S', 0, 1) ?></span><?= substr($t['yes'] ?? 'Si', 1) ?>
-                </button>
-            </form>
+        <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuació final' ?>: <?= $score ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
 
-            <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">
-                <span class="underline-letter"><?= substr($t['no'] ?? 'N', 0, 1) ?></span><?= substr($t['no'] ?? 'No', 1) ?>
+        <form method="post" action="gameover.php" style="display:inline;">
+            <input type="hidden" name="name" value="<?= $name ?>">
+            <input type="hidden" name="score" value="<?= $score ?>">
+            <input type="hidden" name="time" value="<?= $time ?>">
+            <input type="hidden" name="hits" value="<?= $hits ?>">
+            <input type="hidden" name="bonus" value="<?= $bonus ?>">
+            <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
+            <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+            <input type="hidden" name="save" value="1">
+
+            <button type="submit" class="btn-link" id="save-btn">
+                <span class="underline-letter"><?= substr($t['yes'] ?? 'S', 0, 1) ?></span><?= substr($t['yes'] ?? 'Si', 1) ?>
             </button>
-        </div>
+        </form>
 
-        <script src="utils/musicGameover.js"></script>
-        <script>
-            const buttonSound = document.getElementById("button-sound");
+        <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">
+            <span class="underline-letter"><?= substr($t['no'] ?? 'N', 0, 1) ?></span><?= substr($t['no'] ?? 'No', 1) ?>
+        </button>
+    </div>
 
-            function playSound(callback) {
-                buttonSound.currentTime = 0;
-                buttonSound.play();
-                setTimeout(callback, 800);
-            }
+    <script src="utils/musicGameover.js"></script>
+    <script>
+        const buttonSound = document.getElementById("button-sound");
 
-            document.getElementById("save-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                playSound(() => e.target.closest("form").submit());
-            });
+        function playSound(callback) {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+            setTimeout(callback, 800);
+        }
 
-            function goToIndex() {
-                playSound(() => window.location.href = "index.php");
-            }
+        document.getElementById("save-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            playSound(() => e.target.closest("form").submit());
+        });
 
-            document.addEventListener("keydown", (e) => {
-                const key = e.key.toLowerCase();
-                if (key === (<?= json_encode(substr($t['yes'] ?? 'S', 0, 1)) ?>).toLowerCase()) document.getElementById("save-btn").click();
-                if (key === (<?= json_encode(substr($t['no'] ?? 'N', 0, 1)) ?>).toLowerCase()) goToIndex();
-            });
-        </script>
-    </body>
+        function goToIndex() {
+            playSound(() => window.location.href = "index.php");
+        }
+
+        document.addEventListener("keydown", (e) => {
+            const key = e.key.toLowerCase();
+            if (key === (<?= json_encode(substr($t['yes'] ?? 'S', 0, 1)) ?>).toLowerCase()) document.getElementById("save-btn").click();
+            if (key === (<?= json_encode(substr($t['no'] ?? 'N', 0, 1)) ?>).toLowerCase()) goToIndex();
+        });
+    </script>
+</body>
+
 </html>

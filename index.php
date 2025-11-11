@@ -61,9 +61,6 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
     </head>
 
     <body>
-        <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
-        <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
-
         <!-- ✅ Recuadro usuario -->
         <?php if (isset($_SESSION['name'])): ?>
             <div id="user-box">
@@ -87,6 +84,7 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
             <h1><?= $texts['welcome'] ?? 'Poketype' ?></h1>
             <p><?= $texts['description'] ?? '' ?></p>
             <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Pokémon GIF" width="300">
+
 
             <!-- ✅ Formulario inicio del juego -->
             <form action="index.php" method="post">
