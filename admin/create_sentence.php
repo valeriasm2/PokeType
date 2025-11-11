@@ -85,6 +85,7 @@ function underlineFirstLetter($text)
 </head>
 
 <body class="admin-page-index">
+    <img src="/images/pipluuu2.png" class="piplu-bottom" alt="Gengar estático abajo">
     <div class="admin-container-index">
 
         <p>

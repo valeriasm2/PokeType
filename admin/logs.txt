@@ -138,3 +138,5 @@
 [2025-11-11 17:31:27] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
 [2025-11-11 17:52:45] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
 [2025-11-11 17:53:09] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-11 18:20:20] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-11 18:29:59] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)

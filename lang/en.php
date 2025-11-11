@@ -114,17 +114,22 @@ return [
         'no' => 'No',
     ],
 
-    'error403' => [
-        'title' => '403 – Access Denied',
-        'message' => 'You do not have permission to access this page.',
-        'back' => 'Return to home',
+    403 => [
+        'code' => '403',
+        'title' => 'Access Forbidden',
+        'msg1' => "You can't visit this page directly.",
+        'msg2' => 'A guardian Pokémon blocks the way to protect the game.',
+        'btn' => 'Return to Home'
     ],
-
-    'error404' => [
-        'title' => '404 – Page Not Found',
-        'message' => 'The page you are looking for does not exist.',
-        'back' => 'Return to home',
-    ],
+    
+    404 => [
+        'code' => '404',
+        'title' => 'Page Not Found',
+        'msg1' => "The path you are looking for does not exist. It seems a mischievous Pokémon has taken it away.",
+        'msg2' => '',
+        'btn' => 'Return to Home',
+        'btn2' => 'View Ranking'
+    ],    
 
     'hotkeys' => [
         'play' => 'p',

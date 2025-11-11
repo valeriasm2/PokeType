@@ -114,16 +114,21 @@ return [
         'no' => 'No',
     ],
 
-    'error403' => [
-        'title' => '403 – Accés Denegat',
-        'message' => 'No tens permís per accedir a aquesta pàgina.',
-        'back' => 'Tornar a l\'inici',
+    403 => [
+        'code' => '403',
+        'title' => 'Accés Prohibit',
+        'msg1' => 'No pots visitar directament aquesta pàgina.',
+        'msg2' => 'Un Pokémon guardià bloqueja el pas per protegir el joc.',
+        'btn' => 'Tornar a l\'inici'
     ],
-
-    'error404' => [
-        'title' => '404 – Pàgina no trobada',
-        'message' => 'La pàgina que busques no existeix.',
-        'back' => 'Tornar a l\'inici',
+    
+    404 => [
+        'code' => '404',
+        'title' => 'Pàgina no trobada',
+        'msg1' => 'La ruta que busques no existeix. Sembla que un Pokémon trapella se la va emportar.',
+        'msg2' => '',
+        'btn' => 'Tornar a l\'inici',
+        'btn2' => 'Veure rànquing'
     ],
 
     'hotkeys' => [

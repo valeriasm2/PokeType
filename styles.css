@@ -26,7 +26,7 @@ body {
 }
 
 /* ============================================================
-   🕹️ GENGAR FLOTANTE
+                    🕹️ GENGAR
 ============================================================ */
 .gengar-float {
     position: fixed;
@@ -57,14 +57,6 @@ body {
     pointer-events: none;
     z-index: 1;
 }
-
-
-
-
-
-
-
-
 
 /*
 body {
@@ -1006,6 +998,16 @@ body.laberinto-bg::before {
 .admin-container-index input[type="file"]:hover {
     border-color: #F7C948;
     background-color: #FFF9E6;
+}
+
+.piplu-bottom {
+    position: fixed;
+    bottom: 10px;
+    left: 1%;
+    width: 230px;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 1;
 }
 
 

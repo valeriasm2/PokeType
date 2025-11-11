@@ -132,6 +132,8 @@ function renderButton($text, $id, $link = '#')
 </head>
 
 <body class="admin-page-index">
+    <img src="/images/pipluuu2.png" class="piplu-bottom" alt="Gengar estático abajo">
+
     <!-- Selector de idioma -->
     <form method="post" class="lang-selector-admin" action="login.php">
         <label for="lang">🌐</label>
