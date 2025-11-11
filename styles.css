@@ -22,7 +22,8 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    background: linear-gradient(135deg, #7a1fbf, #b463ff, #c18aff);
+    background-image: url(/PokeType/images/fondoNew.jpg);
+    /*background: linear-gradient(135deg, #7a1fbf, #b463ff, #c18aff);*/
 }
 
 /* ============================================================
