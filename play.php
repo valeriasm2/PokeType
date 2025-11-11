@@ -1,5 +1,8 @@
 <?php
 session_start();
+$bonusGiratina = isset($_GET['bonusGiratina']) ? intval($_GET['bonusGiratina']) : 0;
+$_SESSION['bonusGiratina'] = $bonusGiratina;
+
 
 // Si no hay sesión, volver al index
 if (!isset($_SESSION['name'])) {
@@ -229,6 +232,7 @@ function jugar(e) {
                     <input type="hidden" name="time" value="${document.getElementById("timer").textContent}">
                     <input type="hidden" name="hits" value="${totalHits}">
                     <input type="hidden" name="timeBonus" value="${totalTimeBonus}">
+                    <input type="hidden" name="bonusGiratina" value="<?php echo $_SESSION['bonusGiratina'] ?? 0; ?>">
                     <input type="hidden" name="bonus" value="${bonus}">
                     <input type="hidden" name="name" value="<?php echo $name; ?>">
                 `;

@@ -1063,6 +1063,48 @@ body.laberinto-bg::before {
     font-weight: bold;
 }
 
+
+
+/* Combo popup play*/
+#combo-popup {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+/* small label and multiplier */
+#combo-popup .label { font-size: 12px; opacity: 0.85; display:block; }
+#combo-popup .mult { font-size: 22px; }
+
+/* Combo timer (reverse progress) */
+#combo-timer {
+  width: 120px;
+  height: 8px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+#combo-timer-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transition: width 0.1s linear;
+  background: rgba(255,255,255,0.85);
+}
+
+
 /* ============================================================
 📱 MEDIA QUERIES (Responsividad)
 =============================================================== */

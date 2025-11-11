@@ -74,3 +74,30 @@
 [2025-11-11 14:49:49] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'pkmp' cerró sesión del juego
 [2025-11-11 15:00:14] [127.0.0.1] [index.php] GAME_START: Usuario 'koo' inició juego en dificultad 'facil'
 [2025-11-11 15:00:43] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'koo' accedió al ranking
+[2025-11-11 15:29:22] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'dificil'
+[2025-11-11 15:30:43] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'normal'
+[2025-11-11 15:30:50] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'facil'
+[2025-11-11 15:31:06] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'facil'
+[2025-11-11 15:32:18] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'normal'
+[2025-11-11 15:34:16] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hdwu' accedió al ranking
+[2025-11-11 15:34:42] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'normal'
+[2025-11-11 15:35:59] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'dificil'
+[2025-11-11 15:38:18] [127.0.0.1] [index.php] GAME_START: Usuario 'hdwu' inició juego en dificultad 'dificil'
+[2025-11-11 15:40:13] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hdwu' accedió al ranking
+[2025-11-11 15:48:41] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'hdwu' cerró sesión del juego
+[2025-11-11 15:48:46] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'normal'
+[2025-11-11 15:50:08] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'normal'
+[2025-11-11 15:56:01] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'dificil'
+[2025-11-11 16:03:14] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'normal'
+[2025-11-11 16:10:47] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'normal'
+[2025-11-11 16:10:58] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'facil'
+[2025-11-11 16:11:55] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'facil'
+[2025-11-11 16:12:40] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'Pedrito' accedió al ranking
+[2025-11-11 16:12:47] [127.0.0.1] [index.php] GAME_START: Usuario 'Pedrito' inició juego en dificultad 'facil'
+[2025-11-11 16:16:14] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Pedrito' cerró sesión del juego
+[2025-11-11 16:16:19] [127.0.0.1] [index.php] GAME_START: Usuario 'pko' inició juego en dificultad 'normal'
+[2025-11-11 16:21:01] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'pko' cerró sesión del juego
+[2025-11-11 16:21:09] [127.0.0.1] [index.php] GAME_START: Usuario 'Gepedro' inició juego en dificultad 'facil'
+[2025-11-11 16:33:51] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Gepedro' cerró sesión del juego
+[2025-11-11 16:34:08] [127.0.0.1] [index.php] GAME_START: Usuario 'Alicante' inició juego en dificultad 'normal'
+[2025-11-11 16:36:25] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'Alicante' accedió al ranking
