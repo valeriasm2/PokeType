@@ -64,3 +64,6 @@
 [2025-11-10 18:11:12] [127.0.0.1] [index.php] GAME_START: Usuario 'lklklk' inició juego en dificultad 'normal'
 [2025-11-10 18:12:05] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'lklklk' accedió al ranking
 [2025-11-10 18:12:12] [127.0.0.1] [index.php] GAME_START: Usuario 'lklklk' inició juego en dificultad 'dificil'
+[2025-11-10 18:13:21] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-10 18:13:35] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase creada en nivel 'normal': 'awkdlmkawmdamdadaaw' sin imagen (Usuario: admin)
+[2025-11-10 18:13:40] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'normal': 'awkdlmkawmdamdadaaw' (Usuario: admin)
