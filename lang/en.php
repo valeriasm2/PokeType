@@ -1,7 +1,6 @@
 <?php
 return [
 
-    /* ------------ INDEX.PHP ------------ */
     'index' => [
         'welcome' => 'Welcome to Poketype!',
         'description' => 'A game to learn Pokémon types and improve your typing speed.',
@@ -15,7 +14,6 @@ return [
         'logout' => 'Log out',
     ],
 
-    /* ------------ PLAY.PHP ------------ */
     'play' => [
         'difficulty_label' => 'Selected difficulty',
         'difficulty_facil' => 'Easy',
@@ -30,7 +28,6 @@ return [
         'easter_egg' => '👀'
     ],
 
-    /* ------------ GAMEOVER.PHP ------------ */
     'gameover' => [
         'title' => 'Game Over',
         'results' => 'Game results:',
@@ -47,7 +44,6 @@ return [
         'no' => 'No',
     ],
 
-    /* ------------ RANKING.PHP ------------ */
     'ranking' => [
         'title' => 'Players Ranking',
         'name' => 'Name',
@@ -57,7 +53,6 @@ return [
         'back' => 'ESCAPE',
     ],
 
-    /* ------------ GIRATINA.PHP ------------ */
     'giratina' => [
         'title' => 'Catch Giratina!',
         'instruction' => 'Click on Giratina before it escapes!',
@@ -66,16 +61,14 @@ return [
         'bonus' => 'Giratina Bonus',
     ],
 
-    /* ------------ ADMIN/LOGIN.PHP ------------ */
     'admin_login' => [
         'title' => 'Admin Access',
-        'username' => 'Username:',
-        'password' => 'Password:',
-        'login' => 'Login',
-        'error' => 'Incorrect credentials',
+        'user' => 'Username:',
+        'pass' => 'Password:',
+        'enter' => 'Login',
+        'error' => 'Incorrect credentials'
     ],
 
-    /* ------------ ADMIN/INDEX.PHP ------------ */
     'admin_index' => [
         'title' => "Administration Panel",
         'create' => 'Create sentence',
@@ -85,8 +78,11 @@ return [
         'list_sentences' => 'List sentences',
         'hide_sentences' => 'Hide sentences',
         'difficulty' => 'Show by difficulty level:',
-        'paginator'      => 'Next',
+        'paginator' => 'Next',
+        'levels' => ['facil'=>'Easy','normal'=>'Normal','dificil'=>'Hard'],
+        'select_level' => 'Select a level',
     ],
+
     'messages' => [
         'frase_eliminada' => 'Sentence deleted successfully.',
         'error_datos' => 'Error: incomplete data to delete the sentence.',
@@ -97,25 +93,27 @@ return [
         'error_guardado' => 'Error: could not save the file.',
     ],
 
-    /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */
     'admin_create' => [
-        'title' => 'Create New Sentence',
-        'text' => 'Sentence text:',
-        'image' => 'Image name:',
-        'difficulty' => 'Difficulty:',
-        'save' => 'Save',
-        'back' => 'Back',
+        'title'        => 'Create New Sentence',
+        'text'         => 'Sentence text:',
+        'image'        => 'Image name:',
+        'difficulty'   => 'Difficulty:',
+        'save'         => 'Save',
+        'back'         => 'Back',
+        'select_level' => 'Select a level',
+        'success'      => 'Sentence added successfully.',
+        'success_lang' => 'Sentence added successfully in language: {lang}',
+        'info_lang'    => 'The sentence will be saved in the list for the selected language:',
+        'select_file'  => 'No file selected',
     ],
 
-    /* ------------ ADMIN/DELETE_SENTENCE.PHP ------------ */
     'admin_delete' => [
-        'title' => 'Delete Sentence',
+        'title' => 'X',
         'confirm' => 'Are you sure you want to delete this sentence?',
         'yes' => 'Yes',
         'no' => 'No',
     ],
 
-    /* ------------ ERRORS/403 y 404 ------------ */
     'error403' => [
         'title' => '403 – Access Denied',
         'message' => 'You do not have permission to access this page.',
@@ -128,11 +126,12 @@ return [
         'back' => 'Return to home',
     ],
 
-    /* ------------ HOTKEYS ------------ */
     'hotkeys' => [
         'play' => 'p',
         'save' => 'y',
         'no' => 'n',
         'back' => 'esc'
-    ]
+    ],
+
+    'lang_names' => ['ca'=>'Català','es'=>'Español','en'=>'English'],
 ];

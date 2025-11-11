@@ -61,6 +61,8 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
     </head>
 
     <body>
+        <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
+        <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
         <!-- ✅ Recuadro usuario -->
         <?php if (isset($_SESSION['name'])): ?>
@@ -73,9 +75,7 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
         <!-- ✅ Audio botones -->
         <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
 
-        <!-- ✅ Selector de idioma (arriba izquierda) -->
-        <form action="index.php" method="post" id="lang-selector">
-            <label for="lang">🌐</label>
+        <form action="index.php" method="post" id="lang-selector-form">
             <select name="lang" id="lang" onchange="this.form.submit()">
                 <option value="ca" <?= ($lang === 'ca') ? 'selected' : '' ?>>Català</option>
                 <option value="es" <?= ($lang === 'es') ? 'selected' : '' ?>>Español</option>

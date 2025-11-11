@@ -1,168 +1,158 @@
 <?php
 session_name("admin_session");
 session_start();
-
-// Incluir sistema de logs
 require_once 'logger.php';
 
+// Verificar login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit;
 }
+
+$defaultLang = $_SESSION['lang'] ?? 'ca';
+$lang_file = "../lang/$defaultLang.php";
+if (!file_exists($lang_file)) $lang_file = "../lang/ca.php";
+$lang_data = include($lang_file);
+
 $mensaje = "";
 $error = false;
+$idiomas = $lang_data['lang_names'] ?? ['ca' => 'Català', 'es' => 'Español', 'en' => 'English'];
+$archivos_frases = ['ca' => '../frases_ca.txt', 'es' => '../frases_es.txt', 'en' => '../frases_en.txt'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //me cargo la frase resaltada anterior para no duplicar y generar una nueva sin confusión
-    unset($_SESSION['ultima_frase']);
-    unset($_SESSION['ultim_nivell']);
+    $lang = $_POST['lang'] ?? $defaultLang;
+    $archivo = $archivos_frases[$lang] ?? '../frases_ca.txt';
+    unset($_SESSION['ultima_frase'], $_SESSION['ultim_nivell']);
     $nivell = $_POST['nivell'] ?? '';
-    $frase = trim($_POST['frase'] ?? '');
-    
+    $frase  = trim($_POST['frase'] ?? '');
+
     if ($nivell === '' || $frase === '') {
-        $mensaje = "Error: has de seleccionar un nivell i escriure una frase.";
+        $mensaje = $lang_data['messages']['error_datos'] ?? "Error: incomplete data";
         $error = true;
     } else {
-        $archivo = '../frases.txt';
-
-        if (!file_exists($archivo)) {
-            $frases = [
-                'facil' => [],
-                'normal' => [],
-                'dificil' => []
-            ];
-        } else {
-            $contenido = file_get_contents($archivo);
-            $frases = json_decode($contenido, true);
-
-            if ($frases === null) {
-                $mensaje = "Error: fitxer de frases mal format.";
-                $error = true;
-            }
+        $frases = file_exists($archivo) ? json_decode(file_get_contents($archivo), true) : ['facil' => [], 'normal' => [], 'dificil' => []];
+        if ($frases === null) {
+            $mensaje = $lang_data['messages']['error_json'] ?? "Error: malformed file";
+            $error = true;
         }
+
         if (!$error) {
-            if (!isset($frases[$nivell])) {
-                $frases[$nivell] = [];
-            }
-            //========MANEJO DE IMAGENES SUBIDAS=========
-            $nombreImagen = null; // Por defecto sin imagen
-    
+            if (!isset($frases[$nivell])) $frases[$nivell] = [];
+            $nombreImagen = null;
             if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-                
-                $nombreImagen = $_FILES['imagen']['name'];
+                $nombreImagen = basename($_FILES['imagen']['name']);
                 $rutaDestino = '../images/' . $nombreImagen;
-                
                 if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
-                    $mensaje = "Error: no s'ha pogut guardar la imatge.";
+                    $mensaje = $lang_data['messages']['error_guardado'] ?? "Error: could not save the image.";
                     $error = true;
                     $nombreImagen = null;
                 }
-               
             }
-            // Crear objeto frase con texto e imagen 
-            $nuevaFrase = [
-                'texto' => $frase,
-                'imagen' => $nombreImagen 
-            ];
-            
-            $frases[$nivell][] = $nuevaFrase;
 
-            $json_nuevo = json_encode($frases, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            if (file_put_contents($archivo, $json_nuevo) === false) {
-                $mensaje = "Error: no s'ha pogut guardar el fitxer.";
-                $error = true;
-            } else {
-                $mensaje = "Frase afegida correctament.";
-                // Log creación exitosa de frase
-                $imagenInfo = $nombreImagen ? " con imagen: $nombreImagen" : " sin imagen";
-                logAdmin("CREATE_SENTENCE", "create_sentence.php", "Nueva frase creada en nivel '$nivell': '$frase'$imagenInfo");
-                //me guardo la última frase y nivel para resaltarla al volver al listado!!!
-                $_SESSION['ultima_frase'] = $frase;
-                $_SESSION['ultim_nivell'] = $nivell;
-                
+            if (!$error) {
+                $nuevaFrase = ['texto' => $frase, 'imagen' => $nombreImagen];
+                $frases[$nivell][] = $nuevaFrase;
+                if (file_put_contents($archivo, json_encode($frases, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) === false) {
+                    $mensaje = $lang_data['messages']['error_guardado'] ?? "Error: could not save the file.";
+                    $error = true;
+                } else {
+                    $mensaje = str_replace('{lang}', $idiomas[$lang], $lang_data['admin_create']['success_lang'] ?? "Sentence added successfully in language: " . $idiomas[$lang]);
+                    $_SESSION['ultima_frase'] = $frase;
+                    $_SESSION['ultim_nivell'] = $nivell;
+                    logAdmin("CREATE_SENTENCE", "create_sentence.php", "New sentence in '$nivell', language '$lang': '$frase'");
+                }
             }
         }
     }
 }
+
+function underlineFirstLetter($text)
+{
+    if (empty($text)) return '';
+    $first = substr($text, 0, 1);
+    $rest  = substr($text, 1);
+    return "<span class='underline-letter'>{$first}</span>{$rest}";
+}
 ?>
+
 <!DOCTYPE html>
-<html lang="ca">
-    <head>
-        <meta charset="UTF-8">
-        <title>Afegir Frase</title>
-        <link rel="stylesheet" href="../styles.css?<?php echo time(); ?>">
-    </head>
-    <body class="admin-page-index">
-        <div class="admin-container-index">
-            <p> Benvingut, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong> | 
-            <a href="logout.php" class="admin-link-btn logout" id="logout-link">
-                <span class="underline-letter">L</span>ogout
-            </a>
-            |
+<html lang="<?= $defaultLang ?>">
+
+<head>
+    <meta charset="UTF-8">
+    <title><?= $lang_data['admin_create']['title'] ?? "Create New Sentence" ?></title>
+    <link rel="stylesheet" href="../styles.css?<?= time() ?>">
+</head>
+
+<body class="admin-page-index">
+    <div class="admin-container-index">
+
+        <p>
+            <?= sprintf($lang_data['index']['welcome'] ?? "Welcome, %s", htmlspecialchars($_SESSION['admin_user'])) ?> |
+
+            <a href="logout.php" class="admin-link-btn logout">
+                <?= underlineFirstLetter($lang_data['index']['logout'] ?? "Logout") ?>
+            </a> |
+
             <?php
-            // Enlace al panel con el nivel correcto si existe, te redirecciona al listado del último nivel agregado
             $panel_url = 'index.php';
             if (isset($_SESSION['ultim_nivell'])) {
                 $panel_url .= '?action=llistar&nivell=' . urlencode($_SESSION['ultim_nivell']);
             }
             ?>
-            <a href="<?= $panel_url ?>" class="admin-link-btn" id="panel-link">
-                <span class="underline-letter">T</span>ornar al panell
+            <a href="<?= $panel_url ?>" class="admin-link-btn">
+                <?= underlineFirstLetter($lang_data['admin_create']['back'] ?? "Back to panel") ?>
             </a>
+        </p>
+
+        <h1><?= $lang_data['admin_create']['title'] ?? "Create New Sentence" ?></h1>
+
+        <form action="create_sentence.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="lang" value="<?= $defaultLang ?>">
+
+            <p class="info-idioma">
+                <?= $lang_data['admin_create']['info_lang'] ?? "The sentence will be saved in the list for the selected language:" ?>
+                <strong><?= $idiomas[$defaultLang] ?></strong>
             </p>
 
-            <h1>Afegir una nova frase</h1>
-            <form action="create_sentence.php" method="POST" enctype="multipart/form-data" id="create-form">
-                <label for="nivell">Nivell de dificultat:</label>
-                <select name="nivell" id="nivell" required>
-                    <option value="">Selecciona un nivell</option>
-                    <option value="facil">Fàcil</option>
-                    <option value="normal">Normal</option>
-                    <option value="dificil">Difícil</option>
-                </select>
+            <label for="nivell"><?= $lang_data['admin_create']['difficulty'] ?? "Difficulty:" ?></label>
+            <select name="nivell" id="nivell">
+                <option value=""><?= $lang_data['admin_create']['select_level'] ?? "Select a level" ?></option>
+                <option value="facil"><?= $lang_data['admin_index']['levels']['facil'] ?? "Easy" ?></option>
+                <option value="normal"><?= $lang_data['admin_index']['levels']['normal'] ?? "Normal" ?></option>
+                <option value="dificil"><?= $lang_data['admin_index']['levels']['dificil'] ?? "Hard" ?></option>
+            </select>
 
-                <label for="frase">Frase:</label>
-                <textarea name="frase" id="frase" rows="4" required></textarea>
-                
-                <label for="imagen">Imatge (opcional):</label>
+            <label for="frase"><?= $lang_data['admin_create']['text'] ?? "Sentence text:" ?></label>
+            <textarea name="frase" id="frase" rows="4"></textarea>
+
+            <label><?= $lang_data['admin_create']['image'] ?? "Image name:" ?></label>
+            <div class="custom-file">
+                <span id="custom-file-text" class="custom-file-text"><?= $lang_data['admin_create']['select_file'] ?? "No file selected" ?></span>
                 <input type="file" name="imagen" id="imagen" accept="image/*">
-                
+            </div>
 
-                <button type="submit" id="add-btn">
-                    <span class="underline-letter">A</span>fegir frase
-                </button>
+            <br><br>
+            <button type="submit"><?= $lang_data['admin_create']['save'] ?? "Save" ?></button>
 
-                <?php if ($mensaje): ?>
-                    <div class="admin-message <?php echo $error ? 'error' : 'success'; ?>">
-                        <?php echo $error ? '❌' : '✅'; ?> <?php echo htmlspecialchars($mensaje); ?>
-                    </div>
-                <?php endif; ?>
-            </form>
-        </div>
-    </body>
+            <?php if ($mensaje): ?>
+                <div class="<?= $error ? 'error' : 'success' ?>">
+                    <?= htmlspecialchars($mensaje) ?>
+                </div>
+            <?php endif; ?>
+        </form>
+
+    </div>
+
     <script>
-        
-        //esto es pa que no joda los atajos cuando el usuario está escribiendo
-        
-        document.addEventListener("keydown", function(event){
-            if (document.activeElement.tagName === 'INPUT' || 
-                document.activeElement.tagName === 'TEXTAREA' ||
-                document.activeElement.tagName === 'SELECT' ||
-                document.activeElement.isContentEditable ) {
-                return; 
-            }
-            const teclita = event.key.toLowerCase();
-            if (teclita === "l") {
-                window.location.href = "logout.php";
-            }
-            if (teclita === "t") {
-                window.location.href = "index.php";
-                document.getElementById("panel-link").click();
-            }
-            if (teclita === "a") {
-                document.getElementById("add-btn").click();
-            }
-        })
-
+        const inputFile = document.getElementById('imagen');
+        const fileText = document.getElementById('custom-file-text');
+        inputFile.addEventListener('change', function() {
+            fileText.textContent = this.files.length ?
+                this.files[0].name :
+                "<?= addslashes($lang_data['admin_create']['select_file'] ?? "No file selected") ?>";
+        });
     </script>
+</body>
+
 </html>

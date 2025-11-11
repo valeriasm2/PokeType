@@ -46,6 +46,7 @@ if (file_exists($rankingFile)) {
 </head>
 
 <body>
+    <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
     <div id="user-box">
         👤 <strong><?= htmlspecialchars($name) ?></strong><br>

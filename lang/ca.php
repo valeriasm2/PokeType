@@ -1,7 +1,6 @@
 <?php
 return [
 
-    /* ------------ INDEX.PHP ------------ */
     'index' => [
         'welcome' => 'Benvingut a Poketype!',
         'description' => 'Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d\'escriptura.',
@@ -15,14 +14,12 @@ return [
         'logout' => 'Tancar sessió',
     ],
 
-    /* ------------ PLAY.PHP ------------ */
     'play' => [
-        // Etiqueta de dificultad
         'difficulty_label' => 'Dificultat seleccionada',
         'difficulty_facil' => 'Fàcil',
         'difficulty_normal' => 'Normal',
         'difficulty_dificil' => 'Difícil',
-        'timer' => '⏱', 
+        'timer' => '⏱',
         'countdown_start' => 'Començant...',
         'progress' => 'Frase %d de %d',
         'phraseCompleted' => '✅ Frase completada!',
@@ -31,7 +28,6 @@ return [
         'easter_egg' => '👀'
     ],
 
-    /* ------------ GAMEOVER.PHP ------------ */
     'gameover' => [
         'title' => 'Game Over',
         'results' => 'Resultat de la partida:',
@@ -48,16 +44,6 @@ return [
         'no' => 'No',
     ],
 
-    /* ------------ GIRATINA.PHP ------------ */
-    'giratina' => [
-        'title' => 'Atrapa en Giratina!',
-        'instruction' => 'Fes clic sobre en Giratina abans que fugi!',
-        'caught' => 'Has atrapat en Giratina! +100 punts 🎉',
-        'redirecting' => 'Redirigint al joc...',
-        'bonus' => 'Bonificació Giratina',
-    ],
-    
-    /* ------------ RANKING.PHP ------------ */
     'ranking' => [
         'title' => 'Rànquing de Jugadors',
         'name' => 'Nom',
@@ -67,59 +53,69 @@ return [
         'back' => 'ESCAPE',
     ],
 
-    /* ------------ ADMIN/LOGIN.PHP ------------ */
-    'admin_login' => [
-        'title' => 'Accés Administratiu',
-        'username' => 'Usuari:',
-        'password' => 'Contrasenya:',
-        'login' => 'Entrar',
-        'error' => 'Credencials incorrectes',
+    'giratina' => [
+        'title' => 'Atrapa en Giratina!',
+        'instruction' => 'Fes clic sobre en Giratina abans que fugi!',
+        'caught' => 'Has atrapat en Giratina! +100 punts 🎉',
+        'redirecting' => 'Redirigint al joc...',
+        'bonus' => 'Bonificació Giratina',
     ],
 
-    /* ------------ ADMIN/INDEX.PHP ------------ */
+    'admin_login' => [
+        'title' => 'Accés Administrador',
+        'user' => 'Usuari:',
+        'pass' => 'Contrasenya:',
+        'enter' => 'Entrar',
+        'error' => 'Credencials incorrectes'
+    ],
+
     'admin_index' => [
-        'title'          => "Panell d'Administrador",
-        'create'         => 'Afegir frase',
-        'edit'           => 'Editar frase',
-        'delete'         => 'Esborrar frase',
-        'logout'         => 'Logout',
+        'title' => "Panell d'Administració",
+        'create' => 'Crear frase',
+        'edit' => 'Editar frase',
+        'delete' => 'Eliminar frase',
+        'logout' => 'Tancar sessió',
         'list_sentences' => 'Llistar frases',
         'hide_sentences' => 'Ocultar frases',
-        'difficulty'     => 'Mostra segons nivell de dificultat:',
-        'paginator'      => 'Següent',
+        'difficulty' => 'Mostra segons nivell de dificultat:',
+        'paginator' => 'Següent',
+        'levels' => ['facil'=>'Fàcil','normal'=>'Normal','dificil'=>'Difícil'],
+        'select_level' => 'Selecciona un nivell',
     ],
 
     'messages' => [
-        'frase_eliminada'              => 'Frase eliminada correctament.',
-        'error_datos'                  => 'Error: dades incompletes per eliminar la frase.',
-        'error_archivo_no_encontrado'  => 'Error: fitxer de frases no trobat.',
-        'error_permiso_escritura'      => "Error: sense permís d'escriptura al fitxer.",
-        'error_json'                   => "Error: fitxer de frases mal format.",
-        'error_frase_no_encontrada'    => "Error: frase no trobada.",
-        'error_guardado'               => "Error: no s'ha pogut guardar el fitxer.",
+        'frase_eliminada' => 'Frase eliminada correctament.',
+        'error_datos' => 'Error: dades incompletes per eliminar la frase.',
+        'error_archivo_no_encontrado' => 'Error: fitxer de frases no trobat.',
+        'error_permiso_escritura' => 'Error: sense permís d\'escriptura al fitxer.',
+        'error_json' => 'Error: fitxer de frases mal format.',
+        'error_frase_no_encontrada' => 'Error: frase no trobada.',
+        'error_guardado' => 'Error: no s\'ha pogut guardar el fitxer.',
     ],
 
-    /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */
     'admin_create' => [
-        'title' => 'Crear Nova Frase',
-        'text' => 'Text de la frase:',
-        'image' => 'Nom de la imatge:',
-        'difficulty' => 'Dificultat:',
-        'save' => 'Desar',
-        'back' => 'Tornar',
+        'title'        => 'Crear Nova Frase',
+        'text'         => 'Text de la frase:',
+        'image'        => 'Nom de la imatge:',
+        'difficulty'   => 'Dificultat:',
+        'save'         => 'Desar',
+        'back'         => 'Tornar',
+        'select_level' => 'Selecciona un nivell',
+        'success'      => 'Frase afegida correctament.',
+        'success_lang' => 'Frase afegida correctament a l\'idioma: {lang}',
+        'info_lang'    => 'La frase es guardarà a la llista de l\'idioma seleccionat:',
+        'select_file'  => 'No s\'ha triat cap fitxer',
     ],
 
-    /* ------------ ADMIN/DELETE_SENTENCE.PHP ------------ */
     'admin_delete' => [
-        'title' => 'Eliminar Frase',
+        'title' => 'X',
         'confirm' => 'Segur que vols eliminar aquesta frase?',
         'yes' => 'Sí',
         'no' => 'No',
     ],
 
-    /* ------------ ERRORS/403 y 404 ------------ */
     'error403' => [
-        'title' => '403 – Accés denegat',
+        'title' => '403 – Accés Denegat',
         'message' => 'No tens permís per accedir a aquesta pàgina.',
         'back' => 'Tornar a l\'inici',
     ],
@@ -130,11 +126,12 @@ return [
         'back' => 'Tornar a l\'inici',
     ],
 
-    /* ------------ HOTKEYS ------------ */
     'hotkeys' => [
-        'play' => 'j',
-        'save' => 'd',
+        'play' => 'p',
+        'save' => 'y',
         'no' => 'n',
         'back' => 'esc'
-    ]
+    ],
+
+    'lang_names' => ['ca'=>'Català','es'=>'Español','en'=>'English'],
 ];

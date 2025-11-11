@@ -50,6 +50,8 @@ if (isset($_POST['save'])) {
         <link rel="stylesheet" href="styles.css?<?= time(); ?>">
     </head>
     <body>
+        <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
+
         <div id="user-box">
             👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
             <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sesión' ?></a>

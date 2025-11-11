@@ -101,3 +101,40 @@
 [2025-11-10 21:37:46] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'dificil'
 [2025-11-10 21:37:58] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'dificil'
 [2025-11-10 21:50:25] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 14:08:04] [127.0.0.1] [index.php] GAME_START: Usuario 'val' inició juego en dificultad 'facil'
+[2025-11-11 14:08:35] [127.0.0.1] [index.php] GAME_START: Usuario 'val' inició juego en dificultad 'facil'
+[2025-11-11 14:09:00] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'val' accedió al ranking
+[2025-11-11 14:10:06] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 14:12:47] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 14:53:18] [127.0.0.1] [login.php] LOGIN_FAILED: Intento de login con usuario incorrecto: HR_ADMIN
+[2025-11-11 14:53:30] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 15:09:06] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 15:09:21] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 15:32:07] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'facil': 'hai bebybe' sin imagen (Usuario: admin)
+[2025-11-11 15:56:41] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'facil', idioma 'en': 'hola maria' (Usuario: admin)
+[2025-11-11 15:58:10] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'facil', idioma 'en': 'hola maria' (Usuario: admin)
+[2025-11-11 15:58:59] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'normal', idioma 'en': 'juana maria' (Usuario: admin)
+[2025-11-11 15:59:26] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'facil', idioma 'es': 'juana maria' (Usuario: admin)
+[2025-11-11 16:00:02] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: Nueva frase en 'facil', idioma 'es': 'juana maria' (Usuario: admin)
+[2025-11-11 16:14:14] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 16:14:24] [127.0.0.1] [login.php] LOGIN_FAILED: Intento de login con usuario incorrecto: HR_ADMIN
+[2025-11-11 16:14:31] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 16:14:41] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 16:14:57] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 16:16:02] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 16:16:10] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 16:39:11] [127.0.0.1] [create_sentence.php] CREATE_SENTENCE: New sentence in 'facil', language 'en': 'JUAN' (Usuario: admin)
+[2025-11-11 16:49:03] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil' en 'en': 'JUAN' (Usuario: admin)
+[2025-11-11 16:49:11] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil' en 'en': 'hai bebybe' (Usuario: admin)
+[2025-11-11 16:49:19] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil' en 'en': 'hola maria' (Usuario: admin)
+[2025-11-11 16:55:05] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil' en 'en': 'hola maria' (Usuario: admin)
+[2025-11-11 16:55:12] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'facil' en 'en': 'Ditto can transform into anything' (Usuario: admin)
+[2025-11-11 16:56:23] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'dificil' en 'es': 'Mewtwo es un Pokémon legendario creado por experimentos' (Usuario: admin)
+[2025-11-11 16:56:33] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'normal' en 'en': 'Eevee can evolve into many different forms' (Usuario: admin)
+[2025-11-11 16:59:27] [127.0.0.1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'dificil' en 'es': 'Lunala refleja la luz como la luna llena' (Usuario: admin)
+[2025-11-11 17:02:19] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 17:02:28] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-11 17:18:34] [127.0.0.1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-11 17:31:27] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-11 17:52:45] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-11 17:53:09] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking

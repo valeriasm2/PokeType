@@ -1,7 +1,6 @@
 <?php
 return [
 
-    /* ------------ INDEX.PHP ------------ */
     'index' => [
         'welcome' => '¡Bienvenido a Poketype!',
         'description' => 'Un juego para aprender los tipos de Pokémon y mejorar tu velocidad de escritura.',
@@ -15,7 +14,6 @@ return [
         'logout' => 'Cerrar sesión',
     ],
 
-    /* ------------ PLAY.PHP ------------ */
     'play' => [
         'difficulty_label' => 'Dificultad seleccionada',
         'difficulty_facil' => 'Fácil',
@@ -30,8 +28,6 @@ return [
         'easter_egg' => '👀'
     ],
 
-
-    /* ------------ GAMEOVER.PHP ------------ */
     'gameover' => [
         'title' => 'Game Over',
         'results' => 'Resultado de la partida:',
@@ -47,16 +43,7 @@ return [
         'yes' => 'Sí',
         'no' => 'No',
     ],
-    /* ------------ GIRATINA.PHP ------------ */
-    'giratina' => [
-        'title' => '¡Atrapa a Giratina!',
-        'instruction' => '¡Haz clic sobre Giratina antes de que escape!',
-        'caught' => '¡Has atrapado a Giratina! +100 puntos 🎉',
-        'redirecting' => 'Redirigiendo al juego...',
-        'bonus' => 'Bonus Giratina',
-    ],
 
-    /* ------------ RANKING.PHP ------------ */
     'ranking' => [
         'title' => 'Ranking de Jugadores',
         'name' => 'Nombre',
@@ -66,27 +53,36 @@ return [
         'back' => 'ESCAPE',
     ],
 
-    /* ------------ ADMIN/LOGIN.PHP ------------ */
-    'admin_login' => [
-        'title' => 'Acceso Administrativo',
-        'username' => 'Usuario:',
-        'password' => 'Contraseña:',
-        'login' => 'Entrar',
-        'error' => 'Credenciales incorrectas',
+    'giratina' => [
+        'title' => '¡Atrapa a Giratina!',
+        'instruction' => '¡Haz clic en Giratina antes de que escape!',
+        'caught' => '¡Has atrapado a Giratina! +100 puntos 🎉',
+        'redirecting' => 'Redirigiendo al juego...',
+        'bonus' => 'Bonus Giratina',
     ],
 
-    /* ------------ ADMIN/INDEX.PHP ------------ */
+    'admin_login' => [
+        'title' => 'Acceso Administrador',
+        'user' => 'Usuario:',
+        'pass' => 'Contraseña:',
+        'enter' => 'Entrar',
+        'error' => 'Credenciales incorrectas'
+    ],
+
     'admin_index' => [
-        'title' => "Panel de Administrador",
-        'create' => 'Agregar frase',
+        'title' => "Panel de Administración",
+        'create' => 'Crear frase',
         'edit' => 'Editar frase',
-        'delete' => 'Borrar frase',
+        'delete' => 'Eliminar frase',
         'logout' => 'Cerrar sesión',
         'list_sentences' => 'Listar frases',
         'hide_sentences' => 'Ocultar frases',
         'difficulty' => 'Mostrar según nivel de dificultad:',
-        'paginator'      => 'Siguiente',
+        'paginator' => 'Siguiente',
+        'levels' => ['facil'=>'Fácil','normal'=>'Normal','dificil'=>'Difícil'],
+        'select_level' => 'Selecciona un nivel',
     ],
+
     'messages' => [
         'frase_eliminada' => 'Frase eliminada correctamente.',
         'error_datos' => 'Error: datos incompletos para eliminar la frase.',
@@ -97,27 +93,29 @@ return [
         'error_guardado' => 'Error: no se pudo guardar el archivo.',
     ],
 
-    /* ------------ ADMIN/CREATE_SENTENCE.PHP ------------ */
     'admin_create' => [
-        'title' => 'Crear Nueva Frase',
-        'text' => 'Texto de la frase:',
-        'image' => 'Nombre de la imagen:',
-        'difficulty' => 'Dificultad:',
-        'save' => 'Guardar',
-        'back' => 'Volver',
+        'title'        => 'Crear Nueva Frase',
+        'text'         => 'Texto de la frase:',
+        'image'        => 'Nombre de la imagen:',
+        'difficulty'   => 'Dificultad:',
+        'save'         => 'Guardar',
+        'back'         => 'Volver',
+        'select_level' => 'Selecciona un nivel',
+        'success'      => 'Frase agregada correctamente.',
+        'success_lang' => 'Frase agregada correctamente en el idioma: {lang}',
+        'info_lang'    => 'La frase se guardará en la lista del idioma seleccionado:',
+        'select_file'  => 'No se ha seleccionado ningún archivo',
     ],
 
-    /* ------------ ADMIN/DELETE_SENTENCE.PHP ------------ */
     'admin_delete' => [
-        'title' => 'Eliminar Frase',
-        'confirm' => '¿Seguro que deseas borrar esta frase?',
+        'title' => 'X',
+        'confirm' => '¿Seguro que quieres eliminar esta frase?',
         'yes' => 'Sí',
         'no' => 'No',
     ],
 
-    /* ------------ ERRORS/403 y 404 ------------ */
     'error403' => [
-        'title' => '403 – Acceso denegado',
+        'title' => '403 – Acceso Denegado',
         'message' => 'No tienes permiso para acceder a esta página.',
         'back' => 'Volver al inicio',
     ],
@@ -128,11 +126,12 @@ return [
         'back' => 'Volver al inicio',
     ],
 
-    /* ------------ TECLAS RÁPIDAS ------------ */
     'hotkeys' => [
-        'play' => 'j',
-        'save' => 's',
+        'play' => 'p',
+        'save' => 'y',
         'no' => 'n',
         'back' => 'esc'
-    ]
+    ],
+
+    'lang_names' => ['ca'=>'Català','es'=>'Español','en'=>'English'],
 ];
