@@ -86,10 +86,21 @@ $bonus = ($difficulty === "facil") ? 2 :
 
         <a href="index.php" id="back-btn"><span class="underline-letter">ESC</span>APE</a>
     </div>
+    <!-- Popup combo (mostrat quan canvia o quan hi ha el timer) -->
+    <div id="combo-popup" role="status" aria-live="polite">
+    <div>
+        <span class="label">Combo</span>
+        <span class="mult" id="combo-mult">x1</span>
+        <div id="combo-timer" style="display:block;">
+        <div id="combo-timer-bar"></div>
+        </div>
+    </div>
+    </div>
+
 
 <script src="utils/music.js"></script>
 <script>
-/* ------------------- CONFIG ------------------- */
+/* ------------------- CONFIG (mantinc parts teves) ------------------- */
 const frasesData = <?php echo json_encode($frasesSeleccionadas); ?>;
 let fraseIndex = 0;
 let charIndex = 0;
@@ -112,7 +123,6 @@ const progressContainer = document.getElementById("progress-container");
 
 /* ------------------- TIMER GLOBAL ------------------- */
 let startTimeGlobal = null;
-
 function startGlobalTimer() {
     startTimeGlobal = Date.now();
     setInterval(() => {
@@ -185,19 +195,152 @@ function iniciarCuentaAtras() {
 
             mostrarFrase();
             document.addEventListener("keydown", jugar);
+            resetInactivityTimer(); // arrenco timer d'inactivitat quan comença a jugar
         }
     }, 1000);
 }
 
+/* ------------------ COMBO SYSTEM ------------------ */
+/*
+ He implementat:
+ - comboLevel: 1..4 (x1..x4)
+ - correctSinceLevel: compta encerts parcials cap al següent nivell (0..4)
+ - singleWrongPending: boolean per detectar 1 error (no penalitza)
+ - penalització: a partir de 2 errors seguits es redueix comboLevel per cada error seguit (mínim 1)
+ - comboTimer: si 3s sense teclat -> perdre combo (esborra el progrés)
+ - es mostra popup amb el multiplicador cada vegada que canvia
+*/
+
+const comboPopup = document.getElementById("combo-popup");
+const comboMultEl = document.getElementById("combo-mult");
+const comboTimerBar = document.getElementById("combo-timer-bar");
+
+let comboLevel = 1;            // 1 = x1, 2 = x2, ...
+let correctSinceLevel = 0;     // encerts cap al següent nivell (0..4)
+let singleWrongPending = false;
+let consecutiveWrong = 0;
+
+// Inactivity/timeout
+let inactivityTimeout = null;
+const INACTIVITY_MS = 3000;
+let comboTimerInterval = null;
+let comboTimerRemaining = INACTIVITY_MS;
+
+// Mostrar popup (breu) i actualitzar text
+function showComboPopup() {
+    comboMultEl.textContent = 'x' + comboLevel;
+    comboPopup.style.display = 'flex';
+    // Reiniciar animació: ho deixem visible 1.4s (o mentre hi hagi barra)
+    clearTimeout(comboPopup._hideTimeout);
+    comboPopup._hideTimeout = setTimeout(() => {
+        // Només ocultem si el timer no està corrent
+        if (!comboTimerInterval) comboPopup.style.display = 'none';
+    }, 1400);
+}
+
+// Actualitzar barra inversa segons time remaining (0..INACTIVITY_MS)
+function updateComboTimerBar() {
+    const frac = Math.max(0, comboTimerRemaining / INACTIVITY_MS);
+    comboTimerBar.style.width = (frac * 100) + '%';
+}
+
+// Perdre el combo complet
+function clearCombo() {
+    comboLevel = 1;
+    correctSinceLevel = 0;
+    singleWrongPending = false;
+    consecutiveWrong = 0;
+    comboTimerRemaining = INACTIVITY_MS;
+    stopComboTimer();
+    showComboPopup();
+}
+
+// Inici/atur timer d'inactivitat (3s)
+function startComboTimer() {
+    stopComboTimer();
+    comboTimerRemaining = INACTIVITY_MS;
+    updateComboTimerBar();
+    comboTimerInterval = setInterval(() => {
+        comboTimerRemaining -= 100;
+        if (comboTimerRemaining <= 0) {
+            clearInterval(comboTimerInterval);
+            comboTimerInterval = null;
+            // perdre combo per inactivitat
+            clearCombo();
+            comboPopup.style.display = 'flex'; // mostrar que s'ha perdut
+            setTimeout(() => { if (!comboTimerInterval) comboPopup.style.display = 'none'; }, 1200);
+        } else {
+            updateComboTimerBar();
+        }
+    }, 100);
+    // fer visible la popup mentre corre el timer
+    comboPopup.style.display = 'flex';
+}
+
+function stopComboTimer() {
+    if (comboTimerInterval) {
+        clearInterval(comboTimerInterval);
+        comboTimerInterval = null;
+    }
+    updateComboTimerBar();
+}
+
+// Reiniciar timer d'inactivitat (cridar a cada tecla)
+function resetInactivityTimer() {
+    startComboTimer();
+}
+
 /* ------------------ JUEGO ------------------ */
 function jugar(e) {
-    let frase = frasesData[fraseIndex].texto;
-    if (charIndex >= frase.length || e.key.length > 1) return;
+    // evitar captures quan el countdown està inactiu o teclas no standard
+    if (!frasesData[fraseIndex] || charIndex >= frasesData[fraseIndex].texto.length || e.key.length > 1) {
+        // també reiniciem el timer d'inactivitat si és una tecla no-evaluable (p.ex. ESC)
+        resetInactivityTimer();
+        return;
+    }
 
+    let frase = frasesData[fraseIndex].texto;
+
+    // Normalitzar i comparar
     const acertado = normalizar(e.key) === normalizar(frase[charIndex]);
     estado[charIndex] = acertado;
 
-    acertado ? correctSound.play() : wrongSound.play();
+    if (acertado) {
+        correctSound.play();
+
+        // COMBO: encert
+        correctSinceLevel++;
+        consecutiveWrong = 0;
+        singleWrongPending = false;
+
+        // Si arribes a 5 encerts addicionals i no s'ha arribat al nivell màxim, puja combo
+        if (correctSinceLevel >= 5 && comboLevel < 4) {
+            comboLevel++;
+            correctSinceLevel = 0;
+            showComboPopup();
+        }
+    } else {
+        wrongSound.play();
+
+        // COMBO: error
+        consecutiveWrong++;
+        if (consecutiveWrong === 1) {
+            // 1 error seguit: no passa res (marquem single wrong pending)
+            singleWrongPending = true;
+        } else {
+            // >=2 errors seguits: cada error resta 1 al nivell (mínim 1)
+            if (comboLevel > 1) {
+                comboLevel = Math.max(1, comboLevel - 1);
+                showComboPopup();
+            }
+            // després d'aplicar penalització, reiniciem el comptador cap a nou augment
+            correctSinceLevel = 0;
+            singleWrongPending = false;
+        }
+    }
+
+    // Reinici timer d'inactivitat a cada tecla (reserva del combo)
+    resetInactivityTimer();
 
     charIndex++;
     mostrarFrase();
@@ -224,13 +367,21 @@ function jugar(e) {
                 form.method = "POST";
                 form.action = "gameover.php";
 
+                // Multiplicador final segons comboLevel
+                const finalMultiplier = comboLevel; // x1..x4
+
+                // Calculem puntuació final amb multiplicador (aplicat només a la puntuació)
+                const baseScore = puntosTotales + bonus;
+                const finalScore = Math.floor(baseScore * finalMultiplier);
+
                 form.innerHTML = `
-                    <input type="hidden" name="score" value="${puntosTotales + bonus}">
+                    <input type="hidden" name="score" value="${finalScore}">
                     <input type="hidden" name="time" value="${document.getElementById("timer").textContent}">
                     <input type="hidden" name="hits" value="${totalHits}">
                     <input type="hidden" name="timeBonus" value="${totalTimeBonus}">
                     <input type="hidden" name="bonus" value="${bonus}">
                     <input type="hidden" name="name" value="<?php echo $name; ?>">
+                    <input type="hidden" name="comboLevel" value="${comboLevel}">
                 `;
                 document.body.appendChild(form);
                 form.submit();
@@ -253,7 +404,10 @@ document.addEventListener("keydown", (e) => {
         setTimeout(() => document.getElementById("back-btn").click(), 200);
     }
 });
+
+// També volem que les tecles ràpides S/N/altres segueixin funcionant en gameover; per això restem l'event listener quan toca
 </script>
+
 
 </body>
 </html>

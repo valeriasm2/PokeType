@@ -32,6 +32,7 @@ $hits          = intval($_POST['hits']);
 $bonus         = intval($_POST['bonus']);
 $timeBonus     = intval($_POST['timeBonus']);
 $bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0;
+$comboLevel    = isset($_POST['comboLevel']) ? intval($_POST['comboLevel']) : 1;
 
 $_SESSION['name'] = $name;
 
@@ -40,11 +41,11 @@ if (isset($_POST['save'])) {
 
     $rankingFile = __DIR__ . '/ranking.txt';
 
-    // Guardar en formato: nombre:puntuación:tiempo
-    $line = $name . ":" . $score . ":" . $time . PHP_EOL;
+    // Guardar en formato: nombre:puntuación:tiempo:combo
+    $line = $name . ":" . $score . ":" . $time . ":" . $comboLevel . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);
 
-    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score . "&time=" . $time);
+    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score . "&time=" . $time . "&combo=" . $comboLevel);
     exit();
 }
 ?>
@@ -78,6 +79,8 @@ if (isset($_POST['save'])) {
         <?php endif; ?>
 
         <p>⚡ Bonus per temps: <strong><?= $timeBonus ?></strong></p>
+
+        <p>🔥 Multiplicador de combo: <strong>x<?= $comboLevel ?></strong></p>
         
         <p>⏱ Temps total: <strong><?= $time ?>s</strong></p>
 
@@ -94,6 +97,7 @@ if (isset($_POST['save'])) {
             <input type="hidden" name="bonus" value="<?= $bonus ?>">
             <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
             <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+            <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
             <input type="hidden" name="save" value="1">
 
             <button type="submit" class="btn-link" id="save-btn">
