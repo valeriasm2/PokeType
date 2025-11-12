@@ -192,7 +192,31 @@ function render_pagination_ranking($pagina_actual, $total_paginas)
         });
 
         document.addEventListener("keydown", (e) => {
+            if (e.repeat) return;
+            const active = document.activeElement;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
+
+            // Buscar la letra subrayada en el botón de volver
+            const underlineSpan = backBtn.querySelector(".underline-letter");
+            if (underlineSpan) {
+                const key = underlineSpan.textContent.trim().toLowerCase();
+                // Manejar "esc" (3 letras) o letra individual
+                if (key === "esc" && e.key === "Escape") {
+                    e.preventDefault();
+                    playSoundAndBack();
+                    backBtn.classList.add('button-pressed');
+                    setTimeout(() => backBtn.classList.remove('button-pressed'), 200);
+                } else if (key.length === 1 && e.key.toLowerCase() === key) {
+                    e.preventDefault();
+                    playSoundAndBack();
+                    backBtn.classList.add('button-pressed');
+                    setTimeout(() => backBtn.classList.remove('button-pressed'), 200);
+                }
+            }
+            
+            // Fallback: Escape siempre funciona
             if (e.key === "Escape") {
+                e.preventDefault();
                 playSoundAndBack();
                 backBtn.classList.add('button-pressed');
                 setTimeout(() => backBtn.classList.remove('button-pressed'), 200);

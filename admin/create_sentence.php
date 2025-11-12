@@ -134,7 +134,12 @@ function underlineFirstLetter($text)
             </div>
 
             <br><br>
-            <button type="submit" class="button-save"><?= $lang_data['admin_create']['save'] ?? "Save" ?></button>
+            <button type="submit" class="button-save">
+                <?php
+                $saveText = $lang_data['admin_create']['save'] ?? "Save";
+                echo underlineFirstLetter($saveText);
+                ?>
+            </button>
 
             <?php if ($mensaje): ?>
                 <div class="<?= $error ? 'error' : 'success' ?>">
@@ -152,6 +157,30 @@ function underlineFirstLetter($text)
             fileText.textContent = this.files.length ?
                 this.files[0].name :
                 "<?= addslashes($lang_data['admin_create']['select_file'] ?? "No file selected") ?>";
+        });
+
+        // Atajos de teclado para botones con letra subrayada
+        document.addEventListener("keydown", (e) => {
+            if (e.repeat) return;
+            const active = document.activeElement;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
+
+            // Buscar todos los botones y enlaces con letra subrayada
+            const buttons = document.querySelectorAll("button, a.admin-link-btn");
+            buttons.forEach(btn => {
+                const underlineSpan = btn.querySelector(".underline-letter");
+                if (underlineSpan) {
+                    const key = underlineSpan.textContent.trim().toLowerCase();
+                    if (e.key.toLowerCase() === key) {
+                        e.preventDefault();
+                        if (btn.tagName === 'A') {
+                            window.location.href = btn.href;
+                        } else {
+                            btn.click();
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>

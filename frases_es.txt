@@ -127,10 +127,6 @@
     ],
     "normal": [
         {
-            "texto": "Eevee puede evolucionar en muchas formas diferentes",
-            "imagen": null
-        },
-        {
             "texto": "Squirtle es un Pokémon de tipo agua muy fiel",
             "imagen": null
         },

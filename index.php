@@ -153,9 +153,26 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
                 const active = document.activeElement;
                 if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
 
+                // Buscar botones con letra subrayada primero
+                buttons.forEach(btn => {
+                    const underlineSpan = btn.querySelector(".underline-letter");
+                    if (underlineSpan) {
+                        const key = underlineSpan.textContent.trim().toLowerCase();
+                        if (e.key.toLowerCase() === key) {
+                            e.preventDefault();
+                            btn.click();
+                            return;
+                        }
+                    }
+                });
+
+                // Fallback: buscar por primera letra del texto
                 buttons.forEach(btn => {
                     const text = btn.textContent.trim().toLowerCase();
-                    if (text.startsWith(e.key.toLowerCase())) btn.click();
+                    if (text.startsWith(e.key.toLowerCase())) {
+                        e.preventDefault();
+                        btn.click();
+                    }
                 });
             });
         </script>

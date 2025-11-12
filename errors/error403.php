@@ -33,5 +33,27 @@ $homeUrl = (session_name() === 'admin_session') ? '../admin/index.php' : '../ind
             <?= htmlspecialchars(substr($errorTexts['btn'] ?? 'Tornar a l\'inici', 1)) ?>
         </button>
     </div>
+
+    <script>
+        // Atajos de teclado para botones con letra subrayada
+        document.addEventListener("keydown", (e) => {
+            if (e.repeat) return;
+            const active = document.activeElement;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
+
+            // Buscar todos los botones
+            const buttons = document.querySelectorAll("button");
+            buttons.forEach(btn => {
+                const underlineSpan = btn.querySelector(".underline-letter");
+                if (underlineSpan) {
+                    const key = underlineSpan.textContent.trim().toLowerCase();
+                    if (e.key.toLowerCase() === key) {
+                        e.preventDefault();
+                        btn.click();
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

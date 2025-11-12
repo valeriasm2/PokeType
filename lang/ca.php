@@ -26,7 +26,8 @@ return [
         'phraseCompleted' => '✅ Frase completada!',
         'back' => 'Tornar',
         'escape' => 'ESCAPE',
-        'easter_egg' => '👀'
+        'easter_egg' => '👀',
+        'write_phrase' => 'ESCRIU LA SEGÜENT FRASE:',
     ],
 
     'gameover' => [

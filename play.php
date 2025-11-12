@@ -19,6 +19,9 @@ $langArray = include $langFile;
 $tPlay = $langArray['play'];
 $tIndex = $langArray['index'];
 
+$writePhrase3lang = '<span style="font-size:1.1em; color:#87004A;">' 
+    . htmlspecialchars($tPlay['write_phrase']) . '</span>';
+
 // Datos del jugador
 $name = $_SESSION['name'];
 $difficulty = $_SESSION['difficulty'] ?? "facil";
@@ -78,6 +81,10 @@ $bonus = ($difficulty === "facil") ? 2 :
             <h1>Poketype</h1>
             <p><?= $tPlay['difficulty_label'] ?>:
             <strong><?= $tIndex["difficulty_{$difficulty}"] ?? ucfirst($difficulty) ?></strong></p>
+            
+            <div id="writePhrase3lang" style="margin-bottom:16px;">
+                <?= $writePhrase3lang ?>
+            </div>
 
             <div id="countdown">3</div>
 

@@ -44,11 +44,13 @@ if (isset($_POST['save'])) {
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
+
 <head>
     <meta charset="UTF-8">
     <title><?= $t['title'] ?? 'Game Over' ?></title>
     <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
+
 <body>
     <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
     <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
@@ -86,10 +88,11 @@ if (isset($_POST['save'])) {
                 <button type="submit" id="save-btn">
                     <?= $t['yes'] ?? 'Sí' ?>
                 </button>
+                <button type="button" id="no-btn">
+                    <?= $t['no'] ?? 'No' ?>
+                </button>
             </form>
-            <button type="button" id="no-btn" onclick="goToIndex()">
-                <?= $t['no'] ?? 'No' ?>
-            </button>
+
         </div>
         <div class="gameover-save-text" style="margin-top:1em;text-align:center">
             <?= $t['save'] ?? 'Guardar puntuació?' ?>
@@ -101,26 +104,56 @@ if (isset($_POST['save'])) {
         const buttonSound = document.getElementById("button-sound");
 
         function playSound(callback) {
-            buttonSound.currentTime = 0;
-            buttonSound.play();
-            setTimeout(callback, 800);
+            if (buttonSound) {
+                buttonSound.currentTime = 0;
+                buttonSound.play().catch(() => {
+                    // Si falla el audio, ejecutar callback inmediatamente
+                    if (callback) callback();
+                });
+                if (callback) {
+                    setTimeout(callback, 800);
+                }
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        function goToIndex() {
+            window.location.href = "index.php";
         }
 
         document.getElementById("save-btn").addEventListener("click", (e) => {
             e.preventDefault();
-            playSound(() => e.target.closest("form").submit());
+            playSound(() => {
+                const form = e.target.closest("form");
+                if (form) form.submit();
+            });
         });
 
-        function goToIndex() {
-            playSound(() => window.location.href = "index.php");
-        }
+        document.getElementById("no-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            playSound(() => {
+                goToIndex();
+            });
+        });
 
         document.addEventListener("keydown", (e) => {
+            if (e.repeat) return;
+            const active = document.activeElement;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
+
             const key = e.key.toLowerCase();
             // Detect both first character and Enter/Escape as fallback
-            if (key === (<?= json_encode(mb_substr(($t['yes'] ?? 'S'), 0, 1)) ?>).toLowerCase() || key === "enter") document.getElementById("save-btn").click();
-            if (key === (<?= json_encode(mb_substr(($t['no'] ?? 'N'), 0, 1)) ?>).toLowerCase() || key === "escape") goToIndex();
+            if (key === (<?= json_encode(mb_substr(($t['yes'] ?? 'S'), 0, 1)) ?>).toLowerCase() || key === "enter") {
+                e.preventDefault();
+                document.getElementById("save-btn").click();
+            }
+            if (key === (<?= json_encode(mb_substr(($t['no'] ?? 'N'), 0, 1)) ?>).toLowerCase() || key === "escape") {
+                e.preventDefault();
+                document.getElementById("no-btn").click();
+            }
         });
     </script>
 </body>
+
 </html>

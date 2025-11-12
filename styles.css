@@ -48,19 +48,15 @@ body {
     0% {
         transform: translateX(-50%) translateY(0) rotate(0deg);
     }
-
     25% {
         transform: translateX(-50%) translateY(-10px) rotate(-5deg);
     }
-
     50% {
         transform: translateX(-50%) translateY(-20px) rotate(5deg);
     }
-
     75% {
         transform: translateX(-50%) translateY(-10px) rotate(-5deg);
     }
-
     100% {
         transform: translateX(-50%) translateY(0) rotate(0deg);
     }
@@ -76,59 +72,73 @@ body {
     z-index: 1;
 }
 
-/*
-body {
-    font-family: 'Press Start 2P', monospace, sans-serif;
-    background: url('https://media1.tenor.com/m/0_-BvSG6IpgAAAAd/monad.gif') no-repeat center center fixed;
-    background-size: cover;
-    color: #a602ff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-}*/
-
 /* ============================================================
       🏠 CONTENEDOR INDEX
 ============================================================ */
 #index-container {
     text-align: center;
     padding: 30px 40px;
-    /* algo de padding interno */
     background-color: rgba(231, 217, 247, 0.8);
     border: 4px solid #a825d4;
     border-radius: 20px;
     box-shadow: 0 0 20px #3b4cca;
     max-width: 600px;
-    /* nunca más ancho de 600px */
     width: 80%;
-    /* ocupar 80% del contenedor padre */
     position: relative;
     margin: 60px auto;
-    /* centrado horizontal */
 }
-
-
 
 /* ============================================================
       🎮 CONTENEDOR DEL JUEGO
+============================================================ */
+/* ============================================================
+      🎮 CONTENEDOR DEL JUEGO MEJORADO
 ============================================================ */
 #container {
     display: inline-block;
     text-align: center;
     padding: 50px;
-    background-color: rgb(231, 217, 247);
-    border: 5px solid #a825d4;
-    border-radius: 25px;
-    box-shadow: 0 0 30px #3b4cca;
+    background: linear-gradient(145deg, #f3e5ff, #d1b3ff);
+    border: 3px solid rgba(168, 37, 212, 0.7);
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(59, 76, 202, 0.4), 
+                0 6px 10px rgba(168, 37, 212, 0.2) inset;
     max-width: 600px;
     width: 90%;
-    margin: 200px auto;
+    margin: 150px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Animación al pasar el mouse */
+#container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(59, 76, 202, 0.5),
+                0 8px 15px rgba(168, 37, 212, 0.3) inset;
+}
+
+/* Texto dentro del contenedor */
+#container h1, #container p {
+    margin: 10px 0;
+}
+
+/* Botones (si tienes) */
+#container button {
+    padding: 10px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #a825d4, #3b4cca);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#container button:hover {
+    background: linear-gradient(90deg, #3b4cca, #a825d4);
+    transform: scale(1.05);
+}
+
 
 /* ============================================================
       ☠️ CONTENEDOR GAME OVER
@@ -142,10 +152,10 @@ body {
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    margin: 0;
+    margin: 100px auto;
+    position: relative;
 }
 
-/* ===== EFECTO ANIMACIÓN GAME OVER ===== */
 .gameover-container h1 {
     font-size: 60px;
     color: #aa32ef;
@@ -154,15 +164,111 @@ body {
     padding: 50px 0;
 }
 
+.gameover-container h3 {
+    font-size: 24px;
+    color: #3b4cca;
+    margin: 20px 0;
+}
+
+.gameover-container hr {
+    border: 2px solid #a825d4;
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+.gameover-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.gameover-buttons form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.gameover-buttons button,
+.gameover-buttons #save-btn,
+.gameover-buttons #no-btn {
+    background-color: #3b4cca !important;
+    color: #ffcb05 !important;
+    border: none !important;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+    min-width: 120px;
+    padding: 12px 24px;
+    font-size: 14px;
+    margin: 0;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    line-height: 1.5;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.gameover-buttons button *,
+.gameover-buttons #save-btn *,
+.gameover-buttons #no-btn * {
+    color: #ffcb05 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline !important;
+}
+
+.gameover-buttons button .underline-letter,
+.gameover-buttons #save-btn .underline-letter,
+.gameover-buttons #no-btn .underline-letter {
+    color: #ffcb05 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
+.gameover-buttons button:hover,
+.gameover-buttons #save-btn:hover,
+.gameover-buttons #no-btn:hover {
+    background-color: #a846f8;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gameover-save-text {
+    font-size: 16px;
+    color: #3b4cca;
+    font-weight: bold;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.gameover-container p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.gameover-container p strong {
+    color: #3b4cca;
+    font-weight: bold;
+}
+
 @keyframes gameover-shake {
     0% {
         transform: scale(1) rotate(-1deg);
     }
-
     50% {
         transform: scale(1.05) rotate(1deg);
     }
-
     100% {
         transform: scale(1) rotate(-1deg);
     }
@@ -205,8 +311,7 @@ body {
     font-weight: bold;
     color: #ff3c3c;
     -webkit-text-stroke: 2px #400000;
-    text-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000;
-    text-shadow: 0 0 10px #9c0000;
+    text-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000, 0 0 10px #9c0000;
 }
 
 /* Texto principal */
@@ -224,7 +329,30 @@ body {
     line-height: 1.4;
 }
 
-/* Botones */
+/* ⚠️ ===== BOTONES (Error, General) cuadrar ===== */
+.error-container button,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.admin-link-btn,
+.admin-container-index button,
+.admin-container-index a.button-link,
+.admin-container-index .admin-btn,
+.button-save,
+#add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Uniform width and size if required: */
+    /* min-width: 120px; */
+    box-sizing: border-box;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    gap: 0;
+}
+
 .error-container button {
     background-color: #3b4cca;
     color: white;
@@ -257,7 +385,6 @@ body {
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(10px);
     }
@@ -271,8 +398,6 @@ h1 {
     margin: 0;
     color: #ffffff;
     text-shadow: 0 0 8px #a602ff, 0 0 20px #3b4cca;
-
-
 }
 
 h2 {
@@ -291,8 +416,10 @@ p {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
+    display: inline-block;
+    margin-right: 0;
+    padding-right: 0;
 }
-
 
 /* ============================================================
       📋 FORMULARIOS Y BOTONES
@@ -301,6 +428,7 @@ form {
     margin-top: 20px;
 }
 
+/* Botones y campos uniformes */
 input,
 select,
 button {
@@ -310,23 +438,49 @@ button {
     border-radius: 8px;
     border: 2px solid #3b4cca;
     font-family: 'Press Start 2P', monospace, sans-serif;
+    box-sizing: border-box;
+    /* Ensure vertical align for buttons */
+    vertical-align: middle;
 }
 
-button {
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
     background-color: #3b4cca;
     color: #ffcb05;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
 }
 
-button:hover {
+/* Asegurar que los botones de gameover tengan contenido visible */
+.gameover-buttons button:empty::before,
+.gameover-buttons #save-btn:empty::before,
+.gameover-buttons #no-btn:empty::before {
+    content: "?";
+    visibility: visible;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
     background-color: #a846f8;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button:disabled {
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
@@ -347,25 +501,59 @@ button:disabled {
 #game-area {
     font-size: 1.5em;
     margin-top: 30px;
+    min-height: 100px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    border: 2px solid rgba(168, 37, 212, 0.3);
+}
+
+#game-area p#frase {
+    font-size: 0.9em;
+    line-height: 1.6;
+    word-wrap: break-word;
+    margin: 0;
+    padding: 10px;
+    min-height: 60px;
 }
 
 .correct {
-    color: green;
+    color: #2ecc71;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
 }
-
 .wrong {
-    color: red;
+    color: #e74c3c;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
 }
-
 .highlight {
     text-decoration: underline;
     font-weight: bold;
+    color: #3b4cca;
+    background: rgba(59, 76, 202, 0.2);
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 #countdown {
-    font-size: 2em;
-    color: darkblue;
-    margin-top: 20px;
+    font-size: 4em;
+    color: #3b4cca;
+    margin: 30px 0;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(59, 76, 202, 0.8);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
 }
 
 /* ============================================================
@@ -373,7 +561,9 @@ button:disabled {
 ============================================================ */
 #back-btn {
     margin-top: 40px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: #e43df0;
     color: #ffcb05;
     padding: 12px 25px;
@@ -381,6 +571,9 @@ button:disabled {
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
+    min-width: 120px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 #back-btn:hover {
@@ -429,11 +622,16 @@ button:disabled {
     color: #ffcb05;
     font-weight: bold;
     background-color: #3b4cca;
-    padding: 12px 25px;
+    padding: 8px 14px;
     border-radius: 12px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
     margin-top: 20px;
+    min-width: 70px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 #ranking-container a:hover {
@@ -559,6 +757,7 @@ body.laberinto-bg::before {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     font-size: 14px;
     z-index: 9999;
+    white-space: nowrap;
 }
 
 #user-box a {
@@ -641,6 +840,12 @@ body.laberinto-bg::before {
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .admin-page button:hover {
@@ -674,7 +879,6 @@ body.laberinto-bg::before {
     display: block;
     width: 180px;
     height: auto;
-
     margin: 0 auto 1rem;
     pointer-events: none;
 }
@@ -710,11 +914,42 @@ body.laberinto-bg::before {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Barra superior admin */
+.admin-topbar {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #4A90E2;
+}
+
+.admin-welcome {
+    font-size: 14px;
+    color: #1E3A5F;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-welcome strong {
+    color: #4A90E2;
+}
+
+/* Contenedor de botones admin */
+.admin-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.admin-buttons > * {
+    flex-shrink: 0;
+}
+
 .admin-container-index:hover {
     transform: translateY(-1px);
-
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-
 }
 
 /* Título */
@@ -723,7 +958,6 @@ body.laberinto-bg::before {
     color: #1E3A5F;
     font-size: 22px;
     margin-bottom: 2.5rem;
-
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     padding-top: 20px;
 }
@@ -740,7 +974,41 @@ body.laberinto-bg::before {
     margin: 0 0.5rem;
 }
 
-.admin-container-index button,
+/* Botones del admin - contenedor principal */
+.admin-buttons button,
+.admin-buttons .admin-btn {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    gap: 0;
+    margin: 0.3rem;
+}
+
+.admin-buttons button:hover,
+.admin-buttons .admin-btn:hover {
+    background-color: #F7C948;
+    color: #1E3A5F;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Botones generales del admin container */
+.admin-container-index button:not(.admin-btn):not(.delete-btn),
 .admin-container-index a.button-link {
     background-color: #4A90E2;
     color: #FFFFFF;
@@ -753,19 +1021,25 @@ body.laberinto-bg::before {
     font-size: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    gap: 0.5em;
 }
 
-.admin-container-index button:hover,
+.admin-container-index button:not(.admin-btn):not(.delete-btn):hover,
 .admin-container-index a.button-link:hover {
     background-color: #F7C948;
     color: #1E3A5F;
-
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
 /* Tabla de frases */
-
 .admin-container-index table {
     width: 100%;
     border-collapse: separate;
@@ -775,73 +1049,60 @@ body.laberinto-bg::before {
     border: 2px solid #4A90E2;
     border-radius: 8px;
     overflow: hidden;
-
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
-
 .admin-container-index th,
 .admin-container-index td {
     padding: 1rem;
     border-bottom: 1px solid #4A90E2;
     text-align: left;
     font-family: 'Press Start 2P', monospace, sans-serif;
-
     font-size: 14px;
     color: #1E3A5F;
     word-break: break-word;
 }
-
 .admin-container-index th {
     background-color: #4A90E2;
     color: #FFFFFF;
     text-align: center;
     font-size: 12px;
 }
-
 .admin-container-index tr:nth-child(even) {
     background-color: #D8ECFF;
 }
-
 .admin-container-index td:last-child {
     text-align: center;
     vertical-align: middle;
 }
-
-
 .admin-container-index table td:first-child,
 .admin-container-index table th:first-child {
     max-width: 300px;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .admin-container-index table td:last-child,
 .admin-container-index table th:last-child {
     width: 100px;
     text-align: center;
     white-space: nowrap;
 }
-
 /* Mostrar/Ocultar contenedor de frases */
 .hidden {
     display: none;
 }
-
 /* resaltar la fila nueva */
 .admin-container-index table tr.highlight {
     background-color: #f3f178 !important;
     color: #3b4cca !important;
     font-weight: bold;
 }
-
 #llistarContainer {
     transition: all 0.3s ease;
 }
-
 /* Botón de eliminar en la tabla */
 .delete-btn {
-    background-color: #d32f2f; /* rojo típico */
+    background-color: #d32f2f;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -850,41 +1111,21 @@ body.laberinto-bg::before {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: none; /* quitar sombra heredada */
+    box-shadow: none;
+    min-width: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-
 .delete-btn:hover {
-    background-color: #f44336; /* rojo más brillante */
+    background-color: #f44336;
     transform: translateY(-2px);
 }
-
-/*
-/* Botón de crear
-.admin-container-index form button {
-    background-color: #fa9292;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 6px;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
-    font-family: 'Press Start 2P', monospace, sans-serif;
-    font-size: 11px;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.admin-container-index form button:hover {
-    background-color: #F7C948;
-    color: #1E3A5F;
-    transform: translateY(-2px);
-}
-*/
-
 
 /* ============================================================
       💾 BOTÓNES
 ============================================================ */
-/* CREAR FRASE */
 .button-save {
     background-color: #3b4cca;
     color: #ffcb05;
@@ -900,31 +1141,30 @@ body.laberinto-bg::before {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-width: 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    gap: 0;
 }
-
-/* Efecto hover neón */
 .button-save:hover {
     background-color: #5e2aa1;
     color: #ffffff;
     box-shadow: 0 6px 20px rgba(93, 42, 161, 0.8), 0 0 15px #ffcb05, 0 0 30px #5e2aa1 inset;
     transform: translateY(-2px);
 }
-
-/* Efecto click/presionado */
 .button-save:active {
     transform: scale(0.97);
     box-shadow: 0 3px 10px rgba(59, 76, 202, 0.4), 0 0 8px #ffcb05, 0 0 15px #3b4cca inset;
 }
-
-/* Disabled */
 .button-save:disabled {
     background-color: #aaa;
     color: #555;
     cursor: not-allowed;
     box-shadow: none;
 }
-
-/* Texto animado opcional (brillo) */
 .button-save::after {
     content: '';
     position: absolute;
@@ -937,46 +1177,43 @@ body.laberinto-bg::before {
     transition: all 0.5s ease;
     pointer-events: none;
 }
-
 .button-save:hover::after {
     top: -60%;
     left: -60%;
 }
 
-
 .admin-link-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 8px 18px;
     margin: 8px 4px;
-    background-color: #3b4cca;        /* Azul Pokémon base */
-    color: #ffcb05;                   /* Amarillo brillante */
+    background-color: #3b4cca;
+    color: #ffcb05;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
     border-radius: 8px;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* sombra más discreta */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     text-align: center;
+    min-width: 120px;
+    white-space: nowrap;
+    gap: 0;
 }
-
-/* Hover */
 .admin-link-btn:hover {
-    background-color: #5e2aa1;        /* Azul más intenso */
+    background-color: #5e2aa1;
     color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* sombra sutil pero visible */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
-
-/* Botón logout en azul */
 .admin-link-btn.logout {
-    background-color: #1b3fa3;        /* Azul oscuro */
+    background-color: #1b3fa3;
     color: #ffcb05;
 }
-
-/* Hover logout */
 .admin-link-btn.logout:hover {
-    background-color: #3b73ff;        /* Azul brillante */
+    background-color: #3b73ff;
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
@@ -993,13 +1230,18 @@ body.laberinto-bg::before {
     font-size: 12px;
     cursor: pointer;
     transition: 0.3s;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    gap: 0;
 }
-
 #add-btn:hover {
     background-color: #045801;
     transform: translateY(-3px);
 }
-
 
 /* Select y formulario de filtro */
 .admin-container-index select {
@@ -1042,28 +1284,18 @@ body.laberinto-bg::before {
     font-size: 12px;
 }
 
-.admin-container-index .admin-btn {
-    display: inline-block;
-    background-color: #4A90E2;
-    color: #FFFFFF;
-    border: none;
+.admin-container-index .info {
+    background-color: #E8F4FD;
+    color: #1E3A5F;
+    padding: 12px 20px;
     border-radius: 8px;
-    padding: 0.8rem 1.8rem;
-    margin: 0.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: 'Press Start 2P', monospace, sans-serif;
+    border-left: 4px solid #4A90E2;
+    margin: 15px 0;
     font-size: 12px;
-    transition: all 0.3s ease;
     text-align: center;
 }
 
-.admin-container-index .admin-btn:hover {
-    background-color: #F7C948;
-    color: #1E3A5F;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+/* Estilos unificados para admin-btn (ya definidos arriba en .admin-buttons) */
 
 .admin-container-index form {
     display: flex;
@@ -1092,7 +1324,6 @@ body.laberinto-bg::before {
     font-size: 14px;
     text-align: center;
 }
-
 .admin-message.success {
     background-color: #d4edda;
     color: #155724;
@@ -1130,7 +1361,6 @@ body.laberinto-bg::before {
     z-index: 1;
 }
 
-
 /* ============================================================
       🎮 POKEMON ICON EN JUEGO
 ============================================================ */
@@ -1138,7 +1368,6 @@ body.laberinto-bg::before {
     text-align: center;
     margin: 5px 0 0px 0;
 }
-
 .pokemon-icon {
     width: 80px;
     height: 80px;
@@ -1147,7 +1376,6 @@ body.laberinto-bg::before {
     transition: opacity 0.3s ease, transform 0.3s ease;
     object-fit: contain;
 }
-
 .pokemon-icon:hover {
     opacity: 1;
     transform: scale(1.1);
@@ -1162,27 +1390,22 @@ body.laberinto-bg::before {
     margin-bottom: 15px;
     font-weight: bold;
 }
-
 .empty {
     background-color: #ffeb3b !important;
     color: #333 !important;
 }
-
 .user {
     background-color: #f44336 !important;
     color: #fff !important;
 }
-
 .pass {
     background-color: #ff9800 !important;
     color: #fff !important;
 }
-
 .server {
     background-color: #9c27b0 !important;
     color: #fff !important;
 }
-
 /* Mensajes de éxito LISTAR FRASES */
 #llistarContainer .success {
     margin: 20px auto;
@@ -1196,7 +1419,6 @@ body.laberinto-bg::before {
     text-align: center;
     align-items: center;
 }
-
 /* Mensajes de error LISTAR FRASES */
 #llistarContainer .error {
     margin: 20px auto;
@@ -1217,9 +1439,10 @@ body.laberinto-bg::before {
     margin-top: 20px;
     text-align: center;
 }
-
 .pagination a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 6px 12px;
     margin: 0 5px;
     border: 1px solid #ccc;
@@ -1227,12 +1450,13 @@ body.laberinto-bg::before {
     text-decoration: none;
     color: #333;
     background: #f9f9f9;
+    min-width: 64px;
+    text-align: center;
+    white-space: nowrap;
 }
-
 .pagination a:hover {
     background: #e0e0e0;
 }
-
 .pagination span {
     margin: 0 10px;
     font-weight: bold;
@@ -1241,17 +1465,17 @@ body.laberinto-bg::before {
 /* ===============================================
         PAGINATOR RANKING
 ================================================= */
-
 .pagination_ranking {
     margin-top: 34px;
     text-align: center;
     user-select: none;
     font-family: 'Press Start 2P', monospace, sans-serif;
 }
-
 .pagination_ranking a {
-    display: inline-block;
-    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 13px;
     margin: 0 8px;
     border-radius: 18px;
     border: 2.5px solid #a825d4;
@@ -1272,8 +1496,10 @@ body.laberinto-bg::before {
     cursor: pointer;
     position: relative;
     top: 0;
+    min-width: 64px;
+    text-align: center;
+    white-space: nowrap;
 }
-
 .pagination_ranking a:hover,
 .pagination_ranking a:focus {
     background: linear-gradient(90deg, #fae9ac 55%, #faeaef 100%);
@@ -1282,7 +1508,6 @@ body.laberinto-bg::before {
     box-shadow: 0 6px 24px rgba(120, 35, 184, 0.14);
     top: -2px;
 }
-
 .pagination_ranking span {
     margin: 0 18px;
     color: #4B2062;
@@ -1297,7 +1522,6 @@ body.laberinto-bg::before {
     display: inline-block;
     vertical-align: middle;
 }
-
 
 /* ===============================================
         Selector de idioma JUEGO
@@ -1319,12 +1543,10 @@ body.laberinto-bg::before {
     gap: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 #lang-selector-form:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
-
 #lang-selector-form select {
     font-family: 'Press Start 2P', monospace, sans-serif;
     font-size: 12px;
@@ -1336,14 +1558,12 @@ body.laberinto-bg::before {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 #lang-selector-form select:hover,
 #lang-selector-form select:focus {
     border-color: #a846f8;
     background-color: #e1d4f7;
     outline: none;
 }
-
 
 /* ===============================================
         Selector de idioma ADMIN (AZUL)
@@ -1353,11 +1573,9 @@ body.laberinto-bg::before {
     top: 15px;
     left: 15px;
     background: linear-gradient(145deg, #d7eaff, #b9d8ff);
-    /* azul muy suave */
     padding: 8px 12px;
     border-radius: 12px;
     border: 2px solid #3b4cca;
-    /* azul intenso Pokémon */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 1000;
     font-family: 'Press Start 2P', monospace, sans-serif;
@@ -1367,41 +1585,31 @@ body.laberinto-bg::before {
     gap: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .lang-selector-admin:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
-
 .lang-selector-admin label {
     font-size: 14px;
     color: #1b3fa3;
-    /* azul oscuro */
 }
-
 .lang-selector-admin select {
     font-family: 'Press Start 2P', monospace, sans-serif;
     font-size: 12px;
     padding: 4px 6px;
     border-radius: 8px;
     border: 2px solid #1b3fa3;
-    /* azul fuerte */
     background-color: #e8f1ff;
-    /* azul claro */
     color: #1b3fa3;
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .lang-selector-admin select:hover,
 .lang-selector-admin select:focus {
     border-color: #3b73ff;
-    /* azul brillante */
     background-color: #d8e7ff;
-    /* azul algo más oscuro */
     outline: none;
 }
-
 
 .info-idioma {
     background-color: #eef6ff;
@@ -1411,14 +1619,12 @@ body.laberinto-bg::before {
     border-radius: 5px;
     font-weight: bold;
 }
-
 .custom-file {
     display: inline-block;
     position: relative;
     overflow: hidden;
     cursor: pointer;
 }
-
 .custom-file input[type=file] {
     position: absolute;
     left: 0;
@@ -1428,7 +1634,6 @@ body.laberinto-bg::before {
     height: 100%;
     cursor: pointer;
 }
-
 .custom-file-text {
     display: inline-block;
     padding: 6px 12px;
@@ -1436,14 +1641,10 @@ body.laberinto-bg::before {
     width: 300px;
 }
 
-
-
 /* ============================================================
 📱 MEDIA QUERIES (Responsividad)
 =============================================================== */
-/* === Media query para 1388px de ancho y 768px de alto === */
 @media (max-width: 1388px) and (max-height: 768px) {
-
     #index-container,
     #container,
     .gameover-container,
@@ -1453,48 +1654,57 @@ body.laberinto-bg::before {
         width: 85%;
         margin: 80px auto;
     }
-
     h1 {
         font-size: 40px;
     }
-
     h2 {
         font-size: 28px;
     }
-
+    .gameover-container h1 {
+        font-size: 50px;
+        padding: 40px 0;
+    }
+    .gameover-container h3 {
+        font-size: 20px;
+    }
     p {
         font-size: 14px;
     }
-
     input,
     select,
-    button {
+    button,
+    .admin-link-btn,
+    .button-save,
+    #add-btn {
         padding: 10px;
         font-size: 12px;
+        min-width: 100px;
     }
-
     #back-btn {
         padding: 10px 20px;
         font-size: 14px;
+        min-width: 100px;
     }
-
     #game-area {
         font-size: 1.2em;
     }
-
     #resultado p {
         font-size: 18px;
     }
-
     #user-box {
+        top: 15px;
+        right: 15px;
         font-size: 12px;
         padding: 6px 10px;
     }
+    #timer-box {
+        top: 15px;
+        right: 180px;
+        font-size: 16px;
+        padding: 6px 10px;
+    }
 }
-
-/* === Media query para pantallas medianas === */
 @media (max-width: 1200px) {
-
     #index-container,
     #container,
     .gameover-container,
@@ -1502,19 +1712,14 @@ body.laberinto-bg::before {
         max-width: 450px;
         padding: 25px;
     }
-
     h1 {
         font-size: 36px;
     }
-
     h2 {
         font-size: 26px;
     }
 }
-
-/* === Media query para pantallas pequeñas === */
 @media (max-width: 992px) {
-
     #index-container,
     #container,
     .gameover-container,
@@ -1522,26 +1727,20 @@ body.laberinto-bg::before {
         width: 90%;
         padding: 20px;
     }
-
     h1 {
         font-size: 32px;
     }
-
     h2 {
         font-size: 24px;
     }
-
     #game-area {
         font-size: 1em;
     }
 }
-
-/* === Media query para móviles === */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
     }
-
     #index-container,
     #container,
     .gameover-container,
@@ -1550,48 +1749,82 @@ body.laberinto-bg::before {
         padding: 15px;
         width: 95%;
     }
-
     h1 {
         font-size: 28px;
     }
-
     h2 {
         font-size: 20px;
     }
-
+    .gameover-container h1 {
+        font-size: 40px;
+        padding: 30px 0;
+    }
+    .gameover-container h3 {
+        font-size: 18px;
+    }
     p {
         font-size: 12px;
     }
-
     input,
     select,
-    button {
+    button,
+    .admin-link-btn,
+    .button-save,
+    #add-btn {
         font-size: 10px;
         padding: 8px;
+        min-width: 80px;
     }
-
     #back-btn {
         font-size: 12px;
         padding: 8px 16px;
+        min-width: 80px;
+    }
+    #user-box {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    #timer-box {
+        top: 10px;
+        right: 150px;
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    .gameover-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .gameover-buttons #save-btn,
+    .gameover-buttons #no-btn {
+        width: 100%;
+        max-width: 200px;
     }
 }
 
-
-
+/* ============================================================
+      ⏱️ TIMER BOX
+============================================================ */
 #timer-box {
-    position: absolute;
-    top: 20px;
-    right: 250px;
-    background: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 12px;
+    right: 280px;
+    background: rgba(255, 255, 255, 0.9);
     padding: 8px 12px;
     border-radius: 10px;
+    border: 2px solid #3b4cca;
     font-size: 18px;
     font-weight: bold;
+    color: #3b4cca;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    white-space: nowrap;
 }
 
-
-/* === Barra de progressió del nombre de frases === */
-
+/* ============================================================
+      📊 BARRA DE PROGRESSIÓ DEL NOMBRE DE FRASES
+============================================================ */
 #progress-text {
     text-align: center;
     font-size: 18px;
@@ -1599,7 +1832,6 @@ body.laberinto-bg::before {
     margin-top: 10px;
     color: #222;
 }
-
 #progress-container {
     width: 80%;
     height: 22px;
@@ -1610,15 +1842,22 @@ body.laberinto-bg::before {
     box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
     display: none;
 }
-
 #progress-bar {
     height: 100%;
     width: 0%;
     border-radius: 14px;
-    background: linear-gradient(to right, #61c152, #2e8b24);
+    background: linear-gradient(to right, #b97fff, #8e24aa);
     transition: width 0.4s ease-in-out;
 }
 
+/* ============================================================
+      📝 WRITE PHRASE 3 LANG
+============================================================ */
+#writePhrase3lang {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+}
 #back-btn.button-pressed {
     background-color: #a846f8 !important;
     color: #fff !important;
