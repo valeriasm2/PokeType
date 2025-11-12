@@ -142,3 +142,83 @@
 [2025-11-11 18:29:59] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
 [2025-11-11 19:03:30] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
 [2025-11-11 19:03:56] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:01:02] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 15:01:34] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:04:46] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:04:50] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:04:52] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:05:01] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:05:13] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 15:05:38] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:05:51] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:47:08] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 15:52:12] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 15:53:05] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:53:42] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:54:34] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:54:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:54:41] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:57:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:57:42] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:57:47] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 15:58:13] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-12 16:03:03] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:03:37] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:03:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:03:42] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:03:44] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:04:44] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:04:46] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:04:49] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:04:51] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:05:02] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:05:45] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:05:47] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:05:57] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:06:01] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:45] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:47] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:51] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:55] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:57] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:09:59] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:10:01] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:19:42] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:20:10] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:20:17] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:20:22] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:22:32] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:22:59] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:23:02] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:23:04] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:25:41] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:25:44] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:25:54] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:26:20] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:28:00] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:28:08] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:28:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:30:00] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:30:05] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:32:48] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:34:59] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:36:16] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:36:29] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:37:56] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:38:03] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:38:31] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:40:50] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:41:23] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:43:55] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:44:23] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:47:51] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:49:21] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:50:07] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:50:34] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:50:36] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:50:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:50:44] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:51:12] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' inició juego en dificultad 'facil'
+[2025-11-12 16:51:35] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:51:39] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking
+[2025-11-12 16:51:41] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'valeria' accedió al ranking

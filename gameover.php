@@ -1,19 +1,19 @@
 <?php
 session_start();
 
-// Redirigir al index si no hay sesión
+// 🚫 Si no hay sesión, volver al index
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
     exit();
 }
 
-// Selección de idioma
+// 🔤 Idioma actual (por defecto catalán)
 $lang = $_SESSION['lang'] ?? 'ca';
 $langFile = __DIR__ . "/lang/{$lang}.php";
 $langArray = file_exists($langFile) ? require $langFile : [];
-$t = $langArray['gameover'] ?? []; // Textos para gameover
+$t = $langArray['gameover'] ?? [];
 
-// Validar que todos los datos vengan de play.php
+// 🌟 Validación de que la info venga de play.php
 if (
     !isset($_POST['score'], $_POST['name'], $_POST['time'], $_POST['hits'], $_POST['bonus'], $_POST['timeBonus'])
 ) {
@@ -21,7 +21,7 @@ if (
     exit();
 }
 
-// Valores recibidos
+// 📝 Valores del POST
 $name          = htmlspecialchars($_POST['name']);
 $score         = intval($_POST['score']);
 $time          = floatval($_POST['time']);
@@ -32,7 +32,7 @@ $bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']
 
 $_SESSION['name'] = $name;
 
-// Guardar récord
+// 🎲 Guardar en ranking si el usuario pulsa "sí"
 if (isset($_POST['save'])) {
     $rankingFile = __DIR__ . '/ranking.txt';
     $line = $name . ":" . $score . ":" . $time . PHP_EOL;
@@ -43,61 +43,57 @@ if (isset($_POST['save'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?= $lang ?>">
-
+<html lang="<?= htmlspecialchars($lang) ?>">
 <head>
     <meta charset="UTF-8">
     <title><?= $t['title'] ?? 'Game Over' ?></title>
     <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
-
 <body>
     <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
     <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
     <div id="user-box">
         👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
-        <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sesión' ?></a>
+        <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sessió' ?></a>
     </div>
 
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div class="gameover-container">
         <h1><?= $t['title'] ?? 'Game Over!' ?></h1>
-
         <h3><?= $t['results'] ?? 'Resultat de la partida:' ?></h3>
         <p>✅ <?= $t['hits'] ?? 'Encerts' ?>: <strong><?= $hits ?></strong></p>
         <p>🎯 <?= $t['difficultyBonus'] ?? 'Bonus per dificultat' ?>: <strong><?= $bonus ?></strong></p>
-
         <?php if ($bonusGiratina > 0): ?>
             <p>✨ <?= $t['bonusGiratina'] ?? 'Bonus Giratina' ?>: <strong>+<?= $bonusGiratina ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
         <?php endif; ?>
-
         <p>⚡ <?= $t['timeBonus'] ?? 'Bonus per temps' ?>: <strong><?= $timeBonus ?></strong></p>
         <p>⏱ <?= $t['totalTime'] ?? 'Temps total' ?>: <strong><?= $time ?>s</strong></p>
-
         <hr>
-
         <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuació final' ?>: <?= $score ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
 
-        <form method="post" action="gameover.php" style="display:inline;">
-            <input type="hidden" name="name" value="<?= $name ?>">
-            <input type="hidden" name="score" value="<?= $score ?>">
-            <input type="hidden" name="time" value="<?= $time ?>">
-            <input type="hidden" name="hits" value="<?= $hits ?>">
-            <input type="hidden" name="bonus" value="<?= $bonus ?>">
-            <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
-            <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
-            <input type="hidden" name="save" value="1">
-
-            <button type="submit" class="btn-link" id="save-btn">
-                <span class="underline-letter"><?= substr($t['yes'] ?? 'S', 0, 1) ?></span><?= substr($t['yes'] ?? 'Si', 1) ?>
+        <div class="gameover-buttons">
+            <form method="post" action="gameover.php" style="display:inline;">
+                <input type="hidden" name="name" value="<?= $name ?>">
+                <input type="hidden" name="score" value="<?= $score ?>">
+                <input type="hidden" name="time" value="<?= $time ?>">
+                <input type="hidden" name="hits" value="<?= $hits ?>">
+                <input type="hidden" name="bonus" value="<?= $bonus ?>">
+                <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
+                <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+                <input type="hidden" name="save" value="1">
+                <button type="submit" id="save-btn">
+                    <?= $t['yes'] ?? 'Sí' ?>
+                </button>
+            </form>
+            <button type="button" id="no-btn" onclick="goToIndex()">
+                <?= $t['no'] ?? 'No' ?>
             </button>
-        </form>
-
-        <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">
-            <span class="underline-letter"><?= substr($t['no'] ?? 'N', 0, 1) ?></span><?= substr($t['no'] ?? 'No', 1) ?>
-        </button>
+        </div>
+        <div class="gameover-save-text" style="margin-top:1em;text-align:center">
+            <?= $t['save'] ?? 'Guardar puntuació?' ?>
+        </div>
     </div>
 
     <script src="utils/musicGameover.js"></script>
@@ -121,10 +117,10 @@ if (isset($_POST['save'])) {
 
         document.addEventListener("keydown", (e) => {
             const key = e.key.toLowerCase();
-            if (key === (<?= json_encode(substr($t['yes'] ?? 'S', 0, 1)) ?>).toLowerCase()) document.getElementById("save-btn").click();
-            if (key === (<?= json_encode(substr($t['no'] ?? 'N', 0, 1)) ?>).toLowerCase()) goToIndex();
+            // Detect both first character and Enter/Escape as fallback
+            if (key === (<?= json_encode(mb_substr(($t['yes'] ?? 'S'), 0, 1)) ?>).toLowerCase() || key === "enter") document.getElementById("save-btn").click();
+            if (key === (<?= json_encode(mb_substr(($t['no'] ?? 'N'), 0, 1)) ?>).toLowerCase() || key === "escape") goToIndex();
         });
     </script>
 </body>
-
 </html>

@@ -20,6 +20,7 @@ return [
         'difficulty_normal' => 'Normal',
         'difficulty_dificil' => 'Difícil',
         'timer' => '⏱',
+        'seconds' => 's',
         'countdown_start' => 'Començant...',
         'progress' => 'Frase %d de %d',
         'phraseCompleted' => '✅ Frase completada!',
