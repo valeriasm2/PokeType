@@ -31,19 +31,24 @@ return [
     ],
 
     'gameover' => [
-        'title' => 'Game Over',
-        'results' => 'Resultat de la partida:',
-        'hits' => 'Encerts',
-        'difficultyBonus' => 'Bonus per dificultat',
-        'bonusGiratina' => 'Bonus Giratina',
-        'timeBonus' => 'Bonus per temps',
-        'totalTime' => 'Temps total',
-        'finalScore' => 'Puntuació final',
-        'scoreUnit' => 'punts',
-        'retry' => 'Torna a jugar',
-        'save' => 'Guardar puntuació?',
-        'yes' => 'Sí',
-        'no' => 'No',
+        'title'           => 'Game Over',
+        'results'         => 'Resultado de la partida:',
+        'hits'            => 'Aciertos',
+        'difficultyBonus' => 'Bonus por dificultad',
+        'bonusGiratina'   => 'Bonus Giratina',
+        'scoreUnit'       => 'puntos',
+        'finalScore'      => 'Puntuación final',
+        'yes'             => 'Sí',
+        'no'              => 'No',
+        // Textos de permadeath
+        'permadeath_dead'   => '⚠️ Modo Permadeath activado: la partida terminó porque te quedaste sin vidas. No se aplica el bonus.',
+        'permadeath_alive'  => '⚠️ Modo Permadeath activado: esta partida se completó en permadeath.',
+        'permadeath_bonus'  => 'Bonus permadeath aplicado',
+        // Otros textos si quieres traducir también
+        'timeBonus'       => 'Bonus por tiempo',
+        'comboMultiplier' => 'Multiplicador de combo',
+        'totalTime'       => 'Tiempo total',
+        'saveRecord'      => 'Guardar récord',
     ],
 
     'ranking' => [

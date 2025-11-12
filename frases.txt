@@ -1,0 +1,368 @@
+{
+    "facil": [
+        {
+            "texto": "Pikachu és un Pokémon de tipus elèctric",
+            "imagen": "pikachu.png"
+        },
+        {
+            "texto": "Bulbasaur és un Pokémon de tipus planta",
+            "imagen": null
+        },
+        {
+            "texto": "Charmander pot llançar foc",
+            "imagen": null
+        },
+        {
+            "texto": "Squirtle és un Pokémon de tipus aigua",
+            "imagen": null
+        },
+        {
+            "texto": "Jigglypuff pot adormir rivals cantant",
+            "imagen": null
+        },
+        {
+            "texto": "Caterpie es transforma en una papallona",
+            "imagen": null
+        },
+        {
+            "texto": "Pidgey és un Pokémon de tipus volador",
+            "imagen": null
+        },
+        {
+            "texto": "Rattata és molt ràpid",
+            "imagen": "rattata.png"
+        },
+        {
+            "texto": "Zubat viu en coves fosques",
+            "imagen": null
+        },
+        {
+            "texto": "Oddish surt de nit per buscar llum de lluna",
+            "imagen": null
+        },
+        {
+            "texto": "Geodude és una roca amb braços",
+            "imagen": null
+        },
+        {
+            "texto": "Psyduck té mal de cap sovint",
+            "imagen": null
+        },
+        {
+            "texto": "Growlithe és molt lleial",
+            "imagen": null
+        },
+        {
+            "texto": "Poliwag té una espiral a la panxa",
+            "imagen": "poliwag.png"
+        },
+        {
+            "texto": "Abra es teletransporta quan s'espanta",
+            "imagen": null
+        },
+        {
+            "texto": "Machop s'entrena constantment",
+            "imagen": null
+        },
+        {
+            "texto": "Bellsprout és flexible com una planta",
+            "imagen": "bellsprout.png"
+        },
+        {
+            "texto": "Tentacool flota al mar",
+            "imagen": null
+        },
+        {
+            "texto": "Ponyta corre molt ràpid",
+            "imagen": null
+        },
+        {
+            "texto": "Magnemite es manté unit amb camps magnètics",
+            "imagen": "magnemite.png"
+        },
+        {
+            "texto": "Seel li encanta el fred",
+            "imagen": null
+        },
+        {
+            "texto": "Grimer està fet de fang tòxic",
+            "imagen": null
+        },
+        {
+            "texto": "Shellder viu dins una closca dura",
+            "imagen": null
+        },
+        {
+            "texto": "Gastly és gairebé invisible",
+            "imagen": null
+        },
+        {
+            "texto": "Krabby pot tallar amb les seves pinces",
+            "imagen": null
+        },
+        {
+            "texto": "Voltorb s'assembla a una Poké Ball",
+            "imagen": null
+        },
+        {
+            "texto": "Koffing conté gasos dins seu",
+            "imagen": null
+        },
+        {
+            "texto": "Horsea dispara aigua",
+            "imagen": null
+        },
+        {
+            "texto": "Staryu brilla a la nit",
+            "imagen": null
+        },
+        {
+            "texto": "Ditto pot transformar-se en qualsevol cosa jejeje",
+            "imagen": "ditto.png"
+        }
+    ],
+    "normal": [
+        {
+            "texto": "Eevee pot evolucionar en moltes formes diferents",
+            "imagen": null
+        },
+        {
+            "texto": "Squirtle és un Pokémon de tipus aigua molt fidel",
+            "imagen": null
+        },
+        {
+            "texto": "Togepi porta sempre un ou a la closca",
+            "imagen": null
+        },
+        {
+            "texto": "Charmeleon controla focs més intensos que Charmander",
+            "imagen": null
+        },
+        {
+            "texto": "Ivysaur utilitza la tija del seu bulb per atacar",
+            "imagen": null
+        },
+        {
+            "texto": "Wartortle utilitza la seva cua per nedar amb estabilitat",
+            "imagen": null
+        },
+        {
+            "texto": "Vulpix pot tenir fins a sis cues",
+            "imagen": null
+        },
+        {
+            "texto": "Pikachu carrega energia a les galtes",
+            "imagen": null
+        },
+        {
+            "texto": "Goldeen neda elegantment amb la seva banya",
+            "imagen": null
+        },
+        {
+            "texto": "Onix s'arrossega a gran velocitat sota terra",
+            "imagen": "onix.png"
+        },
+        {
+            "texto": "Arcanine és conegut com el Pokémon llegendari en moltes cultures",
+            "imagen": null
+        },
+        {
+            "texto": "Alakazam té un cervell extraordinari",
+            "imagen": null
+        },
+        {
+            "texto": "Golem pot rodar per costers sense frenar",
+            "imagen": null
+        },
+        {
+            "texto": "Rapidash pot córrer més ràpid que el vent",
+            "imagen": null
+        },
+        {
+            "texto": "Slowpoke reacciona molt lentament als estímuls",
+            "imagen": "slowpoke.png"
+        },
+        {
+            "texto": "Magneton crea camps magnètics que pertorben aparells electrònics",
+            "imagen": null
+        },
+        {
+            "texto": "Farfetch’d sempre porta un porro com a arma",
+            "imagen": "farfetch.png"
+        },
+        {
+            "texto": "Muk desprèn una olor molt forta",
+            "imagen": null
+        },
+        {
+            "texto": "Cloyster és gairebé impossible d’obrir",
+            "imagen": "cloyster.png"
+        },
+        {
+            "texto": "Hypno utilitza un pèndol per hipnotitzar",
+            "imagen": null
+        },
+        {
+            "texto": "Kingler té una pinça molt poderosa",
+            "imagen": null
+        },
+        {
+            "texto": "Electrode explota amb facilitat",
+            "imagen": "electrode.png"
+        },
+        {
+            "texto": "Exeggutor té múltiples caps que pensen junts",
+            "imagen": null
+        },
+        {
+            "texto": "Hitmonlee pot estirar les cames per lluitar",
+            "imagen": null
+        },
+        {
+            "texto": "Hitmonchan dona cops ràpids com un boxejador",
+            "imagen": null
+        },
+        {
+            "texto": "Weezing conté dos sacs de gasos tòxics",
+            "imagen": "weezing.png"
+        },
+        {
+            "texto": "Rhydon camina dret com un humà",
+            "imagen": null
+        },
+        {
+            "texto": "Starmie emet una llum misteriosa",
+            "imagen": "starmie.png"
+        },
+        {
+            "texto": "Scyther talla l’aire amb les seves fulles",
+            "imagen": null
+        },
+        {
+            "texto": "Lapras adora transportar persones pel mar",
+            "imagen": "lapras.png"
+        }
+    ],
+    "dificil": [
+        {
+            "texto": "Mewtwo és un Pokémon llegendari creat per experiments",
+            "imagen": null
+        },
+        {
+            "texto": "Rayquaza viu als cels i controla els conflictes entre Kyogre i Groudon",
+            "imagen": "rayquaza.png"
+        },
+        {
+            "texto": "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió",
+            "imagen": null
+        },
+        {
+            "texto": "La fúria gegant de l'aigua és el que defineix Gyarados",
+            "imagen": "gyarados.png"
+        },
+        {
+            "texto": "Lugia governa els corrents marins des de les profunditats",
+            "imagen": null
+        },
+        {
+            "texto": "Ho-Oh és símbol d’esperança i renaixement",
+            "imagen": null
+        },
+        {
+            "texto": "Celebi pot viatjar en el temps",
+            "imagen": "celebi.png"
+        },
+        {
+            "texto": "Regirock pot reconstruir-se amb pedres del seu entorn",
+            "imagen": null
+        },
+        {
+            "texto": "Regice està format completament per gel etern",
+            "imagen": null
+        },
+        {
+            "texto": "Registeel té un cos més dur que qualsevol metall conegut",
+            "imagen": "registeel.png"
+        },
+        {
+            "texto": "Latias pot fer-se invisible",
+            "imagen": null
+        },
+        {
+            "texto": "Latios pot volar a velocitats impressionants",
+            "imagen": null
+        },
+        {
+            "texto": "Kyogre expandeix els mars amb les seves pluges torrencials",
+            "imagen": "kyogre.png"
+        },
+        {
+            "texto": "Groudon pot expandir continents sencers",
+            "imagen": null
+        },
+        {
+            "texto": "Deoxys canvia de forma per adaptar-se al combat",
+            "imagen": "deoxys.png"
+        },
+        {
+            "texto": "Darkrai provoca malsons als que dormen",
+            "imagen": null
+        },
+        {
+            "texto": "Cresselia protegeix els humans dels malsons",
+            "imagen": null
+        },
+        {
+            "texto": "Heatran habita en coves plenes de magma",
+            "imagen": null
+        },
+        {
+            "texto": "Dialga controla el temps",
+            "imagen": null
+        },
+        {
+            "texto": "Palkia domina l’espai",
+            "imagen": "palkia.png"
+        },
+        {
+            "texto": "Arceus és considerat el creador de l’univers Pokémon",
+            "imagen": "arceus.png"
+        },
+        {
+            "texto": "Zekrom genera energia elèctrica amb la cua",
+            "imagen": null
+        },
+        {
+            "texto": "Reshiram controla flames blaves molt potents",
+            "imagen": "reshi.png"
+        },
+        {
+            "texto": "Xerneas comparteix energia vital amb els éssers vius",
+            "imagen": null
+        },
+        {
+            "texto": "Yveltal absorbeix energia vital per sobreviure",
+            "imagen": null
+        },
+        {
+            "texto": "Zygarde manté l’equilibri de l’ecosistema",
+            "imagen": null
+        },
+        {
+            "texto": "Solgaleo brilla com un sol vivent",
+            "imagen": null
+        },
+        {
+            "texto": "Lunala reflecteix la llum com la lluna plena",
+            "imagen": "lunala.png"
+        },
+        {
+            "texto": "Necrozma consumeix llum per guanyar força",
+            "imagen": null
+        },
+        {
+            "texto": "Eternatus produeix una energia gairebé il·limitada",
+            "imagen": null
+        }
+    ]
+}

@@ -2,6 +2,7 @@
 session_start();
 
 // 🚫 Si no hay sesión, volver al index
+require_once 'admin/logger.php';
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
     exit();
@@ -29,79 +30,100 @@ $hits          = intval($_POST['hits']);
 $bonus         = intval($_POST['bonus']);
 $timeBonus     = intval($_POST['timeBonus']);
 $bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0;
+$comboLevel    = isset($_POST['comboLevel']) ? intval($_POST['comboLevel']) : 1;
+
+// Permadeath (opcional)
+$isPermadeath = (isset($_POST['permadeath']) && intval($_POST['permadeath']) === 1);
+$muerto       = (isset($_POST['muerto']) && intval($_POST['muerto']) === 1);
 
 $_SESSION['name'] = $name;
 
-// 🎲 Guardar en ranking si el usuario pulsa "sí"
+// Bonus permadeath
+$permadeathBonus = ($isPermadeath && !$muerto) ? 300 : 0;
+$finalScore = $score + $permadeathBonus;
+
+logJuego("GAMEOVER_RECEIVED", "gameover.php", "Datos recibidos: jugador '$name', puntuación base $score, muerto=" . ($muerto? '1':'0') . ", bonus_permadeath $permadeathBonus, puntuación final $finalScore, tiempo $time s, combo x$comboLevel, permadeath=" . ($isPermadeath ? '1' : '0'));
+
+// ✅ Guardar récord si se pulsa "Sí"
 if (isset($_POST['save'])) {
     $rankingFile = __DIR__ . '/ranking.txt';
-    $line = $name . ":" . $score . ":" . $time . PHP_EOL;
+    $permaFlag = $isPermadeath ? 1 : 0;
+    $line = $name . ":" . $finalScore . ":" . $time . ":" . $comboLevel . ":" . $permaFlag . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);
 
-    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score . "&time=" . $time);
+    logJuego("RANKING_SAVED", "gameover.php", "Guardado ranking: $line");
+
+    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $finalScore . "&time=" . $time . "&combo=" . $comboLevel . "&permadeath=" . $permaFlag);
     exit();
 }
+
+// Variables de botones Sí/No
+$yesText = $t['yes'] ?? 'Sí';
+$noText  = $t['no'] ?? 'No';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title><?= $t['title'] ?? 'Game Over' ?></title>
     <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
-
 <body>
     <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
     <img src="images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
     <div id="user-box">
         👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
-        <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sessió' ?></a>
+        <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sesión' ?></a>
     </div>
 
     <div class="gameover-container">
         <h1><?= $t['title'] ?? 'Game Over!' ?></h1>
-        <h3><?= $t['results'] ?? 'Resultat de la partida:' ?></h3>
-        <p>✅ <?= $t['hits'] ?? 'Encerts' ?>: <strong><?= $hits ?></strong></p>
-        <p>🎯 <?= $t['difficultyBonus'] ?? 'Bonus per dificultat' ?>: <strong><?= $bonus ?></strong></p>
+        <h3><?= $t['results'] ?? 'Resultado de la partida:' ?></h3>
+        <p>✅ <?= $t['hits'] ?? 'Aciertos' ?>: <strong><?= $hits ?></strong></p>
+        <p>🎯 <?= $t['difficultyBonus'] ?? 'Bonus por dificultad' ?>: <strong><?= $bonus ?></strong></p>
         <?php if ($bonusGiratina > 0): ?>
             <p>✨ <?= $t['bonusGiratina'] ?? 'Bonus Giratina' ?>: <strong>+<?= $bonusGiratina ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
         <?php endif; ?>
-        <p>⚡ <?= $t['timeBonus'] ?? 'Bonus per temps' ?>: <strong><?= $timeBonus ?></strong></p>
-        <p>⏱ <?= $t['totalTime'] ?? 'Temps total' ?>: <strong><?= $time ?>s</strong></p>
+        <p>⚡ <?= $t['timeBonus'] ?? 'Bonus por tiempo' ?>: <strong><?= $timeBonus ?></strong></p>
+        <p>🔥 <?= $t['comboMultiplier'] ?? 'Multiplicador de combo' ?>: <strong>x<?= $comboLevel ?></strong></p>
+        <p>⏱ <?= $t['totalTime'] ?? 'Tiempo total' ?>: <strong><?= $time ?>s</strong></p>
+
         <hr>
-        <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuació final' ?>: <?= $score ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
+        <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuación final' ?>: <?= $finalScore ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
 
-        <div class="gameover-save-text" style="margin-top:1em;margin-bottom:1em;text-align:center">
-            <?= $t['save'] ?? 'Guardar puntuació?' ?>
-        </div>
+        <?php if ($isPermadeath): ?>
+            <?php if ($muerto): ?>
+                <p class="permadeath-notice"><?= $t['permadeath_dead'] ?? '⚠️ Modo Permadeath activado: la partida terminó porque te quedaste sin vidas. No se aplica el bonus.' ?></p>
+            <?php else: ?>
+                <p class="permadeath-notice"><?= $t['permadeath_alive'] ?? '⚠️ Modo Permadeath activado: esta partida se completó en permadeath.' ?></p>
+                <p class="permadeath-notice"><?= $t['permadeath_bonus'] ?? 'Bonus permadeath aplicado' ?>: +<?= $permadeathBonus ?> <?= $t['scoreUnit'] ?? '' ?></p>
+            <?php endif; ?>
+        <?php endif; ?>
 
-        <?php
-        $yesText = $t['yes'] ?? 'Sí';
-        $noText  = $t['no'] ?? 'No';
-        ?>
+        <!-- Form guardar récord -->
+        <form method="post" action="gameover.php" style="display:inline;">
+            <input type="hidden" name="name" value="<?= $name ?>">
+            <input type="hidden" name="score" value="<?= $finalScore ?>">
+            <input type="hidden" name="time" value="<?= $time ?>">
+            <input type="hidden" name="hits" value="<?= $hits ?>">
+            <input type="hidden" name="bonus" value="<?= $bonus ?>">
+            <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
+            <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+            <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
+            <input type="hidden" name="permadeath" value="<?= $isPermadeath ? 1 : 0 ?>">
+            <input type="hidden" name="save" value="1">
 
-        <div class="gameover-buttons">
-            <form method="post" action="gameover.php">
-                <input type="hidden" name="name" value="<?= $name ?>">
-                <input type="hidden" name="score" value="<?= $score ?>">
-                <input type="hidden" name="time" value="<?= $time ?>">
-                <input type="hidden" name="hits" value="<?= $hits ?>">
-                <input type="hidden" name="bonus" value="<?= $bonus ?>">
-                <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
-                <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
-                <input type="hidden" name="save" value="1">
+            <div class="gameover-buttons">
                 <button type="submit" id="save-btn">
-                    <span class="underline-letter"><?= substr($yesText, 0, 1) ?></span><?= substr($yesText, 1) ?>
+                    <span class="underline-letter"><?= mb_substr($yesText, 0, 1) ?></span><?= mb_substr($yesText, 1) ?>
                 </button>
-            </form>
-            <a href="index.php" id="no-btn" class="btn">
-                <span class="underline-letter"><?= substr($noText, 0, 1) ?></span><?= substr($noText, 1) ?>
-            </a>
-        </div>
-
+                <a href="index.php" id="no-btn" class="btn">
+                    <span class="underline-letter"><?= mb_substr($noText, 0, 1) ?></span><?= mb_substr($noText, 1) ?>
+                </a>
+            </div>
+        </form>
     </div>
 
     <script>
@@ -109,8 +131,8 @@ if (isset($_POST['save'])) {
             if (e.repeat) return;
             const key = e.key.toLowerCase();
 
-            const yesKey = <?= json_encode(mb_substr(($t['yes'] ?? 'Sí'), 0, 1)) ?>.toLowerCase();
-            const noKey  = <?= json_encode(mb_substr(($t['no'] ?? 'No'), 0, 1)) ?>.toLowerCase();
+            const yesKey = <?= json_encode(mb_substr($yesText, 0, 1)) ?>.toLowerCase();
+            const noKey  = <?= json_encode(mb_substr($noText, 0, 1)) ?>.toLowerCase();
 
             if (key === yesKey || key === "enter") {
                 e.preventDefault();
@@ -123,5 +145,4 @@ if (isset($_POST['save'])) {
         });
     </script>
 </body>
-
 </html>
