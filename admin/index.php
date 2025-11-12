@@ -90,7 +90,7 @@ if ($mostrar_llistat) {
                         <input type="hidden" name="nivell" value="' . htmlspecialchars($nivell_seleccionat) . '">
                         <input type="hidden" name="index" value="' . $index . '">
                         <input type="hidden" name="lang" value="' . htmlspecialchars($lang) . '">
-                        <button type="submit" class="delete-btn">' . ($lang_data['admin_index']['delete'] ?? 'X') . '</button>
+                        <button type="submit" class="delete-btn">' . ($lang_data['admin_index']['delete_phrase'] ?? 'X') . '</button>
                     </form>
                 </td>';
                 $listado_html .= '</tr>';

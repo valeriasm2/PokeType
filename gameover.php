@@ -47,20 +47,19 @@ if (isset($_POST['save'])) {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title><?= $t['title'] ?? 'Game Over' ?></title>
     <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
 
 <body>
     <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
-    <img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
+    <img src="images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
 
     <div id="user-box">
         👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
         <a href="destroy_session.php"><?= $langArray['index']['logout'] ?? 'Cerrar sessió' ?></a>
     </div>
-
-    <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div class="gameover-container">
         <h1><?= $t['title'] ?? 'Game Over!' ?></h1>
@@ -75,8 +74,17 @@ if (isset($_POST['save'])) {
         <hr>
         <p>🏆 <strong><?= $t['finalScore'] ?? 'Puntuació final' ?>: <?= $score ?> <?= $t['scoreUnit'] ?? '' ?></strong></p>
 
+        <div class="gameover-save-text" style="margin-top:1em;margin-bottom:1em;text-align:center">
+            <?= $t['save'] ?? 'Guardar puntuació?' ?>
+        </div>
+
+        <?php
+        $yesText = $t['yes'] ?? 'Sí';
+        $noText  = $t['no'] ?? 'No';
+        ?>
+
         <div class="gameover-buttons">
-            <form method="post" action="gameover.php" style="display:inline;">
+            <form method="post" action="gameover.php">
                 <input type="hidden" name="name" value="<?= $name ?>">
                 <input type="hidden" name="score" value="<?= $score ?>">
                 <input type="hidden" name="time" value="<?= $time ?>">
@@ -86,69 +94,29 @@ if (isset($_POST['save'])) {
                 <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
                 <input type="hidden" name="save" value="1">
                 <button type="submit" id="save-btn">
-                    <?= $t['yes'] ?? 'Sí' ?>
-                </button>
-                <button type="button" id="no-btn">
-                    <?= $t['no'] ?? 'No' ?>
+                    <span class="underline-letter"><?= substr($yesText, 0, 1) ?></span><?= substr($yesText, 1) ?>
                 </button>
             </form>
+            <a href="index.php" id="no-btn" class="btn">
+                <span class="underline-letter"><?= substr($noText, 0, 1) ?></span><?= substr($noText, 1) ?>
+            </a>
+        </div>
 
-        </div>
-        <div class="gameover-save-text" style="margin-top:1em;text-align:center">
-            <?= $t['save'] ?? 'Guardar puntuació?' ?>
-        </div>
     </div>
 
-    <script src="utils/musicGameover.js"></script>
     <script>
-        const buttonSound = document.getElementById("button-sound");
-
-        function playSound(callback) {
-            if (buttonSound) {
-                buttonSound.currentTime = 0;
-                buttonSound.play().catch(() => {
-                    // Si falla el audio, ejecutar callback inmediatamente
-                    if (callback) callback();
-                });
-                if (callback) {
-                    setTimeout(callback, 800);
-                }
-            } else if (callback) {
-                callback();
-            }
-        }
-
-        function goToIndex() {
-            window.location.href = "index.php";
-        }
-
-        document.getElementById("save-btn").addEventListener("click", (e) => {
-            e.preventDefault();
-            playSound(() => {
-                const form = e.target.closest("form");
-                if (form) form.submit();
-            });
-        });
-
-        document.getElementById("no-btn").addEventListener("click", (e) => {
-            e.preventDefault();
-            playSound(() => {
-                goToIndex();
-            });
-        });
-
         document.addEventListener("keydown", (e) => {
             if (e.repeat) return;
-            const active = document.activeElement;
-            if (["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) return;
-
             const key = e.key.toLowerCase();
-            // Detect both first character and Enter/Escape as fallback
-            if (key === (<?= json_encode(mb_substr(($t['yes'] ?? 'S'), 0, 1)) ?>).toLowerCase() || key === "enter") {
+
+            const yesKey = <?= json_encode(mb_substr(($t['yes'] ?? 'Sí'), 0, 1)) ?>.toLowerCase();
+            const noKey  = <?= json_encode(mb_substr(($t['no'] ?? 'No'), 0, 1)) ?>.toLowerCase();
+
+            if (key === yesKey || key === "enter") {
                 e.preventDefault();
                 document.getElementById("save-btn").click();
             }
-            if (key === (<?= json_encode(mb_substr(($t['no'] ?? 'N'), 0, 1)) ?>).toLowerCase() || key === "escape") {
+            if (key === noKey || key === "escape") {
                 e.preventDefault();
                 document.getElementById("no-btn").click();
             }
