@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once 'admin/logger.php';
 // Si no hay sesión → al index
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -36,11 +36,13 @@ $comboLevel    = isset($_POST['comboLevel']) ? intval($_POST['comboLevel']) : 1;
 
 $_SESSION['name'] = $name;
 
+logJuego("GAMEOVER_RECEIVED", "gameover.php", "Datos recibidos: jugador '$name', puntuación $score, tiempo $time s, combo x$comboLevel");
+
+
 // ✅ Guardar récord si se pulsa "Sí"
 if (isset($_POST['save'])) {
 
     $rankingFile = __DIR__ . '/ranking.txt';
-
     // Guardar en formato: nombre:puntuación:tiempo:combo
     $line = $name . ":" . $score . ":" . $time . ":" . $comboLevel . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);

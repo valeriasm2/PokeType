@@ -23,11 +23,11 @@ if ($_POST) {
     if (empty($name)) {
         $error = "⚠️ El camp nom no pot estar buit";
     } else {
-        $_SESSION['name'] = $name;              // ✅ Guardem nom en sessió
-        $_SESSION['difficulty'] = $difficulty;  // ✅ Guardem dificultat en sessió
+        $_SESSION['name'] = $name;              
+        $_SESSION['difficulty'] = $difficulty;  
 
         // Log inicio de juego
-        logJuego("GAME_START", "index.php", "Usuario '$name' inició juego en dificultad '$difficulty'");
+        logJuego("GAME_START", "index.php", "Usuario '$name' escogió juego en dificultad '$difficulty'");
 
         header("Location: play.php");
         exit();

@@ -1,5 +1,8 @@
 <?php
+
 session_start();
+
+require_once "admin/logger.php";
 
 // Si no hay sesión, volver al index
 if (!isset($_SESSION['name'])) {
@@ -10,6 +13,8 @@ if (!isset($_SESSION['name'])) {
 // Variables básicas
 $name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Jugador';
 $difficulty = isset($_SESSION['difficulty']) ? $_SESSION['difficulty'] : 'facil';
+
+logJuego("GAME_START", "play.php", "Jugador '$name' inició partida en dificultad '$difficulty'");
 
 // Bonus especial Giratina desde Easter Egg
 $bonusGiratina = isset($_GET['bonusGiratina']) ? (int)$_GET['bonusGiratina'] : 0;
