@@ -26,38 +26,45 @@ if ($mostrar_llistat) {
             $nivell_seleccionat = 'facil';
         }
 
-        $listado_html = '<table>';
-        $listado_html .= '<thead><tr><th>Frase</th><th>Esborra</th></tr></thead><tbody>';
+       $listado_html = '<table>';
+       $listado_html .= '<thead><tr><th>Frase</th><th>Foto</th><th>Esborra</th></tr></thead><tbody>';
 
-        // --- Paginació ---
+
+        // --- Paginacion ---
         $por_pagina = 25;
         $total_frases = count($frases[$nivell_seleccionat]);
         $total_paginas = ceil($total_frases / $por_pagina);
 
         $pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 
-        // Calculem l’índex d’inici i final
+        
         $inicio = ($pagina_actual - 1) * $por_pagina;
         $frases_paginadas = array_slice($frases[$nivell_seleccionat], $inicio, $por_pagina);
 
         foreach ($frases_paginadas as $i => $fraseObj) {
-            $index = $inicio + $i;
-            $textoFrase = $fraseObj['texto'];
+        $index = $inicio + $i;
+        $textoFrase = $fraseObj['texto'];
 
-            // Comparo si és la nova frase i el seu nivell per ressaltar-la
-            $es_nueva = ($nuevaFrase !== null && $textoFrase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
+        // lo q hago es comparar si la frase es nueva y su niel de dificultad pa resaltarla o no
+        $es_nueva = ($nuevaFrase !== null && $textoFrase === $nuevaFrase && $nivell_seleccionat === $nivellUltim);
 
-            $listado_html .= '<tr' . ($es_nueva ? ' class="highlight"' : '') . '>';
-            $listado_html .= '<td>' . htmlspecialchars($textoFrase) . '</td>';
-            $listado_html .= '<td>
-                <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\'Segur que vols eliminar aquesta frase?\');">
-                    <input type="hidden" name="nivell" value="' . htmlspecialchars($nivell_seleccionat) . '">
-                    <input type="hidden" name="index" value="' . $index . '">
-                    <button type="submit" aria-label="Esborra">X</button>
-                </form>
-            </td>';
-            $listado_html .= '</tr>';
-        }
+        $listado_html .= '<tr' . ($es_nueva ? ' class="highlight"' : '') . '>';
+        $listado_html .= '<td>' . htmlspecialchars($textoFrase) . '</td>';
+
+        $nombreFoto = !empty($fraseObj['imagen']) ? htmlspecialchars($fraseObj['imagen']) : '—';
+        $listado_html .= '<td class="foto-cell">' . $nombreFoto . '</td>';
+
+
+        $listado_html .= '<td>
+            <form method="POST" action="delete_sentence.php" onsubmit="return confirm(\'Segur que vols eliminar aquesta frase?\');">
+                <input type="hidden" name="nivell" value="' . htmlspecialchars($nivell_seleccionat) . '">
+                <input type="hidden" name="index" value="' . $index . '">
+                <button type="submit" aria-label="Esborra">X</button>
+            </form>
+        </td>';
+        $listado_html .= '</tr>';
+    }
+
 
         $listado_html .= '</tbody></table>';
 

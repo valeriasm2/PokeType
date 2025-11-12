@@ -726,6 +726,16 @@ body.laberinto-bg::before {
     text-align: center;
     font-size: 12px;
 }
+/* Columna de Foto */
+/* Columna de Foto (centrada y consistente) */
+.admin-container-index td.foto-cell,
+.admin-container-index th.foto-header {
+    text-align: center !important;
+    vertical-align: middle;
+    width: 250px; /* puedes ajustar según quieras */
+    white-space: nowrap;
+}
+
 
 .admin-container-index tr:nth-child(even) {
     background-color: #D8ECFF;
