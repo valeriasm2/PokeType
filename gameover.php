@@ -34,20 +34,37 @@ $timeBonus     = intval($_POST['timeBonus']);
 $bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0;
 $comboLevel    = isset($_POST['comboLevel']) ? intval($_POST['comboLevel']) : 1;
 
+// Permadeath (opcional) — enviado por play.php cuando corresponde
+$isPermadeath = (isset($_POST['permadeath']) && intval($_POST['permadeath']) === 1) ? true : false;
+
+// ¿La partida terminó porque el jugador se quedó sin vidas? (enviado por play.php)
+$muerto = (isset($_POST['muerto']) && intval($_POST['muerto']) === 1) ? true : false;
+
 $_SESSION['name'] = $name;
 
-logJuego("GAMEOVER_RECEIVED", "gameover.php", "Datos recibidos: jugador '$name', puntuación $score, tiempo $time s, combo x$comboLevel");
+// Aplicar bonus por permadeath si corresponde
+
+// Aplicar bonus por permadeath solo si el modo estaba activo Y NO ha sido una muerte por quedarse sin vidas
+$permadeathBonus = ($isPermadeath && !$muerto) ? 300 : 0;
+$finalScore = $score + $permadeathBonus;
+
+logJuego("GAMEOVER_RECEIVED", "gameover.php", "Datos recibidos: jugador '$name', puntuación base $score, muerto=" . ($muerto? '1':'0') . ", bonus_permadeath $permadeathBonus, puntuación final $finalScore, tiempo $time s, combo x$comboLevel, permadeath=" . ($isPermadeath ? '1' : '0'));
 
 
 // ✅ Guardar récord si se pulsa "Sí"
 if (isset($_POST['save'])) {
 
     $rankingFile = __DIR__ . '/ranking.txt';
-    // Guardar en formato: nombre:puntuación:tiempo:combo
-    $line = $name . ":" . $score . ":" . $time . ":" . $comboLevel . PHP_EOL;
+    // Guardar en formato: nombre:puntuación:tiempo:combo:permadeath
+    $permaFlag = (isset($_POST['permadeath']) && intval($_POST['permadeath']) === 1) ? 1 : 0;
+    // Guardamos la puntuación final (incluido bonus de permadeath)
+    $line = $name . ":" . $finalScore . ":" . $time . ":" . $comboLevel . ":" . $permaFlag . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);
 
-    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score . "&time=" . $time . "&combo=" . $comboLevel);
+    logJuego("RANKING_SAVED", "gameover.php", "Guardado ranking: $line");
+
+    // Añadimos perma al redirect para que ranking pueda mostrarlo si quiere
+    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $finalScore . "&time=" . $time . "&combo=" . $comboLevel . "&permadeath=" . $permaFlag);
     exit();
 }
 ?>
@@ -88,18 +105,28 @@ if (isset($_POST['save'])) {
 
         <hr>
 
-        <p>🏆 <strong>Puntuació final: <?= $score ?> punts</strong></p>
+        <p>🏆 <strong>Puntuació final: <?= $finalScore ?> punts</strong></p>
+
+        <?php if ($isPermadeath): ?>
+            <?php if ($muerto): ?>
+                <p class="permadeath-notice">⚠️ Mode <em>Permadeath</em> activat: la partida ha acabat perquè et vas quedar sense vides. No s'aplica el bonus.</p>
+            <?php else: ?>
+                <p class="permadeath-notice">⚠️ Mode <em>Permadeath</em> activat: aquesta partida s'ha completat en permadeath.</p>
+                <p class="permadeath-notice">Bonus permadeath aplicat: +<?= $permadeathBonus ?> punts</p>
+            <?php endif; ?>
+        <?php endif; ?>
 
         <!-- Form guardar récord -->
         <form method="post" action="gameover.php" style="display:inline;">
             <input type="hidden" name="name" value="<?= $name ?>">
-            <input type="hidden" name="score" value="<?= $score ?>">
+            <input type="hidden" name="score" value="<?= $finalScore ?>">
             <input type="hidden" name="time" value="<?= $time ?>">
             <input type="hidden" name="hits" value="<?= $hits ?>">
             <input type="hidden" name="bonus" value="<?= $bonus ?>">
             <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
             <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
             <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
+            <input type="hidden" name="permadeath" value="<?= $isPermadeath ? 1 : 0 ?>">
             <input type="hidden" name="save" value="1">
 
             <button type="submit" class="btn-link" id="save-btn">

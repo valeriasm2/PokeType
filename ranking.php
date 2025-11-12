@@ -23,8 +23,20 @@ $lastScore  = isset($_GET['score']) ? intval($_GET['score']) : null;
 if(file_exists($rankingFile)) {
     $lines = file($rankingFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach($lines as $line) {
-        [$playerName, $score] = explode(":", $line);
-        $ranking[] = ['name' => htmlspecialchars($playerName), 'score' => intval($score)];
+        // Formato esperado: nombre:puntaje:tiempo:combo:permadeath
+        $parts = explode(":", $line);
+        $playerName = $parts[0] ?? '';
+        $scoreVal = isset($parts[1]) ? intval($parts[1]) : 0;
+        $timeVal = isset($parts[2]) ? $parts[2] : '';
+        $comboVal = isset($parts[3]) ? intval($parts[3]) : 1;
+        $permaVal = isset($parts[4]) ? intval($parts[4]) : 0;
+        $ranking[] = [
+            'name' => htmlspecialchars($playerName),
+            'score' => $scoreVal,
+            'time' => $timeVal,
+            'combo' => $comboVal,
+            'permadeath' => $permaVal
+        ];
     }
     usort($ranking, fn($a, $b) => $b['score'] <=> $a['score']);
 }
@@ -57,6 +69,7 @@ if(file_exists($rankingFile)) {
                     <tr>
                         <th>Jugador</th>
                         <th>Punts</th>
+                        <th>Temps</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,8 +80,10 @@ if(file_exists($rankingFile)) {
                             if($highlight) $highlighted = true;
                     ?>
                         <tr class="<?= $i % 2 === 0 ? 'even' : 'odd' ?> <?= $highlight ? 'highlight' : '' ?>">
-                            <td><?= $p['name'] ?></td>
+                            <?php $displayName = $p['name'] . ($p['permadeath'] ? ' 💀' : ''); ?>
+                            <td><?= $displayName ?></td>
                             <td><?= $p['score'] ?></td>
+                            <td><?= $p['permadeath'] ? htmlspecialchars($p['time']) : '-' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

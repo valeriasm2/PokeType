@@ -16,6 +16,15 @@ $difficulty = isset($_SESSION['difficulty']) ? $_SESSION['difficulty'] : 'facil'
 
 logJuego("GAME_START", "play.php", "Jugador '$name' inició partida en dificultad '$difficulty'");
 
+// Permadeath: si viene por GET lo fijamos en sesión; también admitimos la bandera en sesión
+$isPermadeath = false;
+if (isset($_GET['permadeath']) && $_GET['permadeath']) {
+    $_SESSION['permadeath'] = true;
+}
+if (isset($_SESSION['permadeath']) && $_SESSION['permadeath']) {
+    $isPermadeath = true;
+}
+
 // Bonus especial Giratina desde Easter Egg
 $bonusGiratina = isset($_GET['bonusGiratina']) ? (int)$_GET['bonusGiratina'] : 0;
 
@@ -67,6 +76,10 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 
 <!-- Temporizador -->
 <div id="timer-box">⏱ <span id="timer">0.00</span>s</div>
+<!-- Vidas (permadeath) - contenedor cajón -->
+<div id="lives-container">
+    <div id="lives-box">❤❤❤❤❤</div>
+</div>
 
 <!-- Sonidos -->
 <audio id="correct-sound" src="media/bien.mp3" preload="auto"></audio>
@@ -130,6 +143,36 @@ const imageBox = document.getElementById("image-box");
 const progressText = document.getElementById("progress-text");
 const progressBar = document.getElementById("progress-bar");
 const progressContainer = document.getElementById("progress-container");
+
+/* ------------------ PERMADEATH (vidas) ------------------ */
+const permadeathEnabled = <?php echo $isPermadeath ? 'true' : 'false'; ?>;
+let vidas = permadeathEnabled ? 5 : 0; // 5 fallos permitidos en permadeath
+const livesBox = document.getElementById('lives-box');
+function modificarVidas(){
+    // Mostrar siempre el cajón para facilitar pruebas visuales.
+    livesBox.style.display = 'block';
+    // Si el modo permadeath NO está activo, mostramos un estado atenuado (placeholder)
+    if(!permadeathEnabled){
+        livesBox.classList.add('disabled');
+        // mostrar corazones vacíos como placeholder
+        let heartsOff = '';
+        for(let i=0;i<5;i++) heartsOff += '♡';
+        livesBox.innerText = heartsOff + '  (permadeath off)';
+        return;
+    }
+    // Si está activo, mostrar corazones según vidas restantes
+    livesBox.classList.remove('disabled');
+    let hearts = '';
+    for(let i=0;i<vidas;i++) hearts += '❤';
+    for(let i=vidas;i<5;i++) hearts += '♡';
+    livesBox.innerText = hearts + (vidas<=2 ? '  ⚠️ Queden ' + vidas + ' vides' : '');
+}
+function perderVidasEff(){
+    // pequeño efecto visual
+    livesBox.classList.add('life-lost');
+    setTimeout(()=> livesBox.classList.remove('life-lost'), 400);
+}
+modificarVidas();
 
 /* ------------------- TIMER GLOBAL ------------------- */
 let startTimeGlobal = null;
@@ -235,6 +278,22 @@ function jugar(e){
         wrongSound.play();
         consecutiveWrong++;
         if(consecutiveWrong===1){ singleWrongPending=true; } else { if(comboLevel>1){ comboLevel=Math.max(1,comboLevel-1); showComboPopup(); } correctSinceLevel=0; singleWrongPending=false; }
+
+        // Permadeath: restar vidas en cada fallo
+        if(permadeathEnabled){
+            vidas = Math.max(0, vidas - 1);
+            perderVidasEff();
+            modificarVidas();
+            if(vidas <= 0){
+                // Fin inmediato de la partida por permadeath
+                document.removeEventListener("keydown", jugar);
+                fraseEl.innerHTML += "<br><br><strong>💀 Permadeath: no queden vides. Fi de la partida.</strong>";
+                setTimeout(()=>{
+                    enviarScore(puntosTotales, true);
+                }, 2000);
+                return;
+            }
+        }
     }
 
     resetInactivityTimer();
@@ -265,7 +324,7 @@ function jugar(e){
 }
 
 /* Enviar score a gameover.php incluyendo bonus Giratina */
-function enviarScore(finalScoreBase){
+function enviarScore(finalScoreBase, muerto = false){
     const finalScore = Math.floor((finalScoreBase + bonusDificultad + bonusGiratina) * comboLevel);
     const form = document.createElement("form");
     form.method="POST";
@@ -279,6 +338,8 @@ function enviarScore(finalScoreBase){
         <input type="hidden" name="bonusGiratina" value="${bonusGiratina}">
         <input type="hidden" name="name" value="<?php echo $name; ?>">
         <input type="hidden" name="comboLevel" value="${comboLevel}">
+        ${permadeathEnabled ? '<input type="hidden" name="permadeath" value="1">' : ''}
+        ${muerto ? '<input type="hidden" name="muerto" value="1">' : ''}
     `;
     document.body.appendChild(form);
     form.submit();

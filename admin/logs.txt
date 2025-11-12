@@ -1,7 +1,13 @@
 
-[2025-11-12 19:31:30] [::1] [index.php] GAME_START: Usuario 'Gerard' inició juego en dificultad 'normal'
-[2025-11-12 19:31:30] [::1] [play.php] GAME_START: Jugador 'Gerard' inició partida en dificultad 'normal'
-[2025-11-12 19:32:17] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'Gerard', puntuación 87, tiempo 43.17 s, combo x1
-[2025-11-12 19:32:23] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'Gerard', puntuación 87, tiempo 43.17 s, combo x1
-[2025-11-12 19:32:23] [::1] [ranking.php] VIEW_RANKING: Usuario 'Gerard' accedió al ranking
-[2025-11-12 19:32:27] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Gerard' cerró sesión del juego
+[2025-11-12 20:59:00] [::1] [index.php] GAME_START_PERMADEATH: Usuario 'Ik3R' inició partida en modo permadeath (5 vides)
+[2025-11-12 20:59:00] [::1] [play.php] GAME_START: Jugador 'Ik3R' inició partida en dificultad 'facil'
+[2025-11-12 20:59:37] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'Ik3R', puntuación base 408, muerto=0, bonus_permadeath 300, puntuación final 708, tiempo 33.57 s, combo x4, permadeath=1
+[2025-11-12 20:59:48] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'Ik3R', puntuación base 708, muerto=0, bonus_permadeath 300, puntuación final 1008, tiempo 33.57 s, combo x4, permadeath=1
+[2025-11-12 20:59:48] [::1] [gameover.php] RANKING_SAVED: Guardado ranking: Ik3R:1008:33.57:4:1
+
+[2025-11-12 20:59:48] [::1] [ranking.php] VIEW_RANKING: Usuario 'Ik3R' accedió al ranking
+[2025-11-12 20:59:56] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'Ik3R' cerró sesión del juego
+[2025-11-12 21:00:06] [::1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-12 21:00:27] [::1] [create_sentence.php] CREATE_SENTENCE: Nueva frase creada en nivel 'normal': 'wadwawaawwa' sin imagen (Usuario: admin)
+[2025-11-12 21:00:33] [::1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'normal': 'wadwawaawwa' (Usuario: admin)
+[2025-11-12 21:00:34] [::1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
