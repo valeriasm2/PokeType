@@ -134,7 +134,7 @@ function underlineFirstLetter($text)
             </div>
 
             <br><br>
-            <button type="submit"><?= $lang_data['admin_create']['save'] ?? "Save" ?></button>
+            <button type="submit" class="button-save"><?= $lang_data['admin_create']['save'] ?? "Save" ?></button>
 
             <?php if ($mensaje): ?>
                 <div class="<?= $error ? 'error' : 'success' ?>">

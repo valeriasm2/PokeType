@@ -839,9 +839,29 @@ body.laberinto-bg::before {
     transition: all 0.3s ease;
 }
 
-/* Botón de borrar */
+/* Botón de eliminar en la tabla */
+.delete-btn {
+    background-color: #d32f2f; /* rojo típico */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: none; /* quitar sombra heredada */
+}
+
+.delete-btn:hover {
+    background-color: #f44336; /* rojo más brillante */
+    transform: translateY(-2px);
+}
+
+/*
+/* Botón de crear
 .admin-container-index form button {
-    background-color: #e40707;
+    background-color: #fa9292;
     color: #FFFFFF;
     border: none;
     border-radius: 6px;
@@ -857,6 +877,109 @@ body.laberinto-bg::before {
     background-color: #F7C948;
     color: #1E3A5F;
     transform: translateY(-2px);
+}
+*/
+
+
+/* ============================================================
+      💾 BOTÓNES
+============================================================ */
+/* CREAR FRASE */
+.button-save {
+    background-color: #3b4cca;
+    color: #ffcb05;
+    font-weight: bold;
+    font-size: 27px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(59, 76, 202, 0.6), 0 0 10px #ffcb05, 0 0 20px #3b4cca inset;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto hover neón */
+.button-save:hover {
+    background-color: #5e2aa1;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(93, 42, 161, 0.8), 0 0 15px #ffcb05, 0 0 30px #5e2aa1 inset;
+    transform: translateY(-2px);
+}
+
+/* Efecto click/presionado */
+.button-save:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 10px rgba(59, 76, 202, 0.4), 0 0 8px #ffcb05, 0 0 15px #3b4cca inset;
+}
+
+/* Disabled */
+.button-save:disabled {
+    background-color: #aaa;
+    color: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Texto animado opcional (brillo) */
+.button-save::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    transform: rotate(25deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.button-save:hover::after {
+    top: -60%;
+    left: -60%;
+}
+
+
+.admin-link-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 8px 4px;
+    background-color: #3b4cca;        /* Azul Pokémon base */
+    color: #ffcb05;                   /* Amarillo brillante */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* sombra más discreta */
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Hover */
+.admin-link-btn:hover {
+    background-color: #5e2aa1;        /* Azul más intenso */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* sombra sutil pero visible */
+}
+
+/* Botón logout en azul */
+.admin-link-btn.logout {
+    background-color: #1b3fa3;        /* Azul oscuro */
+    color: #ffcb05;
+}
+
+/* Hover logout */
+.admin-link-btn.logout:hover {
+    background-color: #3b73ff;        /* Azul brillante */
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* Botón de afegir */
@@ -980,33 +1103,6 @@ body.laberinto-bg::before {
     background-color: #f8d7da;
     color: #721c24;
     border: 2px solid #f5c6cb;
-}
-
-.admin-link-btn {
-    display: inline-block;
-    padding: 8px 18px;
-    margin: 8px 4px;
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 6px;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-.admin-link-btn:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-}
-
-.admin-link-btn.logout {
-    background-color: #f44336;
-}
-
-.admin-link-btn.logout:hover {
-    background-color: #d32f2f;
 }
 
 .admin-container-index input[type="file"] {
