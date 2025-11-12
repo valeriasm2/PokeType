@@ -9,7 +9,8 @@ if (!isset($_SESSION['name'])) {
 
 /*
  ✅ Validación:
- Si falta algún dato, redirigimos al index para evitar errores.
+ En lugar de enviar a error403, si falta algún dato vamos al index
+ para evitar errores cuando venga desde play.php.
 */
 if (
     !isset($_POST['score']) ||
@@ -30,23 +31,21 @@ $time          = floatval($_POST['time']);
 $hits          = intval($_POST['hits']);
 $bonus         = intval($_POST['bonus']);
 $timeBonus     = intval($_POST['timeBonus']);
-$bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0; // 🟢 Captura el bonus
+$bonusGiratina = isset($_POST['bonusGiratina']) ? intval($_POST['bonusGiratina']) : 0;
+$comboLevel    = isset($_POST['comboLevel']) ? intval($_POST['comboLevel']) : 1;
 
 $_SESSION['name'] = $name;
-
-// 🟢 Calcular puntuación total incluyendo el bonus de Giratina
-$totalScore = $score + $bonusGiratina;
 
 // ✅ Guardar récord si se pulsa "Sí"
 if (isset($_POST['save'])) {
 
     $rankingFile = __DIR__ . '/ranking.txt';
 
-    // Guardar en formato: nombre:puntuación:tiempo
-    $line = $name . ":" . $totalScore . ":" . $time . PHP_EOL;
+    // Guardar en formato: nombre:puntuación:tiempo:combo
+    $line = $name . ":" . $score . ":" . $time . ":" . $comboLevel . PHP_EOL;
     file_put_contents($rankingFile, $line, FILE_APPEND | LOCK_EX);
 
-    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $totalScore . "&time=" . $time);
+    header("Location: ranking.php?last=" . urlencode($name) . "&score=" . $score . "&time=" . $time . "&combo=" . $comboLevel);
     exit();
 }
 ?>
@@ -80,22 +79,25 @@ if (isset($_POST['save'])) {
         <?php endif; ?>
 
         <p>⚡ Bonus per temps: <strong><?= $timeBonus ?></strong></p>
+
+        <p>🔥 Multiplicador de combo: <strong>x<?= $comboLevel ?></strong></p>
+        
         <p>⏱ Temps total: <strong><?= $time ?>s</strong></p>
 
         <hr>
 
-        <!-- 🟢 Mostrar puntuación total con bonus de Giratina incluido -->
-        <p>🏆 <strong>Puntuació final: <?= $totalScore ?> punts</strong></p>
+        <p>🏆 <strong>Puntuació final: <?= $score ?> punts</strong></p>
 
         <!-- Form guardar récord -->
         <form method="post" action="gameover.php" style="display:inline;">
             <input type="hidden" name="name" value="<?= $name ?>">
-            <input type="hidden" name="score" value="<?= $totalScore ?>"> <!-- 🟢 Usa totalScore -->
+            <input type="hidden" name="score" value="<?= $score ?>">
             <input type="hidden" name="time" value="<?= $time ?>">
             <input type="hidden" name="hits" value="<?= $hits ?>">
             <input type="hidden" name="bonus" value="<?= $bonus ?>">
             <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
             <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+            <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
             <input type="hidden" name="save" value="1">
 
             <button type="submit" class="btn-link" id="save-btn">

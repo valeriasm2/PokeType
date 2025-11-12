@@ -113,3 +113,8 @@
 [2025-11-12 18:15:11] [::1] [index.php] GAME_START: Usuario 'test777' inició juego en dificultad 'normal'
 [2025-11-12 18:16:38] [::1] [ranking.php] VIEW_RANKING: Usuario 'test777' accedió al ranking
 [2025-11-12 18:18:36] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'test777' cerró sesión del juego
+[2025-11-12 19:10:02] [::1] [index.php] GAME_START: Usuario 'pedro' inició juego en dificultad 'facil'
+[2025-11-12 19:10:38] [::1] [ranking.php] VIEW_RANKING: Usuario 'pedro' accedió al ranking
+[2025-11-12 19:10:46] [::1] [index.php] GAME_START: Usuario 'pedro' inició juego en dificultad 'facil'
+[2025-11-12 19:11:42] [::1] [ranking.php] VIEW_RANKING: Usuario 'pedro' accedió al ranking
+[2025-11-12 19:11:54] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'pedro' cerró sesión del juego
