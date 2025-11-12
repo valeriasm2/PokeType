@@ -108,3 +108,8 @@
 [2025-11-12 17:01:17] [::1] [create_sentence.php] CREATE_SENTENCE: Nueva frase creada en nivel 'dificil': 'yjyfyjdtddhrrsdhs' sin imagen (Usuario: admin)
 [2025-11-12 17:02:57] [::1] [delete_sentence.php] DELETE_SENTENCE: Frase eliminada del nivel 'dificil': 'yjyfyjdtddhrrsdhs' (Usuario: admin)
 [2025-11-12 17:03:15] [::1] [logout.php] LOGOUT: Admin cerró sesión (Usuario: admin)
+[2025-11-12 18:06:37] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'wwad' cerró sesión del juego
+[2025-11-12 18:08:13] [::1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-12 18:15:11] [::1] [index.php] GAME_START: Usuario 'test777' inició juego en dificultad 'normal'
+[2025-11-12 18:16:38] [::1] [ranking.php] VIEW_RANKING: Usuario 'test777' accedió al ranking
+[2025-11-12 18:18:36] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'test777' cerró sesión del juego

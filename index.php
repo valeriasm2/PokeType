@@ -69,7 +69,7 @@ if (isset($_SESSION['difficulty'])) {
 
         <h1>Poketype</h1>
         <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
-        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Mew GIF" width="300">
+        <img src="/media/gengarIndex.png" alt="Gengar" width="300">
 
         <form action="index.php" method="post">
             <label for="name">Nom:</label>
