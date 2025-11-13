@@ -2,20 +2,20 @@
     "facil": [
         "Pikachu és un Pokémon de tipus elèctric",
         "Bulbasaur és un Pokémon de tipus planta",
-        "Charmander pot llançar foc",
-        "Hola que tale stais",
-        "frase prueba"
+        "Charmander pot llançar foc"
     ],
     "normal": [
         "Eevee pot evolucionar en moltes formes diferents",
         "Squirtle és un Pokémon de tipus aigua molt fidel",
         "Togepi porta sempre un ou a la closca",
-        "En termes de reproducció Vaporeon es compatible amb humans"
+        "En termes de reproducció Vaporeon es compatible amb humans",
+        "Mew es la preevolucion de Mewtwo"
     ],
     "dificil": [
         "Mewtwo és un Pokémon llegendari creat per experiments",
         "Rayquaza viu als cels i controla els conflictes entre Kyogre i Groudon",
         "Giratina habita en una dimensió paral·lela coneguda com el Món Distorsió",
-        "M'agrada menjar Torkoals a la llauna, nyam!."
+        "xavi test 2",
+        "Quan en Gyarados va emergir furiós de les aigües turmentoses, un sol raig hidroelèctric va deixar knock out tots els contrincants en un instant d’esglai absolut."
     ]
 }
