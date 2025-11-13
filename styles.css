@@ -72,6 +72,92 @@ body {
     margin: 200px auto;
 }
 
+/* Aviso permadeath (gameover) */
+.permadeath-notice {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+/* PERMADEATH (index.php) */
+label[for="permadeath"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.75rem;
+  color: #640c0c;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  user-select: none;
+}
+
+#permadeath {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  accent-color: #640c0c; /* Chrome/Edge/Firefox modern styling */
+}
+
+/* Info button "?" */
+#perma-info {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 6px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #640c0c, #332222);
+  color: #ffffff;
+  border: 2px solid #8a482e;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+#perma-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.22);
+}
+
+#perma-info:focus {
+  outline: 3px solid rgba(247,201,72,0.22);
+  outline-offset: 2px;
+}
+
+
+/* Cajón para las vidas (permadeath) */
+#lives-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+}
+
+#lives-box {
+    display: none; /* el JS controla cuando mostrar */
+    background: rgba(255,255,255,0.95);
+    color: #b71cff;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 2px solid #a825d4;
+    box-shadow: 0 6px 18px rgba(59,76,202,0.18);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    min-width: 120px;
+    text-align: center;
+}
+
+
+
 /* ===== EFECTO ANIMACIÓN GAME OVER ===== */
 .gameover-container h1 {
     font-size: 60px;
@@ -726,6 +812,16 @@ body.laberinto-bg::before {
     text-align: center;
     font-size: 12px;
 }
+/* Columna de Foto */
+/* Columna de Foto (centrada y consistente) */
+.admin-container-index td.foto-cell,
+.admin-container-index th.foto-header {
+    text-align: center !important;
+    vertical-align: middle;
+    width: 250px; /* puedes ajustar según quieras */
+    white-space: nowrap;
+}
+
 
 .admin-container-index tr:nth-child(even) {
     background-color: #D8ECFF;
@@ -756,10 +852,16 @@ body.laberinto-bg::before {
     display: none;
 }
 
+/* resaltar la fila nueva */
+.admin-container-index table tr.highlight {
+  background-color: #f3f178 !important;
+  color: #3b4cca !important;
+  font-weight: bold;
+}
+
 #llistarContainer {
     transition: all 0.3s ease;
 }
-
 
 /* Botón de borrar */
 .admin-container-index form button {
@@ -884,6 +986,26 @@ body.laberinto-bg::before {
     text-align: center;
 }
 
+.admin-message {
+    margin: 15px 0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.admin-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.admin-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
 .admin-link-btn {
     display: inline-block;
     padding: 8px 18px;
@@ -909,6 +1031,44 @@ body.laberinto-bg::before {
 
 .admin-link-btn.logout:hover {
     background-color: #d32f2f;
+}
+
+/* Input file mejorado - versión simple */
+.admin-container-index input[type="file"] {
+    padding: 10px;
+    border: 2px solid #4A90E2;
+    border-radius: 8px;
+    background-color: #EAF6FF;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.admin-container-index input[type="file"]:hover {
+    border-color: #F7C948;
+    background-color: #FFF9E6;
+}
+
+/* ============================================================
+      🎮 POKEMON ICON EN JUEGO
+============================================================ */
+.pokemon-image-container {
+    text-align: center;
+    margin: 5px 0 0px 0;
+}
+
+.pokemon-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    object-fit: contain; /* Para mantener aspecto sin deformar */
+}
+
+.pokemon-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 /* ============================================================
@@ -939,6 +1099,105 @@ body.laberinto-bg::before {
 .server {
     background-color: #9c27b0 !important;
     color: #fff !important;
+}
+
+/* mensajes de listar frases */
+/* Mensajes de éxito */
+#llistarContainer .success {
+    margin: 20px auto;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    font-weight: bold;
+    max-width: 400px;
+    text-align: center;
+    align-items: center;
+}
+
+/* Mensajes de error */
+#llistarContainer .error {
+    margin: 20px auto;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    font-weight: bold;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+
+/* ===============================================
+        PAGINATOR 25RESULTS
+================================================= */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    background: #f9f9f9;
+}
+
+.pagination a:hover {
+    background: #e0e0e0;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+
+
+/* Combo popup play*/
+#combo-popup {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+/* small label and multiplier */
+#combo-popup .label { font-size: 12px; opacity: 0.85; display:block; }
+#combo-popup .mult { font-size: 22px; }
+
+/* Combo timer (reverse progress) */
+#combo-timer {
+  width: 120px;
+  height: 8px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+#combo-timer-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transition: width 0.1s linear;
+  background: rgba(255,255,255,0.85);
 }
 
 
@@ -1079,3 +1338,61 @@ body.laberinto-bg::before {
         padding: 8px 16px;
     }
 }
+
+/*PERMADEATH*/
+@media (max-width: 480px) {
+  label[for="permadeath"] { gap: 0.35rem; font-size: 9px; }
+  #perma-info { width: 24px; height: 24px; font-size: 11px; }
+}
+
+
+#timer-box {
+    position: absolute;
+    top: 20px;
+    right: 250px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+@keyframes lifeLostPulse {
+    0% { transform: scale(1); box-shadow: 0 6px 18px rgba(59,76,202,0.18); }
+    40% { transform: scale(1.08); box-shadow: 0 12px 26px rgba(216,27,96,0.28); }
+    100% { transform: scale(1); box-shadow: 0 6px 18px rgba(59,76,202,0.18); }
+}
+
+
+
+/* === Barra de progressió del nombre de frases === */
+
+#progress-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #222;
+}
+
+#progress-container {
+    width: 80%;
+    height: 22px;
+    background: linear-gradient(to right, #cfcfcf, #e8e8e8);
+    border-radius: 14px;
+    margin: 8px auto 18px auto;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 4px rgba(0,0,0,0.25);
+    display: none;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 14px;
+    background: linear-gradient(to right, #61c152, #2e8b24);
+    transition: width 0.4s ease-in-out;
+}
+
+

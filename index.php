@@ -1,5 +1,9 @@
 <?php
-session_start(); // ✅ Permet recordar el nom i mostrar recuadro de sessió
+session_start(); // permite gestionar la sessió del usuarioo
+
+// Incluir sistema de logs y lenguaje
+require_once 'admin/logger.php';
+require_once __DIR__ . '/utils/lang.php';
 
 function mostrarError($error) {
     if (!empty($error)) {
@@ -12,23 +16,44 @@ $error = "";
 $name = "";
 $difficulty = "";
 
+// Cambio de idioma desde selector independiente
+if (isset($_POST['setlang']) && isset($_POST['lang'])) {
+    $newLang = $_POST['lang'];
+    if (in_array($newLang, ['es','ca','en'], true)) {
+        $_SESSION['lang'] = $newLang;
+    }
+    header('Location: index.php');
+    exit();
+}
+
 // ✅ Si el formulari s'envia
 if ($_POST) {
     $name = trim($_POST['name']);
     $difficulty = $_POST['difficulty'] ?? '';
+    $permadeath = isset($_POST['permadeath']) && $_POST['permadeath'] === '1';
 
     if (empty($name)) {
-        $error = "⚠️ El camp nom no pot estar buit";
+        $error = t('index.error_empty');
     } else {
-        $_SESSION['name'] = $name;              // ✅ Guardem nom en sessió
-        $_SESSION['difficulty'] = $difficulty;  // ✅ Guardem dificultat en sessió
-
-        header("Location: play.php");
+        $_SESSION['name'] = $name;              
+        $_SESSION['difficulty'] = $difficulty;  
+        
+        // aqui se gestiona si se esta jugando en permadeath o no
+        if ($permadeath) {
+            $_SESSION['permadeath'] = true;
+            // Log inicio de juego en modo permadeath
+            logJuego("GAME_START_PERMADEATH", "index.php", "Usuario '$name' inició partida en modo permadeath (5 vides)");
+            header("Location: play.php?permadeath=1");
+        } else {
+            unset($_SESSION['permadeath']);
+            // Log inicio de juego normal
+            logJuego("GAME_START", "index.php", "Usuario '$name' escogió juego en dificultad '$difficulty'");
+            header("Location: play.php");
+        }
         exit();
     }
 }
 
-// ✅ Si hi ha sessió iniciada, recuperar dades per mostrar-les al formulari
 if (isset($_SESSION['name'])) {
     $name = $_SESSION['name'];
 }
@@ -38,7 +63,7 @@ if (isset($_SESSION['difficulty'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo htmlspecialchars(pt_current_lang()); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,10 +76,22 @@ if (isset($_SESSION['difficulty'])) {
     <?php if (isset($_SESSION['name'])): ?>
         <div id="user-box">
             👤 <strong><?= htmlspecialchars($_SESSION['name']); ?></strong><br>
-            <a href="destroy_session.php">Tancar sessió</a>
+            <a href="destroy_session.php"><?= htmlspecialchars(t('index.logout')); ?></a>
         </div>
     <?php endif; ?>
     <!-- ✅ Fin recuadro -->
+
+    <!-- Selector de idioma -->
+    <form action="index.php" method="post" style="position:absolute; top:10px; left:10px;">
+        <input type="hidden" name="setlang" value="1">
+        <label for="lang" style="margin-right:6px;"><?= htmlspecialchars(t('index.language')); ?></label>
+        <select name="lang" id="lang" onchange="this.form.submit()">
+            <?php $cur = pt_current_lang(); $names = pt_load_messages(pt_current_lang())['lang_names'] ?? ['es'=>'Español','ca'=>'Català','en'=>'English']; ?>
+            <option value="es" <?= $cur==='es'?'selected':''; ?>><?= htmlspecialchars($names['es'] ?? 'Español'); ?></option>
+            <option value="ca" <?= $cur==='ca'?'selected':''; ?>><?= htmlspecialchars($names['ca'] ?? 'Català'); ?></option>
+            <option value="en" <?= $cur==='en'?'selected':''; ?>><?= htmlspecialchars($names['en'] ?? 'English'); ?></option>
+        </select>
+    </form>
 
     <!-- So botons -->
     <audio id="button-sound" src="boton.mp3" preload="auto"></audio>
@@ -62,33 +99,40 @@ if (isset($_SESSION['difficulty'])) {
     <div id="index-container">
 
         <h1>Poketype</h1>
-        <p>Benvingut a Poketype! Un joc per aprendre els tipus de Pokémon i millorar la teva velocitat d’escriptura.</p>
-        <img src="https://media.tenor.com/7nOwCz3oGYYAAAAi/gengar.gif" alt="Mew GIF" width="300">
+        <p><?= htmlspecialchars(t('index.description')); ?></p>
+        <img src="/media/gengarIndex.png" alt="Gengar" width="300">
 
         <form action="index.php" method="post">
-            <label for="name">Nom:</label>
+            <label for="name"><?= htmlspecialchars(t('index.name_label')); ?></label>
             <input type="text" id="name" name="name"
                    value="<?php echo htmlspecialchars($name); ?>"><br>
 
             <?php mostrarError($error); ?>
             <br>
 
-            <label for="dificultat">Dificultat:</label>
+            <label for="dificultat"><?= htmlspecialchars(t('index.difficulty')); ?></label>
             <select name="difficulty" id="dificultat">
-                <option value="facil"  <?= ($difficulty === "facil") ? "selected" : "" ?>>Fàcil</option>
-                <option value="normal" <?= ($difficulty === "normal") ? "selected" : "" ?>>Normal</option>
-                <option value="dificil" <?= ($difficulty === "dificil") ? "selected" : "" ?>>Difícil</option>
-            </select><br><br>
+                <option value="facil"  <?= ($difficulty === "facil") ? "selected" : "" ?>><?= htmlspecialchars(t('index.difficulty_facil')); ?></option>
+                <option value="normal" <?= ($difficulty === "normal") ? "selected" : "" ?>><?= htmlspecialchars(t('index.difficulty_normal')); ?></option>
+                <option value="dificil" <?= ($difficulty === "dificil") ? "selected" : "" ?>><?= htmlspecialchars(t('index.difficulty_dificil')); ?></option>
+            </select>
+
+            <!-- Mode Permadeath -->
+            <label for="permadeath" style="margin-left:10px;">
+                <input type="checkbox" id="permadeath" name="permadeath" value="1" /> <?= htmlspecialchars(t('index.permadeath_label')); ?>
+            </label>
+            <button type="button" id="perma-info" class="info-btn" title="Què és el mode permadeath?">?</button>
+            <br><br>
 
             <!-- Botó Jugar -->
             <button type="submit" id="play-button" disabled>
-                <span class="underline-letter">J</span>ugar
+                <?= pt_label_with_hotkey('index.play', 'play'); ?>
             </button>
 
 
             <noscript>
                 <div class="error-alert">
-                    ⚠️ Aquest joc necessita JavaScript per funcionar. Si us plau, habilita JavaScript al teu navegador. ⚠️
+                    <?= htmlspecialchars(t('index.noscript')); ?>
                 </div>
             </noscript>
         </form>
@@ -97,6 +141,8 @@ if (isset($_SESSION['difficulty'])) {
     <!-- Scripts -->
     <script src="utils/music.js"></script>
     <script>
+        const PT_PERMA_INFO = <?= t_js('index.permadeath_info'); ?>;
+        const PT_PERMA_CONFIRM = <?= t_js('index.permadeath_confirm'); ?>;
         // Activar el botó Jugar quan es carregui la pàgina
         const playButton = document.getElementById('play-button');
         playButton.disabled = false;
@@ -104,18 +150,42 @@ if (isset($_SESSION['difficulty'])) {
         const buttons = document.querySelectorAll('button');
         const buttonSound = document.getElementById('button-sound');
 
-        // Reproducir so en fer clic
+        // Reproducir so en fer clic i gestionar confirm per permadeath
         buttons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                buttonSound.currentTime = 0;
-                buttonSound.play();
+                // Si és el botó d'informació sobre permadeath, mostrar explicació
+                if (btn.id === 'perma-info') {
+                    e.preventDefault();
+                    alert(PT_PERMA_INFO);
+                    return;
+                }
+
+                const permaCheckbox = document.getElementById('permadeath');
+                const permaChecked = permaCheckbox && permaCheckbox.checked;
 
                 if (btn.type === 'submit') {
+                    // Si està marcat permadeath, demanar confirmació abans de continuar
+                    if (permaChecked) {
+                        const ok = confirm(PT_PERMA_CONFIRM);
+                        if (!ok) {
+                            e.preventDefault();
+                            return;
+                        }
+                    }
+
+                    // Reproduir so i enviar formulari després d'un petit retard
+                    buttonSound.currentTime = 0;
+                    buttonSound.play();
                     e.preventDefault();
                     setTimeout(() => {
                         btn.closest('form').submit();
-                    }, 1000); // temps per escoltar el so
+                    }, 1000);
+                    return;
                 }
+
+                // Per a botons no-submit, només reproduir so
+                buttonSound.currentTime = 0;
+                buttonSound.play();
             });
         });
 
