@@ -4,6 +4,7 @@ session_start();
 
 // Incluir sistema de logs
 require_once 'logger.php';
+require_once __DIR__ . '/../utils/lang.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -26,7 +27,8 @@ if (!$nivell || $index === null) {
     redirigir_error("error_datos");
 }
 
-$archivo = '../frases.txt';
+$lang = pt_current_lang();
+$archivo = __DIR__ . '/../frases.' . $lang . '.txt';
 
 if (!file_exists($archivo)) {
     redirigir_error("error_archivo_no_encontrado", $nivell);

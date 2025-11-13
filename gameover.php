@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'admin/logger.php';
+require_once __DIR__ . '/utils/lang.php';
 // Si no hay sesión → al index
 if (!isset($_SESSION['name'])) {
     header("Location: index.php");
@@ -69,10 +70,10 @@ if (isset($_POST['save'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo htmlspecialchars(pt_current_lang()); ?>">
 <head>
     <meta charset="UTF-8">
-    <title>Game Over</title>
+    <title><?= htmlspecialchars(t('gameover.title')); ?></title>
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
 </head>
 <body>
@@ -80,39 +81,39 @@ if (isset($_POST['save'])) {
     <!-- Recuadro usuario -->
     <div id="user-box">
         👤 <strong><?php echo htmlspecialchars($_SESSION['name']); ?></strong><br>
-        <a href="destroy_session.php">Tancar sessió</a>
+        <a href="destroy_session.php"><?= htmlspecialchars(t('index.logout')); ?></a>
     </div>
 
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div class="gameover-container">
-        <h1>Game Over!</h1>
+        <h1><?= htmlspecialchars(t('gameover.title')); ?></h1>
 
         <!-- Desglose -->
-        <h3>Resultat de la partida:</h3>
-        <p>✅ Encerts: <strong><?= $hits ?></strong></p>
-        <p>🎯 Bonus per dificultat: <strong><?= $bonus ?></strong></p>
+        <h3><?= htmlspecialchars(t('gameover.results')); ?></h3>
+        <p>✅ <?= htmlspecialchars(t('gameover.hits')); ?>: <strong><?= $hits ?></strong></p>
+        <p>🎯 <?= htmlspecialchars(t('gameover.difficultyBonus')); ?>: <strong><?= $bonus ?></strong></p>
 
         <?php if ($bonusGiratina > 0): ?>
-            <p>✨ Bonus Giratina: <strong>+<?= $bonusGiratina ?></strong> punts!</p>
+            <p>✨ <?= htmlspecialchars(t('gameover.bonusGiratina')); ?>: <strong>+<?= $bonusGiratina ?></strong></p>
         <?php endif; ?>
 
-        <p>⚡ Bonus per temps: <strong><?= $timeBonus ?></strong></p>
+        <p>⚡ <?= htmlspecialchars(t('gameover.timeBonus')); ?>: <strong><?= $timeBonus ?></strong></p>
 
-        <p>🔥 Multiplicador de combo: <strong>x<?= $comboLevel ?></strong></p>
+        <p>🔥 <?= htmlspecialchars(t('gameover.comboMultiplier') ?? 'Combo'); ?>: <strong>x<?= $comboLevel ?></strong></p>
         
-        <p>⏱ Temps total: <strong><?= $time ?>s</strong></p>
+        <p>⏱ <?= htmlspecialchars(t('gameover.totalTime')); ?>: <strong><?= $time ?>s</strong></p>
 
         <hr>
 
-        <p>🏆 <strong>Puntuació final: <?= $finalScore ?> punts</strong></p>
+        <p>🏆 <strong><?= htmlspecialchars(t('gameover.finalScore')); ?>: <?= $finalScore ?> <?= htmlspecialchars(t('gameover.scoreUnit')); ?></strong></p>
 
         <?php if ($isPermadeath): ?>
             <?php if ($muerto): ?>
-                <p class="permadeath-notice">⚠️ Mode <em>Permadeath</em> activat: la partida ha acabat perquè et vas quedar sense vides. No s'aplica el bonus.</p>
+                <p class="permadeath-notice">⚠️ <?= htmlspecialchars(t('gameover.permadeath_dead') ?? ''); ?></p>
             <?php else: ?>
-                <p class="permadeath-notice">⚠️ Mode <em>Permadeath</em> activat: aquesta partida s'ha completat en permadeath.</p>
-                <p class="permadeath-notice">Bonus permadeath aplicat: +<?= $permadeathBonus ?> punts</p>
+                <p class="permadeath-notice">⚠️ <?= htmlspecialchars(t('gameover.permadeath_completed') ?? ''); ?></p>
+                <p class="permadeath-notice"><?= htmlspecialchars(t('gameover.bonus')); ?>: +<?= $permadeathBonus ?></p>
             <?php endif; ?>
         <?php endif; ?>
 
@@ -129,14 +130,10 @@ if (isset($_POST['save'])) {
             <input type="hidden" name="permadeath" value="<?= $isPermadeath ? 1 : 0 ?>">
             <input type="hidden" name="save" value="1">
 
-            <button type="submit" class="btn-link" id="save-btn">
-                <span class="underline-letter">S</span>i
-            </button>
+            <button type="submit" class="btn-link" id="save-btn"><?= pt_label_with_hotkey('gameover.yes','save'); ?></button>
         </form>
 
-        <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()">
-            <span class="underline-letter">N</span>o
-        </button>
+        <button type="button" class="btn-link" id="no-btn" onclick="goToIndex()"><?= pt_label_with_hotkey('gameover.no','no'); ?></button>
     </div>
 
 <script src="utils/musicGameover.js"></script>
@@ -158,10 +155,12 @@ if (isset($_POST['save'])) {
         playSound(() => window.location.href = "index.php");
     }
 
+    const PT_HOTKEY_SAVE = <?= t_js('hotkeys.save'); ?>.toLowerCase();
+    const PT_HOTKEY_NO = <?= t_js('hotkeys.no'); ?>.toLowerCase();
     document.addEventListener("keydown", (e) => {
         const key = e.key.toLowerCase();
-        if (key === "s") document.getElementById("save-btn").click();
-        if (key === "n") goToIndex();
+        if (key === PT_HOTKEY_SAVE) document.getElementById("save-btn").click();
+        if (key === PT_HOTKEY_NO) goToIndex();
     });
 </script>
 

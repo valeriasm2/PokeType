@@ -4,6 +4,17 @@ session_start();
 
 // Incluir sistema de logs
 require_once 'logger.php';
+require_once __DIR__ . '/../utils/lang.php';
+
+// Selector de idioma antes de login
+if (isset($_POST['setlang']) && isset($_POST['lang'])) {
+    $newLang = $_POST['lang'];
+    if (in_array($newLang, pt_supported_langs(), true)) {
+        $_SESSION['lang'] = $newLang;
+    }
+    header('Location: login.php');
+    exit;
+}
 
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: index.php");
@@ -18,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass = trim($_POST['pass'] ?? '');
 
     if ($user === '' || $pass === '') {
-        $error = "Tots els camps són obligatoris.";
+        $error = t('admin.login.errors.empty');
         $error_type = "empty";
     } else {
         $creds = file(__DIR__ . '/credentials.txt', FILE_IGNORE_NEW_LINES);
@@ -26,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             list($stored_user, $stored_pass) = explode(':', trim($creds[0]));
 
             if ($user !== $stored_user) {
-                $error = "Usuari no trobat.";
+                $error = t('admin.login.errors.user');
                 $error_type = "user";
                 // Log intento de login con usuario incorrecto
                 escribirLog("LOGIN_FAILED", "login.php", "Intento login con usuario incorrecto: $user");
             } elseif ($pass !== $stored_pass) {
-                $error = "Contrasenya incorrecta.";
+                $error = t('admin.login.errors.pass');
                 $error_type = "pass";
                 // Log intento de login con contraseña incorrecta
                 escribirLog("LOGIN_FAILED", "login.php", "Intento login con contraseña incorrecta para usuario: $user");
@@ -45,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
         } else {
-            $error = "No s'han pogut llegir les credencials del servidor.";
+            $error = t('admin.login.errors.server');
             $error_type = "server";
         }
     }
@@ -53,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo htmlspecialchars(pt_current_lang()); ?>">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,20 +73,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body class="admin-page">
         <div class="admin-container">
+            <!-- Selector de idioma para Admin Login -->
+            <form action="login.php" method="post" style="position:fixed; top:10px; left:10px; white-space:nowrap; z-index:9999;">
+                <input type="hidden" name="setlang" value="1">
+                <label for="lang" style="margin-right:6px;"><?= htmlspecialchars(t('admin.language_label')); ?></label>
+                <?php $cur = pt_current_lang(); $names = pt_load_messages($cur)['lang_names'] ?? ['es'=>'Español','ca'=>'Català','en'=>'English']; ?>
+                <select name="lang" id="lang" onchange="this.form.submit()">
+                    <option value="es" <?= $cur==='es'?'selected':''; ?>><?= htmlspecialchars($names['es'] ?? 'Español'); ?></option>
+                    <option value="ca" <?= $cur==='ca'?'selected':''; ?>><?= htmlspecialchars($names['ca'] ?? 'Català'); ?></option>
+                    <option value="en" <?= $cur==='en'?'selected':''; ?>><?= htmlspecialchars($names['en'] ?? 'English'); ?></option>
+                </select>
+            </form>
             <img src="../media/piplu.gif" alt="Piplup" class="admin-gif" />
-            <h1>Login Administrador</h1>
+            <h1><?= htmlspecialchars(t('admin.login.title')); ?></h1>
             <?php 
             if ($error) {
                 echo "<p class='error $error_type'>$error</p>";
             }
             ?>
             <form method="post">
-                <label>Usuari:</label>
+                <label><?= htmlspecialchars(t('admin.login.user_label')); ?></label>
                 <input type="text" name="user" value="<?php echo htmlspecialchars($user ?? ''); ?>">
-                <label>Contrasenya:</label>
+                <label><?= htmlspecialchars(t('admin.login.pass_label')); ?></label>
                 <input type="password" name="pass">
                 <button type="submit" id="enter-btn">
-                    <span class="underline-letter">E</span>ntrar
+                    <?= htmlspecialchars(t('admin.login.enter')); ?>
                 </button>
             </form>
         </div>

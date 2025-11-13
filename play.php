@@ -3,6 +3,7 @@
 session_start();
 
 require_once "admin/logger.php";
+require_once __DIR__ . '/utils/lang.php';
 
 // Si no hay sesión, volver al index
 if (!isset($_SESSION['name'])) {
@@ -32,18 +33,29 @@ $bonusGiratina = isset($_GET['bonusGiratina']) ? (int)$_GET['bonusGiratina'] : 0
 $bonus = ($difficulty === "facil") ? 2 :
         (($difficulty === "normal") ? 3 : 5);
 
-// Cargar frases desde JSON
-$file = "frases.txt";
+// Cargar frases desde JSON según idioma (fallback a frases.txt)
+$lang = function_exists('pt_current_lang') ? pt_current_lang() : 'es';
+$fileCandidates = [
+    __DIR__ . DIRECTORY_SEPARATOR . "frases." . $lang . ".txt",
+    __DIR__ . DIRECTORY_SEPARATOR . "frases.txt",
+];
+$file = null;
+foreach ($fileCandidates as $candidate) {
+    if (is_file($candidate)) { $file = $candidate; break; }
+}
+
 $frasesSeleccionadas = [];
-if (file_exists($file)) {
+if ($file) {
     $json = file_get_contents($file);
     $frasesData = json_decode($json, true);
-
-    if (isset($frasesData[$difficulty])) {
+    if (is_array($frasesData) && isset($frasesData[$difficulty]) && is_array($frasesData[$difficulty])) {
         foreach ($frasesData[$difficulty] as $obj) {
+            if (!is_array($obj)) continue;
+            $texto = isset($obj['texto']) ? (string)$obj['texto'] : '';
+            $imagen = $obj['imagen'] ?? null;
             $frasesSeleccionadas[] = [
-                "texto" => $obj["texto"],
-                "imagen" => $obj["imagen"] ?? null
+                'texto' => $texto,
+                'imagen' => $imagen
             ];
         }
     }
@@ -58,7 +70,7 @@ shuffle($frasesSeleccionadas);
 $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo htmlspecialchars(pt_current_lang()); ?>">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +82,7 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 <!-- Info usuario -->
 <div id="user-box">
     👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
-    <a href="destroy_session.php">Tancar sessió</a>
+    <a href="destroy_session.php"><?= htmlspecialchars(t('index.logout')); ?></a>
 </div>
 <a href="secret.php" id="easter-egg" title="Easter Egg">👀</a>
 
@@ -88,7 +100,8 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
 
 <div id="container">
     <h1>Poketype</h1>
-    <p>Dificultat seleccionada: <strong><?php echo ucfirst(htmlspecialchars($difficulty)); ?></strong></p>
+    <?php $diffLabel = t('play.difficulty_' . $difficulty); ?>
+    <p><?= htmlspecialchars(t('play.difficulty_label')); ?>: <strong><?php echo htmlspecialchars($diffLabel); ?></strong></p>
 
     <div id="countdown">3</div>
 
@@ -104,7 +117,7 @@ $frasesSeleccionadas = array_slice($frasesSeleccionadas, 0, $frasesPorNivel);
         <div id="image-box" class="pokemon-image-container"></div>
     </div>
 
-    <a href="index.php" id="back-btn"><span class="underline-letter">ESC</span>APE</a>
+    <a href="index.php" id="back-btn"><?php echo str_replace('ESC', '<span class="underline-letter">ESC</span>', htmlspecialchars(t('play.escape'))); ?></a>
 </div>
 
 <!-- Popup combo -->
@@ -143,6 +156,12 @@ const imageBox = document.getElementById("image-box");
 const progressText = document.getElementById("progress-text");
 const progressBar = document.getElementById("progress-bar");
 const progressContainer = document.getElementById("progress-container");
+// Textos i18n para JS
+const PT_PERMA_OFF = <?= t_js('play.permadeath_off'); ?>;
+const PT_PERMA_WARN = <?= t_js('play.permadeath_warning'); ?>;
+const PT_PERMA_GAMEOVER = <?= t_js('play.permadeath_gameover'); ?>;
+const PT_PROGRESS_TPL = <?= t_js('play.progress'); ?>;
+const PT_PHRASE_COMPLETED = <?= t_js('play.phraseCompleted'); ?>;
 
 /* ------------------ PERMADEATH (vidas) ------------------ */
 const permadeathEnabled = <?php echo $isPermadeath ? 'true' : 'false'; ?>;
@@ -157,7 +176,7 @@ function modificarVidas(){
         // mostrar corazones vacíos como placeholder
         let heartsOff = '';
         for(let i=0;i<5;i++) heartsOff += '♡';
-        livesBox.innerText = heartsOff + '  (permadeath off)';
+        livesBox.innerText = heartsOff + '  ' + PT_PERMA_OFF;
         return;
     }
     // Si está activo, mostrar corazones según vidas restantes
@@ -165,7 +184,11 @@ function modificarVidas(){
     let hearts = '';
     for(let i=0;i<vidas;i++) hearts += '❤';
     for(let i=vidas;i<5;i++) hearts += '♡';
-    livesBox.innerText = hearts + (vidas<=2 ? '  ⚠️ Queden ' + vidas + ' vides' : '');
+    let warn = '';
+    if(vidas<=2){
+        warn = '  ' + PT_PERMA_WARN.replace('{lives}', String(vidas));
+    }
+    livesBox.innerText = hearts + warn;
 }
 function perderVidasEff(){
     // pequeño efecto visual
@@ -228,7 +251,7 @@ function iniciarCuentaAtras() {
     countdownEl.style.display = "block";
 
     progressContainer.style.display = "block";
-    progressText.innerText = `Frase ${fraseIndex+1} de ${frasesData.length}`;
+    progressText.innerText = PT_PROGRESS_TPL.replace('%d', (fraseIndex+1)).replace('%d', frasesData.length);
     progressBar.style.width = ((fraseIndex)/frasesData.length)*100+"%";
 
     let intervalo = setInterval(()=>{
@@ -286,8 +309,8 @@ function jugar(e){
             modificarVidas();
             if(vidas <= 0){
                 // Fin inmediato de la partida por permadeath
-                document.removeEventListener("keydown", jugar);
-                fraseEl.innerHTML += "<br><br><strong>💀 Permadeath: no queden vides. Fi de la partida.</strong>";
+                    document.removeEventListener("keydown", jugar);
+                    fraseEl.innerHTML += "<br><br><strong>" + PT_PERMA_GAMEOVER + "</strong>";
                 setTimeout(()=>{
                     enviarScore(puntosTotales, true);
                 }, 2000);
@@ -302,7 +325,7 @@ function jugar(e){
 
     if(charIndex===frase.length){
         document.removeEventListener("keydown", jugar);
-        fraseEl.innerHTML+="<br><br><strong>✅ Frase completada!</strong>";
+            fraseEl.innerHTML += "<br><br><strong>" + PT_PHRASE_COMPLETED + "</strong>";
         let aciertos = estado.filter(x=>x).length;
         let tiempoFrase = stopTimerFrase();
         let tiempoScore = Math.max(0,Math.floor(30/tiempoFrase));

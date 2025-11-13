@@ -3,6 +3,7 @@ session_start();
 
 // Incluir sistema de logs
 require_once 'admin/logger.php';
+require_once __DIR__ . '/utils/lang.php';
 
 // Si no hay sesión, vuelve al inicio
 if (!isset($_SESSION['name'])) {
@@ -40,12 +41,23 @@ if(file_exists($rankingFile)) {
     }
     usort($ranking, fn($a, $b) => $b['score'] <=> $a['score']);
 }
+
+// --- Paginación ---
+$por_pagina = 25;
+$total_registros = count($ranking);
+$total_paginas = ($por_pagina > 0) ? (int)ceil($total_registros / $por_pagina) : 1;
+$pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
+if ($pagina_actual > $total_paginas && $total_paginas > 0) {
+    $pagina_actual = $total_paginas;
+}
+$inicio = ($pagina_actual - 1) * $por_pagina;
+$ranking_paginado = array_slice($ranking, $inicio, $por_pagina);
 ?>
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="<?php echo htmlspecialchars(pt_current_lang()); ?>">
 <head>
     <meta charset="UTF-8">
-    <title>Rànking de rècords</title>
+    <title><?= htmlspecialchars(t('ranking.title')); ?></title>
     <link rel="stylesheet" href="styles.css?<?php echo time(); ?>">
 </head>
 <body>
@@ -53,7 +65,7 @@ if(file_exists($rankingFile)) {
     <!-- Recuadro session -->
     <div id="user-box">
         👤 <strong><?php echo htmlspecialchars($name); ?></strong><br>
-        <a href="destroy_session.php">Tancar sessió</a>
+        <a href="destroy_session.php"><?= htmlspecialchars(t('index.logout')); ?></a>
     </div>
 
     <!-- Audio para música de fondo y efectos -->
@@ -61,21 +73,21 @@ if(file_exists($rankingFile)) {
     <audio id="button-sound" src="media/boton.mp3" preload="auto"></audio>
 
     <div id="ranking-container">
-        <h1>Rànking de Jugadors</h1>
+        <h1><?= htmlspecialchars(t('ranking.title')); ?></h1>
 
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th>Jugador</th>
-                        <th>Punts</th>
-                        <th>Temps</th>
+                        <th><?= htmlspecialchars(t('ranking.name')); ?></th>
+                        <th><?= htmlspecialchars(t('ranking.score')); ?></th>
+                        <th><?= htmlspecialchars(t('ranking.time')); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         $highlighted = false;
-                        foreach($ranking as $i => $p):
+                        foreach($ranking_paginado as $i => $p):
                             $highlight = (!$highlighted && $p['name'] === $lastPlayer && $p['score'] === $lastScore);
                             if($highlight) $highlighted = true;
                     ?>
@@ -88,12 +100,31 @@ if(file_exists($rankingFile)) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php if ($total_paginas > 1): ?>
+                <div class="pagination">
+                    <?php
+                        $queryBase = [];
+                        if ($lastPlayer !== '') { $queryBase['last'] = $lastPlayer; }
+                        if ($lastScore !== null) { $queryBase['score'] = $lastScore; }
+                        $queryBase['pagina'] = 1; // placeholder
+                        $buildUrl = function($pagina) use ($queryBase) {
+                            $queryBase['pagina'] = $pagina;
+                            return 'ranking.php?' . http_build_query($queryBase);
+                        };
+                    ?>
+                    <?php if ($pagina_actual > 1): $prev = $pagina_actual - 1; ?>
+                        <a href="<?= htmlspecialchars($buildUrl($prev)); ?>"><?= htmlspecialchars(t('admin.pagination_prev')); ?></a>
+                    <?php endif; ?>
+                    <span><?= htmlspecialchars(t('admin.pagination_page_of', ['current' => $pagina_actual, 'total' => $total_paginas])); ?></span>
+                    <?php if ($pagina_actual < $total_paginas): $next = $pagina_actual + 1; ?>
+                        <a href="<?= htmlspecialchars($buildUrl($next)); ?>"><?= htmlspecialchars(t('admin.pagination_next')); ?></a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Botón Tornar -->
-        <a href="index.php" id="back-btn">
-            <span class="underline-letter">ESC</span>APE
-        </a>
+        <a href="index.php" id="back-btn"><?php echo str_replace('ESC', '<span class="underline-letter">ESC</span>', htmlspecialchars(t('ranking.back'))); ?></a>
     </div>
 
     <script src="utils/music3.js"></script>
