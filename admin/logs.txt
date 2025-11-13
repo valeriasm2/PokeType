@@ -115,3 +115,19 @@
 [2025-11-13 01:02:13] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
 [2025-11-13 01:02:17] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
 [2025-11-13 01:02:21] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
+[2025-11-13 01:05:18] [::1] [index.php] GAME_START_PERMADEATH: Usuario 'testeooo' inició partida en modo permadeath (5 vides)
+[2025-11-13 01:05:18] [::1] [play.php] GAME_START: Jugador 'testeooo' inició partida en dificultad 'facil'
+[2025-11-13 01:05:23] [::1] [play.php] GAME_START: Jugador 'testeooo' inició partida en dificultad 'facil'
+[2025-11-13 01:05:31] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'testeooo', puntuación base 102, muerto=1, bonus_permadeath 0, puntuación final 102, tiempo 4.68 s, combo x1, permadeath=1
+[2025-11-13 01:05:48] [::1] [index.php] GAME_START_PERMADEATH: Usuario 'testeooo' inició partida en modo permadeath (5 vides)
+[2025-11-13 01:05:48] [::1] [play.php] GAME_START: Jugador 'testeooo' inició partida en dificultad 'facil'
+[2025-11-13 01:05:57] [::1] [play.php] GAME_START: Jugador 'testeooo' inició partida en dificultad 'facil'
+[2025-11-13 01:06:04] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'testeooo', puntuación base 102, muerto=1, bonus_permadeath 0, puntuación final 102, tiempo 3.13 s, combo x1, permadeath=1
+[2025-11-13 01:06:07] [::1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'testeooo', puntuación base 102, muerto=0, bonus_permadeath 300, puntuación final 402, tiempo 3.13 s, combo x1, permadeath=1
+[2025-11-13 01:06:07] [::1] [gameover.php] RANKING_SAVED: Guardado ranking: testeooo:402:3.13:1:1
+
+[2025-11-13 01:06:07] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
+[2025-11-13 01:06:13] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
+[2025-11-13 01:06:22] [::1] [ranking.php] VIEW_RANKING: Usuario 'testeooo' accedió al ranking
+[2025-11-13 01:06:25] [::1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'testeooo' cerró sesión del juego
+[2025-11-13 01:06:43] [::1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
