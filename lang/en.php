@@ -10,7 +10,7 @@ return [
         'difficulty_normal' => 'Normal',
         'difficulty_dificil' => 'Hard',
         'play' => 'Play',
-        'error_empty' => '⚠️ Name field cannot be empty',
+        'error_empty' => '⚠️ The name field cannot be empty',
         'logout' => 'Log out',
     ],
 
@@ -20,29 +20,33 @@ return [
         'difficulty_normal' => 'Normal',
         'difficulty_dificil' => 'Hard',
         'timer' => '⏱',
+        'seconds' => 's',
         'countdown_start' => 'Starting...',
         'progress' => 'Sentence %d of %d',
         'phraseCompleted' => 'Sentence completed!',
         'back' => 'Back',
         'escape' => 'ESCAPE',
         'easter_egg' => '👀',
-        'write_phrase' => 'WRITE THE FOLLOWING PHRASE:',
+        'write_phrase' => 'TYPE THE FOLLOWING SENTENCE:',
     ],
 
     'gameover' => [
-        'title' => 'Game Over',
-        'results' => 'Game results:',
-        'hits' => 'Hits',
+        'title'           => 'Game Over',
+        'results'         => 'Game results:',
+        'hits'            => 'Hits',
         'difficultyBonus' => 'Difficulty bonus',
-        'bonusGiratina' => 'Giratina bonus',
-        'timeBonus' => 'Time bonus',
-        'totalTime' => 'Total time',
-        'finalScore' => 'Final score',
-        'scoreUnit' => 'points',
-        'retry' => 'Play again',
-        'save' => 'Save score?',
-        'yes' => 'Yes',
-        'no' => 'No',
+        'bonusGiratina'   => 'Giratina bonus',
+        'scoreUnit'       => 'points',
+        'finalScore'      => 'Final score',
+        'yes'             => 'Yes',
+        'no'              => 'No',
+        'permadeath_dead'   => '⚠️ Permadeath mode active: the game ended because you ran out of lives. No bonus applies.',
+        'permadeath_alive'  => '⚠️ Permadeath mode active: this run was completed in permadeath.',
+        'permadeath_bonus'  => 'Permadeath bonus applied',
+        'timeBonus'       => 'Time bonus',
+        'comboMultiplier' => 'Combo multiplier',
+        'totalTime'       => 'Total time',
+        'saveRecord'      => 'Save record',
     ],
 
     'ranking' => [
@@ -52,6 +56,10 @@ return [
         'time' => 'Time',
         'date' => 'Date',
         'back' => 'ESCAPE',
+        'combo' => 'Combo',
+        'permadeath' => 'Permadeath',
+        'permadeath_flag' => 'Yes',
+        'permadeath_flag_no' => 'No',
     ],
 
     'giratina' => [
@@ -59,19 +67,19 @@ return [
         'instruction' => 'Click on Giratina before it escapes!',
         'caught' => 'You caught Giratina! +100 points 🎉',
         'redirecting' => 'Redirecting to the game...',
-        'bonus' => 'Giratina Bonus',
+        'bonus' => 'Giratina bonus',
     ],
 
     'admin_login' => [
         'title' => 'Admin Access',
-        'user' => 'Username:',
+        'user' => 'User:',
         'pass' => 'Password:',
-        'enter' => 'Login',
-        'error' => 'Incorrect credentials'
+        'enter' => 'Enter',
+        'error' => 'Invalid credentials'
     ],
 
     'admin_index' => [
-        'title' => "Administration Panel",
+        'title' => 'Admin Panel',
         'create' => 'Create sentence',
         'edit' => 'Edit sentence',
         'delete' => 'Delete sentence',
@@ -83,14 +91,19 @@ return [
         'paginator' => 'Next',
         'levels' => ['facil'=>'Easy','normal'=>'Normal','dificil'=>'Hard'],
         'select_level' => 'Select a level',
+        'photo' => 'Photo',
+        'confirm_delete' => 'Delete this sentence?',
+        'paginator_prev' => 'Previous',
+        'paginator_next' => 'Next',
+        'paginator_page' => 'Page',
     ],
 
     'messages' => [
         'frase_eliminada' => 'Sentence deleted successfully.',
         'error_datos' => 'Error: incomplete data to delete the sentence.',
         'error_archivo_no_encontrado' => 'Error: sentences file not found.',
-        'error_permiso_escritura' => 'Error: no write permission on file.',
-        'error_json' => 'Error: malformed sentences file.',
+        'error_permiso_escritura' => 'Error: no write permission on the file.',
+        'error_json' => 'Error: sentences file is malformed.',
         'error_frase_no_encontrada' => 'Error: sentence not found.',
         'error_guardado' => 'Error: could not save the file.',
     ],
@@ -105,7 +118,7 @@ return [
         'select_level' => 'Select a level',
         'success'      => 'Sentence added successfully.',
         'success_lang' => 'Sentence added successfully in language: {lang}',
-        'info_lang'    => 'The sentence will be saved in the list for the selected language:',
+        'info_lang'    => 'The sentence will be saved in the selected language list:',
         'select_file'  => 'No file selected',
     ],
 
@@ -119,19 +132,19 @@ return [
     403 => [
         'code' => '403',
         'title' => 'Access Forbidden',
-        'msg1' => "You can't visit this page directly.",
-        'msg2' => 'A guardian Pokémon blocks the way to protect the game.',
-        'btn' => 'Return to Home'
+        'msg1' => 'You cannot visit this page directly.',
+        'msg2' => 'A guardian Pokémon blocks the path to protect the game.',
+        'btn' => 'Back to home'
     ],
-    
+
     404 => [
         'code' => '404',
-        'title' => 'Page Not Found',
-        'msg1' => "The path you are looking for does not exist. It seems a mischievous Pokémon has taken it away.",
+        'title' => 'Page not found',
+        'msg1' => 'The path you are looking for does not exist. A mischievous Pokémon may have taken it.',
         'msg2' => '',
-        'btn' => 'Return to Home',
-        'btn2' => 'View Ranking'
-    ],    
+        'btn' => 'Back to home',
+        'btn2' => 'View ranking'
+    ],
 
     'hotkeys' => [
         'play' => 'p',

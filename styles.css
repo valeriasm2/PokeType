@@ -1,6 +1,6 @@
 /* ============================================================
-   🎨 FUENTE Y FONDO GENERAL
-   ============================================================ */
+🎨 FUENTE Y FONDO GENERAL
+============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 html,
@@ -12,7 +12,6 @@ body {
 
 body {
     font-family: 'Press Start 2P', monospace, sans-serif;
-    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -28,11 +27,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     -webkit-overflow-scrolling: touch;
-    /*background: linear-gradient(135deg, #7a1fbf, #b463ff, #c18aff);*/
 }
 
 /* ============================================================
-                    🕹️ GENGAR
+🕹️ GENGAR
 ============================================================ */
 .gengar-float {
     position: fixed;
@@ -50,15 +48,19 @@ body {
     0% {
         transform: translateX(-50%) translateY(0) rotate(0deg);
     }
+
     25% {
         transform: translateX(-50%) translateY(-10px) rotate(-5deg);
     }
+
     50% {
         transform: translateX(-50%) translateY(-20px) rotate(5deg);
     }
+
     75% {
         transform: translateX(-50%) translateY(-10px) rotate(-5deg);
     }
+
     100% {
         transform: translateX(-50%) translateY(0) rotate(0deg);
     }
@@ -75,77 +77,49 @@ body {
 }
 
 /* ============================================================
-      🏠 CONTENEDOR INDEX
+👹 GIRATINA
 ============================================================ */
-#index-container {
-    text-align: center;
-    padding: 30px 40px;
-    background-color: rgba(231, 217, 247, 0.8);
-    border: 4px solid #a825d4;
-    border-radius: 20px;
-    box-shadow: 0 0 20px #3b4cca;
-    max-width: 600px;
-    width: 80%;
-    position: relative;
-    margin: 60px auto;
+.giratina-float {
+    position: fixed;
+    top: 15%;
+    left: 10%;
+    width: 300px;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatGiratina 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatGiratina {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-15px) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+
+    75% {
+        transform: translateY(-15px) rotate(-10deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
 }
 
 /* ============================================================
-      🎮 CONTENEDOR DEL JUEGO
+🏠 CONTENEDORES PRINCIPALES
 ============================================================ */
-/* ============================================================
-      🎮 CONTENEDOR DEL JUEGO MEJORADO
-============================================================ */
-#container {
-    display: inline-block;
-    text-align: center;
-    padding: 50px;
-    background: linear-gradient(145deg, #f3e5ff, #d1b3ff);
-    border: 3px solid rgba(168, 37, 212, 0.7);
-    border-radius: 30px;
-    box-shadow: 0 8px 20px rgba(59, 76, 202, 0.4), 
-                0 6px 10px rgba(168, 37, 212, 0.2) inset;
-    max-width: 600px;
-    width: 90%;
-    margin: 150px auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Animación al pasar el mouse */
-#container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(59, 76, 202, 0.5),
-                0 8px 15px rgba(168, 37, 212, 0.3) inset;
-}
-
-/* Texto dentro del contenedor */
-#container h1, #container p {
-    margin: 10px 0;
-}
-
-/* Botones (si tienes) */
-#container button {
-    padding: 10px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(90deg, #a825d4, #3b4cca);
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-#container button:hover {
-    background: linear-gradient(90deg, #3b4cca, #a825d4);
-    transform: scale(1.05);
-}
-
-
-/* ============================================================
-      ☠️ CONTENEDOR GAME OVER
-============================================================ */
-.gameover-container {
+#index-container,
+#container,
+.gameover-container,
+#ranking-container,
+.error-container {
     text-align: center;
     padding: 50px;
     background-color: rgb(231, 217, 247);
@@ -154,104 +128,48 @@ body {
     box-shadow: 0 0 30px #3b4cca;
     max-width: 600px;
     width: 90%;
-    margin: 100px auto;
     position: relative;
+    margin: 60px auto;
+}
+
+#container {
+    margin: 200px auto;
+}
+
+.gameover-container {
+    margin: 100px auto;
     z-index: 10;
 }
 
-/* Aviso permadeath (gameover) */
-.permadeath-notice {
-    color: #e74c3c;
-    font-weight: bold;
-    margin-top: 10px;
+.error-container {
+    padding: 30px 20px;
+    border: 4px solid #d42525;
+    box-shadow: 0 0 20px #3b4cca;
 }
 
-
-/* PERMADEATH (index.php) */
-label[for="permadeath"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: 0.75rem;
-  color: #640c0c;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  user-select: none;
-}
-
-#permadeath {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  vertical-align: middle;
-  cursor: pointer;
-  accent-color: #640c0c; /* Chrome/Edge/Firefox modern styling */
-}
-
-/* Info button "?" */
-#perma-info {
-  display: inline-grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  margin-left: 6px;
-  padding: 0;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #640c0c, #332222);
-  color: #ffffff;
-  border: 2px solid #8a482e;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-
-#perma-info:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.22);
-}
-
-#perma-info:focus {
-  outline: 3px solid rgba(247,201,72,0.22);
-  outline-offset: 2px;
-}
-
-
-/* Cajón para las vidas (permadeath) */
-#lives-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10000;
-}
-
-#lives-box {
-    display: none; /* el JS controla cuando mostrar */
-    background: rgba(255,255,255,0.95);
-    color: #b71cff;
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: 2px solid #a825d4;
-    box-shadow: 0 6px 18px rgba(59,76,202,0.18);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    min-width: 120px;
-    text-align: center;
-}
-
-
-
-/* ===== EFECTO ANIMACIÓN GAME OVER ===== */
+/* ============================================================
+🎮 CONTENEDOR GAME OVER
+============================================================ */
 .gameover-container h1 {
     font-size: 60px;
     color: #aa32ef;
     animation: gameover-shake 0.6s infinite alternate ease-in-out;
     text-shadow: 0px 0px 10px #fff, 0 0 25px #aa32ef, 0 0 45px #aa32ef;
     padding: 50px 0;
+}
+
+@keyframes gameover-shake {
+    0% {
+        transform: scale(1) rotate(-1deg);
+    }
+
+    50% {
+        transform: scale(1.05) rotate(1deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(-1deg);
+    }
 }
 
 .gameover-container h3 {
@@ -267,24 +185,16 @@ label[for="permadeath"] {
 }
 
 .gameover-buttons {
-    display: flex !important;
+    display: flex;
+    gap: 16px;
     justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 20px 0;
     flex-wrap: wrap;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 10;
-    position: relative;
+    margin-top: 16px;
 }
 
 .gameover-buttons form {
-    display: inline-block;
+    display: inline-flex;
     margin: 0;
-    padding: 0;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
 .gameover-buttons button,
@@ -297,43 +207,17 @@ label[for="permadeath"] {
     cursor: pointer;
     font-weight: bold;
     font-family: 'Press Start 2P', monospace, sans-serif;
-    min-width: 120px;
-    min-height: 44px;
-    padding: 12px 24px;
-    font-size: 14px;
-    margin: 0;
-    display: inline-flex !important;
+    width: 140px;
+    height: 48px;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     text-align: center;
     white-space: nowrap;
-    transition: all 0.3s ease;
+    font-size: 14px;
     line-height: 1.5;
-    visibility: visible !important;
-    opacity: 1 !important;
+    transition: all 0.3s ease;
     text-decoration: none !important;
-    z-index: 10;
-    position: relative;
-    -webkit-tap-highlight-color: rgba(59, 76, 202, 0.3);
-    touch-action: manipulation;
-}
-
-.gameover-buttons button *,
-.gameover-buttons #save-btn *,
-.gameover-buttons #no-btn * {
-    color: #ffcb05 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: inline !important;
-}
-
-.gameover-buttons button .underline-letter,
-.gameover-buttons #save-btn .underline-letter,
-.gameover-buttons #no-btn .underline-letter {
-    color: #ffcb05 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: inline-block !important;
 }
 
 .gameover-buttons button:hover,
@@ -344,156 +228,31 @@ label[for="permadeath"] {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.gameover-save-text {
-    font-size: 16px;
+.gameover-save-text,
+.gameover-container p {
+    text-align: center;
     color: #3b4cca;
     font-weight: bold;
     margin-top: 1em;
-    text-align: center;
-}
-
-.gameover-container p {
     font-size: 16px;
-    color: #333;
-    margin: 10px 0;
     line-height: 1.6;
 }
 
 .gameover-container p strong {
     color: #3b4cca;
-    font-weight: bold;
-}
-
-@keyframes gameover-shake {
-    0% {
-        transform: scale(1) rotate(-1deg);
-    }
-    50% {
-        transform: scale(1.05) rotate(1deg);
-    }
-    100% {
-        transform: scale(1) rotate(-1deg);
-    }
 }
 
 /* ============================================================
-      🏆 CONTENEDOR RANKING
+⚠️ MENSAJES DE ERROR
 ============================================================ */
-#ranking-container {
-    text-align: center;
-    padding: 50px;
-    background-color: rgb(231, 217, 247);
-    border: 5px solid #a825d4;
-    border-radius: 25px;
-    box-shadow: 0 0 30px #3b4cca;
-    max-width: 600px;
-    width: 90%;
-    position: relative;
-    margin: 100px auto;
+.error-alert {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* ============================================================
-      🚫 CONTENEDOR DE ERRORES (404 / 403)
-============================================================ */
-.error-container {
-    text-align: center;
-    padding: 30px 20px;
-    background-color: rgb(231, 217, 247);
-    border: 4px solid #d42525;
-    border-radius: 25px;
-    box-shadow: 0 0 20px #3b4cca;
-    max-width: 600px;
-    width: 90%;
-    margin: auto;
-}
-
-/* Número grande */
-.fontError {
-    font-size: 80px;
-    font-weight: bold;
-    color: #ff3c3c;
-    -webkit-text-stroke: 2px #400000;
-    text-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000, 0 0 10px #9c0000;
-}
-
-/* Texto principal */
-.fontNameError {
-    font-size: 28px;
-    color: #d42525;
-    margin: 50px 0 40px 0;
-}
-
-/* Párrafos */
-.error-container p {
-    font-size: 16px;
-    color: #333;
-    margin: 5px 0;
-    line-height: 1.4;
-}
-
-/* ⚠️ ===== BOTONES (Error, General) cuadrar ===== */
-.error-container button,
-button,
-input[type="submit"],
-input[type="button"],
-input[type="reset"],
-.admin-link-btn,
-.admin-container-index button,
-.admin-container-index a.button-link,
-.admin-container-index .admin-btn,
-.button-save,
-#add-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /* Uniform width and size if required: */
-    /* min-width: 120px; */
-    box-sizing: border-box;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-align: center;
-    gap: 0;
-}
-
-.error-container button {
-    background-color: #3b4cca;
-    color: white;
-    font-weight: bold;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 15px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.error-container button:hover {
-    background-color: #a846f8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Animación */
-.error-container h1 {
-    font-size: 50px;
-    color: #d42525;
-    animation: error-shake 0.6s infinite alternate ease-in-out;
-    text-shadow: 0px 0px 10px #fff, 0 0 25px #d42525, 0 0 45px #d42525;
-    padding: 10px 0;
-}
-
-@keyframes error-shake {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(10px);
-    }
-}
-
-/* ============================================================
-      🧾 ENCABEZADOS , TEXTOS GENERALES Y SUBRAYADOS
+🧾 ENCABEZADOS Y TEXTOS
 ============================================================ */
 h1 {
     font-size: 50px;
@@ -518,19 +277,15 @@ p {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
-    display: inline-block;
-    margin-right: 0;
-    padding-right: 0;
 }
 
 /* ============================================================
-      📋 FORMULARIOS Y BOTONES
+📋 FORMULARIOS Y BOTONES
 ============================================================ */
 form {
     margin-top: 20px;
 }
 
-/* Botones y campos uniformes */
 input,
 select,
 button {
@@ -539,133 +294,62 @@ button {
     font-size: 14px;
     border-radius: 8px;
     border: 2px solid #3b4cca;
-    font-family: 'Press Start 2P', monospace, sans-serif;
-    box-sizing: border-box;
-    /* Ensure vertical align for buttons */
-    vertical-align: middle;
+    font-family: 'Press Start 2P', cursive;
 }
 
-button,
-input[type="submit"],
-input[type="button"],
-input[type="reset"] {
+button {
     background-color: #3b4cca;
     color: #ffcb05;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 120px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    white-space: nowrap;
 }
 
-/* Asegurar que los botones de gameover tengan contenido visible */
-.gameover-buttons button:empty::before,
-.gameover-buttons #save-btn:empty::before,
-.gameover-buttons #no-btn:empty::before {
-    content: "?";
-    visibility: visible;
-}
-
-button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover {
+button:hover {
     background-color: #a846f8;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button:disabled,
-input[type="submit"]:disabled,
-input[type="button"]:disabled,
-input[type="reset"]:disabled {
+button:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
 }
 
 /* ============================================================
-      ⚠️ MENSAJES DE ERROR GENERALES
-============================================================ */
-.error-alert {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* ============================================================
-      🕹️ ZONA DE JUEGO
+🕹️ ZONA DE JUEGO
 ============================================================ */
 #game-area {
     font-size: 1.5em;
     margin-top: 30px;
-    min-height: 100px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
-    border: 2px solid rgba(168, 37, 212, 0.3);
-}
-
-#game-area p#frase {
-    font-size: 0.9em;
-    line-height: 1.6;
-    word-wrap: break-word;
-    margin: 0;
-    padding: 10px;
-    min-height: 60px;
 }
 
 .correct {
-    color: #2ecc71;
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    color: green;
 }
+
 .wrong {
-    color: #e74c3c;
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+    color: red;
 }
+
 .highlight {
     text-decoration: underline;
     font-weight: bold;
-    color: #3b4cca;
-    background: rgba(59, 76, 202, 0.2);
-    padding: 2px 4px;
-    border-radius: 3px;
 }
 
 #countdown {
-    font-size: 4em;
-    color: #3b4cca;
-    margin: 30px 0;
-    font-weight: bold;
-    text-shadow: 0 0 20px rgba(59, 76, 202, 0.8);
-    animation: pulse 1s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-    }
+    font-size: 2em;
+    color: darkblue;
+    margin-top: 20px;
 }
 
 /* ============================================================
-      🔙 BOTÓN DE VOLVER
+🔙 BOTÓN DE VOLVER
 ============================================================ */
 #back-btn {
     margin-top: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     background-color: #e43df0;
     color: #ffcb05;
     padding: 12px 25px;
@@ -673,9 +357,6 @@ input[type="reset"]:disabled {
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
-    min-width: 120px;
-    text-align: center;
-    white-space: nowrap;
 }
 
 #back-btn:hover {
@@ -685,19 +366,26 @@ input[type="reset"]:disabled {
 }
 
 /* ============================================================
-      📊 TABLA RANKING
+📊 TABLAS Y RANKING
 ============================================================ */
+#ranking-container {
+    overflow-x: auto;
+}
+
 #ranking-container table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 16px;
+    table-layout: fixed;
 }
 
 #ranking-container th,
 #ranking-container td {
     padding: 12px;
     border: 2px solid #aa32ef;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 #ranking-container th {
@@ -705,15 +393,15 @@ input[type="reset"]:disabled {
     color: #3b4cca;
 }
 
-#ranking-container table tbody tr:nth-child(odd) {
+#ranking-container tbody tr:nth-child(odd) {
     background-color: rgb(231, 217, 247);
 }
 
-#ranking-container table tbody tr:nth-child(even) {
+#ranking-container tbody tr:nth-child(even) {
     background-color: rgb(220, 200, 243);
 }
 
-#ranking-container table tr.highlight {
+#ranking-container tr.highlight {
     background-color: #aaff9c !important;
     color: #3b4cca !important;
     font-weight: bold;
@@ -724,16 +412,11 @@ input[type="reset"]:disabled {
     color: #ffcb05;
     font-weight: bold;
     background-color: #3b4cca;
-    padding: 8px 14px;
+    padding: 12px 25px;
     border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     transition: all 0.3s ease;
     margin-top: 20px;
-    min-width: 70px;
-    text-align: center;
-    white-space: nowrap;
 }
 
 #ranking-container a:hover {
@@ -759,116 +442,6 @@ input[type="reset"]:disabled {
     opacity: 1;
 }
 
-/* ============================================================
-      🌑 FONDO OSCURO (LABERINTO)
-============================================================ */
-body.laberinto-bg {
-    background-image: url('media/giratina.gif');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-body.laberinto-bg::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    filter: brightness(0.55) blur(5px);
-    z-index: 0;
-}
-
-/* ============================================================
-      👁️ GIRATINA CONTAINER Y RESULTADO
-============================================================ */
-.giratina-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #ffcb05;
-    text-shadow: 2px 2px #3b4cca;
-    z-index: 1;
-}
-
-#giratina {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: url('https://media.tenor.com/0GRl16naN8YAAAAj/pokemon-nintendo.gif') center/contain no-repeat;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-#giratina:hover {
-    transform: scale(1.2);
-}
-
-/* Resultado */
-#resultado {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px #ffcb05;
-    opacity: 0;
-    transform: scale(0.9);
-    pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-#resultado.mostrar {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-
-#resultado img {
-    width: 150px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 10px #ffcb05);
-}
-
-#resultado p {
-    font-size: 22px;
-    font-weight: bold;
-    color: #ffcb05;
-}
-
-/* ============================================================
-      👤 RECUADRO USUARIO
-============================================================ */
-#user-box {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #666;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    font-size: 14px;
-    z-index: 9999;
-    white-space: nowrap;
-}
-
-#user-box a {
-    display: inline-block;
-    margin-top: 5px;
-    font-weight: bold;
-    color: #c0392b;
-    text-decoration: none;
-}
 
 /* ============================================================
       ⚙️ ÁREA ADMIN LOGIN / LOGOUT
@@ -1170,17 +743,6 @@ body.laberinto-bg::before {
     text-align: center;
     font-size: 12px;
 }
-/* Columna de Foto */
-/* Columna de Foto (centrada y consistente) */
-.admin-container-index td.foto-cell,
-.admin-container-index th.foto-header {
-    text-align: center !important;
-    vertical-align: middle;
-    width: 250px; /* puedes ajustar según quieras */
-    white-space: nowrap;
-}
-
-
 .admin-container-index tr:nth-child(even) {
     background-color: #D8ECFF;
 }
@@ -1475,165 +1037,27 @@ body.laberinto-bg::before {
 }
 
 /* ============================================================
-      🎮 POKEMON ICON EN JUEGO
+💥 COMBOS Y EFECTOS ESPECIALES
 ============================================================ */
-.pokemon-image-container {
-    text-align: center;
-    margin: 5px 0 0px 0;
-}
-.pokemon-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    opacity: 0.9;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    object-fit: contain;
-}
-.pokemon-icon:hover {
-    opacity: 1;
-    transform: scale(1.1);
+.combo-highlight {
+    color: #ffcb05;
+    text-shadow: 0 0 5px #ff00ff;
+    font-weight: bold;
+    animation: comboBlink 1s infinite;
 }
 
-/* ============================================================
-      🧱 MENSAJES DE ERROR ADMIN
-============================================================ */
-.error {
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-.empty {
-    background-color: #ffeb3b !important;
-    color: #333 !important;
-}
-.user {
-    background-color: #f44336 !important;
-    color: #fff !important;
-}
-.pass {
-    background-color: #ff9800 !important;
-    color: #fff !important;
-}
-.server {
-    background-color: #9c27b0 !important;
-    color: #fff !important;
-}
-/* Mensajes de éxito LISTAR FRASES */
-#llistarContainer .success {
-    margin: 20px auto;
-    padding: 10px 15px;
-    border-radius: 6px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    font-weight: bold;
-    max-width: 400px;
-    text-align: center;
-    align-items: center;
-}
-/* Mensajes de error LISTAR FRASES */
-#llistarContainer .error {
-    margin: 20px auto;
-    padding: 10px 15px;
-    border-radius: 6px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    font-weight: bold;
-    max-width: 400px;
-    text-align: center;
-}
+@keyframes comboBlink {
 
-/* ===============================================
-        PAGINATOR LISTAR
-================================================= */
-.pagination {
-    margin-top: 20px;
-    text-align: center;
-}
-.pagination a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #333;
-    background: #f9f9f9;
-    min-width: 64px;
-    text-align: center;
-    white-space: nowrap;
-}
-.pagination a:hover {
-    background: #e0e0e0;
-}
-.pagination span {
-    margin: 0 10px;
-    font-weight: bold;
-}
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
 
-/* ===============================================
-        PAGINATOR RANKING
-================================================= */
-.pagination_ranking {
-    margin-top: 34px;
-    text-align: center;
-    user-select: none;
-    font-family: 'Press Start 2P', monospace, sans-serif;
-}
-.pagination_ranking a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 13px;
-    margin: 0 8px;
-    border-radius: 18px;
-    border: 2.5px solid #a825d4;
-    background: linear-gradient(90deg, #e7dafe 60%, #c1cfff 100%);
-    color: #7231b9;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 10px rgba(120, 35, 184, 0.08);
-    text-shadow: 0px 2px 0px #fff, 1px 1px 2px #ab84ca2e;
-    transition:
-        background 0.18s,
-        color 0.18s,
-        box-shadow 0.19s,
-        border 0.19s;
-    text-decoration: none;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    top: 0;
-    min-width: 64px;
-    text-align: center;
-    white-space: nowrap;
-}
-.pagination_ranking a:hover,
-.pagination_ranking a:focus {
-    background: linear-gradient(90deg, #fae9ac 55%, #faeaef 100%);
-    color: #a825d4;
-    border-color: #7231b9;
-    box-shadow: 0 6px 24px rgba(120, 35, 184, 0.14);
-    top: -2px;
-}
-.pagination_ranking span {
-    margin: 0 18px;
-    color: #4B2062;
-    font-size: 13px;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 8px;
-    padding: 8px 14px 7px 13px;
-    letter-spacing: 0.5px;
-    border: 1.3px solid #a795cc;
-    box-shadow: 0 1px 3px rgba(87, 32, 138, 0.05);
-    display: inline-block;
-    vertical-align: middle;
+    25%,
+    75% {
+        opacity: 0.4;
+    }
 }
 
 /* ===============================================
@@ -1724,34 +1148,165 @@ body.laberinto-bg::before {
     outline: none;
 }
 
-.info-idioma {
-    background-color: #eef6ff;
-    padding: 10px 15px;
-    border-left: 4px solid #3b82f6;
-    margin-bottom: 15px;
-    border-radius: 5px;
+/* ============================================================
+      👤 RECUADRO USUARIO
+============================================================ */
+#user-box {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #666;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+#user-box a {
+    display: inline-block;
+    margin-top: 5px;
     font-weight: bold;
+    color: #c0392b;
+    text-decoration: none;
 }
-.custom-file {
-    display: inline-block;
-    position: relative;
+
+/* ============================================================
+      ⏱️ TIMER BOX
+============================================================ */
+#timer-box {
+    position: fixed;
+    top: 12px;
+    right: 260px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #3b4cca;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3b4cca;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+/* ============================================================
+      PERMADEATH NOTICE
+============================================================ */
+
+/* Aviso permadeath (gameover) */
+.permadeath-notice {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+/* PERMADEATH (index.php) */
+label[for="permadeath"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.75rem;
+  color: #640c0c;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  user-select: none;
+}
+
+#permadeath {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  accent-color: #640c0c; /* Chrome/Edge/Firefox modern styling */
+}
+
+/* Info button "?" */
+#perma-info {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 6px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #640c0c, #332222);
+  color: #ffffff;
+  border: 2px solid #8a482e;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+#perma-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.22);
+}
+
+#perma-info:focus {
+  outline: 3px solid rgba(247,201,72,0.22);
+  outline-offset: 2px;
+}
+
+
+/* Cajón para las vidas (permadeath) */
+#lives-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+}
+
+/* ============================================================
+      📊 BARRA DE PROGRESSIÓ DEL NOMBRE DE FRASES
+============================================================ */
+#progress-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #222;
+}
+#progress-container {
+    width: 80%;
+    height: 22px;
+    background: linear-gradient(to right, #cfcfcf, #e8e8e8);
+    border-radius: 14px;
+    margin: 8px auto 18px auto;
     overflow: hidden;
-    cursor: pointer;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+    /* quitar display:none; */
 }
-.custom-file input[type=file] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
+
+#progress-bar {
     height: 100%;
-    cursor: pointer;
+    width: 0%;
+    border-radius: 14px;
+    background: linear-gradient(to right, #b97fff, #8e24aa);
+    transition: width 0.4s ease-in-out;
 }
-.custom-file-text {
-    display: inline-block;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    width: 300px;
+
+/* ============================================================
+      📝 WRITE PHRASE 3 LANG
+============================================================ */
+#writePhrase3lang {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+#back-btn.button-pressed {
+    background-color: #a846f8 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px #7229a9;
+    transform: scale(0.97);
 }
 
 
@@ -1795,712 +1350,211 @@ body.laberinto-bg::before {
 }
 
 
-/* ============================================================
-📱 MEDIA QUERIES (Responsividad)
-=============================================================== */
+/* ===============================================
+        PAGINATOR RANKING
+================================================= */
+.pagination_ranking {
+    margin-top: 34px;
+    text-align: center;
+    user-select: none;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+}
+.pagination_ranking a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 13px;
+    margin: 0 8px;
+    border-radius: 18px;
+    border: 2.5px solid #a825d4;
+    background: linear-gradient(90deg, #e7dafe 60%, #c1cfff 100%);
+    color: #7231b9;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(120, 35, 184, 0.08);
+    text-shadow: 0px 2px 0px #fff, 1px 1px 2px #ab84ca2e;
+    transition:
+        background 0.18s,
+        color 0.18s,
+        box-shadow 0.19s,
+        border 0.19s;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    min-width: 64px;
+    text-align: center;
+    white-space: nowrap;
+}
+.pagination_ranking a:hover,
+.pagination_ranking a:focus {
+    background: linear-gradient(90deg, #fae9ac 55%, #faeaef 100%);
+    color: #a825d4;
+    border-color: #7231b9;
+    box-shadow: 0 6px 24px rgba(120, 35, 184, 0.14);
+    top: -2px;
+}
+.pagination_ranking span {
+    margin: 0 18px;
+    color: #4B2062;
+    font-size: 13px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 8px;
+    padding: 8px 14px 7px 13px;
+    letter-spacing: 0.5px;
+    border: 1.3px solid #a795cc;
+    box-shadow: 0 1px 3px rgba(87, 32, 138, 0.05);
+    display: inline-block;
+    vertical-align: middle;
+}
 
-/* ===== TABLETS GRANDES Y DESKTOPS PEQUEÑOS (1400px - 1024px) ===== */
-@media (max-width: 1400px) {
-    .gengar-float {
-        width: 180px;
-        left: 90%;
+
+/* ============================================================
+📱 MEDIA QUERIES RESPONSIVE
+============================================================ */
+@media (max-width: 1388px) and (max-height: 768px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        padding: 30px;
+        max-width: 500px;
+        width: 85%;
+        margin: 80px auto;
     }
-    .gengar-bottom {
-        width: 240px;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input,
+    select,
+    button {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    #back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #game-area {
+        font-size: 1.2em;
+    }
+
+    #resultado p {
+        font-size: 18px;
+    }
+
+    #user-box {
+        font-size: 12px;
+        padding: 6px 10px;
     }
 }
 
 @media (max-width: 1200px) {
-    #index-container,
-    #container,
-    .gameover-container,
-    #ranking-container {
-        max-width: 550px;
-        padding: 35px;
-        margin: 80px auto;
-    }
-    
-    .gameover-container {
-        padding: 40px 35px;
-    }
-    
-    .gameover-container h1 {
-        font-size: 50px;
-        padding: 35px 0;
-    }
-    
-    .gameover-container h3 {
-        font-size: 22px;
-    }
-    
-    .gameover-container p {
-        font-size: 15px;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 13px;
-        padding: 11px 22px;
-        min-width: 110px;
-    }
-    
-    .gengar-float {
-        width: 160px;
-        opacity: 0.4;
-    }
-    
-    .gengar-bottom {
-        width: 220px;
-        opacity: 0.7;
-    }
-    
-    h1 {
-        font-size: 42px;
-    }
-    
-    h2 {
-        font-size: 28px;
-    }
-}
 
-/* ===== TABLETS (1024px - 768px) ===== */
-@media (max-width: 1024px) {
     #index-container,
     #container,
     .gameover-container,
     #ranking-container {
-        max-width: 500px;
-        padding: 30px;
-        margin: 70px auto;
+        max-width: 450px;
+        padding: 25px;
     }
-    
-    .gameover-container {
-        padding: 35px 30px;
-    }
-    
-    .gameover-container h1 {
-        font-size: 45px;
-        padding: 30px 0;
-    }
-    
-    .gameover-container h3 {
-        font-size: 20px;
-        margin: 15px 0;
-    }
-    
-    .gameover-container p {
-        font-size: 14px;
-        margin: 8px 0;
-    }
-    
-    .gameover-container hr {
-        margin: 15px 0;
-    }
-    
-    .gameover-save-text {
-        font-size: 15px;
-        margin: 15px 0 !important;
-    }
-    
-    .gameover-buttons {
-        margin: 15px 0;
-        gap: 12px;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 12px;
-        padding: 10px 20px;
-        min-width: 100px;
-    }
-    
-    .gengar-float {
-        width: 140px;
-        left: 92%;
-    }
-    
-    .gengar-bottom {
-        width: 200px;
-        left: 3%;
-    }
-    
+
     h1 {
-        font-size: 38px;
+        font-size: 36px;
     }
-    
+
     h2 {
         font-size: 26px;
     }
-    
-    #user-box {
-        top: 12px;
-        right: 12px;
-        font-size: 11px;
-        padding: 6px 10px;
+}
+
+@media (max-width: 992px) {
+
+    #index-container,
+    #container,
+    .gameover-container,
+    #ranking-container {
+        width: 90%;
+        padding: 20px;
     }
-    
-    #timer-box {
-        top: 12px;
-        right: 200px;
-        font-size: 16px;
-        padding: 6px 10px;
+
+    h1 {
+        font-size: 32px;
     }
-    
-    input,
-    select,
-    button,
-    .admin-link-btn,
-    .button-save,
-    #add-btn {
-        padding: 10px;
-        font-size: 12px;
-        min-width: 100px;
+
+    h2 {
+        font-size: 24px;
+    }
+
+    #game-area {
+        font-size: 1em;
     }
 }
 
-/* ===== TABLETS PEQUEÑAS Y MÓVILES GRANDES (768px - 480px) ===== */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
     }
-    
-    #index-container,
-    #container,
-    .gameover-container,
-    #ranking-container {
-        margin: 30px auto;
-        padding: 25px 20px;
-        width: 92%;
-        max-width: 100%;
-    }
-    
-    .gameover-container {
-        padding: 30px 20px;
-        margin: 50px auto;
-    }
-    
-    .gameover-container h1 {
-        font-size: 38px;
-        padding: 25px 0;
-        line-height: 1.2;
-    }
-    
-    .gameover-container h3 {
-        font-size: 18px;
-        margin: 12px 0;
-    }
-    
-    .gameover-container p {
-        font-size: 13px;
-        margin: 7px 0;
-        line-height: 1.5;
-    }
-    
-    .gameover-container hr {
-        margin: 12px 0;
-    }
-    
-    .gameover-save-text {
-        font-size: 14px;
-        margin: 12px 0 !important;
-    }
-    
-    .gameover-buttons {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        margin: 15px 0;
-        flex-wrap: wrap;
-    }
-    
-    .gameover-buttons form {
-        margin: 0;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 11px;
-        padding: 9px 18px;
-        min-width: 90px;
-        width: auto;
-        max-width: 45%;
-        flex: 0 1 auto;
-    }
-    
-    .gengar-float {
-        width: 120px;
-        left: 95%;
-        bottom: 45%;
-        opacity: 0.35;
-    }
-    
-    .gengar-bottom {
-        width: 180px;
-        left: 2%;
-        bottom: 8px;
-        opacity: 0.6;
-    }
-    
-    h1 {
-        font-size: 32px;
-    }
-    
-    h2 {
-        font-size: 22px;
-    }
-    
-    p {
-        font-size: 13px;
-    }
-    
-    input,
-    select,
-    button,
-    .admin-link-btn,
-    .button-save,
-    #add-btn {
-        font-size: 11px;
-        padding: 9px;
-        min-width: 90px;
-    }
-    
-    #back-btn {
-        font-size: 11px;
-        padding: 9px 18px;
-        min-width: 90px;
-    }
-    
-    #user-box {
-        top: 10px;
-        right: 10px;
-        font-size: 10px;
-        padding: 5px 8px;
-    }
-    
-    #timer-box {
-        top: 10px;
-        right: 140px;
-        font-size: 14px;
-        padding: 5px 8px;
-    }
-    
-    #game-area {
-        font-size: 1em;
-        padding: 15px;
-    }
-    
-    #resultado p {
-        font-size: 18px;
-    }
-}
 
-/* ===== MÓVILES MEDIANOS (480px - 360px) ===== */
-@media (max-width: 480px) {
-    body {
-        background-attachment: scroll;
-        background-size: cover;
-    }
-    
     #index-container,
     #container,
     .gameover-container,
     #ranking-container {
-        margin: 20px auto;
-        padding: 20px 15px;
+        margin: 40px 0;
+        padding: 15px;
         width: 95%;
     }
-    
-    .gameover-container {
-        padding: 25px 15px;
-        margin: 40px auto;
-        border-width: 3px;
-    }
-    
-    .gameover-container h1 {
-        font-size: 32px;
-        padding: 20px 0;
-        line-height: 1.1;
-    }
-    
-    .gameover-container h3 {
-        font-size: 16px;
-        margin: 10px 0;
-    }
-    
-    .gameover-container p {
-        font-size: 12px;
-        margin: 6px 0;
-        line-height: 1.4;
-    }
-    
-    .gameover-container hr {
-        margin: 10px 0;
-        border-width: 1.5px;
-    }
-    
-    .gameover-save-text {
-        font-size: 13px;
-        margin: 10px 0 !important;
-    }
-    
-    .gameover-buttons {
-        flex-direction: column;
-        gap: 8px;
-        margin: 12px 0;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 10px;
-        padding: 10px 16px;
-        min-width: 140px;
-        min-height: 44px;
-        width: 100%;
-        max-width: 180px;
-    }
-    
-    .gengar-float {
-        width: 100px;
-        left: 98%;
-        bottom: 40%;
-        opacity: 0.3;
-        display: none; /* Ocultar en móviles muy pequeños para mejor UX */
-    }
-    
-    .gengar-bottom {
-        width: 150px;
-        left: 1%;
-        bottom: 5px;
-        opacity: 0.5;
-    }
-    
+
     h1 {
         font-size: 28px;
     }
-    
+
     h2 {
         font-size: 20px;
     }
-    
+
     p {
         font-size: 12px;
-        margin: 15px 0;
     }
-    
+
     input,
     select,
-    button,
-    .admin-link-btn,
-    .button-save,
-    #add-btn {
+    button {
         font-size: 10px;
         padding: 8px;
-        min-width: 80px;
     }
-    
-    #back-btn {
-        font-size: 10px;
-        padding: 8px 16px;
-        min-width: 80px;
-    }
-    
-    #user-box {
-        top: 8px;
-        right: 8px;
-        font-size: 9px;
-        padding: 4px 6px;
-    }
-    
-    #timer-box {
-        top: 8px;
-        right: 110px;
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-    
-    #game-area {
-        font-size: 0.9em;
-        padding: 12px;
-    }
-    
-    #resultado p {
-        font-size: 16px;
-    }
-}
 
-/* ===== MÓVILES PEQUEÑOS (360px y menos) ===== */
-@media (max-width: 360px) {
-    body {
-        background-attachment: scroll;
-        background-size: cover;
-    }
-    
-    #index-container,
-    #container,
-    .gameover-container,
-    #ranking-container {
-        margin: 15px auto;
-        padding: 15px 12px;
-        width: 98%;
-    }
-    
-    .gameover-container {
-        padding: 20px 12px;
-        margin: 30px auto;
-    }
-    
-    .gameover-container h1 {
-        font-size: 28px;
-        padding: 15px 0;
-    }
-    
-    .gameover-container h3 {
-        font-size: 14px;
-        margin: 8px 0;
-    }
-    
-    .gameover-container p {
-        font-size: 11px;
-        margin: 5px 0;
-    }
-    
-    .gameover-container hr {
-        margin: 8px 0;
-    }
-    
-    .gameover-save-text {
-        font-size: 12px;
-        margin: 8px 0 !important;
-    }
-    
-    .gameover-buttons {
-        gap: 6px;
-        margin: 10px 0;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 9px;
-        padding: 10px 14px;
-        min-width: 120px;
-        min-height: 44px;
-        max-width: 160px;
-    }
-    
-    .gengar-bottom {
-        width: 120px;
-        opacity: 0.4;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    h2 {
-        font-size: 18px;
-    }
-    
-    p {
-        font-size: 11px;
-    }
-    
-    input,
-    select,
-    button,
-    .admin-link-btn,
-    .button-save,
-    #add-btn {
-        font-size: 9px;
-        padding: 7px;
-        min-width: 70px;
-    }
-    
     #back-btn {
-        font-size: 9px;
-        padding: 7px 14px;
-        min-width: 70px;
-    }
-    
-    #user-box {
-        top: 5px;
-        right: 5px;
-        font-size: 8px;
-        padding: 3px 5px;
-    }
-    
-    #timer-box {
-        top: 5px;
-        right: 90px;
-        font-size: 11px;
-        padding: 3px 5px;
-    }
-}
-
-/* ===== ORIENTACIÓN LANDSCAPE EN MÓVILES ===== */
-@media (max-width: 768px) and (orientation: landscape) {
-    body {
-        background-attachment: scroll;
-    }
-    
-    .gameover-container {
-        margin: 15px auto;
-        padding: 20px 25px;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-    
-    .gameover-container h1 {
-        font-size: 32px;
-        padding: 10px 0;
-    }
-    
-    .gameover-container h3 {
-        font-size: 16px;
-        margin: 8px 0;
-    }
-    
-    .gameover-container p {
         font-size: 12px;
-        margin: 4px 0;
-    }
-    
-    .gameover-container hr {
-        margin: 8px 0;
-    }
-    
-    .gameover-save-text {
-        font-size: 13px;
-        margin: 8px 0 !important;
-    }
-    
-    .gameover-buttons {
-        flex-direction: row;
-        gap: 10px;
-        margin: 10px 0;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        max-width: 40%;
-        font-size: 11px;
         padding: 8px 16px;
     }
-    
-    .gengar-float {
-        width: 100px;
-        bottom: 30%;
-        opacity: 0.3;
-    }
-    
-    .gengar-bottom {
-        width: 140px;
-        opacity: 0.5;
-    }
-    
-    #user-box {
-        top: 5px;
-        right: 5px;
+}
+
+@media (max-width: 480px) {
+    label[for="permadeath"] {
+        gap: 0.35rem;
         font-size: 9px;
-        padding: 4px 6px;
+    }
+
+    #perma-info {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
     }
 }
-
-/* ===== PANTALLAS MUY GRANDES (1400px+) ===== */
-@media (min-width: 1401px) {
-    .gameover-container {
-        max-width: 650px;
-    }
-    
-    .gameover-container h1 {
-        font-size: 65px;
-    }
-    
-    .gameover-container h3 {
-        font-size: 26px;
-    }
-    
-    .gameover-container p {
-        font-size: 17px;
-    }
-    
-    .gameover-buttons #save-btn,
-    .gameover-buttons #no-btn {
-        font-size: 15px;
-        padding: 13px 26px;
-        min-width: 130px;
-    }
-}
-
-/* ============================================================
-      ⏱️ TIMER BOX
-============================================================ */
-#timer-box {
-    position: fixed;
-    top: 12px;
-    right: 280px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 2px solid #3b4cca;
-    font-size: 18px;
-    font-weight: bold;
-    color: #3b4cca;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    white-space: nowrap;
-}
-
-/* ============================================================
-      📊 BARRA DE PROGRESSIÓ DEL NOMBRE DE FRASES
-============================================================ */
-
-@keyframes lifeLostPulse {
-    0% { transform: scale(1); box-shadow: 0 6px 18px rgba(59,76,202,0.18); }
-    40% { transform: scale(1.08); box-shadow: 0 12px 26px rgba(216,27,96,0.28); }
-    100% { transform: scale(1); box-shadow: 0 6px 18px rgba(59,76,202,0.18); }
-}
-
-
-
-/* === Barra de progressió del nombre de frases === */
-
-#progress-text {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #222;
-}
-#progress-container {
-    width: 80%;
-    height: 22px;
-    background: linear-gradient(to right, #cfcfcf, #e8e8e8);
-    border-radius: 14px;
-    margin: 8px auto 18px auto;
-    overflow: hidden;
-    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-    display: none;
-}
-#progress-bar {
-    height: 100%;
-    width: 0%;
-    border-radius: 14px;
-    background: linear-gradient(to right, #b97fff, #8e24aa);
-    transition: width 0.4s ease-in-out;
-}
-
-/* ============================================================
-      📝 WRITE PHRASE 3 LANG
-============================================================ */
-#writePhrase3lang {
-    margin-bottom: 16px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-#back-btn.button-pressed {
-    background-color: #a846f8 !important;
-    color: #fff !important;
-    box-shadow: 0 4px 15px #7229a9;
-    transform: scale(0.97);
-}
-

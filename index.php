@@ -111,18 +111,20 @@ if (isset($_SESSION['difficulty'])) $difficulty = $_SESSION['difficulty'];
             </select>
 
             <!-- Mode Permadeath -->
-            <label for="permadeath" style="margin-left:10px;">
-                <input type="checkbox" id="permadeath" name="permadeath" value="1" />
+            <input type="checkbox" id="permadeath" name="permadeath" value="1" />
+            <label for="permadeath">
                 <?= $texts['permadeath_label'] ?? 'Modo permadeath' ?>
             </label>
+
             <button type="button" id="perma-info" class="info-btn" title="<?= $texts['permadeath_info_title'] ?? '¿Qué es el modo permadeath?' ?>">?</button>
 
             <br><br>
 
             <?php $playText = $texts['play'] ?? 'Jugar'; ?>
             <button type="submit" id="play-button" disabled>
-                <span class="underline-letter"><?= mb_substr($playText, 0, 1) ?></span><?= mb_substr($playText, 1) ?>
+                <span class="underline-letter"><?= substr($playText, 0, 1) ?></span><?= substr($playText, 1) ?>
             </button>
+
         </form>
 
         <noscript>

@@ -20,6 +20,7 @@ return [
         'difficulty_normal' => 'Normal',
         'difficulty_dificil' => 'Difícil',
         'timer' => '⏱',
+        'seconds' => 's',
         'countdown_start' => 'Comenzando...',
         'progress' => 'Frase %d de %d',
         'phraseCompleted' => '¡Frase completada!',
@@ -30,19 +31,22 @@ return [
     ],
 
     'gameover' => [
-        'title' => 'Game Over',
-        'results' => 'Resultado de la partida:',
-        'hits' => 'Aciertos',
+        'title'           => 'Game Over',
+        'results'         => 'Resultado de la partida:',
+        'hits'            => 'Aciertos',
         'difficultyBonus' => 'Bonus por dificultad',
-        'bonusGiratina' => 'Bonus Giratina',
-        'timeBonus' => 'Bonus por tiempo',
-        'totalTime' => 'Tiempo total',
-        'finalScore' => 'Puntuación final',
-        'scoreUnit' => 'puntos',
-        'retry' => 'Jugar de nuevo',
-        'save' => '¿Guardar puntuación?',
-        'yes' => 'Sí',
-        'no' => 'No',
+        'bonusGiratina'   => 'Bonus Giratina',
+        'scoreUnit'       => 'puntos',
+        'finalScore'      => 'Puntuación final',
+        'yes'             => 'Sí',
+        'no'              => 'No',
+        'permadeath_dead'   => '⚠️ Modo Permadeath activado: la partida terminó porque te quedaste sin vidas. No se aplica el bonus.',
+        'permadeath_alive'  => '⚠️ Modo Permadeath activado: esta partida se completó en permadeath.',
+        'permadeath_bonus'  => 'Bonus permadeath aplicado',
+        'timeBonus'       => 'Bonus por tiempo',
+        'comboMultiplier' => 'Multiplicador de combo',
+        'totalTime'       => 'Tiempo total',
+        'saveRecord'      => 'Guardar récord',
     ],
 
     'ranking' => [
@@ -52,14 +56,18 @@ return [
         'time' => 'Tiempo',
         'date' => 'Fecha',
         'back' => 'ESCAPE',
+        'combo' => 'Combo',
+        'permadeath' => 'Permadeath',
+        'permadeath_flag' => 'Sí',
+        'permadeath_flag_no' => 'No',
     ],
 
     'giratina' => [
         'title' => '¡Atrapa a Giratina!',
-        'instruction' => '¡Haz clic en Giratina antes de que escape!',
+        'instruction' => '¡Haz clic sobre Giratina antes de que escape!',
         'caught' => '¡Has atrapado a Giratina! +100 puntos 🎉',
         'redirecting' => 'Redirigiendo al juego...',
-        'bonus' => 'Bonus Giratina',
+        'bonus' => 'Bonificación Giratina',
     ],
 
     'admin_login' => [
@@ -71,7 +79,7 @@ return [
     ],
 
     'admin_index' => [
-        'title' => "Panel de Administración",
+        'title' => 'Panel de Administración',
         'create' => 'Crear frase',
         'edit' => 'Editar frase',
         'delete' => 'Eliminar frase',
@@ -79,10 +87,15 @@ return [
         'logout' => 'Cerrar sesión',
         'list_sentences' => 'Listar frases',
         'hide_sentences' => 'Ocultar frases',
-        'difficulty' => 'Mostrar según nivel de dificultad:',
+        'difficulty' => 'Mostrar por nivel de dificultad:',
         'paginator' => 'Siguiente',
         'levels' => ['facil'=>'Fácil','normal'=>'Normal','dificil'=>'Difícil'],
         'select_level' => 'Selecciona un nivel',
+        'photo' => 'Foto',
+        'confirm_delete' => '¿Eliminar esta frase?',
+        'paginator_prev' => 'Anterior',
+        'paginator_next' => 'Siguiente',
+        'paginator_page' => 'Página',
     ],
 
     'messages' => [
@@ -103,10 +116,10 @@ return [
         'save'         => 'Guardar',
         'back'         => 'Volver',
         'select_level' => 'Selecciona un nivel',
-        'success'      => 'Frase agregada correctamente.',
-        'success_lang' => 'Frase agregada correctamente en el idioma: {lang}',
+        'success'      => 'Frase añadida correctamente.',
+        'success_lang' => 'Frase añadida correctamente en el idioma: {lang}',
         'info_lang'    => 'La frase se guardará en la lista del idioma seleccionado:',
-        'select_file'  => 'No se ha seleccionado ningún archivo',
+        'select_file'  => 'No se ha elegido ningún archivo',
     ],
 
     'admin_delete' => [
@@ -123,11 +136,11 @@ return [
         'msg2' => 'Un Pokémon guardián bloquea el paso para proteger el juego.',
         'btn' => 'Volver al inicio'
     ],
-    
+
     404 => [
         'code' => '404',
         'title' => 'Página no encontrada',
-        'msg1' => 'La ruta que buscas no existe. Parece que un Pokémon travieso se la ha llevado.',
+        'msg1' => 'La ruta que buscas no existe. Parece que un Pokémon travieso se la llevó.',
         'msg2' => '',
         'btn' => 'Volver al inicio',
         'btn2' => 'Ver ranking'

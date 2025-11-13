@@ -32,23 +32,21 @@ return [
 
     'gameover' => [
         'title'           => 'Game Over',
-        'results'         => 'Resultado de la partida:',
-        'hits'            => 'Aciertos',
-        'difficultyBonus' => 'Bonus por dificultad',
+        'results'         => 'Resultat de la partida:',
+        'hits'            => 'Encerts',
+        'difficultyBonus' => 'Bonus per dificultat',
         'bonusGiratina'   => 'Bonus Giratina',
-        'scoreUnit'       => 'puntos',
-        'finalScore'      => 'Puntuación final',
+        'scoreUnit'       => 'punts',
+        'finalScore'      => 'Puntuació final',
         'yes'             => 'Sí',
         'no'              => 'No',
-        // Textos de permadeath
-        'permadeath_dead'   => '⚠️ Modo Permadeath activado: la partida terminó porque te quedaste sin vidas. No se aplica el bonus.',
-        'permadeath_alive'  => '⚠️ Modo Permadeath activado: esta partida se completó en permadeath.',
-        'permadeath_bonus'  => 'Bonus permadeath aplicado',
-        // Otros textos si quieres traducir también
-        'timeBonus'       => 'Bonus por tiempo',
+        'permadeath_dead'   => '⚠️ Mode Permadeath activat: la partida ha acabat perquè et vas quedar sense vides. No s\'aplica el bonus.',
+        'permadeath_alive'  => '⚠️ Mode Permadeath activat: aquesta partida s\'ha completat en permadeath.',
+        'permadeath_bonus'  => 'Bonus permadeath aplicat',
+        'timeBonus'       => 'Bonus per temps',
         'comboMultiplier' => 'Multiplicador de combo',
-        'totalTime'       => 'Tiempo total',
-        'saveRecord'      => 'Guardar récord',
+        'totalTime'       => 'Temps total',
+        'saveRecord'      => 'Desar rècord',
     ],
 
     'ranking' => [
@@ -58,6 +56,10 @@ return [
         'time' => 'Temps',
         'date' => 'Data',
         'back' => 'ESCAPE',
+        'combo' => 'Combo',
+        'permadeath' => 'Permadeath',
+        'permadeath_flag' => 'Sí',
+        'permadeath_flag_no' => 'No',
     ],
 
     'giratina' => [
@@ -89,6 +91,11 @@ return [
         'paginator' => 'Següent',
         'levels' => ['facil'=>'Fàcil','normal'=>'Normal','dificil'=>'Difícil'],
         'select_level' => 'Selecciona un nivell',
+        'photo' => 'Foto',
+        'confirm_delete' => 'Segur que vols eliminar aquesta frase?',
+        'paginator_prev' => 'Anterior',
+        'paginator_next' => 'Següent',
+        'paginator_page' => 'Pàgina',
     ],
 
     'messages' => [
@@ -133,7 +140,7 @@ return [
     404 => [
         'code' => '404',
         'title' => 'Pàgina no trobada',
-        'msg1' => 'La ruta que busques no existeix. Sembla que un Pokémon trapella se la va emportar.',
+        'msg1' => 'La ruta que busques no existeix. Sembla que un Pokémon trapella se l\'ha emportat.',
         'msg2' => '',
         'btn' => 'Tornar a l\'inici',
         'btn2' => 'Veure rànquing'

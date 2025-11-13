@@ -70,8 +70,8 @@ $noText  = $t['no'] ?? 'No';
     <link rel="stylesheet" href="styles.css?<?= time(); ?>">
 </head>
 <body>
-    <img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
-    <img src="images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo">
+<!--<img src="images/fantasmaGengar.png" alt="Gengar Fantasma" class="gengar-float">
+<img src="/images/gengar8.png" class="gengar-bottom" alt="Gengar estático abajo"> -->
 
     <div id="user-box">
         👤 <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
@@ -102,28 +102,37 @@ $noText  = $t['no'] ?? 'No';
             <?php endif; ?>
         <?php endif; ?>
 
-        <!-- Form guardar récord -->
-        <form method="post" action="gameover.php" style="display:inline;">
-            <input type="hidden" name="name" value="<?= $name ?>">
-            <input type="hidden" name="score" value="<?= $finalScore ?>">
-            <input type="hidden" name="time" value="<?= $time ?>">
-            <input type="hidden" name="hits" value="<?= $hits ?>">
-            <input type="hidden" name="bonus" value="<?= $bonus ?>">
-            <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
-            <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
-            <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
-            <input type="hidden" name="permadeath" value="<?= $isPermadeath ? 1 : 0 ?>">
-            <input type="hidden" name="save" value="1">
+        <?php
+        $yesText = $t['yes'] ?? 'Sí';
+        $noText  = $t['no'] ?? 'No';
+        ?>
 
-            <div class="gameover-buttons">
-                <button type="submit" id="save-btn">
-                    <span class="underline-letter"><?= mb_substr($yesText, 0, 1) ?></span><?= mb_substr($yesText, 1) ?>
-                </button>
-                <a href="index.php" id="no-btn" class="btn">
-                    <span class="underline-letter"><?= mb_substr($noText, 0, 1) ?></span><?= mb_substr($noText, 1) ?>
-                </a>
-            </div>
-        </form>
+<div class="gameover-buttons">
+    <!-- Botón Sí dentro del form -->
+    <form id="save-form" method="post" action="gameover.php">
+        <input type="hidden" name="name" value="<?= $name ?>">
+        <input type="hidden" name="score" value="<?= $finalScore ?>">
+        <input type="hidden" name="time" value="<?= $time ?>">
+        <input type="hidden" name="hits" value="<?= $hits ?>">
+        <input type="hidden" name="bonus" value="<?= $bonus ?>">
+        <input type="hidden" name="timeBonus" value="<?= $timeBonus ?>">
+        <input type="hidden" name="bonusGiratina" value="<?= $bonusGiratina ?>">
+        <input type="hidden" name="comboLevel" value="<?= $comboLevel ?>">
+        <input type="hidden" name="permadeath" value="<?= $isPermadeath ? 1 : 0 ?>">
+        <input type="hidden" name="save" value="1">
+
+        <button type="submit" class="btn-link" id="save-btn">
+            <span class="underline-letter">S</span>í
+        </button>
+    </form>
+
+    <!-- Botón No fuera del form pero dentro del mismo flex -->
+    <button type="button" class="btn-link" id="no-btn">
+        <span class="underline-letter">N</span>o
+    </button>
+</div>
+
+
     </div>
 
     <script>
@@ -131,8 +140,8 @@ $noText  = $t['no'] ?? 'No';
             if (e.repeat) return;
             const key = e.key.toLowerCase();
 
-            const yesKey = <?= json_encode(mb_substr($yesText, 0, 1)) ?>.toLowerCase();
-            const noKey  = <?= json_encode(mb_substr($noText, 0, 1)) ?>.toLowerCase();
+            const yesKey = <?= json_encode(mb_substr(($t['yes'] ?? 'Sí'), 0, 1)) ?>.toLowerCase();
+            const noKey  = <?= json_encode(mb_substr(($t['no'] ?? 'No'), 0, 1)) ?>.toLowerCase();
 
             if (key === yesKey || key === "enter") {
                 e.preventDefault();
@@ -144,5 +153,6 @@ $noText  = $t['no'] ?? 'No';
             }
         });
     </script>
+
 </body>
 </html>

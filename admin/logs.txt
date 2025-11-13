@@ -357,3 +357,72 @@
 [2025-11-12 23:02:36] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: j:302:4.61:1:1
 
 [2025-11-12 23:02:36] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'j' accedió al ranking
+[2025-11-12 23:07:41] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-12 23:08:20] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'j' cerró sesión del juego
+[2025-11-12 23:34:55] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' escogió juego en dificultad 'facil'
+[2025-11-12 23:34:55] [127.0.0.1] [index.php] GAME_START: Usuario 'valeria' escogió juego en dificultad 'facil'
+[2025-11-12 23:34:55] [127.0.0.1] [play.php] GAME_START: Jugador 'valeria' inició partida en dificultad 'facil'
+[2025-11-12 23:35:52] [127.0.0.1] [play.php] GAME_START: Jugador 'valeria' inició partida en dificultad 'facil'
+[2025-11-12 23:38:34] [127.0.0.1] [play.php] GAME_START: Jugador 'valeria' inició partida en dificultad 'facil'
+[2025-11-12 23:40:17] [127.0.0.1] [play.php] GAME_START: Jugador 'valeria' inició partida en dificultad 'facil'
+[2025-11-12 23:40:27] [127.0.0.1] [destroy_session.php] PLAYER_LOGOUT: Usuario 'valeria' cerró sesión del juego
+[2025-11-12 23:40:35] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-12 23:40:35] [127.0.0.1] [play.php] GAME_START: Jugador 'hoal' inició partida en dificultad 'facil'
+[2025-11-12 23:42:16] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-12 23:42:16] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-12 23:44:38] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:46:34] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:48:33] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:48:41] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:50:09] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:51:11] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x4, permadeath=0
+[2025-11-12 23:51:14] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 340, muerto=0, bonus_permadeath 0, puntuación final 340, tiempo 40.43 s, combo x1, permadeath=0
+[2025-11-12 23:51:14] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: hoal:340:40.43:1:0
+
+[2025-11-12 23:51:14] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-12 23:54:08] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-12 23:54:25] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:55:31] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:56:21] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:57:14] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:57:21] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:57:45] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:58:27] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:58:30] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 68, muerto=0, bonus_permadeath 0, puntuación final 68, tiempo 13.69 s, combo x1, permadeath=0
+[2025-11-12 23:58:30] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: hoal:68:13.69:1:0
+
+[2025-11-12 23:58:30] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:00:21] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:01:10] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:01:16] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:01:32] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:01:32] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:01:50] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 57, muerto=0, bonus_permadeath 0, puntuación final 57, tiempo 15.02 s, combo x1, permadeath=0
+[2025-11-13 00:01:54] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 57, muerto=0, bonus_permadeath 0, puntuación final 57, tiempo 15.02 s, combo x1, permadeath=0
+[2025-11-13 00:01:54] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: hoal:57:15.02:1:0
+
+[2025-11-13 00:01:54] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:02:51] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:03:25] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:03:27] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:04:26] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:04:28] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:06:16] [127.0.0.1] [login.php] LOGIN_SUCCESS: Admin logueado correctamente (Usuario: admin)
+[2025-11-13 00:09:34] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:12:56] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:15:37] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:18:59] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 33, muerto=0, bonus_permadeath 0, puntuación final 33, tiempo 24.25 s, combo x1, permadeath=0
+[2025-11-13 00:21:09] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 33, muerto=0, bonus_permadeath 0, puntuación final 33, tiempo 24.25 s, combo x1, permadeath=0
+[2025-11-13 00:21:14] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 33, muerto=0, bonus_permadeath 0, puntuación final 33, tiempo 24.25 s, combo x1, permadeath=0
+[2025-11-13 00:21:14] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: hoal:33:24.25:1:0
+
+[2025-11-13 00:21:14] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:21:23] [127.0.0.1] [index.php] GAME_START: Usuario 'hoal' escogió juego en dificultad 'facil'
+[2025-11-13 00:21:43] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 51, muerto=0, bonus_permadeath 0, puntuación final 51, tiempo 16.25 s, combo x1, permadeath=0
+[2025-11-13 00:21:50] [127.0.0.1] [gameover.php] GAMEOVER_RECEIVED: Datos recibidos: jugador 'hoal', puntuación base 51, muerto=0, bonus_permadeath 0, puntuación final 51, tiempo 16.25 s, combo x1, permadeath=0
+[2025-11-13 00:21:50] [127.0.0.1] [gameover.php] RANKING_SAVED: Guardado ranking: hoal:51:16.25:1:0
+
+[2025-11-13 00:21:50] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:23:17] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:23:19] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
+[2025-11-13 00:23:22] [127.0.0.1] [ranking.php] VIEW_RANKING: Usuario 'hoal' accedió al ranking
